@@ -10,7 +10,7 @@
 	pref_flag = ROLE_SINFULDEMON
 	jobban_flag = ROLE_TRAITOR
 	preview_antag_datum = /datum/antagonist/sinfuldemon
-	min_pop = 10
+	min_pop = 30 //Не самая лучшая идея была - пихать сакеров и дерьмодемонов в один модуль.
 	weight = 10
 	max_antag_cap = list("denominator" = 24)
 	blacklisted_roles = list(
@@ -32,7 +32,7 @@
 	preview_antag_datum = /datum/antagonist/sinfuldemon
 	pref_flag = ROLE_DEMONINFILTRATION
 	jobban_flag = ROLE_TRAITOR
-	min_pop = 10
+	min_pop = 30 // Выставить на 10, когда дерьмодемоны опять понадобятся.
 	weight = 5
 	blacklisted_roles = list(
 		JOB_CHAPLAIN,

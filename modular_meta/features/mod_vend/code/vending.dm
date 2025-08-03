@@ -21,12 +21,12 @@
 		/obj/item/mod/module/visor/meson = 2,
 	)
 	contraband = list(
-		/obj/item/mod/module/energy_shield = 1,
+		//obj/item/mod/module/energy_shield = 1, Нет, санёкмэн, это слишком сильно.
 		/obj/item/mod/module/atrocinator = 2,
 		/obj/item/mod/module/springlock = 1,
 	)
 	premium = list(
-		/obj/item/mod/module/emp_shield = 2,
+		//obj/item/mod/module/emp_shield = 2, И это тоже.
 		/obj/item/mod/module/jetpack/advanced = 5,
 		/obj/item/mod/module/pathfinder = 3,
 		/obj/item/mod/module/rad_protection = 3,
