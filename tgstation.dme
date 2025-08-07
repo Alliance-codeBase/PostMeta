@@ -6708,4 +6708,6 @@
 #include "code\modules\antagonists\traitor\objective_category.dm"
 #include "code\modules\antagonists\traitor\traitor_objective.dm"
 #include "code\modules\antagonists\traitor\balance_helper.dm"
+#include "code/datums/diseases/annorwa.dm"
+#include "code/datums/diseases/cordafungi.dm"
 // END_INCLUDE
