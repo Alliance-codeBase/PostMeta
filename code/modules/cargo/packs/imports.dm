@@ -358,9 +358,13 @@
 		/obj/item/stock_parts/subspace/ansible,
 	)
 
-datum/supply_pack/imports/viruscrateillegal
+/datum/supply_pack/imports/viruscrateillegal
         name = "Illegal virus crate"
         desc = "Sometimes, normal weapons isn't enough..."
         hidden = TRUE
         cost = CARGO_CRATE_VALUE * 30
-        contains = list(/obj/item/reagent_containers/cup/bottle/cordafungi = 1,   /obj/item/reagent_containers/cup/bottle/annorwa = 1)
+        contains = list(
+	/obj/item/reagent_containers/cup/bottle/cordafungi = 1,
+	/obj/item/reagent_containers/cup/bottle/annorwa = 1
+	)
+
