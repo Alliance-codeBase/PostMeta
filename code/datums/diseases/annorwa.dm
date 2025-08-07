@@ -67,9 +67,3 @@
                         if(need_mob_update)
                                 affected_mob.updatehealth()
 
-// Да
-
-/obj/item/reagent_containers/cup/bottle/annorwa
-        name = "Annoying virus sample culture bottle"
-        desc = "A small bottle. Contains a sample of Annorwa."
-        spawned_disease = /datum/disease/annorwa
