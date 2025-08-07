@@ -70,7 +70,6 @@ SUBSYSTEM_DEF(traitor)
 	return SS_INIT_SUCCESS
 
 /datum/controller/subsystem/traitor/fire(resumed)
-	var/previous_progression = current_global_progression
 	current_global_progression = (STATION_TIME_PASSED()) * CONFIG_GET(number/traitor_scaling_multiplier)
 	var/progression_scaling_delta = (wait / (1 MINUTES)) * current_progression_scaling
 	var/player_count = length(GLOB.alive_player_list)

@@ -81,12 +81,11 @@
 		sleep(200)
 		hymningrn = FALSE
 
-
-//Пьём кумысс без админов еее 
+//Пьём кумысс без админов еее
 
 /datum/chemical_reaction/consumable/kumiss
-        results = list(/datum/reagent/consumable/kumiss = 3)
-        required_reagents = list(/datum/reagent/consumable/sugar = 1, /datum/reagent/consumable/milk = 1)
-        required_catalysts = list(/datum/reagent/consumable/enzyme = 5)
-        reaction_tags = REACTION_TAG_EASY | REACTION_TAG_OTHER
+	results = list(/datum/reagent/consumable/kumiss = 3)
+	required_reagents = list(/datum/reagent/consumable/sugar = 1, /datum/reagent/consumable/milk = 1)
+	required_catalysts = list(/datum/reagent/consumable/enzyme = 5)
+	reaction_tags = REACTION_TAG_EASY | REACTION_TAG_OTHER
 
