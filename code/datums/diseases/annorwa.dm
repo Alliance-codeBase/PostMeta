@@ -1,8 +1,8 @@
 /datum/disease/annorwa
         form = "Disease"
         name = "AN-04"
-        max_stages = 3
-        spread_text = "Airborne"
+        max_stages = 5
+        spread_text = "Touch"
         cure_text = "Spaceacillin"
         cures = list(/datum/reagent/medicine/spaceacillin)
         agent = "Bacillus Cerebrus"
