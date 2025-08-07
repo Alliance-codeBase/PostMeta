@@ -67,9 +67,3 @@
                         if(need_mob_update)
                                 affected_mob.updatehealth()
 
-// Баночка для бешенства
-
-/obj/item/reagent_containers/cup/bottle/cordafungi
-        name = "Fungal Rabies culture bottle"
-        desc = "A small bottle. Contains a sample of Cordius Fungi."
-        spawned_disease = /datum/disease/cordafungi
