@@ -1,5 +1,3 @@
-//Собственно, наши вирусы
-
 /datum/disease/annorwa
         form = "Disease"
         name = "AN-04"
@@ -21,7 +19,7 @@
                 return
 
         if(SPT_PROB(stage * 2, seconds_per_tick))
-                affected_mob.emote("faint")
+                affected_mob.emote("twitch_s")
                 to_chat(affected_mob, span_danger("You wanna sleep..."))
 
         switch(stage)
@@ -30,6 +28,10 @@
                                 to_chat(affected_mob, span_danger("You feel very weak..."))
                         if(SPT_PROB(5, seconds_per_tick))
                                 to_chat(affected_mob, span_danger("You REALLY wanna sleep."))
+				if(3)
+						var/need_mob_update = FALSE
+						if(SPT_PROB(25, seconds_per_tick))
+                                affected_mob.emote("twitch")
                 if(4)
                         var/need_mob_update = FALSE
                         if(SPT_PROB(1, seconds_per_tick))
@@ -37,7 +39,7 @@
                                 affected_mob.set_dizzy_if_lower(15 SECONDS)
                         if(SPT_PROB(1, seconds_per_tick))
                                 to_chat(affected_mob, span_danger("You feel really weak"))
-                                need_mob_update += affected_mob.adjustStaminaLoss(100, updating_health = FALSE)
+                                need_mob_update += affected_mob.adjustStaminaLoss(70, updating_health = FALSE)
                                 affected_mob.emote("Cough")
                         if(SPT_PROB(5, seconds_per_tick))
                                 to_chat(affected_mob, span_danger("You feel eepy..."))
@@ -57,15 +59,15 @@
                         if(SPT_PROB(1, seconds_per_tick))
                                 to_chat(affected_mob, span_userdanger("Zzzzz..."))
                                 affected_mob.adjust_confusion_up_to(0 SECONDS, 300 SECONDS)
-                        if(SPT_PROB(20, seconds_per_tick))
+                        if(SPT_PROB(3, seconds_per_tick))
                                 affected_mob.vomit(VOMIT_CATEGORY_DEFAULT, lost_nutrition = 1)
                         if(SPT_PROB(1.5, seconds_per_tick))
-                                to_chat(affected_mob, span_warning("<i>[pick("Your stomach silently rumbles...", "Your stomach seizes up and falls limp, muscles dead and lifeless.", "You could eat a crayon")]</i>"))
-                                affected_mob.overeatduration = max(affected_mob.overeatduration - (10 SECONDS), 0)
+                                to_chat(affected_mob, span_warning("<i>[pick("Your stomach silently rumbles...", "You feel...", "You could eat a crayon")]</i>"))
+                                affected_mob.overeatduration = max(affected_mob.overeatduration - (5 SECONDS), 0)
                                 affected_mob.adjust_nutrition(-10)
                         if(SPT_PROB(7.5, seconds_per_tick))
-                                to_chat(affected_mob, span_danger("[pick("You feel uncomfortably hot...", "You feel like unzipping your jumpsuit...", "You feel like taking off some clothes...")]"))
-                                affected_mob.adjust_bodytemperature(40)
+                                to_chat(affected_mob, span_danger("[pick("You Freezing!", "You feel like coat yourself...", "You wanna sleep...")]"))
+                                affected_mob.adjust_bodytemperature(-20)
                         if(need_mob_update)
                                 affected_mob.updatehealth()
 
@@ -99,6 +101,12 @@
                                 to_chat(affected_mob, span_danger("You feel stranger than before..."))
                         if(SPT_PROB(5, seconds_per_tick))
                                 to_chat(affected_mob, span_danger("Your thoughts are confused."))
+		if(3)
+			var/need_mob_update = FALSE
+			if(SPT_PROB(1, seconds_per_tick))
+                                to_chat(affected_mob, span_danger("Uuugh i cant hold it..."))
+                                need_mob_update += affected_mob.adjustOxyLoss(15, updating_health = FALSE)
+                                affected_mob.emote("superfart")
                 if(4)
                         var/need_mob_update = FALSE
                         if(SPT_PROB(1, seconds_per_tick))
