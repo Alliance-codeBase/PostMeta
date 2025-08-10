@@ -107,8 +107,6 @@
 								to_chat(affected_mob, span_danger("Uuugh i cant hold it..."))
 								need_mob_update += affected_mob.adjustOxyLoss(15, updating_health = FALSE)
 								affected_mob.emote("superfart")
-						if(need_mob_update)
-								affected_mob.updatehealth()
 				if(4)
 						var/need_mob_update = FALSE
 						if(SPT_PROB(1, seconds_per_tick))
