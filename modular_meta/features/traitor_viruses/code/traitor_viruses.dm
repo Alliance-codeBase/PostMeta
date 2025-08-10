@@ -101,9 +101,9 @@
 								to_chat(affected_mob, span_danger("You feel stranger than before..."))
 						if(SPT_PROB(5, seconds_per_tick))
 								to_chat(affected_mob, span_danger("Your thoughts are confused."))
-		if(3)
-			var/need_mob_update = FALSE
-			if(SPT_PROB(1, seconds_per_tick))
+				if(3)
+						var/need_mob_update = FALSE
+						if(SPT_PROB(1, seconds_per_tick))
 								to_chat(affected_mob, span_danger("Uuugh i cant hold it..."))
 								need_mob_update += affected_mob.adjustOxyLoss(15, updating_health = FALSE)
 								affected_mob.emote("superfart")
