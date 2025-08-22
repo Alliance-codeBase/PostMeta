@@ -2,10 +2,11 @@
 
 #include "code\novichok_recipe.dm"
 
-datum/modpack/novichok
+datum/modpack/features/novichok
 	id = "novichok"
 	name = "Новичок"
 	group = "Features"
 	desc = "Очень смертельный яд."
 	author = "DarkPush"
+
 
