@@ -37,6 +37,7 @@
 #include "features\telescience\includes.dm"
 #include "features\deathmatch\includes.dm"
 #include "features\countdown_antimov_sfx\includes.dm"
+#include "features\novichok\includes.dm"
 
 /* --- Reverts --- */
 
