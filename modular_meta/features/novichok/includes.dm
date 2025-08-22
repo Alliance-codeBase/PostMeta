@@ -7,4 +7,5 @@ datum/modpack/novichok
 	name = "Новичок"
 	group = "Features"
 	desc = "Очень смертельный яд."
-	author = "Dark Push"
+	author = "DarkPush"
+
