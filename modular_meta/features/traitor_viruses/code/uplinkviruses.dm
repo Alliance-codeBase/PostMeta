@@ -10,7 +10,8 @@
 
 /datum/uplink_item/role_restricted/annorwauplink
     name = "Annorwa sample"
-	desc = "Annoying virus culture bottle, why i need to explain?."
+	desc = "Annoying virus culture bottle, annoying virus that not recommended to inhale."
+    progression_minimum = 45 MINUTES
 	item = /obj/item/reagent_containers/cup/bottle/annorwa
 	cost = 20
 	restricted_roles = list(JOB_MEDICAL_DOCTOR)
@@ -18,7 +19,8 @@
 
 /datum/uplink_item/role_restricted/cordafungiuplink
     name = "Cordafungi sample"
-	desc = "Fungal rabies culture bottle, why i need to explain?."
+	desc = "Fungal rabies culture bottle, why i need to explain? But if you wanna ok, that virus is totally fucks up crew, if you wanna know what's that... thats hell."
+    progression_minimum = 45 MINUTES
 	item = /obj/item/reagent_containers/cup/bottle/cordafungi
 	cost = 20
 	restricted_roles = list(JOB_MEDICAL_DOCTOR)
