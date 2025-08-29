@@ -5,7 +5,7 @@
 	id = "traitor_viruses"
 	name = "Предательские вирусы"
 	group = "Features"
-	desc = "Добавляет вирусы во взломанное емагом карго"
-	author = "pipidaster69"
+	desc = "Добавляет вирусы в аплинк"
+	author = "Биг босс"
 
 
