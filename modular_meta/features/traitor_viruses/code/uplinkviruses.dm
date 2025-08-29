@@ -1,3 +1,13 @@
+/obj/item/reagent_containers/cup/bottle/annorwa
+		name = "Annoying virus sample culture bottle"
+		desc = "A small bottle. Contains a sample of Annorwa."
+		spawned_disease = /datum/disease/annorwa
+
+/obj/item/reagent_containers/cup/bottle/cordafungi
+		name = "Fungal Rabies culture bottle"
+		desc = "A small bottle. Contains a sample of Cordius Fungi."
+		spawned_disease = /datum/disease/cordafungi
+
 /datum/uplink_item/role_restricted/annorwauplink
     name = "Annorwa sample"
 	desc = "Annoying virus culture bottle, why i need to explain?."
