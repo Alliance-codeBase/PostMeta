@@ -38,6 +38,7 @@
 #include "features\traitor_viruses\includes.dm"
 #include "features\deathmatch\includes.dm"
 #include "features\countdown_antimov_sfx\includes.dm"
+#include "features\fuckyou\includes.dm"
 
 /* --- Reverts --- */
 
