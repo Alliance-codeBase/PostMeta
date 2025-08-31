@@ -35,7 +35,6 @@
 #include "features\mod_vend\includes.dm"
 #include "features\roundstart_shell\includes.dm"
 #include "features\telescience\includes.dm"
-#include "features\traitor_viruses\includes.dm"
 #include "features\deathmatch\includes.dm"
 #include "features\countdown_antimov_sfx\includes.dm"
 #include "features\fuckyou\includes.dm"
