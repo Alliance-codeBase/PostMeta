@@ -38,6 +38,7 @@
 #include "features\deathmatch\includes.dm"
 #include "features\countdown_antimov_sfx\includes.dm"
 #include "features\novichok\includes.dm"
+#include "features\chromium_trioxide\includes.dm
 
 /* --- Reverts --- */
 
