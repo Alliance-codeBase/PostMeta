@@ -4,7 +4,7 @@
 
 /datum/modpack/chromium_trioxide
 	id = "chromium_trioxide"
-	name = "триоксид хрома"
+	name = "Триоксид хрома"
 	group = "Features"
-	desc = "добавляет очень и ядовитое вещество"
+	desc = "Добавляет крайне ядовитое вещество"
 	author = "Sonfix"
