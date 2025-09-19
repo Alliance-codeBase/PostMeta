@@ -6,7 +6,6 @@
 /// Midround Rulesets
 /datum/dynamic_ruleset/midround // Can be drafted once in a while during a round
 	ruletype = MIDROUND_RULESET
-	var/midround_ruleset_style
 	/// If the ruleset should be restricted from ghost roles.
 	var/restrict_ghost_roles = TRUE
 	/// What mob type the ruleset is restricted to.
@@ -229,7 +228,7 @@
 /// Midround Traitor Ruleset (From Living)
 /datum/dynamic_ruleset/midround/from_living/autotraitor
 	name = "Syndicate Sleeper Agent"
-	midround_ruleset_style = MIDROUND_RULESET_STYLE_LIGHT
+	midround_type = LIGHT_MIDROUND
 	antag_datum = /datum/antagonist/traitor/infiltrator/sleeper_agent
 	antag_flag = ROLE_SLEEPER_AGENT
 	antag_flag_override = ROLE_TRAITOR
@@ -277,7 +276,7 @@
 /// Midround Malf AI Ruleset (From Living)
 /datum/dynamic_ruleset/midround/malf
 	name = "Malfunctioning AI"
-	midround_ruleset_style = MIDROUND_RULESET_STYLE_HEAVY
+	midround_type = HEAVY_MIDROUND
 	antag_datum = /datum/antagonist/malf_ai
 	antag_flag = ROLE_MALF_MIDROUND
 	antag_flag_override = ROLE_MALF
@@ -337,7 +336,7 @@
 /// Midround Wizard Ruleset (From Ghosts)
 /datum/dynamic_ruleset/midround/from_ghosts/wizard
 	name = "Wizard"
-	midround_ruleset_style = MIDROUND_RULESET_STYLE_HEAVY
+	midround_type = HEAVY_MIDROUND
 	antag_datum = /datum/antagonist/wizard
 	antag_flag = ROLE_WIZARD_MIDROUND
 	antag_flag_override = ROLE_WIZARD
@@ -367,7 +366,7 @@
 /// Midround Nuclear Operatives Ruleset (From Ghosts)
 /datum/dynamic_ruleset/midround/from_ghosts/nuclear
 	name = "Nuclear Assault"
-	midround_ruleset_style = MIDROUND_RULESET_STYLE_HEAVY
+	midround_type = HEAVY_MIDROUND
 	antag_flag = ROLE_OPERATIVE_MIDROUND
 	antag_flag_override = ROLE_OPERATIVE
 	antag_datum = /datum/antagonist/nukeop
@@ -424,7 +423,7 @@
 /// Midround Blob Ruleset (From Ghosts)
 /datum/dynamic_ruleset/midround/from_ghosts/blob
 	name = "Blob"
-	midround_ruleset_style = MIDROUND_RULESET_STYLE_HEAVY
+	midround_type = HEAVY_MIDROUND
 	antag_datum = /datum/antagonist/blob
 	antag_flag = ROLE_BLOB
 	ruleset_category = parent_type::ruleset_category |  RULESET_CATEGORY_NO_WITTING_CREW_ANTAGONISTS
@@ -444,7 +443,7 @@
 /// Midround Blob Infection Ruleset (From Living)
 /datum/dynamic_ruleset/midround/from_living/blob_infection
 	name = "Blob Infection"
-	midround_ruleset_style = MIDROUND_RULESET_STYLE_HEAVY
+	midround_type = HEAVY_MIDROUND
 	antag_datum = /datum/antagonist/blob/infection
 	antag_flag = ROLE_BLOB_INFECTION
 	antag_flag_override = ROLE_BLOB
@@ -498,7 +497,7 @@
 /// Midround Xenomorph Ruleset (From Ghosts)
 /datum/dynamic_ruleset/midround/from_ghosts/xenomorph
 	name = "Alien Infestation"
-	midround_ruleset_style = MIDROUND_RULESET_STYLE_HEAVY
+	midround_type = HEAVY_MIDROUND
 	antag_datum = /datum/antagonist/xeno
 	antag_flag = ROLE_ALIEN
 	ruleset_category = parent_type::ruleset_category |  RULESET_CATEGORY_NO_WITTING_CREW_ANTAGONISTS
@@ -547,7 +546,7 @@
 /// Midround Nightmare Ruleset (From Ghosts)
 /datum/dynamic_ruleset/midround/from_ghosts/nightmare
 	name = "Nightmare"
-	midround_ruleset_style = MIDROUND_RULESET_STYLE_LIGHT
+	midround_type = LIGHT_MIDROUND
 	antag_datum = /datum/antagonist/nightmare
 	antag_flag = ROLE_NIGHTMARE
 	antag_flag_override = ROLE_ALIEN
@@ -585,7 +584,7 @@
 /// Midround Space Dragon Ruleset (From Ghosts)
 /datum/dynamic_ruleset/midround/from_ghosts/space_dragon
 	name = "Space Dragon"
-	midround_ruleset_style = MIDROUND_RULESET_STYLE_HEAVY
+	midround_type = HEAVY_MIDROUND
 	antag_datum = /datum/antagonist/space_dragon
 	antag_flag = ROLE_SPACE_DRAGON
 	ruleset_category = parent_type::ruleset_category |  RULESET_CATEGORY_NO_WITTING_CREW_ANTAGONISTS
@@ -626,7 +625,7 @@
 
 /datum/dynamic_ruleset/midround/from_ghosts/abductors
 	name = "Abductors"
-	midround_ruleset_style = MIDROUND_RULESET_STYLE_LIGHT
+	midround_type = LIGHT_MIDROUND
 	antag_datum = /datum/antagonist/abductor
 	antag_flag = ROLE_ABDUCTOR
 	ruleset_category = parent_type::ruleset_category |  RULESET_CATEGORY_NO_WITTING_CREW_ANTAGONISTS
@@ -664,7 +663,7 @@
 /// Midround Space Ninja Ruleset (From Ghosts)
 /datum/dynamic_ruleset/midround/from_ghosts/space_ninja
 	name = "Space Ninja"
-	midround_ruleset_style = MIDROUND_RULESET_STYLE_HEAVY
+	midround_type = HEAVY_MIDROUND
 	antag_datum = /datum/antagonist/ninja
 	antag_flag = ROLE_NINJA
 	ruleset_category = parent_type::ruleset_category |  RULESET_CATEGORY_NO_WITTING_CREW_ANTAGONISTS
@@ -706,7 +705,7 @@
 /// Midround Spiders Ruleset (From Ghosts)
 /datum/dynamic_ruleset/midround/spiders
 	name = "Spiders"
-	midround_ruleset_style = MIDROUND_RULESET_STYLE_HEAVY
+	midround_type = HEAVY_MIDROUND
 	antag_flag = ROLE_SPIDER
 	ruleset_category = parent_type::ruleset_category |  RULESET_CATEGORY_NO_WITTING_CREW_ANTAGONISTS
 	required_type = /mob/dead/observer
@@ -725,7 +724,7 @@
 /// Midround Revenant Ruleset (From Ghosts)
 /datum/dynamic_ruleset/midround/from_ghosts/revenant
 	name = "Revenant"
-	midround_ruleset_style = MIDROUND_RULESET_STYLE_LIGHT
+	midround_type = LIGHT_MIDROUND
 	ruleset_category = parent_type::ruleset_category |  RULESET_CATEGORY_NO_WITTING_CREW_ANTAGONISTS
 	antag_datum = /datum/antagonist/revenant
 	antag_flag = ROLE_REVENANT
@@ -777,7 +776,7 @@
 /// Midround Space Pirates Ruleset (From Ghosts)
 /datum/dynamic_ruleset/midround/pirates
 	name = "Space Pirates"
-	midround_ruleset_style = MIDROUND_RULESET_STYLE_LIGHT
+	midround_type = LIGHT_MIDROUND
 	ruleset_category = parent_type::ruleset_category |  RULESET_CATEGORY_NO_WITTING_CREW_ANTAGONISTS
 	antag_flag = "Space Pirates"
 	required_type = /mob/dead/observer
@@ -800,7 +799,7 @@
 /// Dangerous Space Pirates ruleset
 /datum/dynamic_ruleset/midround/dangerous_pirates
 	name = "Dangerous Space Pirates"
-	midround_ruleset_style = MIDROUND_RULESET_STYLE_HEAVY
+	midround_type = HEAVY_MIDROUND
 	ruleset_category = parent_type::ruleset_category |  RULESET_CATEGORY_NO_WITTING_CREW_ANTAGONISTS
 	antag_flag = "Space Pirates"
 	required_type = /mob/dead/observer
@@ -823,7 +822,7 @@
 /// Midround Obsessed Ruleset (From Living)
 /datum/dynamic_ruleset/midround/from_living/obsessed
 	name = "Obsessed"
-	midround_ruleset_style = MIDROUND_RULESET_STYLE_LIGHT
+	midround_type = LIGHT_MIDROUND
 	antag_datum = /datum/antagonist/obsessed
 	antag_flag = ROLE_OBSESSED
 	ruleset_category = parent_type::ruleset_category |  RULESET_CATEGORY_NO_WITTING_CREW_ANTAGONISTS
@@ -866,7 +865,7 @@
 /// Midround Space Changeling Ruleset (From Ghosts)
 /datum/dynamic_ruleset/midround/from_ghosts/changeling_midround
 	name = "Space Changeling"
-	midround_ruleset_style = MIDROUND_RULESET_STYLE_LIGHT
+	midround_type = LIGHT_MIDROUND
 	antag_datum = /datum/antagonist/changeling/space
 	antag_flag = ROLE_CHANGELING_MIDROUND
 	antag_flag_override = ROLE_CHANGELING
@@ -889,7 +888,7 @@
 /// Midround Paradox Clone Ruleset (From Ghosts)
 /datum/dynamic_ruleset/midround/from_ghosts/paradox_clone
 	name = "Paradox Clone"
-	midround_ruleset_style = MIDROUND_RULESET_STYLE_LIGHT
+	midround_type = LIGHT_MIDROUND
 	antag_datum = /datum/antagonist/paradox_clone
 	antag_flag = ROLE_PARADOX_CLONE
 	ruleset_category = parent_type::ruleset_category |  RULESET_CATEGORY_NO_WITTING_CREW_ANTAGONISTS
@@ -962,7 +961,7 @@
 /// Midround Voidwalker Ruleset (From Ghosts)
 /datum/dynamic_ruleset/midround/from_ghosts/voidwalker
 	name = "Voidwalker"
-	midround_ruleset_style = MIDROUND_RULESET_STYLE_LIGHT
+	midround_type = LIGHT_MIDROUND
 	antag_datum = /datum/antagonist/voidwalker
 	antag_flag = ROLE_VOIDWALKER
 	antag_flag_override = ROLE_VOIDWALKER

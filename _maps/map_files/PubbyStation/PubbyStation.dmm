@@ -32692,7 +32692,7 @@
 /turf/open/floor/plating,
 /area/station/maintenance/department/security/brig)
 "gum" = (
-/obj/structure/filingcabinet/filingcabinet,
+/obj/structure/filingcabinet/white,
 /obj/effect/turf_decal/tile/blue/anticorner/contrasted{
 	dir = 8
 	},

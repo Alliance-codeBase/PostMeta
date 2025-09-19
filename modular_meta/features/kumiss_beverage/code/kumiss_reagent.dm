@@ -44,7 +44,21 @@
 
 /datum/chemical_reaction/consumable/kumiss
 	results = list(/datum/reagent/consumable/kumiss = 3)
-	required_reagents = list(/datum/reagent/consumable/sugar = 1, /datum/reagent/consumable/milk = 1)
+	required_reagents = list(/datum/reagent/consumable/sugar = 1, /datum/reagent/consumable/milk/horse = 1)
 	required_catalysts = list(/datum/reagent/consumable/enzyme = 5)
 	reaction_tags = REACTION_TAG_EASY | REACTION_TAG_OTHER
 
+// молоко кобылы
+/datum/reagent/consumable/milk/horse
+	name = "Mare milk"
+	description = "An opaque white liquid produced by the mammary glands of mammals, in this case horses."
+
+/mob/living/basic/pony
+	var/milked_reagent = /datum/reagent/consumable/milk/horse
+
+/mob/living/basic/pony/Initialize(mapload)
+	setup_udder()
+	. = ..()
+
+/mob/living/basic/pony/proc/setup_udder()
+	AddComponent(/datum/component/udder, reagent_produced_override = milked_reagent)
