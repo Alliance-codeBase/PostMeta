@@ -336,8 +336,10 @@ it couldn't have been added as reskin variant to the \
 	icon = 'modular_meta/features/more_clothes/icons/items/suits/armor.dmi'
 	icon_state = "hosformal_black"
 	worn_icon = 'modular_meta/features/more_clothes/icons/on_mob/suits/armor.dmi'
-	worn_icon_state = "hosformal_black"
 	uses_advanced_reskins = FALSE //no-no, mister fish, no bugs today
+	unique_reskin = null //inherits reskin states from /obj/item/clothing/suit/armor/hos , \
+							although has uses_advanced_reskins set to FALSE, it still somehow \
+							creates an radial reskin menu.
 
 /obj/item/clothing/suit/armor/hos
 	uses_advanced_reskins = TRUE
