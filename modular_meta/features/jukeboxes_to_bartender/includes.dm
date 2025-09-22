@@ -5,5 +5,5 @@
 	id = "jukebox"
 	name = "jukebox beacon"
 	group = "Features"
-	desc = "Добавляет маяк отправляющий под с джукбоксом "
+	desc = "Добавляет маяк отправляющий капсулу с джукбоксом "
 	author = "Bruh24"
