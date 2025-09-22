@@ -40,6 +40,7 @@
 #include "features\deathmatch\includes.dm"
 #include "features\countdown_antimov_sfx\includes.dm"
 #include "features\novichok\includes.dm"
+#include "features\jukebox_and_tv_to_barmen\includes.dm"
 
 /* --- Reverts --- */
 
