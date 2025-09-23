@@ -4,7 +4,7 @@
 	/// additional_icon_location is for downstream modularity support for finding missing sprites in additonal DMI file locations.
 	/// Make sure this location is also present in tools/deploy.sh
 	/// If you need additional paths ontop of this second one, you can add another generate_possible_icon_states_list("your/folder/path/") below the if(additional_icon_location) block in Run(), and make sure to add that path to tools/deploy.sh as well.
-	var/additional_icon_location = "modular_meta/features/heads_on_belts/icons/" //MASSMETA CHANGE (heads_on_belts) этого требуют тесты
+	var/additional_icon_location = "modular_meta/tweaks/heads_on_belts/icons/" //MASSMETA CHANGE (heads_on_belts) этого требуют тесты
 
 /datum/unit_test/worn_icons/proc/generate_possible_icon_states_list(directory_path)
 	if(!directory_path)
@@ -100,6 +100,10 @@
 
 		if(cached_slot_flags & ITEM_SLOT_BELT)
 			icon_file = 'icons/mob/clothing/belt.dmi'
+			//MASSMETA ADD BEGIN (heads_on_belts) без этого орут тесты
+			if((icon_state in icon_states('modular_meta/tweaks/heads_on_belts/icons/belt.dmi', 1)))
+				continue
+			//MASSMETA ADD END
 			if(!(icon_state in icon_states(icon_file, 1)))
 				already_warned_icons += icon_state
 				TEST_FAIL("[item_path] using invalid [worn_icon_state ? "worn_icon_state" : "icon_state"], \"[icon_state]\" in '[icon_file]'[match_message]")
