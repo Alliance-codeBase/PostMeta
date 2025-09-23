@@ -66,3 +66,4 @@
 #include "tweaks\lead_pipe\includes.dm"
 #include "tweaks\lgbt_removal\includes.dm"
 #include "tweaks\tagline\includes.dm"
+#include "tweaks\simple_vote_by_default\includes.dm"
