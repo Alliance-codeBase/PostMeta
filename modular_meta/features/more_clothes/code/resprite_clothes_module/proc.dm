@@ -1,12 +1,17 @@
 /obj/item
 	var/uses_advanced_reskins = FALSE
 
-/obj/item/clothing/verb/clothing_reskin()
+//It could cause some issues with an any jumpsuit of sort, due to accessories being a thing in-game.
+/obj/item/clothing/click_alt_secondary(mob/user)
+	. = ..()
+	clothing_reskin()
+
+/obj/item/clothing/proc/clothing_reskin()
 	set name = "Reskin Clothes"
 	set category = "Object"
 	set src in usr
 	var/mob/M = usr
-	
+
 	if(!uses_advanced_reskins)
 		to_chat(M, "[src] has no reskins available.")
 		return

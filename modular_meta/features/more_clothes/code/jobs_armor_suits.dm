@@ -14,6 +14,12 @@
 			RESKIN_ICON_STATE = "hos",
 			RESKIN_WORN_ICON = 'icons/mob/clothing/suits/armor.dmi',
 			RESKIN_WORN_ICON_STATE = "hos",
+			),
+		"Trench Cloak" = list(
+		RESKIN_ICON = 'modular_meta/features/more_clothes/icons/items/suits/armor.dmi',
+		RESKIN_ICON_STATE = "hos_cloak",
+		RESKIN_WORN_ICON = 'modular_meta/features/more_clothes/icons/on_mob/suits/armor.dmi',
+		RESKIN_WORN_ICON_STATE = "trenchcloak",
 		),
 	)
 
@@ -30,6 +36,12 @@
 			RESKIN_ICON_STATE = "hostrench",
 			RESKIN_WORN_ICON = 'icons/mob/clothing/suits/armor.dmi',
 			RESKIN_WORN_ICON_STATE = "hostrench",
+			),
+		"Trench Cloak" = list(
+			RESKIN_ICON = 'modular_meta/features/more_clothes/icons/items/suits/armor.dmi',
+			RESKIN_ICON_STATE = "hos_cloak",
+			RESKIN_WORN_ICON = 'modular_meta/features/more_clothes/icons/on_mob/suits/armor.dmi',
+			RESKIN_WORN_ICON_STATE = "trenchcloak",
 		),
 	)
 
@@ -46,9 +58,14 @@
 			RESKIN_ICON_STATE = "hosformal",
 			RESKIN_WORN_ICON = 'icons/mob/clothing/suits/armor.dmi',
 			RESKIN_WORN_ICON_STATE = "hosformal",
+			),
+		"Trench Cloak" = list(
+			RESKIN_ICON = 'modular_meta/features/more_clothes/icons/items/suits/armor.dmi',
+			RESKIN_ICON_STATE = "hos_cloak",
+			RESKIN_WORN_ICON = 'modular_meta/features/more_clothes/icons/on_mob/suits/armor.dmi',
+			RESKIN_WORN_ICON_STATE = "trenchcloak",
 		),
 	)
-
 /obj/item/clothing/suit/armor/vest/warden
 	uses_advanced_reskins = TRUE
 	obj_flags = INFINITE_RESKIN

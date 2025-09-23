@@ -327,6 +327,37 @@
 		),
 	)
 
+//Due to some stuff(particularly with it having alternative sprite when alt_clicked) with reskins \
+it couldn't have been added as reskin variant to the \
+/obj/item/clothing/suit/armor/hos/hos_formal/ so, we're adding it as a separate item.
+
+/obj/item/clothing/suit/armor/hos/hos_formal/black
+	name = "\improper Head of Security's parade jacket"
+	icon = 'modular_meta/features/more_clothes/icons/items/suits/armor.dmi'
+	icon_state = "hosformal_black"
+	worn_icon = 'modular_meta/features/more_clothes/icons/on_mob/suits/armor.dmi'
+	uses_advanced_reskins = FALSE //no-no, mister fish, no bugs today
+	unique_reskin = null //inherits reskin states from /obj/item/clothing/suit/armor/hos , \
+							although has uses_advanced_reskins set to FALSE, it still somehow \
+							creates an radial reskin menu.
+
+/obj/item/clothing/suit/armor/hos
+	uses_advanced_reskins = TRUE
+	unique_reskin = list("Trench Cloak" = list(
+		RESKIN_ICON = 'modular_meta/features/more_clothes/icons/items/suits/armor.dmi',
+		RESKIN_ICON_STATE = "trenchcloak",
+		RESKIN_WORN_ICON = 'modular_meta/features/more_clothes/icons/on_mob/suits/armor.dmi',
+		RESKIN_WORN_ICON_STATE = "trenchcloak",
+		)
+	)
+
+//HOS_GARMENT
+
+/obj/item/storage/bag/garment/hos/PopulateContents()
+	. = ..()
+	new /obj/item/clothing/suit/armor/hos/hos_formal/black(src)
+
+
 
 // SUBORDINATE WORKERS
 
