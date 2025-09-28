@@ -1,7 +1,6 @@
 /obj/item/stack/medical/suture/proc/try_mute(mob/living/mutedone, mob/living/user, healed_zone)
 	var/x = mutedone.staminaloss //I skipped my math classes
 	var/stamina_modifier = 5 / (x + 1) // trying some fancy math here, for the first time.
-	to_chat(user, span_notice("muted"))
 	if(DOING_INTERACTION_WITH_TARGET(user, mutedone))
 		return FALSE
 	if(user.zone_selected == BODY_ZONE_PRECISE_MOUTH)
@@ -85,6 +84,5 @@
 
 /obj/item/stack/medical/suture/medicated
 	mouth_sewing_force = 5
-
 
 //TODO: Forbid felinids to use their mouth/bite attack as if restrained or as if their mouth has been covered by a mask.
