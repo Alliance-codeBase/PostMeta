@@ -6,7 +6,7 @@
 
 ### TG Proc/File Changes:
 
-- N/A
+-/obj/item/stack/medical/suture/interact_with_atom_secondary ---> this changed, though modularized
 
 ### TGUI Files:
 
