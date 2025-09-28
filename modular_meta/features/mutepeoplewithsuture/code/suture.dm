@@ -1,8 +1,6 @@
 /obj/item/stack/medical/suture/proc/try_mute(mob/living/mutedone, mob/living/user, healed_zone)
 	var/x = mutedone.staminaloss //I skipped my math classes
 	var/stamina_modifier = 5 / (x + 1) // trying some fancy math here, for the first time.
-	if(DOING_INTERACTION_WITH_TARGET(user, mutedone))
-		return FALSE
 	if(user.zone_selected == BODY_ZONE_PRECISE_MOUTH)
 		balloon_alert(user, "Sewing mouth shut...")
 		to_chat(user, span_alert("You begin trying to suture up [mutedone]'s mouth"))
@@ -38,6 +36,7 @@
 			press resist to try break the suture by your mouth \
 			or use any sharp item to tear it away!"
 	icon_state = "mind_control"
+// TODO: add a resist action to it, for now it can be only removed by someone's help and a sharp knife.
 
 /datum/status_effect/mouth_sewed_up/on_apply()
 	if(ishuman(owner))
