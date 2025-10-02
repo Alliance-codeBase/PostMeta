@@ -626,6 +626,17 @@
 	var/msg = "has created a [isnull(duration) ? "permanent" : "temporary [time_message]"] [applies_to_admins ? "admin " : ""][is_server_ban ? "server ban" : "role ban from [roles_to_ban.len] roles"] for [target]."
 	log_admin_private("[kn] [msg][is_server_ban ? "" : " Roles: [roles_to_ban.Join(", ")]"] Reason: [reason]")
 	message_admins("[kna] [msg][is_server_ban ? "" : " Roles: [roles_to_ban.Join("\n")]"]\nReason: [reason]")
+	GLOB.bot_event_sending_que += list(list(
+		"title" = "Бан",
+		"player_ckey" = player_ckey,
+		"admin_ckey" = admin_ckey,
+		"timestamp" = world.realtime + world.timezone HOURS,
+		"duration" = duration > 1 ?  world.realtime + world.timezone HOURS + duration : null,
+		"reason" = reason,
+		"round" = GLOB.round_id,
+		"additional_info" = is_server_ban ? null : "**Роли:** [roles_to_ban.Join(", ")]",
+		"color" = "#991717",
+	))
 	if(applies_to_admins)
 		send2adminchat("BAN ALERT","[kn] [msg]")
 	if(player_ckey)
@@ -818,6 +829,17 @@
 	qdel(query_unban)
 	log_admin_private("[kn] has unbanned [target] from [role].")
 	message_admins("[kna] has unbanned [target] from [role].")
+	GLOB.bot_event_sending_que += list(list(
+		"title" = "Бан",
+		"player_ckey" = target,
+		"admin_ckey" = usr.client.ckey,
+		"timestamp" = world.realtime + world.timezone HOURS,
+		"duration" = null,
+		"reason" = null,
+		"round" = GLOB.round_id,
+		"additional_info" = "[role ? null : "**Роль:** [role]\n "]**СНЯТ**",
+		"color" = "#669917",
+	))
 	var/client/C = GLOB.directory[player_key]
 	if(C)
 		build_ban_cache(C)
@@ -972,6 +994,17 @@
 	var/kna = key_name_admin(usr)
 	log_admin_private("[kn] has edited the [changes_keys_text] of a ban for [old_key ? "[old_key]" : "[old_ip]-[old_cid]"].") //if a ban doesn't have a key it must have an ip and/or a cid to have reached this point normally
 	message_admins("[kna] has edited the [changes_keys_text] of a ban for [old_key ? "[old_key]" : "[old_ip]-[old_cid]"].")
+	GLOB.bot_event_sending_que += list(list(
+		"title" = "Бан",
+		"player_ckey" = player_ckey,
+		"admin_ckey" = usr.client.key,
+		"timestamp" = world.realtime + world.timezone HOURS,
+		"duration" = duration > 1 ?  world.realtime + world.timezone HOURS + duration : null,
+		"reason" = reason,
+		"round" = GLOB.round_id,
+		"additional_info" = "**ИЗМЕНЕН**",
+		"color" = "#991717",
+	))
 	if(changes["Applies to admins"])
 		send2adminchat("BAN ALERT","[kn] has edited a ban for [old_key ? "[old_key]" : "[old_ip]-[old_cid]"] to [applies_to_admins ? "" : "not"]affect admins")
 
