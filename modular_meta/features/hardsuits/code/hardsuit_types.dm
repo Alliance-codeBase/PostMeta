@@ -243,7 +243,6 @@
 	name = "magnate hardsuit helmet"
 	desc = "A tactical space helmet boasting better protection and a reasonable fashion sense."
 	icon_state = "capspace"
-	armor_type = /datum/armor/hardsuit_magnate
 	inhand_icon_state = null
 
 /obj/item/clothing/suit/space/hardsuit/swat/captain
