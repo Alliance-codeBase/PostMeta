@@ -240,19 +240,20 @@
 /////////////////////////////////// CAPTAIN /////////////////////////////////////////////
 
 /obj/item/clothing/head/helmet/space/hardsuit/swat/captain
-	name = "captain's SWAT helmet"
+	name = "magnate hardsuit helmet"
+	desc = "A tactical space helmet boasting better protection and a reasonable fashion sense."
 	icon_state = "capspace"
+	armor_type = /datum/armor/hardsuit_magnate
 	inhand_icon_state = null
-	desc = "A tactical MK.II SWAT helmet boasting better protection and a reasonable fashion sense."
 
 /obj/item/clothing/suit/space/hardsuit/swat/captain
-	name = "captain's SWAT suit"
-	desc = "A MK.II SWAT suit with streamlined joints and armor made out of superior materials, insulated against intense heat with the complementary gas mask. The most advanced tactical armor available. Usually reserved for heavy hitter corporate security, this one has a regal finish in Nanotrasen company colors. Better not let the assistants get a hold of it."
+	name = "magnate hardsuit"
+	desc = "A tactical hardsuit with streamlined joints and armor made out of superior materials, insulated against intense heat with the complementary gas mask. Best synergy of lightness and armour available. Usually reserved for central command officers, this one has a regal finish in Nanotrasen company colors. Has installed a medical deathrattle implant in it. Better not let the assistants get a hold of it."
 	icon_state = "caparmor"
 	inhand_icon_state = "capspacesuit"
 	hardsuit_helmet_type = /obj/item/clothing/head/helmet/space/hardsuit/swat/captain
 	cell = /obj/item/stock_parts/power_store/cell/super
-	slowdown = 0.4
+	slowdown = 0.25
 
 /////////////////////////////////// CLOWN /////////////////////////////////////////////
 
