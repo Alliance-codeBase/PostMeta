@@ -12,9 +12,16 @@ import {
 import { useBackend, useLocalState } from '../backend';
 import { Window } from '../layouts';
 
+type VariantOption = {
+  id: string;
+  name: string;
+};
+
+type VariantOptions = Record<string, VariantOption[]>;
+
 type ShopItem = {
   id: string;
-  kind?: 'item' | 'antag_token';
+  kind: 'item' | 'other' | 'antag_token' | 'persistent';
   name: string;
   desc: string;
   price: number;
@@ -23,6 +30,7 @@ type ShopItem = {
   fallbackIcon?: string;
   owned: boolean;
   canAfford: boolean;
+  variantOptions?: VariantOptions | null;
   tokensLeft?: number;
   selectedRoleName?: string | null;
 };
@@ -30,12 +38,10 @@ type ShopItem = {
 type Data = {
   isPregame: boolean;
   balance: number;
-  antagTokenSlotsLeft: number;
   preroundItems: ShopItem[];
   persistentItems: ShopItem[];
 };
 
-// MASSMETA EDIT ADDITION START (metacoins)
 const renderListingIcon = (item: ShopItem) => {
   const fallbackName = item.fallbackIcon || 'question-circle';
   const fallbackNode = <Icon name={fallbackName} size={2} />;
@@ -54,7 +60,18 @@ const renderListingIcon = (item: ShopItem) => {
 
   return fallbackNode;
 };
-// MASSMETA EDIT ADDITION END (metacoins)
+
+const parseVariant = (variant: string | null | undefined) => {
+  if (!variant) {
+    return {};
+  }
+
+  try {
+    return JSON.parse(variant) as Record<string, string>;
+  } catch {
+    return {};
+  }
+};
 
 export const MetaCoinShop = () => {
   const { act, data } = useBackend<Data>();
@@ -64,6 +81,10 @@ export const MetaCoinShop = () => {
     'metacoinShopTab',
     'preround',
   );
+
+  const [selectedVariants, setSelectedVariants] = useLocalState<
+    Record<string, string>
+  >('metacoinShopVariants', {});
 
   return (
     <Window title="Metacoin Shop" width={560} height={500}>
@@ -117,10 +138,13 @@ export const MetaCoinShop = () => {
                   <Stack.Item key={item.id}>
                     {(() => {
                       const isAntagToken = item.kind === 'antag_token';
-                      const owned = Boolean(item.owned);
-                      const canAfford = Boolean(item.canAfford);
-                      const tokensLeft = Number(item.tokensLeft || 0);
+                      const owned = item.owned;
+                      const canAfford = item.canAfford;
+                      const tokensLeft = item.tokensLeft ?? 0;
                       const tokenSoldOut = isAntagToken && tokensLeft <= 0;
+                      const currentVariant = parseVariant(
+                        selectedVariants[item.id],
+                      );
 
                       const buttonDisabled = isAntagToken
                         ? !isPregame || owned || !canAfford || tokenSoldOut
@@ -138,6 +162,7 @@ export const MetaCoinShop = () => {
 
                         act('buy_preround', {
                           itemId: item.id,
+                          variant: selectedVariants[item.id] || null,
                         });
                       };
 
@@ -163,6 +188,38 @@ export const MetaCoinShop = () => {
                               <Box mt={1} color="label">
                                 Price: {item.price}
                               </Box>
+
+                              {item.variantOptions &&
+                                Object.entries(item.variantOptions).map(
+                                  ([groupName, options]) => (
+                                    <Box key={groupName} mt={1}>
+                                      <Box color="label">{groupName}</Box>
+                                      <Stack mt={1}>
+                                        {options.map((option) => (
+                                          <Stack.Item key={option.id}>
+                                            <Button
+                                              selected={
+                                                currentVariant[groupName] ===
+                                                option.id
+                                              }
+                                              onClick={() =>
+                                                setSelectedVariants({
+                                                  ...selectedVariants,
+                                                  [item.id]: JSON.stringify({
+                                                    ...currentVariant,
+                                                    [groupName]: option.id,
+                                                  }),
+                                                })
+                                              }
+                                            >
+                                              {option.name}
+                                            </Button>
+                                          </Stack.Item>
+                                        ))}
+                                      </Stack>
+                                    </Box>
+                                  ),
+                                )}
 
                               {isAntagToken && (
                                 <Box
@@ -217,7 +274,18 @@ export const MetaCoinShop = () => {
         )}
 
         {activeTab === 'persistent' && (
-          <Section title="Persistent rewards">
+          <Section
+            title="Persistent rewards"
+            buttons={
+              <Button
+                icon="cog"
+                tooltip="Configure"
+                onClick={() => act('open_settings')}
+              >
+                Settings
+              </Button>
+            }
+          >
             {!persistentItems.length ? (
               <NoticeBox>No persistent rewards available.</NoticeBox>
             ) : (
