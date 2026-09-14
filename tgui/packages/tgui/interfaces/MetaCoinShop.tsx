@@ -21,7 +21,7 @@ type VariantOptions = Record<string, VariantOption[]>;
 
 type ShopItem = {
   id: string;
-  kind?: 'item' | 'antag_token';
+  kind: 'item' | 'other' | 'antag_token' | 'persistent';
   name: string;
   desc: string;
   price: number;
@@ -38,12 +38,10 @@ type ShopItem = {
 type Data = {
   isPregame: boolean;
   balance: number;
-  antagTokenSlotsLeft: number;
   preroundItems: ShopItem[];
   persistentItems: ShopItem[];
 };
 
-// MASSMETA EDIT ADDITION START (metacoins)
 const renderListingIcon = (item: ShopItem) => {
   const fallbackName = item.fallbackIcon || 'question-circle';
   const fallbackNode = <Icon name={fallbackName} size={2} />;
@@ -62,7 +60,6 @@ const renderListingIcon = (item: ShopItem) => {
 
   return fallbackNode;
 };
-// MASSMETA EDIT ADDITION END (metacoins)
 
 const parseVariant = (variant: string | null | undefined) => {
   if (!variant) {
@@ -141,9 +138,9 @@ export const MetaCoinShop = () => {
                   <Stack.Item key={item.id}>
                     {(() => {
                       const isAntagToken = item.kind === 'antag_token';
-                      const owned = Boolean(item.owned);
-                      const canAfford = Boolean(item.canAfford);
-                      const tokensLeft = Number(item.tokensLeft || 0);
+                      const owned = item.owned;
+                      const canAfford = item.canAfford;
+                      const tokensLeft = item.tokensLeft ?? 0;
                       const tokenSoldOut = isAntagToken && tokensLeft <= 0;
                       const currentVariant = parseVariant(
                         selectedVariants[item.id],
