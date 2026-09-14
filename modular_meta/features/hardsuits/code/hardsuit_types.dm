@@ -247,7 +247,7 @@
 
 /obj/item/clothing/suit/space/hardsuit/swat/captain
 	name = "magnate hardsuit"
-	desc = "A tactical hardsuit with streamlined joints and armor made out of superior materials, insulated against intense heat with the complementary gas mask. Best synergy of lightness and armour available. Usually reserved for central command officers, this one has a regal finish in Nanotrasen company colors. Has installed a medical deathrattle implant in it. Better not let the assistants get a hold of it."
+	desc = "A tactical hardsuit with streamlined joints and armor made out of superior materials, insulated against intense heat with the complementary gas mask. Best synergy of lightness and armour available. Usually reserved for central command officers, this one has a regal finish in Nanotrasen company colors. Better not let the assistants get a hold of it."
 	icon_state = "caparmor"
 	inhand_icon_state = "capspacesuit"
 	hardsuit_helmet_type = /obj/item/clothing/head/helmet/space/hardsuit/swat/captain
