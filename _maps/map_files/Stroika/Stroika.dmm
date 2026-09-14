@@ -322,8 +322,7 @@
 "bn" = (
 /obj/structure/girder/reinforced,
 /obj/effect/spawner/structure/window/reinforced/plasma/plastitanium,
-/turf/open/floor/plating,
-/area/station/ai_monitored/turret_protected/ai)
+/turf/open/floor/plating)
 "bq" = (
 /obj/item/gps,
 /obj/item/clothing/glasses/meson,
@@ -396,8 +395,7 @@
 /obj/effect/mapping_helpers/airlock/cyclelink_helper{
 	dir = 1
 	},
-/turf/open/floor/mineral/plastitanium,
-/area/station/ai_monitored/turret_protected/ai)
+/turf/open/floor/mineral/plastitanium)
 "bM" = (
 /obj/item/stack/sheet/glass{
 	pixel_y = -4;
@@ -428,8 +426,7 @@
 /obj/effect/mapping_helpers/airlock/cyclelink_helper{
 	dir = 1
 	},
-/turf/open/space/basic,
-/area/station/ai_monitored/turret_protected/ai)
+/turf/open/space/basic)
 "bR" = (
 /obj/item/clothing/glasses/welding,
 /obj/item/weldingtool/experimental,
@@ -756,7 +753,7 @@
 /obj/structure/sign/poster/official/nanotrasen_logo/directional/east,
 /obj/structure/cable,
 /turf/open/floor/wood/large,
-/area/station/ai_monitored/security/armory/upper)
+/area/station/security/armory)
 "ds" = (
 /obj/effect/spawner/structure/window/reinforced,
 /turf/open/floor/plating/snowed/icemoon,
@@ -1106,8 +1103,7 @@
 "eW" = (
 /obj/structure/cable,
 /obj/effect/landmark/event_spawn,
-/turf/open/floor/mineral/plastitanium,
-/area/station/ai_monitored/turret_protected/ai)
+/turf/open/floor/mineral/plastitanium)
 "eY" = (
 /mob/living/basic/hivebot/rapid,
 /turf/open/floor/plating/icemoon,
@@ -1251,8 +1247,7 @@
 	dir = 1
 	},
 /obj/structure/cable,
-/turf/open/floor/mineral/plastitanium,
-/area/station/ai_monitored/turret_protected/ai)
+/turf/open/floor/mineral/plastitanium)
 "fT" = (
 /obj/structure/cable,
 /obj/machinery/power/apc/auto_name/directional/south,
@@ -1774,10 +1769,6 @@
 /area/station/cargo/storage)
 "iq" = (
 /obj/structure/table,
-/obj/item/stack/sticky_tape{
-	pixel_y = 12;
-	pixel_x = 4
-	},
 /obj/item/pen{
 	pixel_x = -6
 	},
@@ -1962,7 +1953,7 @@
 /obj/effect/mapping_helpers/apc/unlocked,
 /obj/effect/mapping_helpers/apc/no_charge,
 /turf/open/floor/wood/large,
-/area/station/ai_monitored/security/armory/upper)
+/area/station/security/armory)
 "jd" = (
 /obj/machinery/newscaster/directional/north,
 /obj/effect/mob_spawn/corpse/human/syndicatesoldier,
@@ -1992,7 +1983,7 @@
 /area/station/maintenance/space_hut/cabin)
 "ji" = (
 /turf/closed/wall/mineral/wood,
-/area/station/ai_monitored/security/armory/upper)
+/area/station/security/armory)
 "jl" = (
 /obj/structure/table/reinforced,
 /obj/item/radio/intercom/directional/south,
@@ -2123,7 +2114,7 @@
 	},
 /obj/structure/cable,
 /turf/open/floor/wood/large,
-/area/station/ai_monitored/security/armory/upper)
+/area/station/security/armory)
 "jL" = (
 /obj/effect/spawner/random/engineering/canister,
 /turf/open/misc/asteroid/snow/icemoon,
@@ -2465,7 +2456,7 @@
 "lC" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/brown/visible/layer2,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden,
-/turf/closed/wall/r_wall/syndicate,
+/turf/closed/wall/r_wall,
 /area/station/maintenance/disposal/incinerator)
 "lD" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
@@ -2510,7 +2501,7 @@
 /area/station/cargo/storage)
 "lM" = (
 /obj/machinery/atmospherics/pipe/smart/simple/dark/visible,
-/turf/closed/wall/r_wall/syndicate,
+/turf/closed/wall/r_wall,
 /area/station/maintenance/disposal/incinerator)
 "lO" = (
 /obj/vehicle/ridden/atv,
@@ -3034,8 +3025,7 @@
 "oq" = (
 /obj/machinery/recharge_station,
 /mob/living/silicon/robot/shell/cell,
-/turf/open/floor/glass/plasma,
-/area/station/ai_monitored/turret_protected/ai)
+/turf/open/floor/glass/plasma)
 "or" = (
 /obj/structure/table/reinforced,
 /obj/item/clothing/glasses/cold,
@@ -3066,8 +3056,7 @@
 "ov" = (
 /obj/machinery/power/smes/super/full,
 /obj/structure/cable,
-/turf/open/floor/mineral/plastitanium,
-/area/station/ai_monitored/turret_protected/ai)
+/turf/open/floor/mineral/plastitanium)
 "ow" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 1
@@ -3122,12 +3111,11 @@
 "oH" = (
 /obj/machinery/atmospherics/pipe/smart/simple/dark/visible,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/brown/visible/layer2,
-/turf/closed/wall/r_wall/syndicate,
+/turf/closed/wall/r_wall,
 /area/station/maintenance/disposal/incinerator)
 "oI" = (
 /obj/structure/cable,
-/turf/open/floor/mineral/plastitanium,
-/area/station/ai_monitored/turret_protected/ai)
+/turf/open/floor/mineral/plastitanium)
 "oK" = (
 /obj/structure/lattice/catwalk/mining,
 /turf/open/openspace/icemoon/keep_below,
@@ -3146,8 +3134,7 @@
 /turf/open/floor/iron,
 /area/station/cargo/warehouse)
 "oT" = (
-/turf/open/floor/iron/stairs,
-/area/station/ai_monitored/turret_protected/ai)
+/turf/open/floor/iron/stairs)
 "oU" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
@@ -3281,8 +3268,7 @@
 	c_tag = "MiniSat AI Chamber South";
 	network = list("aicore")
 	},
-/turf/open/floor/glass/plasma,
-/area/station/ai_monitored/turret_protected/ai)
+/turf/open/floor/glass/plasma)
 "pz" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 4
@@ -3316,7 +3302,7 @@
 /obj/effect/spawner/random/contraband/armory,
 /obj/effect/spawner/random/maintenance/eight,
 /turf/open/floor/wood/large,
-/area/station/ai_monitored/security/armory/upper)
+/area/station/security/armory)
 "pL" = (
 /obj/effect/mapping_helpers/airlock/cyclelink_helper{
 	dir = 4
@@ -3335,7 +3321,7 @@
 /obj/effect/spawner/random/contraband/armory,
 /obj/effect/spawner/random/maintenance/eight,
 /turf/open/floor/wood/large,
-/area/station/ai_monitored/security/armory/upper)
+/area/station/security/armory)
 "pS" = (
 /obj/structure/alien/resin/wall,
 /turf/open/floor/plating/snowed/icemoon,
@@ -3424,8 +3410,7 @@
 /obj/item/bodypart/arm/right/robot,
 /obj/item/bodypart/arm/left/robot,
 /obj/item/bodypart/leg/right/robot,
-/turf/open/floor/glass/plasma,
-/area/station/ai_monitored/turret_protected/ai)
+/turf/open/floor/glass/plasma)
 "qr" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/effect/turf_decal/stripes/line{
@@ -3490,8 +3475,7 @@
 /obj/item/clothing/neck/link_scryer/loaded,
 /obj/item/clothing/neck/link_scryer/loaded,
 /obj/item/clothing/neck/link_scryer/loaded,
-/turf/open/floor/mineral/plastitanium,
-/area/station/ai_monitored/turret_protected/ai)
+/turf/open/floor/mineral/plastitanium)
 "qz" = (
 /obj/machinery/light/directional/north,
 /obj/machinery/digital_clock/directional/north,
@@ -3628,7 +3612,7 @@
 "re" = (
 /obj/structure/cable,
 /turf/open/floor/wood/large,
-/area/station/ai_monitored/security/armory/upper)
+/area/station/security/armory)
 "rg" = (
 /obj/machinery/door/airlock/shuttle{
 	name = "Emergency Shuttle Airlock"
@@ -3968,8 +3952,7 @@
 /area/station/medical/lower)
 "sC" = (
 /obj/item/circuitboard/machine/pacman/wood,
-/turf/open/floor/mineral/plastitanium,
-/area/station/ai_monitored/turret_protected/ai)
+/turf/open/floor/mineral/plastitanium)
 "sD" = (
 /obj/machinery/door/airlock{
 	name = "Bathroom"
@@ -4169,7 +4152,7 @@
 /area/station/cargo/storage)
 "tC" = (
 /obj/structure/cable/multilayer/multiz,
-/turf/open/floor/plating,
+/turf/closed/wall/r_wall,
 /area/station/engineering/atmos)
 "tD" = (
 /obj/machinery/shower/directional/north,
@@ -4280,7 +4263,6 @@
 /area/station/engineering/storage/tech)
 "tZ" = (
 /obj/structure/window/reinforced/spawner/directional/north,
-/obj/structure/filingcabinet/filingcabinet,
 /obj/effect/turf_decal/tile/brown/half/contrasted{
 	dir = 1
 	},
@@ -4290,8 +4272,7 @@
 "uc" = (
 /obj/effect/spawner/structure/window/reinforced/plasma/plastitanium,
 /obj/structure/girder/reinforced,
-/turf/open/floor/plating,
-/area/station/ai_monitored/turret_protected/ai)
+/turf/open/floor/plating)
 "ue" = (
 /obj/machinery/light/directional/south,
 /obj/structure/cable,
@@ -4335,8 +4316,7 @@
 /obj/effect/mapping_helpers/apc/full_charge,
 /obj/effect/mapping_helpers/apc/unlocked,
 /obj/machinery/power/apc/auto_name/directional/east,
-/turf/open/floor/mineral/plastitanium,
-/area/station/ai_monitored/turret_protected/ai)
+/turf/open/floor/mineral/plastitanium)
 "um" = (
 /obj/machinery/door/airlock/wood{
 	name = "Mining"
@@ -4489,6 +4469,11 @@
 	},
 /turf/open/floor/plating/snowed/icemoon,
 /area/station/cargo/storage)
+"uY" = (
+/obj/structure/window/reinforced/plasma/spawner/directional/east,
+/obj/structure/window/reinforced/plasma/spawner/directional/west,
+/turf/closed/wall/r_wall,
+/area/station/engineering/atmos)
 "uZ" = (
 /obj/effect/turf_decal/tile/blue/opposingcorners,
 /turf/open/floor/mineral/titanium/tiled/white,
@@ -4659,8 +4644,7 @@
 	},
 /obj/effect/mapping_helpers/airlock/access/all/command/ai_upload,
 /obj/effect/mapping_helpers/airlock/cyclelink_helper,
-/turf/open/floor/mineral/plastitanium,
-/area/station/ai_monitored/turret_protected/ai)
+/turf/open/floor/mineral/plastitanium)
 "vV" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 4
@@ -5038,6 +5022,10 @@
 /obj/item/pinpointer/nuke,
 /turf/closed/mineral/random/snow/high_chance,
 /area/icemoon/surface/outdoors/unexplored/rivers/no_monsters)
+"xt" = (
+/obj/effect/spawner/random/engineering/toolbox,
+/turf/closed/wall/r_wall,
+/area/station/engineering/atmos)
 "xu" = (
 /obj/structure/disposalpipe/segment{
 	dir = 4
@@ -5087,8 +5075,7 @@
 /area/station/cargo/storage)
 "xC" = (
 /obj/effect/spawner/structure/window/reinforced/plasma/plastitanium,
-/turf/open/floor/plating,
-/area/station/ai_monitored/turret_protected/ai)
+/turf/open/floor/plating)
 "xD" = (
 /obj/machinery/conveyor_switch/oneway{
 	dir = 8;
@@ -5330,8 +5317,7 @@
 /area/station/medical/lower)
 "yC" = (
 /obj/machinery/airalarm/directional/west,
-/turf/open/floor/mineral/plastitanium,
-/area/station/ai_monitored/turret_protected/ai)
+/turf/open/floor/mineral/plastitanium)
 "yH" = (
 /obj/item/radio,
 /obj/item/flashlight/lantern/on,
@@ -5600,8 +5586,7 @@
 "zU" = (
 /obj/structure/cable,
 /obj/machinery/light/floor,
-/turf/open/floor/mineral/plastitanium,
-/area/station/ai_monitored/turret_protected/ai)
+/turf/open/floor/mineral/plastitanium)
 "zV" = (
 /obj/structure/fans/tiny,
 /obj/structure/window/reinforced/plasma/spawner/directional/west,
@@ -5856,6 +5841,10 @@
 "Bj" = (
 /turf/closed/mineral/random/snow/high_chance,
 /area/icemoon/surface/outdoors/noruins)
+"Bk" = (
+/obj/structure/cable,
+/turf/closed/wall/r_wall,
+/area/station/engineering/atmos)
 "Bn" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 5
@@ -5986,7 +5975,6 @@
 	},
 /obj/effect/turf_decal/bot,
 /obj/machinery/light/small/directional/east,
-/mob/living/simple_animal/bot/mulebot,
 /obj/machinery/status_display/supply{
 	pixel_x = 32
 	},
@@ -5996,12 +5984,9 @@
 /obj/structure/closet/crate/secure/science/robo,
 /obj/item/organ/brain/cybernetic/ai,
 /obj/item/organ/brain/cybernetic/ai,
-/obj/item/aiupgrade/power_transfer,
 /obj/item/borg/upgrade/ai,
 /obj/item/borg/upgrade/ai,
 /obj/item/borg/upgrade/ai,
-/obj/item/borg/upgrade/circuit_app,
-/obj/item/borg/upgrade/circuit_app,
 /obj/item/borg/upgrade/defib/backpack,
 /obj/item/borg/upgrade/diamond_drill,
 /obj/item/borg/upgrade/engineering_omnitool,
@@ -6012,8 +5997,7 @@
 /obj/item/borg/upgrade/shuttle_blueprints,
 /obj/item/borg/upgrade/selfrepair,
 /obj/item/pinpointer/nuke,
-/turf/open/floor/mineral/plastitanium,
-/area/station/ai_monitored/turret_protected/ai)
+/turf/open/floor/mineral/plastitanium)
 "Cc" = (
 /obj/item/shovel,
 /obj/effect/mapping_helpers/broken_floor,
@@ -6028,8 +6012,7 @@
 	c_tag = "MiniSat Core Hallway";
 	network = list("aicore")
 	},
-/turf/open/floor/mineral/plastitanium,
-/area/station/ai_monitored/turret_protected/ai)
+/turf/open/floor/mineral/plastitanium)
 "Cf" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/cable,
@@ -6057,7 +6040,7 @@
 /obj/machinery/light/small/directional/south,
 /obj/structure/cable,
 /turf/open/floor/wood/large,
-/area/station/ai_monitored/security/armory/upper)
+/area/station/security/armory)
 "Co" = (
 /obj/structure/table,
 /obj/item/surgical_drapes,
@@ -6292,8 +6275,7 @@
 	listening = 0;
 	name = "Common Channel"
 	},
-/turf/open/floor/mineral/plastitanium,
-/area/station/ai_monitored/turret_protected/ai)
+/turf/open/floor/mineral/plastitanium)
 "Dm" = (
 /turf/open/floor/wood,
 /area/station/service/bar/atrium)
@@ -6583,8 +6565,7 @@
 /turf/open/floor/plating/snowed/icemoon,
 /area/station/cargo/storage)
 "EL" = (
-/turf/closed/wall/r_wall/syndicate/nodiagonal,
-/area/station/ai_monitored/turret_protected/ai)
+)
 "EO" = (
 /obj/effect/spawner/random/techstorage/rnd_secure_all,
 /obj/structure/rack,
@@ -6673,8 +6654,7 @@
 /area/icemoon/underground/explored)
 "Fq" = (
 /obj/structure/cable/multilayer/multiz,
-/turf/open/floor/mineral/plastitanium,
-/area/station/ai_monitored/turret_protected/ai)
+/turf/open/floor/mineral/plastitanium)
 "Fr" = (
 /obj/machinery/mineral/ore_redemption{
 	input_dir = 8;
@@ -6706,8 +6686,7 @@
 /turf/open/floor/plating,
 /area/station/cargo/lower)
 "Fv" = (
-/turf/open/floor/mineral/plastitanium,
-/area/station/ai_monitored/turret_protected/ai)
+/turf/open/floor/mineral/plastitanium)
 "FA" = (
 /obj/structure/disposalpipe/segment{
 	dir = 10
@@ -7005,8 +6984,7 @@
 /obj/structure/railing{
 	dir = 5
 	},
-/turf/open/floor/iron/stairs,
-/area/station/ai_monitored/turret_protected/ai)
+/turf/open/floor/iron/stairs)
 "GS" = (
 /obj/machinery/light_switch/directional/west,
 /obj/structure/closet/secure_closet/quartermaster,
@@ -7123,7 +7101,7 @@
 /obj/effect/turf_decal/trimline/dark_red/arrow_ccw{
 	dir = 8
 	},
-/turf/closed/wall/r_wall/syndicate,
+/turf/closed/wall/r_wall,
 /area/station/maintenance/disposal/incinerator)
 "HE" = (
 /turf/closed/wall/r_wall,
@@ -7703,8 +7681,7 @@
 /obj/structure/railing{
 	dir = 4
 	},
-/turf/open/floor/mineral/plastitanium,
-/area/station/ai_monitored/turret_protected/ai)
+/turf/open/floor/mineral/plastitanium)
 "Ki" = (
 /obj/structure/table/wood,
 /obj/item/bedsheet/rd/royal_cape{
@@ -7747,8 +7724,7 @@
 /area/station/cargo/storage)
 "Kr" = (
 /obj/machinery/light/floor,
-/turf/open/floor/mineral/plastitanium,
-/area/station/ai_monitored/turret_protected/ai)
+/turf/open/floor/mineral/plastitanium)
 "Ks" = (
 /obj/machinery/atmospherics/components/unary/vent_scrubber/on/layer2{
 	dir = 4
@@ -7986,8 +7962,7 @@
 /obj/effect/spawner/structure/window/reinforced/plasma/plastitanium,
 /obj/machinery/light/floor,
 /obj/structure/girder/reinforced,
-/turf/open/floor/plating,
-/area/station/ai_monitored/turret_protected/ai)
+/turf/open/floor/plating)
 "LV" = (
 /obj/machinery/conveyor{
 	dir = 4;
@@ -8079,8 +8054,7 @@
 	name = "Custom Channel";
 	pixel_y = -8
 	},
-/turf/open/floor/mineral/plastitanium,
-/area/station/ai_monitored/turret_protected/ai)
+/turf/open/floor/mineral/plastitanium)
 "Mt" = (
 /turf/open/floor/plating/foam,
 /area/icemoon/underground/explored)
@@ -8183,7 +8157,7 @@
 /turf/open/floor/iron/freezer,
 /area/station/science/xenobiology)
 "MR" = (
-/turf/closed/wall/r_wall/syndicate,
+/turf/closed/wall/r_wall,
 /area/station/maintenance/disposal/incinerator)
 "MU" = (
 /obj/effect/decal/cleanable/dirt,
@@ -8220,8 +8194,7 @@
 /obj/structure/railing{
 	dir = 8
 	},
-/turf/open/floor/mineral/plastitanium,
-/area/station/ai_monitored/turret_protected/ai)
+/turf/open/floor/mineral/plastitanium)
 "Na" = (
 /obj/structure/cable,
 /turf/open/floor/carpet/neon/simple/blue,
@@ -8255,9 +8228,8 @@
 /turf/open/floor/plating/foam,
 /area/icemoon/underground/explored)
 "Nl" = (
-/obj/structure/lattice/lava,
-/turf/open/openspace/icemoon/keep_below,
-/area/icemoon/surface/outdoors/nospawn)
+/turf/open/space/basic,
+/area/icemoon/underground/unexplored/rivers)
 "Nm" = (
 /obj/structure/disposalpipe/segment{
 	dir = 9
@@ -8615,8 +8587,7 @@
 /obj/structure/railing{
 	dir = 1
 	},
-/turf/open/floor/glass/icemoon,
-/area/station/ai_monitored/turret_protected/ai)
+/turf/open/floor/glass/icemoon)
 "Pd" = (
 /obj/effect/turf_decal/bot,
 /obj/effect/decal/cleanable/dirt,
@@ -9311,8 +9282,7 @@
 /area/icemoon/underground/explored)
 "Si" = (
 /obj/effect/landmark/start/cyborg,
-/turf/open/floor/mineral/plastitanium,
-/area/station/ai_monitored/turret_protected/ai)
+/turf/open/floor/mineral/plastitanium)
 "Sj" = (
 /obj/structure/cable,
 /turf/open/floor/iron/cafeteria,
@@ -9633,7 +9603,7 @@
 	id = "fightingcommunity60"
 	},
 /turf/open/floor/plating,
-/area/station/ai_monitored/security/armory/upper)
+/area/station/security/armory)
 "TT" = (
 /obj/item/flashlight/lantern/on,
 /turf/open/misc/asteroid/snow/icemoon,
@@ -9652,8 +9622,7 @@
 /obj/machinery/recharge_station,
 /mob/living/silicon/robot/shell/cell,
 /obj/machinery/light/floor,
-/turf/open/floor/glass/plasma,
-/area/station/ai_monitored/turret_protected/ai)
+/turf/open/floor/glass/plasma)
 "TZ" = (
 /obj/effect/turf_decal/tile/neutral/fourcorners,
 /obj/structure/table/reinforced,
@@ -9751,8 +9720,7 @@
 /turf/open/floor/iron,
 /area/station/cargo/storage)
 "UI" = (
-/turf/open/floor/plating/snowed/icemoon,
-/area/station/ai_monitored/turret_protected/ai)
+/turf/open/floor/plating/snowed/icemoon)
 "UL" = (
 /turf/closed/wall/r_wall,
 /area/station/hallway/secondary/exit/departure_lounge)
@@ -10068,8 +10036,7 @@
 /obj/structure/railing{
 	dir = 9
 	},
-/turf/open/floor/iron/stairs,
-/area/station/ai_monitored/turret_protected/ai)
+/turf/open/floor/iron/stairs)
 "Wh" = (
 /turf/open/misc/asteroid/snow/icemoon,
 /area/icemoon/underground/unexplored/no_rivers)
@@ -10156,8 +10123,7 @@
 /turf/open/floor/iron,
 /area/station/cargo/storage)
 "WF" = (
-/turf/open/openspace,
-/area/station/ai_monitored/turret_protected/ai)
+/turf/open/openspace)
 "WH" = (
 /obj/item/circuitboard/machine/pacman/wood,
 /turf/open/floor/iron/dark/textured_large,
@@ -10273,8 +10239,7 @@
 	},
 /obj/effect/mapping_helpers/airlock/access/all/command/ai_upload,
 /obj/effect/mapping_helpers/airlock/cyclelink_helper,
-/turf/open/floor/mineral/plastitanium,
-/area/station/ai_monitored/turret_protected/ai)
+/turf/open/floor/mineral/plastitanium)
 "Xo" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
@@ -10576,8 +10541,7 @@
 /area/station/science/xenobiology)
 "YH" = (
 /obj/effect/landmark/start/ai,
-/turf/open/floor/circuit,
-/area/station/ai_monitored/turret_protected/ai)
+/turf/open/floor/circuit)
 "YL" = (
 /obj/structure/fans/tiny,
 /obj/structure/cable,
@@ -10727,7 +10691,7 @@
 	},
 /mob/living/basic/migo/hatsune,
 /turf/open/floor/wood/large,
-/area/station/ai_monitored/security/armory/upper)
+/area/station/security/armory)
 "Zr" = (
 /obj/structure/cable,
 /obj/structure/musician/piano{
@@ -10784,7 +10748,6 @@
 	},
 /obj/structure/rack,
 /obj/item/aicard,
-/obj/item/ai_module/reset,
 /obj/machinery/status_display/ai/directional/south,
 /obj/machinery/firealarm/directional/west,
 /obj/effect/turf_decal/tile/dark_blue/full,
@@ -10822,7 +10785,6 @@
 	location = "QM #1"
 	},
 /obj/effect/turf_decal/bot,
-/mob/living/simple_animal/bot/mulebot,
 /turf/open/floor/iron,
 /area/station/cargo/storage)
 "ZF" = (
@@ -163712,7 +163674,7 @@ vl
 vl
 vl
 vl
-vl
+Nl
 vl
 vl
 vl
@@ -227958,14 +227920,14 @@ LI
 LI
 LI
 LI
-LI
-LI
-LI
-LI
-LI
-LI
-LI
-LI
+Yb
+Yb
+Yb
+Yb
+Yb
+Yb
+Yb
+Yb
 Yb
 LI
 LI
@@ -228215,21 +228177,21 @@ LI
 LI
 LI
 LI
-LI
-LI
-LI
-LI
-LI
-LI
-LI
-LI
+Yb
+Yb
+Yb
+Yb
+Yb
+Yb
+Yb
+Yb
 of
-LI
-LI
-LI
-LI
-LI
-LI
+Yb
+Yb
+Yb
+Yb
+Yb
+Yb
 LI
 LI
 LI
@@ -228467,26 +228429,26 @@ LI
 LI
 LI
 LI
-LI
-LI
-LI
-LI
-LI
-LI
-LI
-LI
-LI
-LI
-LI
-LI
-LI
+Yb
+Yb
+Yb
+Yb
+Yb
+Yb
+Yb
+Iv
+Yb
+Yb
+Yb
+Yb
+Yb
 AR
-LI
-LI
-LI
-LI
-LI
-LI
+Yb
+Yb
+Iv
+Yb
+Yb
+Yb
 LI
 LI
 LI
@@ -228724,29 +228686,29 @@ LI
 LI
 LI
 LI
-LI
-LI
-LI
-LI
-LI
-LI
-LI
-LI
-LI
-LI
-LI
-LI
-LI
+Yb
+Yb
+Yb
+Yb
+Yb
+Yb
+Yb
+Yb
+Yb
+Yb
+Yb
+Yb
+Yb
 AR
-LI
-LI
-LI
-LI
-LI
-LI
-LI
-LI
-LI
+Yb
+Yb
+Yb
+Yb
+Yb
+Yb
+Yb
+Yb
+Yb
 LI
 LI
 LI
@@ -228981,31 +228943,31 @@ LI
 LI
 LI
 LI
-LI
-LI
-LI
-LI
-LI
-LI
-LI
-LI
-LI
-LI
-LI
-LI
-LI
+Yb
+Yb
+Yb
+Yb
+Yb
+Yb
+Yb
+Yb
+Yb
+Yb
+Yb
+Yb
+Yb
 AR
-LI
-LI
-LI
-LI
-LI
-LI
-LI
-LI
-LI
-LI
-LI
+Yb
+Yb
+Yb
+Yb
+Yb
+Iv
+Yb
+Yb
+Yb
+Yb
+Yb
 LI
 LI
 LI
@@ -229237,11 +229199,11 @@ LI
 LI
 LI
 LI
-LI
-LI
-LI
-LI
-LI
+Yb
+Yb
+Yb
+Yb
+Yb
 MR
 MR
 MR
@@ -229262,7 +229224,7 @@ rA
 rA
 rA
 rA
-LI
+Yb
 LI
 LI
 LI
@@ -229494,11 +229456,11 @@ LI
 LI
 LI
 LI
-LI
-LI
-LI
-LI
-LI
+Yb
+Yb
+Iv
+Yb
+Yb
 MR
 YW
 Nr
@@ -229519,7 +229481,7 @@ rA
 rA
 rA
 rA
-LI
+Yb
 LI
 LI
 LI
@@ -229751,11 +229713,11 @@ LI
 LI
 LI
 LI
-LI
-LI
-LI
-LI
-LI
+Yb
+Yb
+Yb
+Yb
+Yb
 MR
 aM
 nX
@@ -229776,7 +229738,7 @@ rA
 rA
 rA
 rA
-LI
+Yb
 LI
 LI
 LI
@@ -230009,10 +229971,10 @@ LI
 LI
 LI
 LI
-LI
-LI
-LI
-LI
+Yb
+Yb
+Yb
+Yb
 MR
 xe
 hg
@@ -230026,15 +229988,15 @@ Rx
 MR
 gL
 MR
-LI
-LI
-LI
-LI
-LI
-LI
-LI
-LI
-LI
+Yb
+Yb
+Yb
+Yb
+Yb
+Yb
+Yb
+Yb
+Yb
 LI
 LI
 LI
@@ -230266,10 +230228,10 @@ LI
 LI
 LI
 LI
-LI
-LI
-LI
-LI
+Yb
+Yb
+Yb
+Yb
 MR
 GC
 Pv
@@ -230283,15 +230245,15 @@ Sv
 Ua
 ZC
 Ux
-LI
-LI
-LI
-LI
-LI
-LI
-LI
-LI
-LI
+Yb
+Yb
+Yb
+Yb
+Yb
+Yb
+Yb
+Yb
+Yb
 LI
 LI
 LI
@@ -230523,10 +230485,10 @@ LI
 LI
 LI
 LI
-LI
-LI
-LI
-LI
+Yb
+Yb
+Yb
+Yb
 HD
 WN
 AS
@@ -230541,14 +230503,14 @@ MR
 jM
 MR
 MR
-LI
-LI
-LI
-LI
-LI
-LI
-LI
-LI
+Yb
+Yb
+Yb
+Yb
+Yb
+Yb
+Yb
+Iv
 LI
 LI
 LI
@@ -230780,10 +230742,10 @@ LI
 LI
 LI
 LI
-LI
-LI
-LI
-LI
+Yb
+Yb
+Yb
+Yb
 MR
 fy
 cm
@@ -230804,8 +230766,8 @@ ft
 rA
 rA
 rA
-LI
-LI
+Yb
+Yb
 LI
 LI
 LI
@@ -231038,9 +231000,9 @@ LI
 LI
 LI
 LI
-LI
-LI
-LI
+Yb
+Yb
+Yb
 MR
 Zt
 lS
@@ -231061,8 +231023,8 @@ rA
 rA
 rA
 rA
-LI
-LI
+Yb
+Yb
 LI
 LI
 LI
@@ -231295,9 +231257,9 @@ LI
 LI
 LI
 LI
-LI
-LI
-LI
+Yb
+Yb
+Yb
 MR
 MR
 MR
@@ -231318,8 +231280,8 @@ rA
 rA
 rA
 rA
-LI
-tM
+Yb
+Yb
 LI
 LI
 LI
@@ -231552,11 +231514,11 @@ LI
 LI
 LI
 LI
-LI
-LI
-LI
-LI
-LI
+Yb
+Yb
+Yb
+Yb
+Yb
 MR
 Pm
 mD
@@ -231565,18 +231527,18 @@ RO
 dg
 dg
 dg
+Yb
+Yb
+Yb
+Yb
+Yb
+Yb
+Yb
+Yb
+Yb
+Yb
+Yb
 LI
-LI
-LI
-LI
-LI
-LI
-LI
-LI
-LI
-LI
-LI
-tM
 LI
 LI
 LI
@@ -231811,29 +231773,29 @@ LI
 LI
 LI
 LI
-LI
-LI
-LI
+Yb
+Yb
+Yb
 MR
 Pm
 mf
 MR
+Yb
+Yb
+Yb
+Yb
+Yb
+Yb
+Yb
+Iv
+Yb
+Yb
+Yb
+Yb
+Yb
+Yb
+Yb
 LI
-LI
-tM
-tM
-tM
-tM
-LI
-LI
-LI
-LI
-LI
-LI
-LI
-LI
-LI
-tM
 LI
 LI
 LI
@@ -232068,29 +232030,29 @@ LI
 LI
 LI
 LI
-LI
-LI
-LI
+Yb
+Yb
+Yb
 MR
 MR
 MR
 MR
-LI
-tM
-LI
-LI
-LI
-tM
-tM
-LI
-LI
-LI
-LI
-LI
-LI
+Yb
+Yb
+Yb
+Iv
+Yb
+Yb
+Yb
+Yb
+Yb
+Yb
+Yb
 LI
 LI
-tM
+LI
+LI
+LI
 LI
 LI
 LI
@@ -232325,28 +232287,28 @@ LI
 LI
 LI
 LI
+Yb
+Yb
+Yb
+Yb
+Yb
+Yb
+Yb
+Yb
+Yb
+Yb
+Yb
+Yb
+Yb
+Iv
+Yb
+Yb
+Yb
+Yb
 LI
 LI
 LI
 LI
-LI
-LI
-tM
-tM
-LI
-LI
-LI
-LI
-LI
-tM
-LI
-LI
-LI
-LI
-LI
-LI
-LI
-tM
 LI
 LI
 LI
@@ -232584,27 +232546,22 @@ LI
 LI
 LI
 LI
-LI
-LI
-LI
-LI
-tM
-LI
-LI
-LI
-LI
-LI
-LI
-LI
-tM
-LI
-LI
-LI
-LI
-LI
-LI
-LI
-LI
+Yb
+Yb
+Yb
+Yb
+Yb
+Yb
+Yb
+Yb
+Yb
+Yb
+Yb
+Yb
+Yb
+Yb
+Yb
+Yb
 LI
 LI
 LI
@@ -232612,19 +232569,24 @@ LI
 LI
 LI
 LI
-tM
-tM
-tM
-tM
-tM
-tM
-tM
-tM
 LI
-tM
-tM
-tM
-tM
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
 LI
 LI
 LI
@@ -232841,26 +232803,14 @@ LI
 LI
 LI
 LI
-LI
-LI
-LI
-LI
-tM
-tM
-LI
-LI
-LI
-LI
-LI
-LI
-tM
-tM
-LI
-LI
-LI
-LI
-tM
-tM
+Yb
+Yb
+Yb
+Yb
+Yb
+Iv
+Yb
+Yb
 LI
 LI
 LI
@@ -232868,9 +232818,21 @@ LI
 LI
 LI
 LI
-tM
 LI
-tM
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
 LI
 LI
 LI
@@ -233103,19 +233065,6 @@ LI
 LI
 LI
 LI
-tM
-LI
-LI
-LI
-LI
-LI
-LI
-LI
-LI
-tM
-tM
-tM
-tM
 LI
 LI
 LI
@@ -233127,8 +233076,21 @@ LI
 LI
 LI
 LI
-tM
-tM
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
 LI
 LI
 LI
@@ -233360,7 +233322,6 @@ LI
 LI
 LI
 LI
-tM
 LI
 LI
 LI
@@ -233385,9 +233346,10 @@ LI
 LI
 LI
 LI
-tM
-tM
-tM
+LI
+LI
+LI
+LI
 LI
 LI
 LI
@@ -233643,10 +233605,10 @@ LI
 LI
 LI
 LI
-tM
-tM
-tM
-tM
+LI
+LI
+LI
+LI
 LI
 LI
 LI
@@ -233901,8 +233863,8 @@ LI
 LI
 LI
 LI
-tM
-tM
+LI
+LI
 LI
 LI
 LI
@@ -234156,9 +234118,9 @@ LI
 LI
 LI
 LI
-tM
 LI
-tM
+LI
+LI
 LI
 LI
 LI
@@ -234413,8 +234375,8 @@ LI
 LI
 LI
 LI
-tM
-tM
+LI
+LI
 LI
 LI
 LI
@@ -234659,18 +234621,18 @@ LI
 LI
 LI
 LI
-tM
-tM
-tM
-tM
 LI
 LI
 LI
 LI
 LI
 LI
-tM
-tM
+LI
+LI
+LI
+LI
+LI
+LI
 LI
 LI
 LI
@@ -234912,12 +234874,6 @@ LI
 LI
 LI
 LI
-tM
-tM
-tM
-tM
-LI
-tM
 LI
 LI
 LI
@@ -234927,18 +234883,24 @@ LI
 LI
 LI
 LI
-tM
-tM
-tM
-tM
-tM
-tM
-tM
-tM
 LI
-tM
-tM
-tM
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
 LI
 LI
 LI
@@ -235163,13 +235125,6 @@ LI
 LI
 LI
 LI
-tM
-tM
-LI
-tM
-LI
-tM
-tM
 LI
 LI
 LI
@@ -235183,8 +235138,15 @@ LI
 LI
 LI
 LI
-tM
-tM
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
 LI
 LI
 LI
@@ -235417,17 +235379,6 @@ LI
 LI
 LI
 LI
-tM
-tM
-tM
-LI
-LI
-LI
-LI
-LI
-LI
-tM
-tM
 LI
 LI
 LI
@@ -235440,7 +235391,18 @@ LI
 LI
 LI
 LI
-tM
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
 LI
 LI
 LI
@@ -235675,8 +235637,8 @@ LI
 LI
 LI
 LI
-tM
-tM
+LI
+LI
 LI
 LI
 LI
@@ -235933,15 +235895,15 @@ LI
 LI
 LI
 LI
-tM
-tM
-tM
-tM
 LI
 LI
 LI
 LI
-tM
+LI
+LI
+LI
+LI
+LI
 LI
 LI
 LI
@@ -236192,13 +236154,13 @@ LI
 LI
 LI
 LI
-tM
-tM
-tM
-tM
 LI
 LI
-tM
+LI
+LI
+LI
+LI
+LI
 LI
 LI
 LI
@@ -236452,10 +236414,10 @@ LI
 LI
 LI
 LI
-tM
-tM
-tM
-tM
+LI
+LI
+LI
+LI
 LI
 LI
 LI
@@ -236712,10 +236674,6 @@ LI
 LI
 LI
 LI
-tM
-tM
-tM
-tM
 LI
 LI
 LI
@@ -236733,12 +236691,16 @@ LI
 LI
 LI
 LI
-tM
 LI
-tM
 LI
-tM
-tM
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
 LI
 LI
 LI
@@ -236973,8 +236935,6 @@ LI
 LI
 LI
 LI
-tM
-tM
 LI
 LI
 LI
@@ -236985,13 +236945,15 @@ LI
 LI
 LI
 LI
-tM
-tM
-tM
-tM
-tM
-tM
-tM
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
 LI
 LI
 LI
@@ -237241,13 +237203,13 @@ LI
 LI
 LI
 LI
-tM
-tM
-tM
 LI
 LI
 LI
-tM
+LI
+LI
+LI
+LI
 LI
 LI
 LI
@@ -237497,14 +237459,14 @@ LI
 LI
 LI
 LI
-tM
-tM
 LI
 LI
 LI
 LI
 LI
-tM
+LI
+LI
+LI
 LI
 LI
 LI
@@ -237753,15 +237715,15 @@ LI
 LI
 LI
 LI
-tM
-tM
-tM
-LI
-tM
-tM
 LI
 LI
-tM
+LI
+LI
+LI
+LI
+LI
+LI
+LI
 LI
 LI
 LI
@@ -238014,11 +237976,11 @@ LI
 LI
 LI
 LI
-tM
-tM
-tM
-tM
-tM
+LI
+LI
+LI
+LI
+LI
 LI
 LI
 LI
@@ -238258,8 +238220,6 @@ LI
 LI
 LI
 LI
-tM
-tM
 LI
 LI
 LI
@@ -238274,8 +238234,10 @@ LI
 LI
 LI
 LI
-tM
-tM
+LI
+LI
+LI
+LI
 LI
 LI
 LI
@@ -238508,12 +238470,6 @@ LI
 LI
 LI
 LI
-tM
-tM
-tM
-tM
-tM
-tM
 LI
 LI
 LI
@@ -238533,10 +238489,16 @@ LI
 LI
 LI
 LI
-tM
 LI
-tM
-tM
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
 LI
 LI
 LI
@@ -238760,11 +238722,11 @@ LI
 LI
 LI
 LI
-tM
-tM
-tM
-tM
-tM
+LI
+LI
+LI
+LI
+LI
 LI
 LI
 LI
@@ -239015,9 +238977,9 @@ LI
 LI
 LI
 LI
-tM
-tM
-tM
+LI
+LI
+LI
 LI
 LI
 LI
@@ -239271,13 +239233,13 @@ LI
 LI
 LI
 LI
-tM
-tM
-tM
-tM
-tM
-tM
-tM
+LI
+LI
+LI
+LI
+LI
+LI
+LI
 LI
 LI
 LI
@@ -239534,12 +239496,12 @@ LI
 LI
 LI
 LI
-tM
-tM
-tM
-tM
-tM
-tM
+LI
+LI
+LI
+LI
+LI
+LI
 LI
 LI
 LI
@@ -239794,13 +239756,13 @@ LI
 LI
 LI
 LI
-tM
-tM
-tM
-tM
-tM
-tM
-tM
+LI
+LI
+LI
+LI
+LI
+LI
+LI
 LI
 LI
 LI
@@ -240054,11 +240016,11 @@ LI
 LI
 LI
 LI
-tM
-tM
-tM
-tM
-tM
+LI
+LI
+LI
+LI
+LI
 LI
 LI
 LI
@@ -240311,11 +240273,11 @@ LI
 LI
 LI
 LI
-tM
-tM
-tM
-tM
-tM
+LI
+LI
+LI
+LI
+LI
 LI
 LI
 LI
@@ -240562,12 +240524,12 @@ LI
 LI
 LI
 LI
-tM
-tM
 LI
-tM
 LI
-tM
+LI
+LI
+LI
+LI
 LI
 LI
 LI
@@ -240814,13 +240776,13 @@ LI
 LI
 LI
 LI
-tM
-tM
-tM
-tM
-tM
-tM
-tM
+LI
+LI
+LI
+LI
+LI
+LI
+LI
 LI
 LI
 LI
@@ -241070,9 +241032,6 @@ LI
 LI
 LI
 LI
-tM
-tM
-tM
 LI
 LI
 LI
@@ -241095,21 +241054,24 @@ LI
 LI
 LI
 LI
-tM
-tM
 LI
-tM
-tM
 LI
-tM
-tM
-tM
-tM
-tM
 LI
-tM
-tM
-tM
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
 LI
 LI
 LI
@@ -241328,7 +241290,6 @@ LI
 LI
 LI
 LI
-tM
 LI
 LI
 LI
@@ -241350,14 +241311,15 @@ LI
 LI
 LI
 LI
-tM
-tM
-tM
-tM
-tM
-tM
-tM
-tM
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
 LI
 LI
 LI
@@ -241611,9 +241573,9 @@ LI
 LI
 LI
 LI
-tM
-tM
-tM
+LI
+LI
+LI
 LI
 LI
 LI
@@ -241869,7 +241831,7 @@ LI
 LI
 LI
 LI
-tM
+LI
 LI
 LI
 LI
@@ -242101,12 +242063,6 @@ LI
 LI
 LI
 LI
-tM
-tM
-LI
-LI
-tM
-tM
 LI
 LI
 LI
@@ -242127,9 +242083,15 @@ LI
 LI
 LI
 LI
-tM
-tM
-tM
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
 LI
 LI
 LI
@@ -242357,20 +242319,6 @@ LI
 LI
 LI
 LI
-tM
-tM
-tM
-tM
-tM
-tM
-tM
-tM
-tM
-tM
-tM
-tM
-tM
-tM
 LI
 LI
 LI
@@ -242386,10 +242334,24 @@ LI
 LI
 LI
 LI
-tM
-tM
-tM
-tM
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
 LI
 LI
 LI
@@ -242614,20 +242576,6 @@ LI
 LI
 LI
 LI
-tM
-LI
-LI
-LI
-LI
-LI
-LI
-LI
-tM
-LI
-LI
-tM
-tM
-tM
 LI
 LI
 LI
@@ -242645,11 +242593,25 @@ LI
 LI
 LI
 LI
-tM
-tM
-tM
 LI
-tM
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
 LI
 LI
 LI
@@ -242871,20 +242833,6 @@ LI
 LI
 LI
 LI
-tM
-tM
-tM
-LI
-LI
-LI
-LI
-tM
-tM
-LI
-LI
-LI
-tM
-tM
 LI
 LI
 LI
@@ -242902,12 +242850,26 @@ LI
 LI
 LI
 LI
-tM
-tM
-tM
-tM
-tM
-tM
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
 LI
 LI
 LI
@@ -243129,19 +243091,6 @@ LI
 LI
 LI
 LI
-tM
-LI
-LI
-LI
-LI
-LI
-tM
-tM
-LI
-LI
-LI
-LI
-tM
 LI
 LI
 LI
@@ -243157,10 +243106,23 @@ LI
 LI
 LI
 LI
-tM
-tM
-tM
-tM
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
 LI
 LI
 LI
@@ -243386,19 +243348,6 @@ LI
 LI
 LI
 LI
-tM
-LI
-LI
-LI
-LI
-LI
-tM
-tM
-LI
-LI
-LI
-LI
-tM
 LI
 LI
 LI
@@ -243410,12 +243359,25 @@ LI
 LI
 LI
 LI
-tM
-tM
-tM
-tM
 LI
-tM
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
 LI
 LI
 LI
@@ -243643,19 +243605,6 @@ LI
 LI
 LI
 LI
-tM
-LI
-LI
-LI
-LI
-LI
-tM
-tM
-LI
-LI
-LI
-LI
-tM
 LI
 LI
 LI
@@ -243665,11 +243614,24 @@ LI
 LI
 LI
 LI
-tM
-tM
-tM
-tM
-tM
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
+LI
 LI
 LI
 LI
@@ -243899,20 +243861,20 @@ LI
 LI
 LI
 LI
-tM
-tM
 LI
 LI
 LI
 LI
 LI
-tM
 LI
 LI
 LI
 LI
 LI
-tM
+LI
+LI
+LI
+LI
 LI
 LI
 LI
@@ -244163,8 +244125,8 @@ LI
 LI
 LI
 LI
-tM
-tM
+LI
+LI
 LI
 LI
 LI
@@ -244421,7 +244383,7 @@ LI
 LI
 LI
 LI
-tM
+LI
 LI
 LI
 LI
@@ -246218,9 +246180,9 @@ LI
 LI
 LI
 LI
-tM
-tM
-tM
+LI
+LI
+LI
 LI
 LI
 LI
@@ -246473,14 +246435,14 @@ LI
 LI
 LI
 LI
-tM
-tM
 LI
 LI
-tM
-tM
-tM
-tM
+LI
+LI
+LI
+LI
+LI
+LI
 LI
 LI
 LI
@@ -246729,15 +246691,15 @@ LI
 LI
 LI
 LI
-tM
-tM
 LI
 LI
 LI
 LI
 LI
-tM
-tM
+LI
+LI
+LI
+LI
 LI
 LI
 LI
@@ -246985,9 +246947,6 @@ LI
 LI
 LI
 LI
-tM
-tM
-tM
 LI
 LI
 LI
@@ -246995,7 +246954,10 @@ LI
 LI
 LI
 LI
-tM
+LI
+LI
+LI
+LI
 LI
 LI
 LI
@@ -247242,9 +247204,6 @@ LI
 LI
 LI
 LI
-tM
-LI
-tM
 LI
 LI
 LI
@@ -247253,7 +247212,10 @@ LI
 LI
 LI
 LI
-tM
+LI
+LI
+LI
+LI
 LI
 LI
 LI
@@ -247500,7 +247462,6 @@ LI
 LI
 LI
 LI
-tM
 LI
 LI
 LI
@@ -247510,7 +247471,8 @@ LI
 LI
 LI
 LI
-tM
+LI
+LI
 LI
 LI
 LI
@@ -247757,7 +247719,6 @@ LI
 LI
 LI
 LI
-tM
 LI
 LI
 LI
@@ -247767,7 +247728,8 @@ LI
 LI
 LI
 LI
-tM
+LI
+LI
 LI
 LI
 LI
@@ -248024,7 +247986,7 @@ LI
 LI
 LI
 LI
-tM
+LI
 LI
 LI
 LI
@@ -294795,9 +294757,9 @@ gc
 gc
 gc
 gc
-Nl
-Nl
-Nl
+Gd
+Gd
+Gd
 gc
 Wd
 Wd
@@ -295052,9 +295014,9 @@ gc
 gc
 gc
 gc
-Nl
-Nl
-Nl
+Gd
+Gd
+Gd
 gc
 Wd
 Wd
@@ -295309,9 +295271,9 @@ gc
 CR
 gc
 gc
-Nl
-Nl
-Nl
+Gd
+Gd
+Gd
 gc
 Wd
 Wd
@@ -296337,9 +296299,9 @@ gc
 gc
 gc
 gc
-Nl
-Nl
-Nl
+Gd
+Gd
+Gd
 gc
 Wd
 Wd
@@ -296594,9 +296556,9 @@ gc
 Dd
 gc
 gc
-Nl
-Nl
-Nl
+Gd
+Gd
+Gd
 gc
 Wd
 Wd
@@ -296838,7 +296800,7 @@ Wd
 Wd
 HE
 eC
-wc
+uY
 zV
 DV
 eA
@@ -296851,9 +296813,9 @@ gc
 gc
 gc
 gc
-Nl
-Nl
-Nl
+Gd
+Gd
+Gd
 gc
 Wd
 Wd
@@ -297095,10 +297057,10 @@ Wd
 Wd
 HE
 tP
-eA
+HE
 tC
-DV
-eA
+Bk
+HE
 eA
 JR
 xK
@@ -297355,7 +297317,7 @@ RN
 wc
 zV
 eA
-mH
+xt
 eA
 JR
 xK
@@ -297609,7 +297571,7 @@ Wd
 Wd
 HE
 Ju
-eA
+HE
 eA
 mH
 eA

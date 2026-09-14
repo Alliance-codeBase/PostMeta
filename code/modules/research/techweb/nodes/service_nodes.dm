@@ -40,6 +40,7 @@
 		/datum/design/rdd,
 		/datum/design/board/photopcopier,
 		/datum/design/manual_cell_recharger, // MASSMETA EDIT (more_cell_interactions)
+		/datum/design/producepad,
 	)
 
 /datum/techweb_node/sanitation

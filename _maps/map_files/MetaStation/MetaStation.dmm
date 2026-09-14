@@ -33496,6 +33496,7 @@
 	id = "hydro_service";
 	name = "Service Shutter"
 	},
+/obj/item/producepad,
 /turf/open/floor/iron,
 /area/station/hallway/secondary/service)
 "lug" = (
@@ -63523,6 +63524,7 @@
 	},
 /obj/item/pen,
 /obj/structure/window/reinforced/spawner/directional/west,
+/obj/item/producepad,
 /turf/open/floor/iron,
 /area/station/hallway/secondary/service)
 "vEl" = (
