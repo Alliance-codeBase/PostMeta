@@ -432,8 +432,11 @@
 
 			for(var/design_path in designs)
 				design_path = text2path(design_path)
-				if(!stored_research.researched_designs[design_path])
+				// MASSMETA EDIT CHANGE START (uplink_items (justice_mecha))
+				if(!stored_research.researched_designs[design_path] && !(design_path in illegal_local_designs))
 					continue
+				// MASSMETA EDIT CHANGE END (uplink_items (justice_mecha))
+
 				// MASSMETA EDIT CHANGE START (uplink_items (justice_mecha))
 				// ORIGINAL: var/datum/design/design = SSresearch.techweb_designs[design_path]
 				var/datum/design/design = SSresearch.techweb_designs[design_path] || is_type_in_list(SSresearch.techweb_designs[design_path], illegal_local_designs)
