@@ -108,6 +108,38 @@ SUBSYSTEM_DEF(ticker)
 			continue
 		music -= S
 
+	// MASSMETA EDIT ADDITION START (music_n_screenz)
+
+
+	// ** For you to have a unique music binded to a title screen of your choice you need to
+	// *  have music same name as your title screen, file extensions are discarded automatically.
+	// *  Just place the files in their respectable folder, (e.g config/title_screens/images/very_special_title_screen.png | title_music/sounds/very_special_title_screen.ogg)
+
+	var/list/file_exts = list("jpg", "png", "gif", "dmi", "ogg", "wav")
+	var/title_file_no_ext = strip_filepath_extension(SStitle.file_path, file_exts)
+	var/title_name = strip_filepath_path(title_file_no_ext)
+
+	var/music_directory = "[global.config.directory]/title_music/sounds/"
+
+	var/music_name = title_name // same as title_screen
+	var/music_file
+
+	for(var/file in provisional_title_music)
+		var/music_file_no_ext = strip_filepath_extension(file, file_exts)
+		if(music_file_no_ext == title_name)
+			music_file = file
+			break
+
+	var/any_paired_music_question_mark = (music_file in provisional_title_music) ? TRUE : FALSE
+
+	if(any_paired_music_question_mark)
+		set_lobby_music("[music_directory][music_file]")
+
+	music -= "[music_file].ogg"
+	music -= "[music_file].wav"
+
+	// MASSMETA EDIT ADDITION END (music_n_screenz)
+
 	if(!length(music))
 		music = world.file2list(ROUND_START_MUSIC_LIST, "\n")
 		if(length(music) > 1)
