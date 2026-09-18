@@ -135,8 +135,7 @@ SUBSYSTEM_DEF(ticker)
 	if(any_paired_music_question_mark)
 		set_lobby_music("[music_directory][music_file]")
 
-	music -= "[music_file].ogg"
-	music -= "[music_file].wav"
+	music -= music_file
 
 	// MASSMETA EDIT ADDITION END (music_n_screenz)
 
