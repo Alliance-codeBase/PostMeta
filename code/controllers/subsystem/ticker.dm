@@ -120,8 +120,6 @@ SUBSYSTEM_DEF(ticker)
 	var/title_name = strip_filepath_path(title_file_no_ext)
 
 	var/music_directory = "[global.config.directory]/title_music/sounds/"
-
-	var/music_name = title_name // same as title_screen
 	var/music_file
 
 	for(var/file in provisional_title_music)
