@@ -406,7 +406,6 @@
 			FOOTSTEP_MOB_CLAW,
 			FOOTSTEP_MOB_HEAVY,
 			FOOTSTEP_MOB_SHOE,
-			FOOTSTEP_MOB_SYNTHETIC,
 		)
 		if(!(footstep_type in supported_types))
 			stack_trace("Invalid footstep type set on leg: \[[footstep_type]\] \

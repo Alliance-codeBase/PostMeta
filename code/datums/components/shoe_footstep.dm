@@ -1,6 +1,7 @@
 /// Basically the squeak component but stripped down for only shoes
-/// In other words it replaces the mob's default footstep sounds with the ones provided on all surfaces
 /datum/component/shoe_footstep
+	dupe_mode = COMPONENT_DUPE_ALLOWED
+
 	/// Tracks how many steps have been taken since the last sound was played
 	VAR_PRIVATE/steps = 0
 
@@ -23,6 +24,7 @@
 
 /datum/component/shoe_footstep/Initialize(
 	list/sounds,
+	can_tape = FALSE,
 	volume = 50,
 	chance_per_play = 100,
 	steps_per_play = 1,
@@ -48,9 +50,12 @@
 	RegisterSignal(parent, COMSIG_ITEM_EQUIPPED, PROC_REF(equipped))
 	RegisterSignal(parent, COMSIG_ITEM_DROPPED, PROC_REF(dropped))
 
-	var/obj/item/parent_object = parent
-	var/mob/living/wearer = parent_object.loc
-	if(istype(wearer) && (wearer.get_slot_by_item(parent_object) & parent_object.slot_flags))
+	var/obj/item/parent_atom = parent
+	parent_atom.flags_1 |= HAS_CONTEXTUAL_SCREENTIPS_1
+	RegisterSignal(parent, COMSIG_ATOM_REQUESTING_CONTEXT_FROM_ITEM, PROC_REF(on_requesting_context_from_item))
+
+	var/mob/living/wearer = parent_atom.loc
+	if(istype(wearer) && (wearer.get_slot_by_item(parent_atom) & parent_atom.slot_flags))
 		ADD_TRAIT(wearer, TRAIT_SILENT_FOOTSTEPS, REF(src))
 
 /datum/component/shoe_footstep/UnregisterFromParent()
@@ -60,24 +65,24 @@
 		COMSIG_ITEM_DROPPED,
 		COMSIG_ATOM_REQUESTING_CONTEXT_FROM_ITEM,
 	))
-	var/obj/item/parent_object = parent
-	if(ismob(parent_object.loc))
-		REMOVE_TRAIT(parent_object.loc, TRAIT_SILENT_FOOTSTEPS, REF(src))
+	var/atom/parent_atom = parent
+	if(ismob(parent_atom.loc))
+		REMOVE_TRAIT(parent_atom.loc, TRAIT_SILENT_FOOTSTEPS, REF(src))
 
 /datum/component/shoe_footstep/proc/stepped(obj/item/clothing/shoes/source)
 	SIGNAL_HANDLER
 
 	var/mob/living/carbon/human/owner = source.loc
-	if(SHOULD_ATOM_DISABLE_FOOTSTEPS(owner) || SHOULD_MOB_DISABLE_FOOTSTEPS(owner))
+	if(CHECK_MOVE_LOOP_FLAGS(owner, MOVEMENT_LOOP_OUTSIDE_CONTROL) || owner.moving_diagonally == SECOND_DIAG_STEP)
 		return
-	if(HAS_TRAIT_NOT_FROM(owner, TRAIT_SILENT_FOOTSTEPS, REF(src)) )
-		return // a second source of silent footsteps silences us! the plot thickens
-
+	if(owner.move_intent == MOVE_INTENT_SNEAK || (owner.movement_type & (VENTCRAWLING|FLYING|FLOATING)))
+		return
+	if(owner.buckled || owner.throwing || HAS_TRAIT(owner, TRAIT_IMMOBILIZED))
+		return
 	if(steps < steps_per_play)
 		steps++
 		return
 
-	steps = 0
 	if(prob(chance_per_play))
 		playsound(
 			source = source,
@@ -88,6 +93,35 @@
 			falloff_exponent = falloff_exponent,
 			falloff_distance = falloff_distance,
 		)
+	steps = 0
+
+/datum/component/shoe_footstep/proc/taped(obj/item/clothing/shoes/source, mob/living/user, obj/item/tape, ...)
+	SIGNAL_HANDLER
+
+	if(tape_check(tape))
+		playsound(source, 'sound/items/duct_tape_snap.ogg', 50, TRUE)
+		user.visible_message(
+			span_notice("[user] tapes the bottom of [source]'s soles."),
+			span_notice("You tape the bottom of [source]'s soles, muffling [source.p_their()] footsteps."),
+		)
+		source.desc += " [source.p_Their()] soles have been taped."
+		qdel(src)
+		return ITEM_INTERACT_SUCCESS
+
+	return NONE
+
+/datum/component/shoe_footstep/proc/tape_check(obj/item/tape)
+	if(!can_tape)
+		return FALSE
+
+	if(istype(tape, /obj/item/clothing/mask/muzzle/tape))
+		qdel(tape)
+		return TRUE
+
+	if(istype(tape, /obj/item/stack/sticky_tape))
+		return tape.use(1)
+
+	return FALSE
 
 /datum/component/shoe_footstep/proc/equipped(obj/item/source, mob/user, slot)
 	SIGNAL_HANDLER
