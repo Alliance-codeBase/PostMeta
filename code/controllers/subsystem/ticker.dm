@@ -118,6 +118,7 @@ SUBSYSTEM_DEF(ticker)
 	var/list/file_exts = list("jpg", "png", "gif", "dmi", "ogg", "wav")
 	var/title_file_no_ext = strip_filepath_extension(SStitle.file_path, file_exts)
 	var/title_name = strip_filepath_path(title_file_no_ext)
+	var/list/screens = flist("[global.config.directory]/title_screens/images/")
 
 	var/music_directory = "[global.config.directory]/title_music/sounds/"
 	var/music_file
@@ -133,7 +134,12 @@ SUBSYSTEM_DEF(ticker)
 	if(any_paired_music_question_mark)
 		set_lobby_music("[music_directory][music_file]")
 
-	music -= music_file
+	for(var/screen in screens)
+		var/screen_name = strip_filepath_extension(screen, file_exts)
+
+		for(var/track in provisional_title_music)
+			if(strip_filepath_extension(track, file_exts) == screen_name)
+				music -= track
 
 	// MASSMETA EDIT ADDITION END (music_n_screenz)
 
