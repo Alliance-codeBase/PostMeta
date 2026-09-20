@@ -60,6 +60,7 @@
 	update_power()
 	RegisterSignal(paddles, COMSIG_DEFIBRILLATOR_SUCCESS, PROC_REF(on_defib_success))
 	AddElement(/datum/element/drag_pickup)
+	AddElement(/datum/element/cuffable_item) //MASSMETA ADDITION
 
 /obj/item/defibrillator/loaded/Initialize(mapload) //starts with hicap
 	. = ..()
