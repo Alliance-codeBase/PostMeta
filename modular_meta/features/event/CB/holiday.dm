@@ -211,3 +211,9 @@
 	. = ..()
 	if(check_holidays(CONTAINMENT_BREACH_DAY) && transport_id == TRANSPORT_TYPE_ELEVATOR)
 		moving_sound = 'modular_meta/features/event/CB/sound/elevator/Moving.ogg'
+
+/// Welcome to the station crew, enjoy your stay
+/datum/centcom_announcer/get_rand_welcome_sound()
+	if(check_holidays(CONTAINMENT_BREACH_DAY))
+		return 'modular_meta/features/event/CB/sound/alarms/site_is_experiencing_combined.ogg'
+	return ..()
