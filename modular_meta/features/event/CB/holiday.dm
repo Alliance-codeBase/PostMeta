@@ -5,8 +5,8 @@
 	end_month = MAY
 	end_day = 10
 	holiday_colors = list(
-		,
-		,
+		COLOR_DARK,
+		COLOR_VERY_LIGHT_GRAY,
 	)
 
 
