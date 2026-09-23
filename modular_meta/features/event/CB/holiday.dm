@@ -238,12 +238,12 @@
 		return 'modular_meta/features/event/CB/sound/alarms/site_is_experiencing_combined.ogg'
 	return ..()
 
-/datum/centcom_announcer/proc/get_rand_alert_sound()
+/datum/centcom_announcer/get_rand_alert_sound()
 	if(check_holidays(CONTAINMENT_BREACH_DAY))
 		return pick(cb_rand_announcer_lines)
 	return ..()
 
-/datum/centcom_announcer/proc/get_rand_report_sound()
+/datum/centcom_announcer/get_rand_report_sound()
 	if(check_holidays(CONTAINMENT_BREACH_DAY))
 		return pick(cb_rand_announcer_lines)
 	return ..()
