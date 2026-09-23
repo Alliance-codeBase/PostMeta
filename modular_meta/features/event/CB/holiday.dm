@@ -125,7 +125,7 @@
 
 /obj/machinery/button/attempt_press(mob/user)
 	. = ..()
-	if(check_holidays(CONTAINMENT_BREACH_DAY))
+	if(!check_holidays(CONTAINMENT_BREACH_DAY))
 		return .
 
 		if(!.)
@@ -138,3 +138,28 @@
 	if(check_holidays(CONTAINMENT_BREACH_DAY))
 		lever_start = 'modular_meta/features/event/CB/sound/interactions/LeverFlip.ogg'
 		lever_stop = 'modular_meta/features/event/CB/sound/interactions/LeverFlip.ogg'
+
+// Shutters 'nd blastdoors
+
+/obj/machinery/door/poddoor/
+	var/list/cb_close_sounds = list(
+		'modular_meta/features/event/CB/sound/gates/BigDoorClose.ogg',
+		'modular_meta/features/event/CB/sound/gates/BigDoorClose1.ogg',
+		'modular_meta/features/event/CB/sound/gates/BigDoorClose2.ogg'
+		)
+
+	var/list/cb_open_sounds = list(
+		'modular_meta/features/event/CB/sound/gates/BigDoorOpen.ogg',
+		'modular_meta/features/event/CB/sound/gates/BigDoorOpen1.ogg',
+		'modular_meta/features/event/CB/sound/gates/BigDoorOpen2.ogg',
+	)
+
+
+/obj/machinery/door/poddoor/animation_effects(animation)
+	if(check_holidays(CONTAINMENT_BREACH_DAY))
+		switch(animation)
+			if(DOOR_OPENING_ANIMATION)
+				animation_sound = pick(cb_open_sounds)
+			if(DOOR_CLOSING_ANIMATION)
+				animation_sound = pick(cb_close_sounds)
+	return ..()
