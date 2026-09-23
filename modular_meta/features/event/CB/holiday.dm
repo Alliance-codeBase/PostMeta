@@ -1,5 +1,7 @@
+#define CONTAINMENT_BREACH_DAY "Birthday of SCP:CB"
+
 /datum/holiday/breach
-	name = "Birthday of SCP:CB"
+	name = CONTAINMENT_BREACH_DAY
 	begin_month = APRIL
 	begin_day = 15
 	end_month = MAY
@@ -26,3 +28,91 @@
 
 /datum/holiday/breach/get_station_name()
 	return pick("Zone", "Foundation", "Site-19", "Site-17", "Site-18", "SCP", "Research", "Class-D")
+
+
+/datum/holiday/breach/celebrate()
+
+/obj/machinery/door/airlock
+	var/list/cb_sounds_doorOpen = list(
+	'modular_meta/features/event/CB/sound/doors/DoorOpen1.ogg',
+	'modular_meta/features/event/CB/sound/doors/DoorOpen2.ogg',
+	'modular_meta/features/event/CB/sound/doors/DoorOpen3.ogg')
+
+	var/list/cb_sounds_doorClose = list(
+	'modular_meta/features/event/CB/sound/doors/DoorClose1.ogg',
+	'modular_meta/features/event/CB/sound/doors/DoorClose2.ogg',
+	'modular_meta/features/event/CB/sound/doors/DoorClose3.ogg')
+
+	var/list/cb_sounds_doorDeni = list(
+	'modular_meta/features/event/CB/sound/interactions/Button2.ogg',
+	'modular_meta/features/event/CB/sound/interactions/KeycardUse2.ogg',
+	)
+	var/list/cb_sounds_boltUp = list(
+	'modular_meta/features/event/CB/sound/doors/DoorError.ogg',
+	'modular_meta/features/event/CB/sound/doors/DoorSparks.ogg')
+
+	var/list/cb_sounds_boltDown = list(
+	'modular_meta/features/event/CB/sound/doors/DoorError.ogg',
+	'modular_meta/features/event/CB/sound/doors/DoorSparks.ogg')
+
+/obj/machinery/door/airlock/Initialize(mapload)
+	. = ..()
+	if(check_holidays(CONTAINMENT_BREACH_DAY))
+		doorOpen = pick(cb_sounds_doorOpen)
+		doorClose = pick(cb_sounds_doorClose)
+		doorDeni = pick(cb_sounds_doorDeni)
+		boltUp = pick(cb_sounds_boltUp)
+		boltDown = pick(cb_sounds_boltDown)
+
+
+/obj/machinery/door/airlock/command/Initialize(mapload)
+	cb_sounds_doorOpen = list('modular_meta/features/event/CB/sound/interactions/ScannerUse1.ogg')
+	cb_sounds_doorDeni = list('modular_meta/features/event/CB/sound/interactions/ScannerUse2.ogg')
+	. = ..()
+
+/obj/machinery/door/airlock/maintenance/Initialize(mapload)
+ cb_sounds_doorOpen = list(
+	'modular_meta/features/event/CB/sound/doors_hv/Door2Open1.ogg',
+	'modular_meta/features/event/CB/sound/doors_hv/Door2Open2.ogg',
+	'modular_meta/features/event/CB/sound/doors_hv/Door2Open3.ogg')
+
+ cb_sounds_doorClose = list(
+	'modular_meta/features/event/CB/sound/doors_hv/Door2Close1.ogg',
+	'modular_meta/features/event/CB/sound/doors_hv/Door2Close2.ogg',
+	'modular_meta/features/event/CB/sound/doors_hv/Door2Close3.ogg')
+
+	. = ..()
+
+/obj/machinery/firealarm/Initialize(mapload)
+	. = ..()
+	if(check_holidays(CONTAINMENT_BREACH_DAY))
+		var/list/office_zones = list(
+			/area/station/command/heads_quarters/hop,
+			/area/station/command/heads_quarters/captain,
+			/area/station/command/heads_quarters/hos,
+			/area/station/command/heads_quarters/ce,
+			/area/station/command/heads_quarters/cmo,
+			/area/station/command/heads_quarters/rd,
+			/area/station/command/heads_quarters/qm,
+			/area/station/command/bridge,
+			/area/station/command/meeting_room,
+			/area/station/command/meeting_room/council,
+			/area/station/service/lawoffice,
+			/area/station/service/chapel/office,
+			/area/station/science/ordnance/office,
+			/area/station/security/office,
+			/area/station/security/detectives_office,
+			/area/station/security/detectives_office/private_investigators_office,
+			/area/station/medical/office,
+			/area/station/medical/psychology,
+			/area/station/engineering/atmos/office,
+			/area/station/cargo/office,
+			/area/station/cargo/miningoffice,
+			/area/station/commons/vacant_room/office,
+	)
+
+		var/in_office = is_type_in_list(my_area, office_zones)
+		if(in_office)
+			soundloop.mid_sounds = list('modular_meta/features/event/CB/sound/alarms/Alarm4.ogg')
+		else
+			soundloop.mid_sounds = list('modular_meta/features/event/CB/sound/alarms/Alarm.ogg')
