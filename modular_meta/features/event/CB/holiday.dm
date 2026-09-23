@@ -341,7 +341,26 @@
 		'modular_meta/features/event/CB/sound/ambience/Zone2/Ambient9.ogg',
 		'modular_meta/features/event/CB/sound/ambience/Zone2/Ambient10.ogg',
 		'modular_meta/features/event/CB/sound/ambience/Zone2/Ambient11.ogg',
+		//maints are scary
+		'modular_meta/features/event/CB/sound/ambience/Horror0.ogg',
+		'modular_meta/features/event/CB/sound/ambience/Horror1.ogg',
+		'modular_meta/features/event/CB/sound/ambience/Horror2.ogg',
+		'modular_meta/features/event/CB/sound/ambience/Horror3.ogg',
+		'modular_meta/features/event/CB/sound/ambience/Horror4.ogg',
+		'modular_meta/features/event/CB/sound/ambience/Horror5.ogg',
+		'modular_meta/features/event/CB/sound/ambience/Horror6.ogg',
+		'modular_meta/features/event/CB/sound/ambience/Horror7.ogg',
+		'modular_meta/features/event/CB/sound/ambience/Horror8.ogg',
+		'modular_meta/features/event/CB/sound/ambience/Horror9.ogg',
+		'modular_meta/features/event/CB/sound/ambience/Horror10.ogg',
+		'modular_meta/features/event/CB/sound/ambience/Horror11.ogg',
+		'modular_meta/features/event/CB/sound/ambience/Horror12.ogg',
+		'modular_meta/features/event/CB/sound/ambience/Horror13.ogg',
+		'modular_meta/features/event/CB/sound/ambience/Horror14.ogg',
+		'modular_meta/features/event/CB/sound/ambience/Horror15.ogg',
+		'modular_meta/features/event/CB/sound/ambience/Horror16.ogg'
 	)
+
 	var/static/list/cb_zone3 = list(
 		'modular_meta/features/event/CB/sound/ambience/Zone3/Ambient1.ogg',
 		'modular_meta/features/event/CB/sound/ambience/Zone3/Ambient2.ogg',
