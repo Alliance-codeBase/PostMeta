@@ -163,3 +163,26 @@
 			if(DOOR_CLOSING_ANIMATION)
 				animation_sound = pick(cb_close_sounds)
 	return ..()
+
+/obj/machinery/door/poddoor/lift
+	cb_close_sounds = list(
+		'modular_meta/features/event/CB/sound/elevator/ElevatorOpen1.ogg',
+		'modular_meta/features/event/CB/sound/elevator/ElevatorOpen2.ogg',
+		'modular_meta/features/event/CB/sound/elevator/ElevatorOpen3.ogg'
+		)
+
+	cb_open_sounds = list(
+		'modular_meta/features/event/CB/sound/elevator/ElevatorOpen1.ogg',
+		'modular_meta/features/event/CB/sound/elevator/ElevatorOpen2.ogg',
+		'modular_meta/features/event/CB/sound/elevator/ElevatorOpen3.ogg',
+	)
+
+/obj/machinery/door/poddoor/lift/animation_effects(animation)
+	if(check_holidays(CONTAINMENT_BREACH_DAY))
+
+		switch(animation)
+			if(DOOR_OPENING_ANIMATION)
+				animation_sound = pick(cb_open_sounds)
+			if(DOOR_CLOSING_ANIMATION)
+				animation_sound = pick(cb_close_sounds)
+	return ..()
