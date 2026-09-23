@@ -212,8 +212,44 @@
 	if(check_holidays(CONTAINMENT_BREACH_DAY) && transport_id == TRANSPORT_TYPE_ELEVATOR)
 		moving_sound = 'modular_meta/features/event/CB/sound/elevator/Moving.ogg'
 
+// Announcers
+
 /// Welcome to the station crew, enjoy your stay
+
+/datum/centcom_announcer
+	var/list/cb_rand_announcer_lines = list(
+		'modular_meta/features/event/CB/sound/announcer/Announc.ogg',
+		'modular_meta/features/event/CB/sound/announcer/Announc173Contain.ogg',
+		'modular_meta/features/event/CB/sound/announcer/AnnouncAfter1.ogg',
+		'modular_meta/features/event/CB/sound/announcer/AnnouncAfter2.ogg',
+		'modular_meta/features/event/CB/sound/announcer/AnnouncCameraCheck.ogg',
+		'modular_meta/features/event/CB/sound/announcer/AnnouncCameraFound1.ogg',
+		'modular_meta/features/event/CB/sound/announcer/AnnouncCameraFound2.ogg',
+		'modular_meta/features/event/CB/sound/announcer/AnnouncCameraNoFound.ogg',
+		'modular_meta/features/event/CB/sound/announcer/ThreatAnnounc1.ogg',
+		'modular_meta/features/event/CB/sound/announcer/ThreatAnnounc2.ogg',
+		'modular_meta/features/event/CB/sound/announcer/ThreatAnnounc3.ogg',
+		'modular_meta/features/event/CB/sound/announcer/ThreatAnnouncFinal.ogg',
+		'modular_meta/features/event/CB/sound/announcer/ThreatAnnouncPossession.ogg',
+		)
+
 /datum/centcom_announcer/get_rand_welcome_sound()
 	if(check_holidays(CONTAINMENT_BREACH_DAY))
 		return 'modular_meta/features/event/CB/sound/alarms/site_is_experiencing_combined.ogg'
 	return ..()
+
+/datum/centcom_announcer/proc/get_rand_alert_sound()
+	if(check_holidays(CONTAINMENT_BREACH_DAY))
+		return pick(cb_rand_announcer_lines)
+	return ..()
+
+/datum/centcom_announcer/proc/get_rand_report_sound()
+	if(check_holidays(CONTAINMENT_BREACH_DAY))
+		return pick(cb_rand_announcer_lines)
+	return ..()
+
+// mob death sound
+/mob/ghostize(can_reenter_corpse = TRUE, forced = FALSE)
+	. = ..()
+	if(. && stat == DEAD && check_holidays(CONTAINMENT_BREACH_DAY)) // because of scrying orb
+		SEND_SOUND(., 'modular_meta/features/event/CB/sound/misc/Bell2.ogg', 40, FALSE)
