@@ -252,4 +252,4 @@
 /mob/ghostize(can_reenter_corpse = TRUE, forced = FALSE)
 	. = ..()
 	if(. && stat == DEAD && check_holidays(CONTAINMENT_BREACH_DAY)) // because of scrying orb
-		SEND_SOUND(., 'modular_meta/features/event/CB/sound/misc/Bell2.ogg', 40)
+		SEND_SOUND(., 'modular_meta/features/event/CB/sound/misc/Bell2.ogg')
