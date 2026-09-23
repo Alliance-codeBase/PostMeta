@@ -29,6 +29,9 @@
 	var/rods = 2
 	/// On deconstruction, how much cable to drop.
 	var/cable = 1
+	// MASSMETA EDIT CHANGE START (event)
+	var/sound/open_and_close_sound = 'sound/machines/windowdoor.ogg'
+	// MASSMETA EDIT CHANGE END (event)
 
 /datum/armor/door_window
 	melee = 20
@@ -249,7 +252,9 @@
 		operating = TRUE
 
 	run_animation(DOOR_OPENING_ANIMATION)
-	playsound(src, 'sound/machines/windowdoor.ogg', 100, TRUE)
+	// MASSMETA EDIT CHANGE START (event)
+	playsound(src, open_and_close_sound, 100, TRUE)
+	// MASSMETA EDIT CHANGE END (event)
 	var/passable_delay = animation_segment_delay(DOOR_OPENING_PASSABLE)
 	sleep(passable_delay)
 	set_density(FALSE)
@@ -293,7 +298,9 @@
 
 	operating = TRUE
 	run_animation(DOOR_CLOSING_ANIMATION)
-	playsound(src, 'sound/machines/windowdoor.ogg', 100, TRUE)
+	// MASSMETA EDIT CHANGE START (event)
+	playsound(src, open_and_close_sound, 100, TRUE)
+	// MASSMETA EDIT CHANGE END (event)
 	var/unpassable_delay = animation_segment_delay(DOOR_CLOSING_UNPASSABLE)
 	sleep(unpassable_delay)
 	set_density(TRUE)

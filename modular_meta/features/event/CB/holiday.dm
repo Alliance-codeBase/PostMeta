@@ -164,6 +164,8 @@
 				animation_sound = pick(cb_close_sounds)
 	return ..()
 
+// Lifts!
+
 /obj/machinery/door/poddoor/lift
 	cb_close_sounds = list(
 		'modular_meta/features/event/CB/sound/elevator/ElevatorOpen1.ogg',
@@ -179,10 +181,33 @@
 
 /obj/machinery/door/poddoor/lift/animation_effects(animation)
 	if(check_holidays(CONTAINMENT_BREACH_DAY))
-
 		switch(animation)
 			if(DOOR_OPENING_ANIMATION)
 				animation_sound = pick(cb_open_sounds)
 			if(DOOR_CLOSING_ANIMATION)
 				animation_sound = pick(cb_close_sounds)
 	return ..()
+
+/obj/machinery/door/window/elevator
+	var/list/cb_close_sounds = list(
+		'modular_meta/features/event/CB/sound/elevator/ElevatorOpen1.ogg',
+		'modular_meta/features/event/CB/sound/elevator/ElevatorOpen2.ogg',
+		'modular_meta/features/event/CB/sound/elevator/ElevatorOpen3.ogg'
+		)
+
+	var/list/cb_open_sounds = list(
+		'modular_meta/features/event/CB/sound/elevator/ElevatorOpen1.ogg',
+		'modular_meta/features/event/CB/sound/elevator/ElevatorOpen2.ogg',
+		'modular_meta/features/event/CB/sound/elevator/ElevatorOpen3.ogg',
+	)
+
+/obj/machinery/door/window/elevator/Initialize(mapload, set_dir, unres_sides)
+	. = ..()
+	if(check_holidays(CONTAINMENT_BREACH_DAY))
+		open_and_close_sound = pick(cb_close_sounds)
+
+// yeah that's the controller responsible for elevator movement
+/datum/transport_controller/linear/New(obj/structure/transport/linear/transport_module)
+	. = ..()
+	if(check_holidays(CONTAINMENT_BREACH_DAY) && transport_id == TRANSPORT_TYPE_ELEVATOR)
+		moving_sound = 'modular_meta/features/event/CB/sound/elevator/Moving.ogg'
