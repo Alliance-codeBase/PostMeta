@@ -8,7 +8,7 @@
 	end_day = 15
 	always_celebrate = TRUE
 	holiday_colors = list(
-		COLOR_DARK,
+		COLOR_BLACK,
 		COLOR_VERY_LIGHT_GRAY,
 	)
 
@@ -403,12 +403,9 @@
 
 // Item pickup sounds
 
-// Using late initialize because there might be already some modular overrides of Initialize(mapload) \
-don't wanna disturb that, so..
-/obj/item/LateInitialize()
+/obj/item/Initialize(mapload)
 	. = ..()
 	if(check_holidays(CONTAINMENT_BREACH_DAY))
-
 		var/static/list/pickup_sounds = list(
 			'modular_meta/features/event/CB/sound/interactions/PickItem0.ogg',
 			'modular_meta/features/event/CB/sound/interactions/PickItem1.ogg',

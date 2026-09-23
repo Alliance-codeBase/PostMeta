@@ -1,6 +1,6 @@
 /obj/machinery/light
-	bulb_colour = "#f1e6dc"
-	bulb_power =  1.2
+	bulb_colour = "#88837f"
+	bulb_power =  0.6
 
 /obj/machinery/light/dim
 	bulb_colour = "#cab8a5"
