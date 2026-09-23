@@ -32,6 +32,40 @@
 
 
 /datum/holiday/breach/celebrate()
+	. = ..()
+	GLOB.footstep[FOOTSTEP_FLOOR][1] = list(
+		'modular_meta/features/event/CB/sound/steps/Run1.ogg',
+		'modular_meta/features/event/CB/sound/steps/Run2.ogg',
+		'modular_meta/features/event/CB/sound/steps/Run3.ogg',
+		'modular_meta/features/event/CB/sound/steps/Run4.ogg',
+		'modular_meta/features/event/CB/sound/steps/Run5.ogg',
+		'modular_meta/features/event/CB/sound/steps/Run6.ogg',
+		'modular_meta/features/event/CB/sound/steps/Run7.ogg',
+		'modular_meta/features/event/CB/sound/steps/Run8.ogg',
+	)
+
+	GLOB.footstep[FOOTSTEP_PLATING][1] = list(
+		'modular_meta/features/event/CB/sound/steps/Run1.ogg',
+		'modular_meta/features/event/CB/sound/steps/StepMetal1.ogg',
+		'modular_meta/features/event/CB/sound/steps/StepMetal2.ogg',
+		'modular_meta/features/event/CB/sound/steps/StepMetal3.ogg',
+		'modular_meta/features/event/CB/sound/steps/StepMetal4.ogg',
+		'modular_meta/features/event/CB/sound/steps/StepMetal5.ogg',
+		'modular_meta/features/event/CB/sound/steps/StepMetal6.ogg',
+		'modular_meta/features/event/CB/sound/steps/StepMetal7.ogg',
+		'modular_meta/features/event/CB/sound/steps/StepMetal8.ogg',
+	)
+	GLOB.footstep[FOOTSTEP_CATWALK][1] = list(
+		'modular_meta/features/event/CB/sound/steps/Run1.ogg',
+		'modular_meta/features/event/CB/sound/steps/StepMetal1.ogg',
+		'modular_meta/features/event/CB/sound/steps/StepMetal2.ogg',
+		'modular_meta/features/event/CB/sound/steps/StepMetal3.ogg',
+		'modular_meta/features/event/CB/sound/steps/StepMetal4.ogg',
+		'modular_meta/features/event/CB/sound/steps/StepMetal5.ogg',
+		'modular_meta/features/event/CB/sound/steps/StepMetal6.ogg',
+		'modular_meta/features/event/CB/sound/steps/StepMetal7.ogg',
+		'modular_meta/features/event/CB/sound/steps/StepMetal8.ogg',
+	)
 
 // Airlock stuff
 /obj/machinery/door/airlock
@@ -347,3 +381,28 @@
 			ambientsounds = cb_zone2.Copy()
 		else
 			ambientsounds = cb_zone1.Copy()
+
+// Item pickup sounds
+
+// Using late initialize because there might be already some modular overrides of Initialize(mapload) \
+don't wanna disturb that, so..
+/obj/item/LateInitialize()
+	. = ..()
+	if(check_holidays(CONTAINMENT_BREACH_DAY))
+
+		var/static/list/pickup_sounds = list(
+			'modular_meta/features/event/CB/sound/interactions/PickItem0.ogg',
+			'modular_meta/features/event/CB/sound/interactions/PickItem1.ogg',
+			'modular_meta/features/event/CB/sound/interactions/PickItem2.ogg',
+			)
+
+		pickup_sound = pick(pickup_sounds)
+
+/mob/living/basic/Initialize(mapload)
+	. = ..()
+	if(check_holidays(CONTAINMENT_BREACH_DAY))
+		var/static/list/attack_sounds = list(
+			'modular_meta/features/event/CB/sound/interactions/Slash1.ogg',
+			'modular_meta/features/event/CB/sound/interactions/Slash2.ogg'
+			)
+		attack_sound = pick(attack_sounds)
