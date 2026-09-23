@@ -279,3 +279,71 @@
 	. = ..()
 	if(check_holidays(CONTAINMENT_BREACH_DAY))
 		fire_sound = 'modular_meta/features/event/CB/sound/weaponry/Gunshot2.ogg'
+
+// areas ambience
+/area/station
+	var/static/list/cb_zone1 = list(
+		'modular_meta/features/event/CB/sound/ambience/Zone1/Ambient1.ogg',
+		'modular_meta/features/event/CB/sound/ambience/Zone1/Ambient2.ogg',
+		'modular_meta/features/event/CB/sound/ambience/Zone1/Ambient3.ogg',
+		'modular_meta/features/event/CB/sound/ambience/Zone1/Ambient4.ogg',
+		'modular_meta/features/event/CB/sound/ambience/Zone1/Ambient5.ogg',
+		'modular_meta/features/event/CB/sound/ambience/Zone1/Ambient6.ogg',
+		'modular_meta/features/event/CB/sound/ambience/Zone1/Ambient7.ogg',
+		'modular_meta/features/event/CB/sound/ambience/Zone1/Ambient8.ogg',
+		'modular_meta/features/event/CB/sound/ambience/Zone1/Ambient9.ogg',
+		'modular_meta/features/event/CB/sound/ambience/Zone1/Ambient10.ogg',
+		'modular_meta/features/event/CB/sound/ambience/Zone1/Ambient11.ogg',
+	)
+	var/static/list/cb_zone2 = list(
+		'modular_meta/features/event/CB/sound/ambience/Zone2/Ambient1.ogg',
+		'modular_meta/features/event/CB/sound/ambience/Zone2/Ambient2.ogg',
+		'modular_meta/features/event/CB/sound/ambience/Zone2/Ambient3.ogg',
+		'modular_meta/features/event/CB/sound/ambience/Zone2/Ambient4.ogg',
+		'modular_meta/features/event/CB/sound/ambience/Zone2/Ambient5.ogg',
+		'modular_meta/features/event/CB/sound/ambience/Zone2/Ambient6.ogg',
+		'modular_meta/features/event/CB/sound/ambience/Zone2/Ambient7.ogg',
+		'modular_meta/features/event/CB/sound/ambience/Zone2/Ambient8.ogg',
+		'modular_meta/features/event/CB/sound/ambience/Zone2/Ambient9.ogg',
+		'modular_meta/features/event/CB/sound/ambience/Zone2/Ambient10.ogg',
+		'modular_meta/features/event/CB/sound/ambience/Zone2/Ambient11.ogg',
+	)
+	var/static/list/cb_zone3 = list(
+		'modular_meta/features/event/CB/sound/ambience/Zone3/Ambient1.ogg',
+		'modular_meta/features/event/CB/sound/ambience/Zone3/Ambient2.ogg',
+		'modular_meta/features/event/CB/sound/ambience/Zone3/Ambient3.ogg',
+		'modular_meta/features/event/CB/sound/ambience/Zone3/Ambient4.ogg',
+		'modular_meta/features/event/CB/sound/ambience/Zone3/Ambient5.ogg',
+		'modular_meta/features/event/CB/sound/ambience/Zone3/Ambient6.ogg',
+		'modular_meta/features/event/CB/sound/ambience/Zone3/Ambient7.ogg',
+		'modular_meta/features/event/CB/sound/ambience/Zone3/Ambient8.ogg',
+		'modular_meta/features/event/CB/sound/ambience/Zone3/Ambient9.ogg',
+		'modular_meta/features/event/CB/sound/ambience/Zone3/Ambient10.ogg',
+		'modular_meta/features/event/CB/sound/ambience/Zone3/Ambient11.ogg',
+		'modular_meta/features/event/CB/sound/ambience/Zone3/Ambient12.ogg',
+	)
+	var/static/list/cb_zone3_areas = list(
+		/area/station/command,
+		/area/station/security,
+		/area/station/ai,
+	)
+	var/static/list/cb_zone2_areas = list(
+		/area/station/engineering,
+		/area/station/maintenance,
+		/area/station/cargo,
+		/area/station/construction,
+		/area/station/solars,
+		/area/station/tcommsat,
+		/area/station/comms,
+		/area/station/server,
+	)
+
+/area/station/Initialize(mapload)
+	. = ..()
+	if(check_holidays(CONTAINMENT_BREACH_DAY))
+		if(is_type_in_list(src, cb_zone3_areas))
+			ambientsounds = cb_zone3.Copy()
+		else if(is_type_in_list(src, cb_zone2_areas))
+			ambientsounds = cb_zone2.Copy()
+		else
+			ambientsounds = cb_zone1.Copy()
