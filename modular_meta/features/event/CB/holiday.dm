@@ -6,6 +6,7 @@
 	begin_day = 15
 	end_month = MAY
 	end_day = 15
+	always_celebrate = TRUE
 	holiday_colors = list(
 		COLOR_DARK,
 		COLOR_VERY_LIGHT_GRAY,
@@ -214,8 +215,6 @@
 
 // Announcers
 
-/// Welcome to the station crew, enjoy your stay
-
 /datum/centcom_announcer
 	var/list/cb_rand_announcer_lines = list(
 		'modular_meta/features/event/CB/sound/announcer/Announc.ogg',
@@ -235,7 +234,7 @@
 
 /datum/centcom_announcer/get_rand_welcome_sound()
 	if(check_holidays(CONTAINMENT_BREACH_DAY))
-		return 'modular_meta/features/event/CB/sound/alarms/site_is_experiencing_combined.ogg'
+		return 'modular_meta/features/event/CB/sound/Intro.ogg'
 	return ..()
 
 /datum/centcom_announcer/get_rand_alert_sound()
@@ -248,6 +247,18 @@
 		return pick(cb_rand_announcer_lines)
 	return ..()
 
+/// Welcome to the station crew, enjoy your stay
+/datum/communciations_controller/send_roundstart_report(greenshift)
+	if(!check_holidays(CONTAINMENT_BREACH_DAY))
+		return ..()
+
+	var/old_sound = SSstation.announcer.event_sounds[ANNOUNCER_INTERCEPT]
+	SSstation.announcer.event_sounds[ANNOUNCER_INTERCEPT] = 'modular_meta/features/event/CB/sound/alarms/site_is_experiencing_combined.ogg'
+
+	. = ..()
+
+	SSstation.announcer.event_sounds[ANNOUNCER_INTERCEPT] = old_sound
+
 // mob death sound
 /mob/ghostize(can_reenter_corpse = TRUE, forced = FALSE)
 	. = ..()
@@ -258,3 +269,13 @@
 	if(check_holidays(CONTAINMENT_BREACH_DAY))
 		stinger_sound = 'modular_meta/features/event/CB/sound/misc/Bell1.ogg'
 	return ..()
+
+/obj/item/gun/ballistic/automatic/wt550/Initialize(mapload)
+	. = ..()
+	if(check_holidays(CONTAINMENT_BREACH_DAY))
+		fire_sound = 'modular_meta/features/event/CB/sound/weaponry/Gunshot.ogg'
+
+/obj/item/gun/ballistic/automatic/l6_saw/Initialize(mapload)
+	. = ..()
+	if(check_holidays(CONTAINMENT_BREACH_DAY))
+		fire_sound = 'modular_meta/features/event/CB/sound/weaponry/Gunshot2.ogg'
