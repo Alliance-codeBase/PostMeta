@@ -5,7 +5,7 @@
 	begin_month = APRIL
 	begin_day = 15
 	end_month = MAY
-	end_day = 10
+	end_day = 15
 	holiday_colors = list(
 		COLOR_DARK,
 		COLOR_VERY_LIGHT_GRAY,
@@ -32,6 +32,7 @@
 
 /datum/holiday/breach/celebrate()
 
+// Airlock stuff
 /obj/machinery/door/airlock
 	var/list/cb_sounds_doorOpen = list(
 	'modular_meta/features/event/CB/sound/doors/DoorOpen1.ogg',
@@ -66,23 +67,26 @@
 
 
 /obj/machinery/door/airlock/command/Initialize(mapload)
-	cb_sounds_doorOpen = list('modular_meta/features/event/CB/sound/interactions/ScannerUse1.ogg')
-	cb_sounds_doorDeni = list('modular_meta/features/event/CB/sound/interactions/ScannerUse2.ogg')
+	if(check_holidays(CONTAINMENT_BREACH_DAY))
+		cb_sounds_doorOpen = list('modular_meta/features/event/CB/sound/interactions/ScannerUse1.ogg')
+		cb_sounds_doorDeni = list('modular_meta/features/event/CB/sound/interactions/ScannerUse2.ogg')
 	. = ..()
 
 /obj/machinery/door/airlock/maintenance/Initialize(mapload)
- cb_sounds_doorOpen = list(
-	'modular_meta/features/event/CB/sound/doors_hv/Door2Open1.ogg',
-	'modular_meta/features/event/CB/sound/doors_hv/Door2Open2.ogg',
-	'modular_meta/features/event/CB/sound/doors_hv/Door2Open3.ogg')
+	if(check_holidays(CONTAINMENT_BREACH_DAY))
+		cb_sounds_doorOpen = list(
+			'modular_meta/features/event/CB/sound/doors_hv/Door2Open1.ogg',
+			'modular_meta/features/event/CB/sound/doors_hv/Door2Open2.ogg',
+			'modular_meta/features/event/CB/sound/doors_hv/Door2Open3.ogg')
 
- cb_sounds_doorClose = list(
-	'modular_meta/features/event/CB/sound/doors_hv/Door2Close1.ogg',
-	'modular_meta/features/event/CB/sound/doors_hv/Door2Close2.ogg',
-	'modular_meta/features/event/CB/sound/doors_hv/Door2Close3.ogg')
+		cb_sounds_doorClose = list(
+			'modular_meta/features/event/CB/sound/doors_hv/Door2Close1.ogg',
+			'modular_meta/features/event/CB/sound/doors_hv/Door2Close2.ogg',
+			'modular_meta/features/event/CB/sound/doors_hv/Door2Close3.ogg')
 
 	. = ..()
 
+// Fire alarms
 /obj/machinery/firealarm/Initialize(mapload)
 	. = ..()
 	if(check_holidays(CONTAINMENT_BREACH_DAY))
@@ -116,3 +120,21 @@
 			soundloop.mid_sounds = list('modular_meta/features/event/CB/sound/alarms/Alarm4.ogg')
 		else
 			soundloop.mid_sounds = list('modular_meta/features/event/CB/sound/alarms/Alarm.ogg')
+
+// Buttons && levers
+
+/obj/machinery/button/attempt_press(mob/user)
+	. = ..()
+	if(check_holidays(CONTAINMENT_BREACH_DAY))
+		return .
+
+		if(!.)
+			playsound(src, 'modular_meta/features/event/CB/sound/interactions/Button2.ogg', 50, TRUE)
+		else
+			playsound(src, 'modular_meta/features/event/CB/sound/interactions/Button.ogg', 50, TRUE)
+
+/obj/machinery/conveyor_switch/Initialize(mapload)
+	. = ..()
+	if(check_holidays(CONTAINMENT_BREACH_DAY))
+		lever_start = 'modular_meta/features/event/CB/sound/interactions/LeverFlip.ogg'
+		lever_stop = 'modular_meta/features/event/CB/sound/interactions/LeverFlip.ogg'
