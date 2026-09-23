@@ -128,10 +128,10 @@
 	if(!check_holidays(CONTAINMENT_BREACH_DAY))
 		return .
 
-		if(!.)
-			playsound(src, 'modular_meta/features/event/CB/sound/interactions/Button2.ogg', 50, TRUE)
-		else
-			playsound(src, 'modular_meta/features/event/CB/sound/interactions/Button.ogg', 50, TRUE)
+	if(!.)
+		playsound(src, 'modular_meta/features/event/CB/sound/interactions/Button2.ogg', 50, TRUE)
+	else
+		playsound(src, 'modular_meta/features/event/CB/sound/interactions/Button.ogg', 50, TRUE)
 
 /obj/machinery/conveyor_switch/Initialize(mapload)
 	. = ..()
@@ -253,3 +253,8 @@
 	. = ..()
 	if(. && stat == DEAD && check_holidays(CONTAINMENT_BREACH_DAY)) // because of scrying orb
 		SEND_SOUND(., 'modular_meta/features/event/CB/sound/misc/Bell2.ogg')
+
+/datum/antagonist/play_stinger()
+	if(check_holidays(CONTAINMENT_BREACH_DAY))
+		stinger_sound = 'modular_meta/features/event/CB/sound/misc/Bell1.ogg'
+	return ..()
