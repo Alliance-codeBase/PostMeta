@@ -4,6 +4,7 @@
 #include "reagents.dm"
 #include "scp294_assets.dm"
 #include "sec_off.dm"
+#include "assistant.dm"
 
 /datum/modpack/scp_cb_holiday
 	id = "scp_cb_holiday"
