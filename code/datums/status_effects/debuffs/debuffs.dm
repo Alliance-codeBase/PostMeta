@@ -48,7 +48,12 @@
 	SHOULD_CALL_PARENT(TRUE)
 
 	var/mob/living/carbon/human/human = owner
+	//MASSMETA EDIT CHANGE BEGIN (force_say)
+	/* ORIGINAL
 	if(istype(human) && prob(force_say_chance) && (duration >= 6 SECONDS || (duration >= 2 SECONDS && prob(66))) )
+	*/
+	if(istype(human) && prob(force_say_chance) && (duration == STATUS_EFFECT_PERMANENT || duration >= 6 SECONDS || (duration >= 2 SECONDS && prob(66))) )
+	//MASSMETA EDIT CHANGE END
 		human.force_say(alter_phrases, immediate = TRUE, major = (duration >= 30 SECONDS))
 
 //STUN
