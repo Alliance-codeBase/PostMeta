@@ -1,0 +1,72 @@
+.SCP294 {
+  background: #000;
+
+  &__panel {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1048 / 662;
+    overflow: hidden;
+    background: #000;
+  }
+
+  &__art {
+    position: absolute;
+    left: -7.1565%;
+    top: 0.9063%;
+    width: 100%;
+    max-width: none;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  &__display {
+    position: absolute;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    color: #aaa99e;
+    font: 10px Arial, sans-serif;
+    text-align: center;
+    text-overflow: ellipsis;
+    cursor: text;
+    text-shadow: 1px 1px 2px #000;
+  }
+
+  &__key {
+    position: absolute;
+    padding: 0;
+    border: 0;
+    border-radius: 6px;
+    background: transparent;
+    cursor: pointer;
+
+    &:hover:not(:disabled),
+    &:focus-visible {
+      background: #ffffff0d;
+      box-shadow: inset 0 0 0 1px #aaa6;
+      outline: none;
+    }
+
+    &:active:not(:disabled) { background: #0008; }
+    &:disabled { cursor: default; }
+  }
+
+  &__cancel {
+    position: absolute;
+    padding: 0;
+    border: 2px solid #77766e;
+    background: #242320;
+    color: #deded7;
+    font: bold 18px Arial, sans-serif;
+    cursor: pointer;
+
+    &:hover,
+    &:focus-visible {
+      background: #393832;
+      border-color: #c1c0b3;
+    }
+
+    &:active { background: #111; }
+  }
+}
