@@ -23,12 +23,6 @@
 		uniform = /obj/item/clothing/under/rank/prisoner
 		r_pocket = /obj/item/paper/fluff/class_d
 
-/datum/outfit/job/assistant/consistent/New()
-	. = ..()
-	if(check_holidays(CONTAINMENT_BREACH_DAY))
-		uniform = /obj/item/clothing/under/rank/prisoner
-		r_pocket = /obj/item/paper/fluff/class_d
-
 /datum/outfit/job/assistant/pre_equip(mob/living/carbon/human/target)
 	if(check_holidays(CONTAINMENT_BREACH_DAY))
 		uniform = /obj/item/clothing/under/rank/prisoner

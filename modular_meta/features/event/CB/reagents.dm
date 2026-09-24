@@ -6,7 +6,7 @@
 	color = "#3D3028"
 	taste_description = "something unfamiliar"
 	metabolization_rate = 1000
-	chemical_flags = REAGENT_UNAFFECTED_BY_METABOLISM
+	chemical_flags = REAGENT_UNAFFECTED_BY_METABOLISM | REAGENT_INVISIBLE | REAGENT_NO_RANDOM_RECIPE | REAGENT_SPAWN_NO_RANDOM
 	var/reaction = 'modular_meta/features/event/CB/sound/294/ew1.ogg'
 	var/amount_spawned = 30
 
@@ -50,10 +50,7 @@
 
 /datum/reagent/anomalous/heal/on_mob_life(mob/living/carbon/affected_mob, seconds_per_tick, metabolization_ratio)
 	. = ..()
-	affected_mob.adjust_brute_loss(-200)
-	affected_mob.adjust_fire_loss(-200)
-	affected_mob.adjust_tox_loss(-200)
-	affected_mob.adjust_oxy_loss(-200)
+	affected_mob.revive(ADMIN_HEAL_ALL & ~HEAL_ALL_REAGENTS)
 
 /datum/reagent/anomalous/heal/expose_mob(mob/living/exposed_mob, methods=TOUCH, reac_volume, show_message=TRUE, touch_protection=0)
 	. = ..()
@@ -65,10 +62,10 @@
 	if(show_message && exposed_mob.stat == DEAD)
 		exposed_mob.visible_message(span_notice("[exposed_mob]'s body convulses as the liquid takes hold!"))
 		exposed_mob.do_jitter_animation(10)
-	exposed_mob.do_strange_reagent_revival(healing)
+	exposed_mob.revive(ADMIN_HEAL_ALL & ~HEAL_ALL_REAGENTS)
 
 /datum/reagent/anomalous/heal/god
-	name = "Godmode"
+	name = "God"
 	taste_description = "starlight and impossible sweetness"
 	amount_spawned = 1
 
@@ -96,12 +93,13 @@
 	var/base_color = container.color
 	var/matrix/base_transform = matrix(container.transform)
 	animate(container, transform = matrix(base_transform).Scale(1.1), pixel_y = base_y + 6, color = "#FF5CB8", time = 0.3 SECONDS)
-	animate(transform = matrix(base_transform).Scale(0.95), pixel_y = base_y - 3, color = "#FF9866", time = 0.3 SECONDS)
-	animate(transform = matrix(base_transform).Scale(1.1), pixel_y = base_y + 6, color = "#FFE866", time = 0.3 SECONDS)
-	animate(transform = matrix(base_transform).Scale(0.95), pixel_y = base_y - 3, color = "#65F7A4", time = 0.3 SECONDS)
-	animate(transform = matrix(base_transform).Scale(1.1), pixel_y = base_y + 6, color = "#74A8FF", time = 0.3 SECONDS)
-	animate(transform = matrix(base_transform).Scale(0.95), pixel_y = base_y - 3, color = "#C983FF", time = 0.3 SECONDS)
-	animate(transform = base_transform, pixel_y = base_y, color = base_color, time = 0.3 SECONDS)
+	animate(transform = matrix(base_transform).Scale(0.95), pixel_y = base_y - 3, color = "#FF9866", time = 1.5  SECONDS)
+	animate(transform = matrix(base_transform).Scale(1.1), pixel_y = base_y + 6, color = "#FFE866", time = 1.5 SECONDS)
+	animate(transform = matrix(base_transform).Scale(0.95), pixel_y = base_y - 3, color = "#65F7A4", time = 1.5  SECONDS)
+	animate(transform = matrix(base_transform).Scale(1.1), pixel_y = base_y + 6, color = "#74A8FF", time = 1.5 SECONDS)
+	animate(transform = matrix(base_transform).Scale(0.95), pixel_y = base_y - 3, color = "#C983FF", time = 1.5  SECONDS)
+	animate(transform = base_transform, pixel_y = base_y, color = base_color, time = 1.5 SECONDS)
+	QDEL_IN(2 SECONDS, container)
 
 /datum/reagent/anomalous/narsie
 	name = "Nar'Sie"
@@ -137,10 +135,15 @@
 	if(!ishuman(affected_mob))
 		return
 	var/mob/living/carbon/human/human = affected_mob
-	if(!human.get_organ_slot(ORGAN_SLOT_ZOMBIE))
-		var/obj/item/organ/zombie_infection/nodamage/tumor = new
+	var/obj/item/organ/zombie_infection/tumor = human.get_organ_slot(ORGAN_SLOT_ZOMBIE)
+	if(!tumor)
+		tumor = new /obj/item/organ/zombie_infection/nodamage
 		tumor.Insert(human)
-	addtimer(CALLBACK(human, TYPE_PROC_REF(/mob/living/carbon, set_heartattack), TRUE), 10 SECONDS)
+	addtimer(CALLBACK(src, PROC_REF(stop_heart), affected_mob), 10 SECONDS)
+
+/datum/reagent/anomalous/zombie/proc/stop_heart(mob/living/carbon/human/owner)
+	if(owner)
+		owner.set_heartattack(TRUE)
 
 /datum/reagent/anomalous/death
 	name = "Death"
