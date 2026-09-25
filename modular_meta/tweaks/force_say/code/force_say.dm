@@ -1,11 +1,9 @@
-#define MODE_FORCE_SAY_SUFFIX "force_say_suffix"
-#define MODE_FORCE_SAY_SUFFIX_ONLY "force_say_suffix_only"
 #define LONG_TEXT_LENGTH 50
 #define LONG_TEXT_MINIMUM_KEPT 40
 
 /datum/tgui_say
 	/// Hurt suffixes for Russian speech.
-	var/static/list/russian_hurt_phrases = list("ОЙ!", "ОХ!", "АХ!", "АЙ!", "УХ!", "УФ!", "ОУ!")
+	var/static/list/russian_hurt_phrases = list("ой!", "ох!", "ах!", "ай!", "ух!", "уф!", "оу!")
 
 /// Says the interrupted entry with its say prefixes kept. An empty entry gives a lone cry or nothing.
 /datum/tgui_say/proc/delegate_forced_speech(payload, channel)
@@ -21,13 +19,14 @@
 	if(!body)
 		var/cry = pick(alter_phrases || russian_hurt_phrases)
 		if(cry)
-			INVOKE_ASYNC(speaker, TYPE_PROC_REF(/atom/movable, say), cry, message_mods = list(MODE_FORCE_SAY_SUFFIX_ONLY = TRUE))
+			INVOKE_ASYNC(speaker, TYPE_PROC_REF(/atom/movable, say), cry)
 		return
 	var/message_modifiers = copytext_char(entry, 1, length_char(entry) - length_char(body) + 1)
 	var/cut_body = cut_off(body)
 	var/radio_key = channel == RADIO_CHANNEL ? RADIO_KEY_COMMON : ""
-	var/suffix = pick(alter_phrases || hurt_phrases_for(cut_body))
-	INVOKE_ASYNC(speaker, TYPE_PROC_REF(/atom/movable, say), "[radio_key][message_modifiers][cut_body]", message_mods = list(MODE_FORCE_SAY_SUFFIX = suffix))
+	var/suffix = LOWER_TEXT(pick(alter_phrases || hurt_phrases_for(cut_body)))
+	var/interruption = suffix ? "... [suffix]" : "..."
+	INVOKE_ASYNC(speaker, TYPE_PROC_REF(/atom/movable, say), "[radio_key][message_modifiers][cut_body][interruption]")
 
 /// TRUE for channels spoken in character.
 /datum/tgui_say/proc/is_in_character(channel)
@@ -50,24 +49,5 @@
 	var/latin_count = length_char(not_latin.Replace(text, ""))
 	return latin_count > cyrillic_count ? hurt_phrases : russian_hurt_phrases
 
-/// Adds the interruption to a forced message. Chat gets "-SUFFIX", TTS gets "... suffix" in lowercase, blackout gets "..." in both. A lone cry only gets lowercase TTS.
-/proc/interrupt_speech(list/message_data, list/message_mods)
-	if(!message_data["message"])
-		return
-	if(message_mods[MODE_FORCE_SAY_SUFFIX_ONLY])
-		message_data["tts_message"] = LOWER_TEXT(message_data["tts_message"])
-		return
-	if(!(MODE_FORCE_SAY_SUFFIX in message_mods))
-		return
-	var/suffix = message_mods[MODE_FORCE_SAY_SUFFIX]
-	if(!suffix)
-		message_data["message"] = "[message_data["message"]]..."
-		message_data["tts_message"] = "[message_data["tts_message"]]..."
-		return
-	message_data["message"] = "[message_data["message"]]-[suffix]"
-	message_data["tts_message"] = "[message_data["tts_message"]]... [LOWER_TEXT(suffix)]"
-
-#undef MODE_FORCE_SAY_SUFFIX
-#undef MODE_FORCE_SAY_SUFFIX_ONLY
 #undef LONG_TEXT_LENGTH
 #undef LONG_TEXT_MINIMUM_KEPT
