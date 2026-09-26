@@ -20,11 +20,6 @@ GLOBAL_LIST_INIT(department_radio_keys, list(
 	RADIO_KEY_SYNDICATE = RADIO_CHANNEL_SYNDICATE,
 	RADIO_KEY_UPLINK = RADIO_CHANNEL_UPLINK,
 	RADIO_KEY_CENTCOM = RADIO_CHANNEL_CENTCOM,
-	RADIO_KEY_FACTION = RADIO_CHANNEL_FACTION, //SKYRAT EDIT ADDITION - FACTION
-	RADIO_KEY_CYBERSUN = RADIO_CHANNEL_CYBERSUN, //SKYRAT EDIT ADDITION - MAPPING
-	RADIO_KEY_INTERDYNE = RADIO_CHANNEL_INTERDYNE, //SKYRAT EDIT ADDITION - MAPPING
-	RADIO_KEY_GUILD = RADIO_CHANNEL_GUILD, //SKYRAT EDIT ADDITION - MAPPING
-	RADIO_KEY_TARKON = RADIO_CHANNEL_TARKON, //SKYRAT EDIT ADDITION - MAPPING
 
 	// Admin
 	MODE_KEY_ADMIN = MODE_ADMIN,
@@ -144,24 +139,21 @@ GLOBAL_LIST_INIT(message_modes_stat_limits, list(
 	var/say_radio_or_mode = saymode || message_mods[RADIO_EXTENSION]
 	if(say_radio_or_mode)
 		var/mob_stat_limit = GLOB.message_modes_stat_limits[say_radio_or_mode]
-		if(stat > (isnull(mob_stat_limit) ? CONSCIOUS : mob_stat_limit))
+		if(stat > (isnull(mob_stat_limit) ? STABLE : mob_stat_limit))
 			saymode = null
 			message_mods -= RADIO_EXTENSION
 
 	switch(stat)
 		if(SOFT_CRIT)
 			message_mods[WHISPER_MODE] = MODE_WHISPER
-		if(UNCONSCIOUS)
-			return
+		//if(UNCONSCIOUS)
+			//return remove by Maximal08 to autotranslate
 		if(HARD_CRIT)
 			if(!message_mods[WHISPER_MODE])
 				return
 		if(DEAD)
 			say_dead(original_message, message_mods[MANNEQUIN_CONTROLLED])
 			return
-
-	if(HAS_TRAIT(src, TRAIT_SOFTSPOKEN) && !HAS_TRAIT(src, TRAIT_SIGN_LANG)) // softspoken trait only applies to spoken languages
-		message_mods[WHISPER_MODE] = MODE_WHISPER
 
 	if(client && SSlag_switch.measures[SLOWMODE_SAY] && !HAS_TRAIT(src, TRAIT_BYPASS_MEASURES) && !forced && src == usr)
 		if(!COOLDOWN_FINISHED(client, say_slowmode))
@@ -230,11 +222,6 @@ GLOBAL_LIST_INIT(message_modes_stat_limits, list(
 	//Get which verb is prefixed to the message before radio but after most modifications
 	message_mods[SAY_MOD_VERB] = say_mod(message, message_mods)
 
-	// SKYRAT EDIT ADDITION START: autopunctuation
-	//ensure EOL punctuation exists and that word-bounded 'i' are capitalized before we do anything else
-	if(client?.autopunctuation) //BUBBER EDIT ADDITION: AUTOPUNCTUATION PREFERENCE CHECK
-		message = autopunct_bare(message)
-	// SKYRAT EDIT ADDITION END
 	var/identifier = "invalid"
 	var/tts_message_to_use = tts_message || message
 
@@ -311,7 +298,7 @@ GLOBAL_LIST_INIT(message_modes_stat_limits, list(
 
 	var/speaker_is_signing = HAS_TRAIT(speaker, TRAIT_SIGN_LANG)
 	var/use_runechat = client?.prefs.read_preference(/datum/preference/toggle/enable_runechat)
-	if (stat == UNCONSCIOUS || stat == HARD_CRIT)
+	if (stat == SOFT_CRIT || stat == HARD_CRIT)
 		use_runechat = FALSE
 	else if (!ismob(speaker) && !client?.prefs.read_preference(/datum/preference/toggle/enable_runechat_non_mobs))
 		use_runechat = FALSE

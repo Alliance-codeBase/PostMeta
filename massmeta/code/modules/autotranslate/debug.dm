@@ -10,10 +10,16 @@
  * hand, exactly what the say pipeline would do.
  */
 
-ADMIN_VERB(autotranslate_test, R_DEBUG, "Test Translation Morph", "Fires a fake translated say at yourself, on both chat and runechat.", ADMIN_CATEGORY_DEBUG, message as text)
-	var/mob/speaker = user.mob
+/client/verb/autotranslate_test(message as text)
+	set name = "Test Translation Morph"
+	set desc = "Fires a fake translated say at yourself, on both chat and runechat."
+	set category = ADMIN_CATEGORY_DEBUG
+	set hidden = 1
+	if(!check_rights(R_DEBUG, 1)) return
+
+	var/mob/speaker = src.mob
 	if(isnull(speaker))
-		to_chat(user, span_warning("You need a mob for this."))
+		to_chat(src, span_warning("You need a mob for this."))
 		return
 
 	message = sanitize(copytext(message, 1, MAX_MESSAGE_LEN))
@@ -23,13 +29,13 @@ ADMIN_VERB(autotranslate_test, R_DEBUG, "Test Translation Morph", "Fires a fake 
 	// --- this block mirrors what the say pipeline would do, in order --------
 
 	// 1. Make the handle. Nothing has been dispatched yet.
-	var/datum/translated_speech/handle = new(user, message, "ru", "en")
+	var/datum/translated_speech/handle = new(src, message, "ru", "en")
 
 	// 2. Wrap the spoken text so the chat panel can find it later, then build
 	//    the chat line exactly as compose_message() would.
 	var/wrapped = handle.wrapped_text()
 	to_chat(
-		user,
+		src,
 		span_game_say("<span class='name'>[speaker.name]</span> <span class='message'>says, \"[wrapped]\"</span>"),
 		type = MESSAGE_TYPE_LOCALCHAT,
 	)
@@ -40,39 +46,53 @@ ADMIN_VERB(autotranslate_test, R_DEBUG, "Test Translation Morph", "Fires a fake 
 	handle.attach_runechat(bubble)
 
 	// 4. Feed a canned result straight in, instead of handle.begin().
-	//
-	//    This verb exists to exercise the presentation layer, so it must not
-	//    depend on which provider happens to be installed. Going through the
-	//    subsystem would hand your text to the real backend as ru->en, and
-	//    English in gives you near-identical English back - a morph from X to
-	//    X, which looks exactly like the feature being broken.
-	//
-	//    Use "Translation: Diagnose" to test the backend instead.
 	var/datum/callback/canned_result = CALLBACK(handle, TYPE_PROC_REF(/datum/translated_speech, on_result), autotranslate_fake_translation(message), TRUE)
 	addtimer(canned_result, 0.4 SECONDS)
 
 	// -----------------------------------------------------------------------
 
-	to_chat(user, span_notice("Fed a canned translation in. This tests the display only - use Translation: Diagnose for the backend."))
+	to_chat(src, span_notice("Fed a canned translation in. This tests the display only - use Translation: Diagnose for the backend."))
 	BLACKBOX_LOG_ADMIN_VERB("Test Translation Morph")
 
-ADMIN_VERB(autotranslate_set_debug_provider, R_DEBUG, "Translation: Use Debug Provider", "Installs the fake translation backend.", ADMIN_CATEGORY_DEBUG, latency_ds as num|null)
+
+/client/verb/autotranslate_set_debug_provider(latency_ds as null|num)
+	set name = "Translation: Use Debug Provider"
+	set desc = "Installs the fake translation backend."
+	set category = ADMIN_CATEGORY_DEBUG
+	set hidden = 1
+	if(!check_rights(R_DEBUG, 1)) return
+
 	var/datum/translation_provider/debug/provider = new()
 	if(!isnull(latency_ds))
 		provider.latency = latency_ds
 	SSautotranslate.set_provider(provider)
-	to_chat(user, span_notice("Translation provider is now [provider.name], latency [provider.latency / 10]s."))
+	to_chat(src, span_notice("Translation provider is now [provider.name], latency [provider.latency / 10]s."))
 	BLACKBOX_LOG_ADMIN_VERB("Translation Use Debug Provider")
 
-ADMIN_VERB(autotranslate_disable, R_DEBUG, "Translation: Disable", "Removes the translation backend. Messages display untranslated.", ADMIN_CATEGORY_DEBUG)
+
+/client/verb/autotranslate_disable()
+	set name = "Translation: Disable"
+	set desc = "Removes the translation backend. Messages display untranslated."
+	set category = ADMIN_CATEGORY_DEBUG
+	set hidden = 1
+	if(!check_rights(R_DEBUG, 1)) return
+
 	SSautotranslate.set_provider(new /datum/translation_provider/none())
-	to_chat(user, span_notice("Translation disabled."))
+	to_chat(src, span_notice("Translation disabled."))
 	BLACKBOX_LOG_ADMIN_VERB("Translation Disable")
 
-ADMIN_VERB(autotranslate_clear_cache, R_DEBUG, "Translation: Clear Cache", "Empties the translation cache.", ADMIN_CATEGORY_DEBUG)
+
+/client/verb/autotranslate_clear_cache()
+	set name = "Translation: Clear Cache"
+	set desc = "Empties the translation cache."
+	set category = ADMIN_CATEGORY_DEBUG
+	set hidden = 1
+	if(!check_rights(R_DEBUG, 1)) return
+
 	var/cleared = SSautotranslate.clear_cache()
-	to_chat(user, span_notice("Cleared [cleared] cached translation\s."))
+	to_chat(src, span_notice("Cleared [cleared] cached translation\s."))
 	BLACKBOX_LOG_ADMIN_VERB("Translation Clear Cache")
+
 
 /**
  * Isolates the DM half from the panel half.
@@ -82,7 +102,13 @@ ADMIN_VERB(autotranslate_clear_cache, R_DEBUG, "Translation: Clear Cache", "Empt
  * answered but a real say still shows the failure marker, the problem is in
  * the panel; if it stalls here, it is server side.
  */
-ADMIN_VERB(autotranslate_diagnose, R_DEBUG, "Translation: Diagnose", "Runs one translation end to end and reports each stage.", ADMIN_CATEGORY_DEBUG, message as text)
+/client/verb/autotranslate_diagnose(message as text)
+	set name = "Translation: Diagnose"
+	set desc = "Runs one translation end to end and reports each stage."
+	set category = ADMIN_CATEGORY_DEBUG
+	set hidden = 1
+	if(!check_rights(R_DEBUG, 1)) return
+
 	message = sanitize(copytext_char(message, 1, MAX_MESSAGE_LEN))
 	if(!length(message))
 		message = "test"
@@ -95,17 +121,17 @@ ADMIN_VERB(autotranslate_diagnose, R_DEBUG, "Translation: Diagnose", "Runs one t
 	report += "supports(ru,en): [current?.supports("ru", "en") ? "TRUE" : "FALSE"]"
 	report += "can_translate(ru,en): [SSautotranslate.can_translate("ru", "en") ? "TRUE" : "FALSE"]"
 	report += "Subsystem can_fire: [SSautotranslate.can_fire ? "TRUE" : "FALSE"], initialized: [SSautotranslate.initialized ? "TRUE" : "FALSE"]"
-	report += "Panel window: [isnull(user.tgui_panel?.window) ? "MISSING - chat updates cannot be delivered" : "present"]"
+	report += "Panel window: [isnull(src.tgui_panel?.window) ? "MISSING - chat updates cannot be delivered" : "present"]"
 	report += "Source text: [message]"
 
 	var/key = SSautotranslate.build_key(message, "ru", "en")
 	report += "Cache key: [key]"
 	report += "Already cached: [isnull(SSautotranslate.translation_cache[key]) ? "no" : "yes - will resolve synchronously"]"
 
-	to_chat(user, boxed_message(jointext(report, "<br>")))
+	to_chat(src, boxed_message(jointext(report, "<br>")))
 
 	if(!SSautotranslate.can_translate("ru", "en"))
-		to_chat(user, span_warning("Nothing will be dispatched - no usable provider. Install one first."))
+		to_chat(src, span_warning("Nothing will be dispatched - no usable provider. Install one first."))
 		return
 
 	var/started = world.time
@@ -113,13 +139,14 @@ ADMIN_VERB(autotranslate_diagnose, R_DEBUG, "Translation: Diagnose", "Runs one t
 		message,
 		"ru",
 		"en",
-		CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(autotranslate_report_result), user, started),
+		CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(autotranslate_report_result), src, started),
 	)
-	to_chat(user, span_notice("request_translation() returned [dispatched ? "TRUE" : "FALSE"]. Awaiting callback..."))
+	to_chat(src, span_notice("request_translation() returned [dispatched ? "TRUE" : "FALSE"]. Awaiting callback..."))
 	if(!dispatched)
-		to_chat(user, span_warning("Nothing dispatched, so no callback is coming."))
+		to_chat(src, span_warning("Nothing dispatched, so no callback is coming."))
 
 	BLACKBOX_LOG_ADMIN_VERB("Translation Diagnose")
+
 
 /// Callback target for the diagnose verb.
 /proc/autotranslate_report_result(client/user, started, result, success)
@@ -131,8 +158,15 @@ ADMIN_VERB(autotranslate_diagnose, R_DEBUG, "Translation: Diagnose", "Runs one t
 	else
 		to_chat(user, span_boldwarning("Translation callback after [elapsed]s: FAILED (result was null)"))
 
-ADMIN_VERB(autotranslate_stats, R_DEBUG, "Translation: Stats", "Prints translation subsystem counters.", ADMIN_CATEGORY_DEBUG)
-	to_chat(user, boxed_message(jointext(list(
+
+/client/verb/autotranslate_stats()
+	set name = "Translation: Stats"
+	set desc = "Prints translation subsystem counters."
+	set category = ADMIN_CATEGORY_DEBUG
+	set hidden = 1
+	if(!check_rights(R_DEBUG, 1)) return
+
+	to_chat(src, boxed_message(jointext(list(
 		span_boldnotice("Auto Translate"),
 		"Provider: [SSautotranslate.provider?.name || "none"]",
 		"In flight: [length(SSautotranslate.active_requests)]",

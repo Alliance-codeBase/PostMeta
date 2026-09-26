@@ -13,6 +13,19 @@
 
 //master files (unsorted, TODO: need modularization)
 
+// AutoTranslate Module
+#include "code/modules/autotranslate/_autotranslate.dm"
+#include "code/modules/autotranslate/config.dm"
+#include "code/modules/autotranslate/debug.dm"
+#include "code/modules/autotranslate/hear.dm"
+#include "code/modules/autotranslate/libretranslate.dm"
+#include "code/modules/autotranslate/preferences.dm"
+#include "code/modules/autotranslate/provider.dm"
+#include "code/modules/autotranslate/runechat.dm"
+#include "code/modules/autotranslate/SSautotranslate.dm"
+#include "code/modules/autotranslate/text_morph.dm"
+#include "code/modules/autotranslate/translated_speech.dm"
+
 #include "code\obj\items\clothing\belt.dm"
 #include "code\datums\components\crafting\weapon_ammo.dm"
 #include "code\modules\ammunition\ballistic\shotgun.dm"
