@@ -143,17 +143,17 @@ GLOBAL_LIST_INIT(message_modes_stat_limits, list(
 			saymode = null
 			message_mods -= RADIO_EXTENSION
 
-	// this is what stops you from talking while dead
-	if(stat == DEAD)
-		say_dead(original_message, message_mods[MANNEQUIN_CONTROLLED])
-		return
-
-	// this is what stops you from talking while asleep, and also what allows you to deathgasp in hard crit
-	if(IS_UNCONSCIOUS(src) && (stat != HARD_CRIT || !message_mods[WHISPER_MODE]))
-		return
-
-	if(HAS_TRAIT(src, TRAIT_FORCE_WHISPER))
-		message_mods[WHISPER_MODE] = MODE_WHISPER
+	switch(stat)
+		if(SOFT_CRIT)
+			message_mods[WHISPER_MODE] = MODE_WHISPER
+		//if(UNCONSCIOUS)
+			//return remove by Maximal08 to autotranslate
+		if(HARD_CRIT)
+			if(!message_mods[WHISPER_MODE])
+				return
+		if(DEAD)
+			say_dead(original_message, message_mods[MANNEQUIN_CONTROLLED])
+			return
 
 	if(client && SSlag_switch.measures[SLOWMODE_SAY] && !HAS_TRAIT(src, TRAIT_BYPASS_MEASURES) && !forced && src == usr)
 		if(!COOLDOWN_FINISHED(client, say_slowmode))
@@ -172,9 +172,8 @@ GLOBAL_LIST_INIT(message_modes_stat_limits, list(
 	if(!message_mods[MODE_CUSTOM_SAY_ERASE_INPUT])
 		if(message_mods[WHISPER_MODE] == MODE_WHISPER)
 			message_range = 1
-			// this is where deathgasping is processed
 			if(stat == HARD_CRIT)
-				var/health_diff = round(-dead_threshold + health)
+				var/health_diff = round(-HEALTH_THRESHOLD_DEAD + health)
 				// If we cut our message short, abruptly end it with a-..
 				var/message_len = length_char(message)
 				message = copytext_char(message, 1, health_diff) + "[message_len > health_diff ? "-.." : "..."]"
@@ -221,7 +220,7 @@ GLOBAL_LIST_INIT(message_modes_stat_limits, list(
 		return
 
 	//Get which verb is prefixed to the message before radio but after most modifications
-	message_mods[SAY_MOD_VERB] ||= say_mod(message, message_mods)
+	message_mods[SAY_MOD_VERB] = say_mod(message, message_mods)
 
 	var/identifier = "invalid"
 	var/tts_message_to_use = tts_message || message
@@ -299,55 +298,50 @@ GLOBAL_LIST_INIT(message_modes_stat_limits, list(
 
 	var/speaker_is_signing = HAS_TRAIT(speaker, TRAIT_SIGN_LANG)
 	var/use_runechat = client?.prefs.read_preference(/datum/preference/toggle/enable_runechat)
-	if (IS_UNCONSCIOUS_AND_ALIVE(src))
+	if (stat == SOFT_CRIT || stat == HARD_CRIT)
 		use_runechat = FALSE
 	else if (!ismob(speaker) && !client?.prefs.read_preference(/datum/preference/toggle/enable_runechat_non_mobs))
 		use_runechat = FALSE
 
 	var/message = ""
+	// if someone is whispering we make an extra type of message that is obfuscated for people out of range
+	// Less than or equal to 0 means normal hearing. More than 0 and less than or equal to eavesdrop_range means
+	// partial hearing. More than eavesdrop_range means no hearing. Exception for GOOD_HEARING trait
+	var/dist = get_dist(speaker, src) - message_range
+	// FENYSHA EDIT ADDITION BEGIN - AUTOTRANSLATE - track whether stars() mangled the text
+	var/message_obscured = FALSE
+	// FENYSHA EDIT ADDITION END
+	if(dist > 0 && dist <= eavesdrop_range && !HAS_TRAIT(src, TRAIT_GOOD_HEARING))
+		raw_message = stars(raw_message)
+		// FENYSHA EDIT ADDITION BEGIN - AUTOTRANSLATE
+		message_obscured = TRUE
+		// FENYSHA EDIT ADDITION END
 	var/speaker_name = span_name("[message_mods[MODE_SPEAKER_NAME_OVERRIDE] || speaker]")
-
-	// Infinite range implies something like telecomms, ie something that should never be distance modified
-	if(message_range != INFINITY && !HAS_TRAIT(src, TRAIT_GOOD_HEARING))
-		var/raw_dist = get_dist(speaker, src)
-		// Check for projected whispers, calculate distance from the projected tile if so
-		if(message_mods[WHISPER_MODE])
-			var/turf/in_front = get_step(speaker, speaker.dir)
-			if(in_front && HAS_TRAIT(in_front, TRAIT_TURF_PROJECTS_WHISPERS))
-				raw_dist = min(raw_dist, get_dist(in_front, src))
-
-		// How far we are we outside the message range?
-		var/outside_dist = max(raw_dist - message_range, 0)
-		// Out of message range AND out of eavesdrop range - interrupt message entirely
-		if(outside_dist > eavesdrop_range)
-			// Can't see them speak either. No message
-			if(is_blind() || HAS_TRAIT(speaker, TRAIT_INVISIBLE_MAN))
-				return FALSE
-			// If they're inside of something, probably can't see them speak. No message
-			if(!isturf(speaker.loc))
-				return FALSE
-
-			// But we can still see them speak
-			if(speaker_is_signing)
-				deaf_message = "[speaker_name] [speaker.get_default_say_verb()] something, but the motions are too subtle to make out from afar."
-			// If we can't hear we want to continue to the default deaf message
-			else if(!HAS_TRAIT(src, TRAIT_DEAF))
-				if(isliving(speaker))
-					var/mob/living/living_speaker = speaker
-					var/mouth_hidden = living_speaker.is_mouth_covered() || HAS_TRAIT(living_speaker, TRAIT_FACE_COVERED)
-					if(mouth_hidden && !HAS_TRAIT(src, TRAIT_SEE_MASK_WHISPER)) // Can't see them speak if their mouth is covered or hidden, unless we're an empath
-						return FALSE
-
-				deaf_message = "[speaker_name] [speaker.verb_whisper] something, but you are too far away to hear [speaker.p_them()]."
-
-			if(deaf_message)
-				deaf_type = MSG_VISUAL
-				message = deaf_message
-				return show_message(message, MSG_VISUAL, deaf_message, deaf_type, avoid_highlight)
+	if(message_range != INFINITY && dist > eavesdrop_range && !HAS_TRAIT(src, TRAIT_GOOD_HEARING))
+		// Too far away and don't have good hearing, you can't hear anything
+		if(is_blind() || HAS_TRAIT(speaker, TRAIT_INVISIBLE_MAN)) // Can't see them speak either
 			return FALSE
-		// Out of message range but within eavesdrop range - alter displayed message
-		if(outside_dist > 0)
-			raw_message = stars(raw_message)
+		if(!isturf(speaker.loc)) // If they're inside of something, probably can't see them speak
+			return FALSE
+
+		// But we can still see them speak
+		if(speaker_is_signing)
+			deaf_message = "[speaker_name] [speaker.get_default_say_verb()] something, but the motions are too subtle to make out from afar."
+		else if(!HAS_TRAIT(src, TRAIT_DEAF)) // If we can't hear we want to continue to the default deaf message
+			if(isliving(speaker))
+				var/mob/living/living_speaker = speaker
+				var/mouth_hidden = living_speaker.is_mouth_covered() || HAS_TRAIT(living_speaker, TRAIT_FACE_COVERED)
+				if(mouth_hidden && !HAS_TRAIT(src, TRAIT_SEE_MASK_WHISPER)) // Can't see them speak if their mouth is covered or hidden, unless we're an empath
+					return FALSE
+
+			deaf_message = "[speaker_name] [speaker.verb_whisper] something, but you are too far away to hear [speaker.p_them()]."
+
+		if(deaf_message)
+			deaf_type = MSG_VISUAL
+			message = deaf_message
+			show_message(message, MSG_VISUAL, deaf_message, deaf_type, avoid_highlight)
+			return FALSE
+
 
 	// we need to send this signal before compose_message() is used since other signals need to modify
 	// the raw_message first. After the raw_message is passed through the various signals, it's ready to be formatted
@@ -390,12 +384,24 @@ GLOBAL_LIST_INIT(message_modes_stat_limits, list(
 		deaf_message = span_notice("You can't hear yourself!")
 		deaf_type = MSG_AUDIBLE // Since you should be able to hear yourself without looking
 
+	// FENYSHA EDIT ADDITION BEGIN - AUTOTRANSLATE
+	// Marks the spoken text so the chat panel can find it later. The wrapper
+	// spans are stripped by generate_image(), so runechat is unaffected.
+	var/datum/translated_speech/translation = try_begin_translation(speaker, raw_message, is_custom_emote, understood, message_obscured)
+	if(translation)
+		raw_message = translation.wrapped_text()
+	// FENYSHA EDIT ADDITION END
+
 	// Create map text prior to modifying message for goonchat
 	if (use_runechat && !HAS_TRAIT(src, TRAIT_DEAF))
 		if (is_custom_emote)
 			create_chat_message(speaker, null, message_mods[MODE_CUSTOM_SAY_EMOTE], spans, EMOTE_MESSAGE)
 		else
-			create_chat_message(speaker, message_language, raw_message, spans)
+			// FENYSHA EDIT CHANGE BEGIN - AUTOTRANSLATE - capture the bubble so it can be retexted
+			// ORIGINAL: create_chat_message(speaker, message_language, raw_message, spans)
+			var/datum/chatmessage/bubble = create_chat_message(speaker, message_language, raw_message, spans)
+			translation?.attach_runechat(bubble)
+			// FENYSHA EDIT CHANGE END
 
 	// Recompose message for AI hrefs, language incomprehension.
 	message = compose_message(speaker, message_language, raw_message, radio_freq, radio_freq_name, radio_freq_color, spans, message_mods)
@@ -403,6 +409,11 @@ GLOBAL_LIST_INIT(message_modes_stat_limits, list(
 	var/hearflags = NONE
 	if(show_message(message, MSG_AUDIBLE, deaf_message, deaf_type, avoid_highlight))
 		hearflags |= HEAR_HEARD
+	// FENYSHA EDIT ADDITION BEGIN - AUTOTRANSLATE
+	// Dispatched last: a cache hit resolves synchronously, so both surfaces
+	// have to exist before this runs.
+	translation?.begin()
+	// FENYSHA EDIT ADDITION END
 	if(understood)
 		hearflags |= HEAR_UNDERSTOOD
 	return hearflags
@@ -417,12 +428,6 @@ GLOBAL_LIST_INIT(message_modes_stat_limits, list(
 
 	var/list/in_view = get_hearers_in_view(message_range + whisper_range, source)
 	var/list/listening = get_hearers_in_range(message_range + whisper_range, source)
-
-	if(is_speaker_whispering)
-		var/turf/in_front = get_step(src, dir)
-		if(in_front && HAS_TRAIT(in_front, TRAIT_TURF_PROJECTS_WHISPERS))
-			in_view |= get_hearers_in_view(message_range + whisper_range, in_front)
-			listening |= get_hearers_in_range(message_range + whisper_range, in_front)
 
 	// Pre-process listeners to account for line-of-sight
 	for(var/atom/movable/listening_movable as anything in listening)
@@ -531,6 +536,11 @@ GLOBAL_LIST_INIT(message_modes_stat_limits, list(
 	return list("message" = message, "tts_message" = tts_message, "tts_filter" = tts_filter)
 
 /mob/living/proc/radio(message, list/message_mods = list(), list/spans, language)
+	//SKYRAT EDIT ADDITION BEGIN
+	if((message_mods[MODE_HEADSET] || message_mods[RADIO_EXTENSION]) && !(mobility_flags & MOBILITY_USE) && !isAI(src) && !ispAI(src) && !ismecha(loc)) // If can't use items, you can't press the button
+		to_chat(src, span_warning("You can't use the radio right now as you can't reach the button!"))
+		return ITALICS | REDUCE_RANGE
+	//SKYRAT EDIT END
 	var/obj/item/implant/radio/imp = locate() in src
 	if(imp?.radio.is_on())
 		if(message_mods[MODE_HEADSET])

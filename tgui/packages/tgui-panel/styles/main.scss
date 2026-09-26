@@ -24,7 +24,8 @@
 @include meta.load-css('./components/Ping.scss');
 @include meta.load-css('./components/Notifications.scss');
 @include meta.load-css('./components/UnreadCount.scss');
-@include meta.load-css('./components/CommandBar.scss');
+// FENYSHA EDIT ADDITION - AUTOTRANSLATE
+@include meta.load-css('./components/Translation.scss');
 
 // Layouts
 @include meta.load-css('~tgui/styles/layouts/Layout.scss');
@@ -32,10 +33,6 @@
 
 // tgchat styles
 @include meta.load-css('./tgchat/chat-dark.scss');
-
-.Panel__stack {
-  gap: 0 !important;
-}
 
 :root {
   --chat-text-color: hsl(210, 50%, 80%);
