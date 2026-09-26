@@ -103,6 +103,7 @@
 		/obj/item/reagent_containers/spray/pepper,
 		/obj/item/restraints/handcuffs,
 		/obj/item/restraints/legcuffs/bola,
+		/obj/item/melee/tonfa,
 	))
 
 ///Webbing security belt
@@ -158,7 +159,6 @@
 		/obj/item/wormhole_jaunter,
 		/obj/item/skeleton_key,
 		/obj/item/crusher_trophy,
-		/obj/item/melee/tonfa
 	))
 
 ///Primitive mining belt
