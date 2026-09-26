@@ -158,6 +158,7 @@
 		/obj/item/wormhole_jaunter,
 		/obj/item/skeleton_key,
 		/obj/item/crusher_trophy,
+		/obj/item/melee/tonfa
 	))
 
 ///Primitive mining belt
