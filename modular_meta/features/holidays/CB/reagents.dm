@@ -6,15 +6,29 @@
 	color = "#3D3028"
 	taste_description = "something unfamiliar"
 	metabolization_rate = 1000
-	chemical_flags = REAGENT_UNAFFECTED_BY_METABOLISM | REAGENT_INVISIBLE | REAGENT_NO_RANDOM_RECIPE | REAGENT_SPAWN_NO_RANDOM
+	chemical_flags = REAGENT_UNAFFECTED_BY_METABOLISM | REAGENT_INVISIBLE | REAGENT_NO_RANDOM_RECIPE | REAGENT_SPAWN_NO_RANDOM | REAGENT_DEAD_PROCESS
 	var/reaction = 'modular_meta/features/holidays/CB/sound/294/ew1.ogg'
 	var/amount_spawned = 30
+	self_consuming = TRUE
 
 /datum/reagent/anomalous/get_taste_description(mob/living/taster)
 	var/custom_taste = data?["taste"]
 	if(custom_taste)
 		return list("[custom_taste]" = 1)
 	return ..()
+
+/datum/reagent/anomalous/on_new(data)
+	. = ..()
+	if(istype(holder.my_atom, /obj/item/reagent_containers/cup/glass/coffee_cup/scp294) || istype(holder.my_atom, /obj/item/organ/stomach) || isliving(holder.my_atom))
+		return
+	volume = 0
+
+/datum/reagent/anomalous/intercept_reagents_transfer(datum/reagents/target, amount, copy_only) // no way you're making patches with anomalous reagents
+	if(istype(target.my_atom, /obj/item/organ/stomach) || (istype(holder.my_atom, /obj/item/organ/stomach) && isliving(target.my_atom)))
+		return FALSE
+	surge()
+	volume = 0
+	return TRUE
 
 /datum/reagent/anomalous/on_mob_metabolize(mob/living/affected_mob)
 	. = ..()
@@ -31,7 +45,7 @@
 	. = ..()
 	affected_mob.adjust_tox_loss(35)
 	affected_mob.adjust_brute_loss(5)
-	affected_mob.adjust_organ_loss(ORGAN_SLOT_STOMACH, 10)
+	affected_mob.adjust_organ_loss(ORGAN_SLOT_STOMACH, 200)
 
 /datum/reagent/anomalous/explosion
 	name = "Explosion"
@@ -83,7 +97,7 @@
 	if(volume <= 10 && volume + amount > 2)
 		surge()
 
-/datum/reagent/anomalous/heal/god/proc/surge()
+/datum/reagent/anomalous/proc/surge()
 	var/obj/item/reagent_containers/container = holder?.my_atom
 	if(!istype(container))
 		return

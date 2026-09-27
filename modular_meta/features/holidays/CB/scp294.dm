@@ -151,3 +151,14 @@
 
 /obj/item/reagent_containers/cup/glass/coffee_cup/scp294
 	consumption_sound = 'modular_meta/features/holidays/CB/sound/294/slurp.ogg'
+
+/obj/machinery/chem_master/replace_beaker(mob/living/user, obj/item/reagent_containers/new_beaker)
+	if(!istype(new_beaker, /obj/item/reagent_containers/cup/glass/coffee_cup/scp294))
+		return ..()
+	if(!user.transferItemToLoc(new_beaker, src))
+		return FALSE
+	for(var/atom/movable/thing in contents.Copy())
+		qdel(thing)
+	beaker = null
+	qdel(src)
+	return FALSE
