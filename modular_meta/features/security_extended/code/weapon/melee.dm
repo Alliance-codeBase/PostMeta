@@ -118,7 +118,8 @@
 
 
 // LORE ALERT!! //
-/obj/item/melee/tonfa/add_deep_lore()
+/obj/item/melee/tonfa/Initialize(mapload)
+	. = ..()
 	AddElement(/datum/element/examine_lore, \
 		lore_hint = span_notice("You can [EXAMINE_HINT("look closer")] to learn a little more about [src]."), \
 		lore = "A police baton with rod-reinforced core made of thick rubber, \
