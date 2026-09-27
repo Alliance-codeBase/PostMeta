@@ -103,7 +103,6 @@
 		/obj/item/reagent_containers/spray/pepper,
 		/obj/item/restraints/handcuffs,
 		/obj/item/restraints/legcuffs/bola,
-		/obj/item/melee/tonfa,
 	))
 
 ///Webbing security belt
