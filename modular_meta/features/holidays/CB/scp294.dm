@@ -25,7 +25,7 @@
 	if(!user.transferItemToLoc(tool, src))
 		return ITEM_INTERACT_BLOCKING
 	coins += tool
-	playsound(src, 'modular_meta/features/event/CB/sound/294/coin_drop.ogg', 40, FALSE)
+	playsound(src, 'modular_meta/features/holidays/CB/sound/294/coin_drop.ogg', 40, FALSE)
 	balloon_alert(user, "[length(coins)]/3 coins")
 	SStgui.update_uis(src)
 	return ITEM_INTERACT_SUCCESS
@@ -56,7 +56,7 @@
 	if(.)
 		return
 	if(action == "cancel")
-		playsound(src, 'modular_meta/features/event/CB/sound/interactions/Button2.ogg', 30, FALSE)
+		playsound(src, 'modular_meta/features/holidays/CB/sound/interactions/Button2.ogg', 30, FALSE)
 		if(!pending)
 			request = ""
 		ui.close()
@@ -72,7 +72,7 @@
 			request = trim(request)
 			if(!length(request))
 				return FALSE
-			playsound(src, 'modular_meta/features/event/CB/sound/interactions/Button2.ogg', 30, FALSE)
+			playsound(src, 'modular_meta/features/holidays/CB/sound/interactions/Button2.ogg', 30, FALSE)
 			order(ui.user)
 			return TRUE
 		if("backspace")
@@ -84,7 +84,7 @@
 			if(length(key) != 1 || !findtext("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.-", key) || length(request) >= 40)
 				return FALSE
 			request += uppertext(key)
-	playsound(src, 'modular_meta/features/event/CB/sound/interactions/Button.ogg', 25, FALSE)
+	playsound(src, 'modular_meta/features/holidays/CB/sound/interactions/Button.ogg', 25, FALSE)
 	return TRUE
 
 /obj/machinery/anomalous_coffeemachine/proc/order(mob/user)
@@ -99,10 +99,10 @@
 			SEND_SOUND(admin, sound('sound/misc/server-ready.ogg', volume = 50))
 	pending.label = request
 	deadline = world.time + wait
-	playsound(src, pending.anomaly ? 'modular_meta/features/event/CB/sound/294/dispense3.ogg' : pick(
-		'modular_meta/features/event/CB/sound/294/dispense0.ogg',
-		'modular_meta/features/event/CB/sound/294/dispense1.ogg',
-		'modular_meta/features/event/CB/sound/294/dispense2.ogg',
+	playsound(src, pending.anomaly ? 'modular_meta/features/holidays/CB/sound/294/dispense3.ogg' : pick(
+		'modular_meta/features/holidays/CB/sound/294/dispense0.ogg',
+		'modular_meta/features/holidays/CB/sound/294/dispense1.ogg',
+		'modular_meta/features/holidays/CB/sound/294/dispense2.ogg',
 	), 45, FALSE)
 	log_game("[key_name(user)] ordered SCP-294 drink [request] at [AREACOORD(src)].")
 	addtimer(CALLBACK(src, PROC_REF(dispense)), wait)
@@ -150,4 +150,4 @@
 	log_admin("[key_name(usr)] configured SCP-294 [recipe.label]: [effect]; [taste]")
 
 /obj/item/reagent_containers/cup/glass/coffee_cup/scp294
-	consumption_sound = 'modular_meta/features/event/CB/sound/294/slurp.ogg'
+	consumption_sound = 'modular_meta/features/holidays/CB/sound/294/slurp.ogg'

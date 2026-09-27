@@ -7,7 +7,7 @@
 	taste_description = "something unfamiliar"
 	metabolization_rate = 1000
 	chemical_flags = REAGENT_UNAFFECTED_BY_METABOLISM | REAGENT_INVISIBLE | REAGENT_NO_RANDOM_RECIPE | REAGENT_SPAWN_NO_RANDOM
-	var/reaction = 'modular_meta/features/event/CB/sound/294/ew1.ogg'
+	var/reaction = 'modular_meta/features/holidays/CB/sound/294/ew1.ogg'
 	var/amount_spawned = 30
 
 /datum/reagent/anomalous/get_taste_description(mob/living/taster)
@@ -24,7 +24,7 @@
 /datum/reagent/anomalous/corrosion
 	name = "Corrosion"
 	taste_description = "rust, ash and old pennies"
-	reaction = 'modular_meta/features/event/CB/sound/294/cough.ogg'
+	reaction = 'modular_meta/features/holidays/CB/sound/294/cough.ogg'
 	amount_spawned = 5
 
 /datum/reagent/anomalous/corrosion/on_mob_life(mob/living/carbon/affected_mob, seconds_per_tick, metabolization_ratio)
@@ -36,7 +36,7 @@
 /datum/reagent/anomalous/explosion
 	name = "Explosion"
 	taste_description = "hot metal and ozone"
-	reaction = 'modular_meta/features/event/CB/sound/294/cough.ogg'
+	reaction = 'modular_meta/features/holidays/CB/sound/294/cough.ogg'
 	amount_spawned = 5
 
 /datum/reagent/anomalous/explosion/on_mob_life(mob/living/carbon/affected_mob, seconds_per_tick, metabolization_ratio)
@@ -46,7 +46,7 @@
 /datum/reagent/anomalous/heal
 	name = "Healing"
 	taste_description = "honey and warm milk"
-	reaction = 'modular_meta/features/event/CB/sound/294/ahh.ogg'
+	reaction = 'modular_meta/features/holidays/CB/sound/294/ahh.ogg'
 
 /datum/reagent/anomalous/heal/on_mob_life(mob/living/carbon/affected_mob, seconds_per_tick, metabolization_ratio)
 	. = ..()
@@ -127,7 +127,7 @@
 /datum/reagent/anomalous/zombie
 	name = "Zombie"
 	taste_description = "rotting flesh and bitter medicine"
-	reaction = 'modular_meta/features/event/CB/sound/294/cough.ogg'
+	reaction = 'modular_meta/features/holidays/CB/sound/294/cough.ogg'
 	amount_spawned = 5
 
 /datum/reagent/anomalous/zombie/on_mob_end_metabolize(mob/living/affected_mob, metabolization_ratio)
@@ -148,7 +148,7 @@
 /datum/reagent/anomalous/death
 	name = "Death"
 	taste_description = "cold ash and grave dust"
-	reaction = 'modular_meta/features/event/CB/sound/294/cough.ogg'
+	reaction = 'modular_meta/features/holidays/CB/sound/294/cough.ogg'
 	amount_spawned = 1
 
 /datum/reagent/anomalous/death/on_mob_life(mob/living/carbon/affected_mob, seconds_per_tick, metabolization_ratio)
@@ -158,7 +158,7 @@
 /datum/reagent/anomalous/head
 	name = "Headburst"
 	taste_description = "copper and bitter almonds"
-	reaction = 'modular_meta/features/event/CB/sound/294/cough.ogg'
+	reaction = 'modular_meta/features/holidays/CB/sound/294/cough.ogg'
 	amount_spawned = 5
 
 /datum/reagent/anomalous/head/on_mob_life(mob/living/carbon/affected_mob, seconds_per_tick, metabolization_ratio)
@@ -172,7 +172,7 @@
 /datum/reagent/anomalous/brain
 	name = "Brain damage"
 	taste_description = "ink and electric sparks"
-	reaction = 'modular_meta/features/event/CB/sound/294/ew2.ogg'
+	reaction = 'modular_meta/features/holidays/CB/sound/294/ew2.ogg'
 	amount_spawned = 5
 
 /datum/reagent/anomalous/brain/on_mob_life(mob/living/carbon/affected_mob, seconds_per_tick, metabolization_ratio)
@@ -182,7 +182,7 @@
 /datum/reagent/anomalous/pain
 	name = "Pain"
 	taste_description = "raw salt and old wounds"
-	reaction = 'modular_meta/features/event/CB/sound/294/cough.ogg'
+	reaction = 'modular_meta/features/holidays/CB/sound/294/cough.ogg'
 	amount_spawned = 5
 
 /datum/reagent/anomalous/pain/on_mob_life(mob/living/carbon/affected_mob, seconds_per_tick, metabolization_ratio)
@@ -192,7 +192,7 @@
 /datum/reagent/anomalous/toxin
 	name = "Severe poisoning"
 	taste_description = "bitter chemicals and spoiled fruit"
-	reaction = 'modular_meta/features/event/CB/sound/294/cough.ogg'
+	reaction = 'modular_meta/features/holidays/CB/sound/294/cough.ogg'
 	amount_spawned = 5
 
 /datum/reagent/anomalous/toxin/on_mob_life(mob/living/carbon/affected_mob, seconds_per_tick, metabolization_ratio)
@@ -202,7 +202,7 @@
 /datum/reagent/anomalous/fire
 	name = "Burning"
 	taste_description = "smoke and molten stone"
-	reaction = 'modular_meta/features/event/CB/sound/294/cough.ogg'
+	reaction = 'modular_meta/features/holidays/CB/sound/294/cough.ogg'
 	amount_spawned = 5
 
 /datum/reagent/anomalous/fire/on_mob_life(mob/living/carbon/affected_mob, seconds_per_tick, metabolization_ratio)
@@ -214,7 +214,7 @@
 /datum/reagent/anomalous/sleep
 	name = "Sleep"
 	taste_description = "warm milk and poppy seeds"
-	reaction = 'modular_meta/features/event/CB/sound/294/ahh.ogg'
+	reaction = 'modular_meta/features/holidays/CB/sound/294/ahh.ogg'
 
 /datum/reagent/anomalous/sleep/on_mob_life(mob/living/carbon/affected_mob, seconds_per_tick, metabolization_ratio)
 	. = ..()
@@ -223,7 +223,7 @@
 /datum/reagent/anomalous/fear
 	name = "Hallucinations"
 	taste_description = "cold sweat and burnt sugar"
-	reaction = 'modular_meta/features/event/CB/sound/294/ew2.ogg'
+	reaction = 'modular_meta/features/holidays/CB/sound/294/ew2.ogg'
 
 /datum/reagent/anomalous/fear/on_mob_life(mob/living/carbon/affected_mob, seconds_per_tick, metabolization_ratio)
 	. = ..()
@@ -232,7 +232,7 @@
 /datum/reagent/anomalous/stamina
 	name = "Restore stamina"
 	taste_description = "strong coffee and mint"
-	reaction = 'modular_meta/features/event/CB/sound/294/ahh.ogg'
+	reaction = 'modular_meta/features/holidays/CB/sound/294/ahh.ogg'
 
 /datum/reagent/anomalous/stamina/on_mob_life(mob/living/carbon/affected_mob, seconds_per_tick, metabolization_ratio)
 	. = ..()
@@ -241,13 +241,13 @@
 /datum/reagent/anomalous/organs
 	name = "Organ failure"
 	taste_description = "rotten fruit and iron"
-	reaction = 'modular_meta/features/event/CB/sound/294/cough.ogg'
+	reaction = 'modular_meta/features/holidays/CB/sound/294/cough.ogg'
 	amount_spawned = 5
 
 /datum/reagent/anomalous/remember_everything
 	name = "Overrated videogameDuh"
 	taste_description = "a really overrated videogame"
-	reaction = 'modular_meta/features/event/CB/sound/294/cough.ogg'
+	reaction = 'modular_meta/features/holidays/CB/sound/294/cough.ogg'
 	amount_spawned = 5
 
 /datum/reagent/anomalous/remember_everything/on_mob_metabolize(mob/living/affected_mob)
@@ -266,7 +266,7 @@
 /datum/reagent/anomalous/organs/happiness
 	name = "False happiness"
 	taste_description = "cotton candy and bitter almonds"
-	reaction = 'modular_meta/features/event/CB/sound/294/ahh.ogg'
+	reaction = 'modular_meta/features/holidays/CB/sound/294/ahh.ogg'
 
 /datum/reagent/anomalous/me
 	name = "Me"

@@ -1,7 +1,7 @@
 /obj/item/clothing/under/rank/security/breach
-	icon = 'modular_meta/features/event/CB/icons/security_item.dmi'
+	icon = 'modular_meta/features/holidays/CB/icons/security_item.dmi'
 	icon_state = "breach"
-	worn_icon = 'modular_meta/features/event/CB/icons/security.dmi'
+	worn_icon = 'modular_meta/features/holidays/CB/icons/security.dmi'
 	abstract_type = /obj/item/clothing/under/rank/security
 	armor_type = /datum/armor/clothing_under/rank_security
 	strip_delay = 5 SECONDS
@@ -15,8 +15,8 @@
 	icon_state = "swat"
 	base_icon_state = "swat"
 	inhand_icon_state = "swat_helmet"
-	worn_icon = 'modular_meta/features/event/CB/icons/security.dmi'
-	icon = 'modular_meta/features/event/CB/icons/security_item.dmi'
+	worn_icon = 'modular_meta/features/holidays/CB/icons/security.dmi'
+	icon = 'modular_meta/features/holidays/CB/icons/security_item.dmi'
 
 /datum/outfit/job/security/New()
 	. = ..()

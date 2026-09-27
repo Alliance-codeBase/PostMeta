@@ -6,12 +6,12 @@
 	. = ..()
 	var/datum/asset/simple/class_d/leaflet = get_asset_datum(/datum/asset/simple/class_d)
 	var/list/urls = leaflet.get_url_mappings()
-	var/url = urls["class_d_leaflet.jpg"]
+	var/url = urls["class_d_leaflet.png"]
 	add_raw_text("<img src='[url]' style='width:100%;height:auto'>", advanced_html = TRUE)
 	update_appearance()
 
 /datum/asset/simple/class_d
-	assets = list("class_d_leaflet.jpg" = 'modular_meta/features/event/CB/icons/Class-D_Orientation_Leaflet.png')
+	assets = list("class_d_leaflet.png" = 'modular_meta/features/holidays/CB/icons/Class-D_Orientation_Leaflet.png')
 
 /obj/item/paper/fluff/class_d/ui_assets(mob/user)
 	. = ..()
