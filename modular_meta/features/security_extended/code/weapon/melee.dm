@@ -102,11 +102,17 @@
 				target.Knockdown(effectiveness * 4 SECONDS * (100-armour_level)/100)
 			target.Move(target_shove_turf, shove_dir)
 		if (user.zone_selected == BODY_ZONE_L_LEG || user.zone_selected == BODY_ZONE_R_LEG || user.zone_selected == BODY_ZONE_L_ARM || user.zone_selected == BODY_ZONE_R_ARM)
-			// 5-6 hits on an unarmoured target, 15 stam
-			target.apply_damage(stamina_force*0.6, STAMINA, target_zone, armour_level)
-			target.adjust_confusion(3 SECONDS)
-		else
-			// 4-5 hits on an unarmoured target
-			target.apply_damage(stamina_force, STAMINA, target_zone, armour_level)
-
-	return ..()
+            // 5-6 hits on an unarmoured target, 20 stam 
+            target.apply_damage(stamina_force*0.8, STAMINA, target_zone, armour_level) 
+            target.add_movespeed_modifier(/datum/movespeed_modifier/bonked) 
+                         addtimer(CALLBACK(target, TYPE_PROC_REF(/mob, remove_movespeed_modifier), /datum/movespeed_modifier/bonked), 3 SECONDS, TIMER_UNIQUE | TIMER_OVERRIDE) 
+        else 
+            // 4-5 hits on an unarmoured target 
+            target.apply_damage(stamina_force, STAMINA, target_zone, armour_level) 
+ 
+        return ..() 
+  
+ // slowdown shit 
+/datum/movespeed_modifier/bonked 
+    multiplicative_slowdown = 0.25 
+        
