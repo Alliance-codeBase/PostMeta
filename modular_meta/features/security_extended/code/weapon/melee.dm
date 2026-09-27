@@ -110,7 +110,7 @@
 			// 4-5 hits on an unarmoured target
 			target.apply_damage(stamina_force, STAMINA, target_zone, armour_level)
 
-		return ..()
+	return ..()
 
 // slowdown shit //
 /datum/movespeed_modifier/bonked
