@@ -251,19 +251,8 @@
 
 /datum/centcom_announcer
 	var/list/cb_rand_announcer_lines = list(
-		'modular_meta/features/holidays/CB/sound/announcer/Announc.ogg',
-		'modular_meta/features/holidays/CB/sound/announcer/Announc173Contain.ogg',
-		'modular_meta/features/holidays/CB/sound/announcer/AnnouncAfter1.ogg',
-		'modular_meta/features/holidays/CB/sound/announcer/AnnouncAfter2.ogg',
-		'modular_meta/features/holidays/CB/sound/announcer/AnnouncCameraCheck.ogg',
-		'modular_meta/features/holidays/CB/sound/announcer/AnnouncCameraFound1.ogg',
-		'modular_meta/features/holidays/CB/sound/announcer/AnnouncCameraFound2.ogg',
-		'modular_meta/features/holidays/CB/sound/announcer/AnnouncCameraNoFound.ogg',
-		'modular_meta/features/holidays/CB/sound/announcer/ThreatAnnounc1.ogg',
-		'modular_meta/features/holidays/CB/sound/announcer/ThreatAnnounc2.ogg',
-		'modular_meta/features/holidays/CB/sound/announcer/ThreatAnnounc3.ogg',
-		'modular_meta/features/holidays/CB/sound/announcer/ThreatAnnouncFinal.ogg',
-		'modular_meta/features/holidays/CB/sound/announcer/ThreatAnnouncPossession.ogg',
+		'modular_meta/features/holidays/CB/sound/interactions/Save1.ogg',
+		'modular_meta/features/holidays/CB/sound/interactions/Save2.ogg',
 		)
 
 /datum/centcom_announcer/get_rand_welcome_sound()

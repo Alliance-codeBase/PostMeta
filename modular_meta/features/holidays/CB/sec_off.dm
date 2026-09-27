@@ -25,3 +25,14 @@
 		suit_store = /obj/item/gun/ballistic/automatic/wt550
 		head = /obj/item/clothing/head/helmet/swat/nanotrasen/breach
 		r_pocket = /obj/item/ammo_box/magazine/wt550m9
+
+/obj/item/clothing/under/rank/security/breach/skirt // no skirts on anomalous site 19
+	icon = 'modular_meta/features/holidays/CB/icons/security_item.dmi'
+	icon_state = "breach"
+	worn_icon = 'modular_meta/features/holidays/CB/icons/security.dmi'
+	abstract_type = /obj/item/clothing/under/rank/security
+	armor_type = /datum/armor/clothing_under/rank_security
+	strip_delay = 5 SECONDS
+	sensor_mode = SENSOR_COORDS
+	random_sensor = FALSE
+	can_adjust = FALSE
