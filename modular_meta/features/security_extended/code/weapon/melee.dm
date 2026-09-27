@@ -112,6 +112,21 @@
 
 		return ..()
 
-// slowdown shit
+// slowdown shit //
 /datum/movespeed_modifier/bonked
 	multiplicative_slowdown = 0.25
+
+/obj/item/melee/tonfa/add_deep_lore()
+	return
+
+// LORE ALERT!! //
+/obj/item/melee/tonfa/add_deep_lore()
+	AddElement(/datum/element/examine_lore, \
+		lore_hint = span_notice("You can [EXAMINE_HINT("look closer")] to learn a little more about [src]."), \
+		lore = "A police baton with rod-reinforced core made of thick rubber\
+		used by the masters, a weapon that was used way ago.\
+		<br>\Most often was used by Russian police, because thats "safer" than telescopic batons\
+		it wasnt, in untrained hands this weapon could break skull or ribs with one swift hit.\
+		<br>\And nowadays is used by most robust Nanotrasen security forces, such as YOU!\
+		They say that hitting limbs may drop weapon of your foe, of even knock them down, but i dont believe in that." \
+        )
