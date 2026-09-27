@@ -4,9 +4,8 @@
 	name = CONTAINMENT_BREACH_DAY
 	begin_month = APRIL
 	begin_day = 15
-	end_month = MAY
-	end_day = 15
-	always_celebrate = TRUE
+	end_month = APRIL
+	end_day = 30
 	holiday_colors = list(
 		COLOR_BLACK,
 		COLOR_VERY_LIGHT_GRAY,
