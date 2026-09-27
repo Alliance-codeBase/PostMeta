@@ -116,8 +116,6 @@
 /datum/movespeed_modifier/bonked
 	multiplicative_slowdown = 0.25
 
-/obj/item/melee/tonfa/add_deep_lore()
-	return
 
 // LORE ALERT!! //
 /obj/item/melee/tonfa/add_deep_lore()
