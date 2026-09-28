@@ -122,7 +122,6 @@
 	. = ..()
 	AddElement(/datum/element/examine_lore, \
 		lore_hint = span_notice("Striking head or chest deals [stamina_force] stamina damage, striking limbs deals [stamina_force*0.8] but will slow down and eventually knock enemy down."), \
-		lore_hint = span_notice("You can [EXAMINE_HINT("look closer")] to learn a little more about [src]."), \
 		lore = "A police baton with rod-reinforced core made of thick rubber, \
 		used by the masters, a weapon that was used way ago.<br>\
 		<br>\
