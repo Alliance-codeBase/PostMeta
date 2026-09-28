@@ -1,0 +1,5 @@
+author: "oguzzzok123"
+delete-after: True
+changes:
+  - balance: "тонфа при ударе в ногу замедляет"
+  - balance: "урон тонфы(стам) по ноге 15->20"
