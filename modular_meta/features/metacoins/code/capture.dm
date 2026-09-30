@@ -5,6 +5,16 @@
 	/// base metacoin reward for capturing this antagonist alive
 	var/capture_reward = 100
 
+/datum/antagonist/hypnotized
+	capture_reward = 0
+
+/datum/antagonist/rev
+	capture_reward = 0
+
+/datum/antagonist/enemy_of_the_state
+	// the math is simple, stop the mutiny, revive the headrevs and get your reward
+	capture_reward = 100
+
 /datum/antagonist/changeling
 	capture_reward = 200
 
