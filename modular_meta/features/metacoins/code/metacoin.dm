@@ -311,6 +311,12 @@ GLOBAL_DATUM(metacoins_controller, /datum/metacoins_controller)
 	if(!player_mob)
 		return
 
+	var/notice = player_mob.client.prefs.read_preference(/datum/preference/choiced/metacoin_notify)
+	if(sound && (notice == "Both" || notice == "Only sound"))
+		player_mob.playsound_local(player_mob, 'sound/effects/coin2.ogg', 40, TRUE, use_reverb = FALSE, pressure_affected = FALSE)
+	if(notice != "Both" && notice != "Only chat notification")
+		return
+
 	var/list/reason_parts = list()
 	for(var/list/reward_entry in reward_entries)
 		var/entry_amount = reward_entry["amount"] || 0
@@ -319,8 +325,6 @@ GLOBAL_DATUM(metacoins_controller, /datum/metacoins_controller)
 		reason_parts += "+[entry_amount] [reward_entry["reason"] || "Reward"]"
 
 	var/reasons_text = length(reason_parts) ? jointext(reason_parts, ", ") : "+[total_reward] Reward"
-	if(sound)
-		player_mob.playsound_local(player_mob, 'sound/effects/coin2.ogg', 40, TRUE, use_reverb = FALSE, pressure_affected = FALSE)
 	to_chat(player_mob, span_boldnicegreen("You received [total_reward] metacoins ([reasons_text])."))
 
 /datum/metacoins_controller/proc/fetch_balance(target_ckey)

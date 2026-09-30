@@ -1,3 +1,14 @@
+/datum/preference/choiced/metacoin_notify
+	category = PREFERENCE_CATEGORY_GAME_PREFERENCES
+	savefile_identifier = PREFERENCE_PLAYER
+	savefile_key = "metacoin_notice"
+
+/datum/preference/choiced/metacoin_notify/init_possible_values()
+	return list("Both", "Only sound", "Only chat notification", "Nothing")
+
+/datum/preference/choiced/metacoin_notify/create_default_value()
+	return "Both"
+
 /datum/metacoinshop/panel/settings
 	interface_id = "MetacoinSettings"
 	COOLDOWN_DECLARE(pref_cooldown)
