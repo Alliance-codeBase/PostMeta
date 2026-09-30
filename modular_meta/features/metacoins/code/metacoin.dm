@@ -55,6 +55,7 @@ GLOBAL_DATUM(metacoins_controller, /datum/metacoins_controller)
 	round_awards_applied = TRUE
 
 	var/list/goal_bonus = goal_rewards()
+	var/capture_bonus = capture_total()
 	var/list/processed_ckeys = list()
 	for(var/player_ckey in GLOB.joined_player_list)
 		if(!player_ckey || processed_ckeys[player_ckey])
@@ -64,6 +65,8 @@ GLOBAL_DATUM(metacoins_controller, /datum/metacoins_controller)
 
 		var/list/rewards = get_round_rewards(player_ckey)
 		rewards += goal_payout(player_ckey, goal_bonus)
+		if(capture_bonus > 0)
+			rewards += capture_reward(player_ckey, capture_bonus)
 		if(length(rewards))
 			award_entries(player_ckey, rewards)
 /// Main proc for your awards. Integrate it wherever you like to
