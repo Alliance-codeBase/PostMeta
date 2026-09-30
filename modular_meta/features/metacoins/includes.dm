@@ -4,6 +4,7 @@
 #include "code\items\preround.dm"
 #include "code\items\persistent.dm"
 #include "code\metacoin.dm"
+#include "code\station_goals.dm"
 #include "code\metacoin_shop.dm"
 #include "code\items\antag_token.dm"
 #include "code\metacoin_gambling.dm"
