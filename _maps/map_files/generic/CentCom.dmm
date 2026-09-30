@@ -327,7 +327,7 @@
 "bd" = (
 /obj/machinery/door/window/brigdoor/right/directional/south{
 	name = "Thunderdome Booth";
-	req_access = list("cent_captain")
+	req_access = list("cent_officer")
 	},
 /obj/effect/turf_decal/bot,
 /turf/open/floor/iron,
@@ -555,7 +555,7 @@
 "bP" = (
 /obj/machinery/door/window/brigdoor/right/directional/south{
 	name = "CentCom Stand";
-	req_access = list("cent_captain")
+	req_access = list("cent_officer")
 	},
 /obj/machinery/firealarm/directional/west,
 /obj/effect/turf_decal/trimline/red/filled/end,
@@ -696,7 +696,7 @@
 	name = "CentCom Security"
 	},
 /obj/effect/turf_decal/stripes/line,
-/obj/effect/mapping_helpers/airlock/access/all/admin/captain,
+/obj/effect/mapping_helpers/airlock/access/all/admin/officer,
 /turf/open/floor/iron,
 /area/centcom/central_command_areas/courtroom)
 "cw" = (
@@ -1455,7 +1455,7 @@
 	},
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden,
 /obj/effect/turf_decal/stripes/line,
-/obj/effect/mapping_helpers/airlock/access/all/admin/officer,
+/obj/effect/mapping_helpers/airlock/access/all/admin/captain,
 /obj/effect/turf_decal/siding/wood,
 /turf/open/floor/wood/tile,
 /area/centcom/central_command_areas/admin)
@@ -1746,7 +1746,7 @@
 	name = "Bathroom"
 	},
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden,
-/obj/effect/mapping_helpers/airlock/access/all/admin/officer,
+/obj/effect/mapping_helpers/airlock/access/all/admin/captain,
 /obj/effect/turf_decal/siding/wood,
 /turf/open/floor/iron/white,
 /area/centcom/central_command_areas/admin)
@@ -2014,7 +2014,7 @@
 "gC" = (
 /obj/machinery/door/window/brigdoor/right/directional/south{
 	name = "CentCom Stand";
-	req_access = list("cent_captain")
+	req_access = list("cent_officer")
 	},
 /obj/machinery/firealarm/directional/east,
 /obj/effect/turf_decal/tile/neutral/fourcorners,
@@ -3418,7 +3418,7 @@
 /obj/item/radio/intercom/syndicate,
 /obj/machinery/door/window/brigdoor/right/directional/south{
 	name = "CentCom Stand";
-	req_access = list("cent_captain")
+	req_access = list("cent_officer")
 	},
 /turf/open/floor/iron/grimy,
 /area/centcom/central_command_areas/courtroom)
@@ -3571,7 +3571,7 @@
 	name = "Shuttle Control Office"
 	},
 /obj/effect/turf_decal/stripes/line,
-/obj/effect/mapping_helpers/airlock/access/all/admin/captain,
+/obj/effect/mapping_helpers/airlock/access/all/admin/officer,
 /turf/open/floor/iron,
 /area/centcom/central_command_areas/supply)
 "lK" = (
@@ -4094,7 +4094,7 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 8
 	},
-/obj/effect/mapping_helpers/airlock/access/all/admin/captain,
+/obj/effect/mapping_helpers/airlock/access/all/admin/officer,
 /turf/open/floor/iron,
 /area/centcom/central_command_areas/courtroom)
 "nr" = (
@@ -4681,7 +4681,7 @@
 /obj/machinery/door/firedoor,
 /obj/machinery/door/window/brigdoor/right/directional/east{
 	name = "CentCom Customs";
-	req_access = list("cent_captain")
+	req_access = list("cent_storage")
 	},
 /obj/item/clipboard,
 /obj/item/folder/yellow,
@@ -5114,7 +5114,7 @@
 	name = "CentCom Security"
 	},
 /obj/effect/turf_decal/stripes/line,
-/obj/effect/mapping_helpers/airlock/access/all/admin/captain,
+/obj/effect/mapping_helpers/airlock/access/all/admin/officer,
 /turf/open/floor/iron,
 /area/centcom/central_command_areas/prison)
 "qM" = (
@@ -6442,7 +6442,7 @@
 /obj/item/pen/red,
 /obj/machinery/door/window/brigdoor/right/directional/north{
 	name = "CentCom Customs";
-	req_access = list("cent_captain")
+	req_access = list("cent_general")
 	},
 /obj/machinery/door/window/left/directional/south,
 /obj/effect/turf_decal/bot,
@@ -6530,7 +6530,7 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 8
 	},
-/obj/effect/mapping_helpers/airlock/access/all/admin/captain,
+/obj/effect/mapping_helpers/airlock/access/all/admin/officer,
 /turf/open/floor/iron,
 /area/centcom/central_command_areas/courtroom)
 "vv" = (
@@ -6902,7 +6902,7 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 8
 	},
-/obj/effect/mapping_helpers/airlock/access/all/admin/captain,
+/obj/effect/mapping_helpers/airlock/access/all/admin/officer,
 /turf/open/floor/iron,
 /area/centcom/central_command_areas/control)
 "wE" = (
@@ -7572,7 +7572,7 @@
 /obj/structure/table/wood,
 /obj/machinery/door/window/brigdoor/right/directional/east{
 	name = "Briefing Desk";
-	req_access = list("cent_captain")
+	req_access = list("cent_officer")
 	},
 /turf/open/floor/carpet/green,
 /area/centcom/central_command_areas/briefing)
@@ -8495,6 +8495,7 @@
 /area/centcom/tdome/arena)
 "BL" = (
 /obj/structure/table/reinforced,
+<<<<<<< HEAD
 /obj/item/gun/magic/staff/locker,
 /obj/effect/turf_decal/tile/neutral/fourcorners,
 /turf/open/floor/iron/dark,
@@ -8518,14 +8519,37 @@
 	},
 /obj/effect/turf_decal/tile/neutral/half/contrasted{
 	dir = 8
+=======
+/obj/machinery/door/firedoor,
+/obj/item/storage/fancy/donut_box,
+/obj/machinery/door/window/brigdoor/right/directional/north{
+	name = "CentCom Customs";
+	req_access = list("cent_general")
+>>>>>>> upstream/master
 	},
 /turf/open/floor/iron,
 /area/centcom/central_command_areas/supply)
 "BO" = (
 /obj/structure/table/reinforced,
+<<<<<<< HEAD
 /obj/effect/turf_decal/tile/neutral/fourcorners,
 /obj/item/book/granter/martial/carp{
 	name = "carp scroll"
+=======
+/obj/machinery/door/firedoor,
+/obj/item/folder/red,
+/obj/item/pen/red,
+/obj/structure/window/reinforced/spawner/directional/north,
+/obj/effect/turf_decal/bot,
+/turf/open/floor/iron,
+/area/centcom/central_command_areas/evacuation)
+"BP" = (
+/obj/structure/table/reinforced,
+/obj/machinery/door/firedoor,
+/obj/machinery/door/window/brigdoor/right/directional/north{
+	name = "CentCom Customs";
+	req_access = list("cent_general")
+>>>>>>> upstream/master
 	},
 /turf/open/floor/iron/dark,
 /area/centcom/tdome/administration)
@@ -9124,7 +9148,7 @@
 /obj/effect/turf_decal/bot,
 /obj/machinery/door/window/brigdoor/right/directional/east{
 	name = "CentCom Customs";
-	req_access = list("cent_captain")
+	req_access = list("cent_general")
 	},
 /turf/open/floor/iron,
 /area/centcom/central_command_areas/control)
@@ -9136,7 +9160,7 @@
 /obj/effect/turf_decal/bot,
 /obj/machinery/door/window/brigdoor/right/directional/west{
 	name = "CentCom Customs";
-	req_access = list("cent_captain")
+	req_access = list("cent_general")
 	},
 /turf/open/floor/iron,
 /area/centcom/central_command_areas/control)
@@ -9592,7 +9616,7 @@
 "Fw" = (
 /obj/machinery/door/window/brigdoor/right/directional/south{
 	name = "CentCom Stand";
-	req_access = list("cent_captain")
+	req_access = list("cent_officer")
 	},
 /obj/machinery/status_display/evac/directional/west,
 /turf/open/floor/iron/grimy,
@@ -10117,7 +10141,7 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 8
 	},
-/obj/effect/mapping_helpers/airlock/access/all/admin/captain,
+/obj/effect/mapping_helpers/airlock/access/all/admin/officer,
 /turf/open/floor/iron,
 /area/centcom/central_command_areas/prison)
 "Hq" = (
@@ -10878,7 +10902,7 @@
 	dir = 4
 	},
 /obj/structure/cable,
-/obj/effect/mapping_helpers/airlock/access/all/admin/officer,
+/obj/effect/mapping_helpers/airlock/access/all/admin/captain,
 /obj/effect/turf_decal/stripes/red/full,
 /obj/effect/turf_decal/siding/dark{
 	dir = 8
@@ -12149,7 +12173,7 @@
 	dir = 4
 	},
 /obj/effect/turf_decal/tile/neutral/fourcorners,
-/obj/effect/mapping_helpers/airlock/access/all/admin/officer,
+/obj/effect/mapping_helpers/airlock/access/all/admin/captain,
 /obj/effect/turf_decal/siding/wood{
 	dir = 8
 	},
@@ -13190,12 +13214,11 @@
 	dir = 4
 	},
 /obj/effect/turf_decal/stripes/red/full,
-/obj/machinery/door/airlock/vault{
-	req_access = list("cent_captain")
-	},
+/obj/machinery/door/airlock/vault,
 /obj/machinery/door/poddoor/shutters/indestructible{
 	id = "XCCadminstore"
 	},
+/obj/effect/mapping_helpers/airlock/access/all/admin/captain,
 /turf/open/floor/iron/dark,
 /area/centcom/central_command_areas/admin/storage)
 "Rk" = (
@@ -14977,7 +15000,7 @@
 "WU" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden,
 /obj/structure/cable,
-/obj/effect/mapping_helpers/airlock/access/all/admin/officer,
+/obj/effect/mapping_helpers/airlock/access/all/admin/captain,
 /obj/machinery/door/airlock/centcom{
 	name = "Administrative Office"
 	},
@@ -15182,7 +15205,7 @@
 "XF" = (
 /obj/machinery/door/window/brigdoor/right/directional/south{
 	name = "CentCom Stand";
-	req_access = list("cent_captain")
+	req_access = list("cent_officer")
 	},
 /obj/machinery/status_display/evac/directional/east,
 /turf/open/floor/iron/grimy,
