@@ -9,7 +9,7 @@
 			},
 			"options": {
 				"env": {
-					"DM_EXE": "${config:dreammaker.byondPath}"
+					"DM_EXE": "${workspaceFolder}/bin/wine-byond.sh"
 				}
 			},
 			"problemMatcher": ["$dreammaker", "$tsc", "$eslint-stylish"],
@@ -38,7 +38,7 @@
 			},
 			"options": {
 				"env": {
-					"DM_EXE": "${config:dreammaker.byondPath}"
+					"DM_EXE": "${workspaceFolder}/bin/wine-byond.sh"
 				}
 			},
 			"problemMatcher": ["$dreammaker", "$tsc", "$eslint-stylish"],
@@ -70,7 +70,7 @@
 			},
 			"options": {
 				"env": {
-					"DM_EXE": "${config:dreammaker.byondPath}"
+					"DM_EXE": "${workspaceFolder}/bin/wine-byond.sh"
 				}
 			},
 			"problemMatcher": ["$dreammaker", "$tsc", "$eslint-stylish"],
@@ -100,7 +100,7 @@
 			},
 			"options": {
 				"env": {
-					"DM_EXE": "${config:dreammaker.byondPath}"
+					"DM_EXE": "${workspaceFolder}/bin/wine-byond.sh"
 				}
 			},
 			"problemMatcher": ["$dreammaker", "$tsc", "$eslint-stylish"],
@@ -136,7 +136,7 @@
 			},
 			"options": {
 				"env": {
-					"DM_EXE": "${config:dreammaker.byondPath}"
+					"DM_EXE": "${workspaceFolder}/bin/wine-byond.sh"
 				}
 			},
 			"problemMatcher": ["$dreammaker", "$tsc", "$eslint-stylish"],
@@ -156,7 +156,7 @@
 			},
 			"options": {
 				"env": {
-					"DM_EXE": "${config:dreammaker.byondPath}"
+					"DM_EXE": "${workspaceFolder}/bin/wine-byond.sh"
 				}
 			},
 			"problemMatcher": ["$dreammaker", "$tsc", "$eslint-stylish"],
@@ -227,6 +227,29 @@
 			"problemMatcher": ["$tsc", "$eslint-stylish"],
 			"group": "build",
 			"label": "tgui: rebuild tgfont"
+		},
+		{
+			"type": "shell",
+			"command": "bin/dreamseeker.sh",
+			"label": "wine: build + run DreamSeeker"
+		},
+		{
+			"type": "shell",
+			"command": "bin/wine-byond.sh",
+			"args": ["dreamseeker", "byond://127.0.0.1:1337"],
+			"label": "wine: run DreamSeeker (no build)"
+		},
+		{
+			"type": "shell",
+			"command": "bin/winetricks-setup.sh",
+			"args": ["verify"],
+			"label": "wine: verify libraries (WebView2 + DirectX)"
+		},
+		{
+			"type": "shell",
+			"command": "bin/winetricks-setup.sh",
+			"args": ["install"],
+			"label": "wine: install libraries (WebView2 + DirectX)"
 		}
 	]
 }
