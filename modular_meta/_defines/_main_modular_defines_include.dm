@@ -11,3 +11,4 @@
 #include "signals_traitor.dm"
 #include "holiday.dm"
 #include "span.dm"
+#include "force_say.dm"

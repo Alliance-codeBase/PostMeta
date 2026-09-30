@@ -1,5 +1,3 @@
-#define CONTAINMENT_BREACH_DAY "Birthday of SCP:CB"
-
 /datum/holiday/breach
 	name = CONTAINMENT_BREACH_DAY
 	begin_month = APRIL

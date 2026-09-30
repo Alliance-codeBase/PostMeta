@@ -197,6 +197,9 @@ GLOBAL_LIST_INIT(message_modes_stat_limits, list(
 		message = uppertext(message)
 
 	var/list/message_data = treat_message(message) // unfortunately we still need this
+	//MASSMETA EDIT ADDITION BEGIN (force_say)
+	interrupt_speech(message_data, message_mods)
+	//MASSMETA EDIT ADDITION END
 	message = message_data["message"]
 	var/tts_message = message_data["tts_message"]
 	var/list/tts_filter = message_data["tts_filter"]
