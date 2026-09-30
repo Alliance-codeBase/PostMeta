@@ -10,7 +10,7 @@
 	lefthand_file = 'modular_meta/features/security_extended/icons/inhands/lefthand.dmi'
 	righthand_file = 'modular_meta/features/security_extended/icons/inhands/righthand.dmi'
 	force = 11
-	wound_bonus = -25
+	wound_bonus = -5
 	throwforce = 7
 	slot_flags = ITEM_SLOT_BELT
 	w_class = WEIGHT_CLASS_BULKY
@@ -91,7 +91,7 @@
 		log_combat(user, target, "attacked", src)
 
 		// If the target has a lot of stamina loss, knock them down
-		if (user.zone_selected == BODY_ZONE_L_LEG || user.zone_selected == BODY_ZONE_R_LEG && target.get_stamina_loss() > 22)
+		if (user.zone_selected == BODY_ZONE_L_LEG || user.zone_selected == BODY_ZONE_R_LEG && target.get_stamina_loss() > 26)//so smarties dont click head then leg for near instant knock
 			var/effectiveness = CLAMP01((target.get_stamina_loss() - 22) / 50)
 			log_combat(user, target, "knocked-down", src, "(additional effect)")
 			// Move the target back upon knockdown, to give them some time to recover
@@ -102,10 +102,31 @@
 				target.Knockdown(effectiveness * 4 SECONDS * (100-armour_level)/100)
 			target.Move(target_shove_turf, shove_dir)
 		if (user.zone_selected == BODY_ZONE_L_LEG || user.zone_selected == BODY_ZONE_R_LEG || user.zone_selected == BODY_ZONE_L_ARM || user.zone_selected == BODY_ZONE_R_ARM)
-			// 4-5 hits on an unarmoured target
-			target.apply_damage(stamina_force*0.6, STAMINA, target_zone, armour_level)
+			// 5-6 hits on an unarmoured target, 20 stam
+			target.apply_damage(stamina_force*0.8, STAMINA, target_zone, armour_level)
+			target.add_movespeed_modifier(/datum/movespeed_modifier/bonked)
+			addtimer(CALLBACK(target, TYPE_PROC_REF(/mob, remove_movespeed_modifier), /datum/movespeed_modifier/bonked), 3 SECONDS, TIMER_UNIQUE | TIMER_OVERRIDE)
 		else
 			// 4-5 hits on an unarmoured target
 			target.apply_damage(stamina_force, STAMINA, target_zone, armour_level)
 
 	return ..()
+
+// slowdown shit //
+/datum/movespeed_modifier/bonked
+	multiplicative_slowdown = 0.25
+
+
+// LORE ALERT!! //
+/obj/item/melee/tonfa/Initialize(mapload)
+	. = ..()
+	AddElement(/datum/element/examine_lore, \
+		lore_hint = span_notice("Striking head or chest deals [stamina_force] stamina damage, striking limbs deals [stamina_force*0.8] but will slow down and eventually knock enemy down."), \
+		lore = "A police baton with rod-reinforced core made of thick rubber, \
+		used by the masters, a weapon that was used way ago.<br>\
+		<br>\
+		Most often was used by Russian police, because thats safer than telescopic batons, \
+		it wasnt, in untrained hands this weapon could break skull or ribs with one swift hit.<br>\
+		<br>\
+		And nowadays is used by most robust Nanotrasen security forces, such as YOU!" \
+        )

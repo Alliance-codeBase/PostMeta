@@ -1,0 +1,4 @@
+author: "Glamyrio"
+delete-after: True
+changes:
+  - bugfix: "Челка меню модпаков теперь стоит на месте."

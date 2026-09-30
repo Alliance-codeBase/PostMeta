@@ -1,0 +1,4 @@
+author: "Bruh-24"
+delete-after: True
+changes:
+  - bugfix: "Создание Justice переведено под логику последнего рефактора изучений"

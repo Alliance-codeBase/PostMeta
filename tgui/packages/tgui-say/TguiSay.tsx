@@ -194,7 +194,13 @@ export function TguiSay() {
     // Handles typing indicators
     if (channelIterator.current.isVisible() && newPrefix !== ':b ') {
       messages.current.typingMsg();
+      //MASSMETA EDIT CHANGE BEGIN (force_say)
+      /* ORIGINAL
       messages.current.saveText(newValue, iterator.current());
+      */
+      const prefix = newPrefix ?? '';
+      messages.current.saveText(prefix + newValue, iterator.current());
+      //MASSMETA EDIT CHANGE END
     }
 
     setValue(newValue);

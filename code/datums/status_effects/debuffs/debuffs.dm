@@ -48,7 +48,12 @@
 	SHOULD_CALL_PARENT(TRUE)
 
 	var/mob/living/carbon/human/human = owner
+	//MASSMETA EDIT CHANGE BEGIN (force_say)
+	/* ORIGINAL
 	if(istype(human) && prob(force_say_chance) && (duration >= 6 SECONDS || (duration >= 2 SECONDS && prob(66))) )
+	*/
+	if(istype(human) && prob(force_say_chance) && (duration == STATUS_EFFECT_PERMANENT || duration >= 6 SECONDS || (duration >= 2 SECONDS && prob(66))) )
+	//MASSMETA EDIT CHANGE END
 		human.force_say(alter_phrases, immediate = TRUE, major = (duration >= 30 SECONDS))
 
 //STUN
@@ -363,25 +368,19 @@ GLOBAL_LIST_EMPTY(unconscious_appearances)
 	. = ..()
 	if(!.)
 		return
-	owner.add_traits(list(TRAIT_IMMOBILIZED, TRAIT_HANDS_BLOCKED, TRAIT_STASIS, TRAIT_TUMOR_SUPPRESSED), TRAIT_STATUS_EFFECT(id))
+	owner.add_traits(list(TRAIT_IMMOBILIZED, TRAIT_HANDS_BLOCKED, TRAIT_STASIS), TRAIT_STATUS_EFFECT(id))
 	owner.add_filter("stasis_status_ripple", 2, list("type" = "ripple", "flags" = WAVE_BOUNDED, "radius" = 0, "size" = 2))
 	var/filter = owner.get_filter("stasis_status_ripple")
 	animate(filter, radius = 0, time = 0.2 SECONDS, size = 2, easing = JUMP_EASING, loop = -1, flags = ANIMATION_PARALLEL)
 	animate(radius = 32, time = 1.5 SECONDS, size = 0)
-	if(iscarbon(owner))
-		var/mob/living/carbon/carbon_owner = owner
-		carbon_owner.update_bodypart_bleed_overlays()
 
 /datum/status_effect/grouped/stasis/tick(seconds_between_ticks)
 	update_time_of_death()
 
 /datum/status_effect/grouped/stasis/on_remove()
-	owner.remove_traits(list(TRAIT_IMMOBILIZED, TRAIT_HANDS_BLOCKED, TRAIT_STASIS, TRAIT_TUMOR_SUPPRESSED), TRAIT_STATUS_EFFECT(id))
+	owner.remove_traits(list(TRAIT_IMMOBILIZED, TRAIT_HANDS_BLOCKED, TRAIT_STASIS), TRAIT_STATUS_EFFECT(id))
 	owner.remove_filter("stasis_status_ripple")
 	update_time_of_death()
-	if(iscarbon(owner))
-		var/mob/living/carbon/carbon_owner = owner
-		carbon_owner.update_bodypart_bleed_overlays()
 	return ..()
 
 /atom/movable/screen/alert/status_effect/stasis
