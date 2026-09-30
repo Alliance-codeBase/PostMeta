@@ -1,5 +1,6 @@
 /datum/metacoinshop/panel/settings
 	interface_id = "MetacoinSettings"
+	COOLDOWN_DECLARE(pref_cooldown)
 
 /datum/metacoinshop/panel/settings/ui_data(mob/user)
 	var/datum/metacoin_shop_controller/shop = get_metacoin_controller()
@@ -35,6 +36,10 @@
 
 	var/datum/metacoinshop/persistent/persistent = get_metacoin_controller().persistent
 	var/owner_ckey = owner?.ckey
+	if(!COOLDOWN_FINISHED(src, pref_cooldown))
+		to_chat(ui.user, span_warning("Please wait before changing your preferences again"))
+		return FALSE
+	COOLDOWN_START(src, pref_cooldown, 1 SECONDS)
 
 	if(action == "toggle_persistent")
 		var/reward_id = params["rewardId"]
