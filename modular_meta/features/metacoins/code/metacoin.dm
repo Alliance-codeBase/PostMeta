@@ -236,6 +236,7 @@ GLOBAL_DATUM(metacoins_controller, /datum/metacoins_controller)
 
 /datum/metacoins_controller/proc/is_evacuation_condition_met(target_ckey)
 	var/datum/mind/player_mind = get_round_mind(target_ckey)
+	var/mob/living/carbon/carbon_current = player_mind.current
 	if(!player_mind)
 		return FALSE
 
@@ -247,7 +248,7 @@ GLOBAL_DATUM(metacoins_controller, /datum/metacoins_controller)
 
 	var/mob/player_mob = player_mind.current
 	var/area/player_area = get_area(player_mob)
-	if(!player_area || istype(player_area, /area/shuttle/escape/brig))
+	if(!player_area || istype(player_area, /area/shuttle/escape/brig) && iscarbon(player_mob) && carbon_current.handcuffed)
 		return FALSE
 
 	var/turf/player_turf = get_turf(player_mob)
