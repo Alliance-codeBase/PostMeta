@@ -364,10 +364,10 @@
 		return
 
 	// Display visual above source
-	// FENYSHA EDIT CHANGE BEGIN - AUTOTRANSLATE - return the datum so callers can retext it later
+	// //MASSMETA EDIT ADDITION BEGIN (autotranslate) - return the datum so callers can retext it later
 	// ORIGINAL: new /datum/chatmessage(...) with no return
 	return new /datum/chatmessage(
-	// FENYSHA EDIT CHANGE END
+	//MASSMETA EDIT ADDITION END (autotranslate)
 		text = raw_message,
 		target = speaker,
 		owner = src,
