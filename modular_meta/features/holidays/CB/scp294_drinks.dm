@@ -135,10 +135,10 @@
 	aliases = list("sanabi", "wasabi", "san4bi")
 	reagent = /datum/reagent/anomalous/remember_everything
 
-/datum/anomalous_coffeemachine/drinks/sleep
+/datum/anomalous_coffeemachine/drinks/repose
 	id = "sleep"
 	aliases = list("dreams")
-	reagent = /datum/reagent/anomalous/sleep
+	reagent = /datum/reagent/anomalous/repose
 
 /datum/anomalous_coffeemachine/drinks/fear
 	id = "fear"
