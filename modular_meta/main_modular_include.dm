@@ -36,7 +36,7 @@
 #include "features\martials\includes.dm"
 #include "features\meta_maps\includes.dme"
 #include "features\meta_redesign\includes.dm"
-#include "features\metacoins\includes.dm" 
+#include "features\metacoins\includes.dm"
 #include "features\mentors\includes.dm"
 #include "features\mod_vend\includes.dm"
 #include "features\more_cell_interactions\includes.dm"
