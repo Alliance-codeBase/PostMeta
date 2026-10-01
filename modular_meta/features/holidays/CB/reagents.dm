@@ -269,9 +269,12 @@
 	playsound(affected_mob,'sound/effects/magic/lightningshock.ogg', 50, 1)
 	playsound(affected_mob,	'modular_meta/features/butt_farts/sound/farts/dagothgod.ogg', 80)
 	spawn(15)
-		if(affected_mob)
-			affected_mob.gib()
-			dyn_explosion(affected_mob.loc, 1, 0)
+	var/turf/epicenter = get_turf(affected_mob)
+
+	affected_mob.gib()
+
+	if(epicenter)
+		dyn_explosion(epicenter, 1, 0)
 
 /datum/reagent/anomalous/organs/on_mob_life(mob/living/carbon/affected_mob, seconds_per_tick, metabolization_ratio)
 	. = ..()
