@@ -225,12 +225,12 @@
 	affected_mob.adjust_fire_stacks(8)
 	affected_mob.ignite_mob()
 
-/datum/reagent/anomalous/sleep
+/datum/reagent/anomalous/repose
 	name = "Sleep"
 	taste_description = "warm milk and poppy seeds"
 	reaction = 'modular_meta/features/holidays/CB/sound/294/ahh.ogg'
 
-/datum/reagent/anomalous/sleep/on_mob_life(mob/living/carbon/affected_mob, seconds_per_tick, metabolization_ratio)
+/datum/reagent/anomalous/repose/on_mob_life(mob/living/carbon/affected_mob, seconds_per_tick, metabolization_ratio)
 	. = ..()
 	affected_mob.Sleeping(20 SECONDS)
 
@@ -287,7 +287,7 @@
 	taste_description = "something strangely familiar"
 
 /datum/reagent/anomalous/nothing
-	name = "Nothing"
+	name = "Nothingness"
 	taste_description = "nothing at all"
 	reaction = null
 
