@@ -310,7 +310,7 @@
 	RegisterSignal(message_loc, COMSIG_MOVABLE_Z_CHANGED, PROC_REF(loc_z_changed))
 
 	// Register with the runechat SS to handle destruction
-	// FENYSHA EDIT CHANGE BEGIN - AUTOTRANSLATE
+	//MASSMETA EDIT ADDITION BEGIN (autotranslate)
 	// Keep the timer id and the fade timings so extend_lifespan() can push the
 	// fadeout back when a translation lands. The timings are captured because
 	// the CHAT_MESSAGE_* defines are #undef'd at the bottom of this file and
@@ -319,7 +319,7 @@
 	translate_eol_fade = CHAT_MESSAGE_EOL_FADE
 	translate_grace_period = CHAT_MESSAGE_GRACE_PERIOD
 	destruction_timer = addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(qdel), src), lifespan + CHAT_MESSAGE_GRACE_PERIOD, TIMER_DELETE_ME | TIMER_STOPPABLE, SSrunechat)
-	// FENYSHA EDIT CHANGE END
+	//MASSMETA EDIT ADDITION END (autotranslate)
 
 /datum/chatmessage/proc/get_current_alpha(time_spent)
 	if(time_spent < CHAT_MESSAGE_SPAWN_TIME)
