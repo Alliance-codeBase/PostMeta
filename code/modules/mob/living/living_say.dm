@@ -142,18 +142,17 @@ GLOBAL_LIST_INIT(message_modes_stat_limits, list(
 		if(stat > (isnull(mob_stat_limit) ? STABLE : mob_stat_limit))
 			saymode = null
 			message_mods -= RADIO_EXTENSION
-
+//MASSMETA EDIT ADDITION BEGIN (autotranslate)
 	switch(stat)
 		if(SOFT_CRIT)
 			message_mods[WHISPER_MODE] = MODE_WHISPER
-		//if(UNCONSCIOUS)
-			//return remove by Maximal08 to autotranslate
 		if(HARD_CRIT)
 			if(!message_mods[WHISPER_MODE])
 				return
 		if(DEAD)
 			say_dead(original_message, message_mods[MANNEQUIN_CONTROLLED])
 			return
+//MASSMETA EDIT ADDITION END (autotranslate)
 
 	if(client && SSlag_switch.measures[SLOWMODE_SAY] && !HAS_TRAIT(src, TRAIT_BYPASS_MEASURES) && !forced && src == usr)
 		if(!COOLDOWN_FINISHED(client, say_slowmode))
@@ -173,7 +172,7 @@ GLOBAL_LIST_INIT(message_modes_stat_limits, list(
 		if(message_mods[WHISPER_MODE] == MODE_WHISPER)
 			message_range = 1
 			if(stat == HARD_CRIT)
-				var/health_diff = round(-HEALTH_THRESHOLD_DEAD + health)
+				var/health_diff = round(-HEALTH_THRESHOLD_DEAD + health) //MASSMETA EDIT (autotranslate)
 				// If we cut our message short, abruptly end it with a-..
 				var/message_len = length_char(message)
 				message = copytext_char(message, 1, health_diff) + "[message_len > health_diff ? "-.." : "..."]"
@@ -220,7 +219,7 @@ GLOBAL_LIST_INIT(message_modes_stat_limits, list(
 		return
 
 	//Get which verb is prefixed to the message before radio but after most modifications
-	message_mods[SAY_MOD_VERB] = say_mod(message, message_mods)
+	message_mods[SAY_MOD_VERB] = say_mod(message, message_mods) //MASSMETA EDIT (autotranslate)
 
 	var/identifier = "invalid"
 	var/tts_message_to_use = tts_message || message
@@ -298,7 +297,7 @@ GLOBAL_LIST_INIT(message_modes_stat_limits, list(
 
 	var/speaker_is_signing = HAS_TRAIT(speaker, TRAIT_SIGN_LANG)
 	var/use_runechat = client?.prefs.read_preference(/datum/preference/toggle/enable_runechat)
-	if (stat == SOFT_CRIT || stat == HARD_CRIT)
+	if (stat == SOFT_CRIT || stat == HARD_CRIT) //MASSMETA EDIT (autotranslate)
 		use_runechat = FALSE
 	else if (!ismob(speaker) && !client?.prefs.read_preference(/datum/preference/toggle/enable_runechat_non_mobs))
 		use_runechat = FALSE
@@ -307,15 +306,13 @@ GLOBAL_LIST_INIT(message_modes_stat_limits, list(
 	// if someone is whispering we make an extra type of message that is obfuscated for people out of range
 	// Less than or equal to 0 means normal hearing. More than 0 and less than or equal to eavesdrop_range means
 	// partial hearing. More than eavesdrop_range means no hearing. Exception for GOOD_HEARING trait
+
+	//MASSMETA EDIT ADDITION BEGIN (autotranslate) - track whether stars() mangled the text
 	var/dist = get_dist(speaker, src) - message_range
-	// FENYSHA EDIT ADDITION BEGIN - AUTOTRANSLATE - track whether stars() mangled the text
 	var/message_obscured = FALSE
-	// FENYSHA EDIT ADDITION END
 	if(dist > 0 && dist <= eavesdrop_range && !HAS_TRAIT(src, TRAIT_GOOD_HEARING))
 		raw_message = stars(raw_message)
-		// FENYSHA EDIT ADDITION BEGIN - AUTOTRANSLATE
 		message_obscured = TRUE
-		// FENYSHA EDIT ADDITION END
 	var/speaker_name = span_name("[message_mods[MODE_SPEAKER_NAME_OVERRIDE] || speaker]")
 	if(message_range != INFINITY && dist > eavesdrop_range && !HAS_TRAIT(src, TRAIT_GOOD_HEARING))
 		// Too far away and don't have good hearing, you can't hear anything
@@ -342,6 +339,7 @@ GLOBAL_LIST_INIT(message_modes_stat_limits, list(
 			show_message(message, MSG_VISUAL, deaf_message, deaf_type, avoid_highlight)
 			return FALSE
 
+		//MASSMETA EDIT ADDITION END (autotranslate)
 
 	// we need to send this signal before compose_message() is used since other signals need to modify
 	// the raw_message first. After the raw_message is passed through the various signals, it's ready to be formatted
@@ -384,24 +382,24 @@ GLOBAL_LIST_INIT(message_modes_stat_limits, list(
 		deaf_message = span_notice("You can't hear yourself!")
 		deaf_type = MSG_AUDIBLE // Since you should be able to hear yourself without looking
 
-	// FENYSHA EDIT ADDITION BEGIN - AUTOTRANSLATE
+	// //MASSMETA EDIT ADDITION BEGIN (autotranslate)
 	// Marks the spoken text so the chat panel can find it later. The wrapper
 	// spans are stripped by generate_image(), so runechat is unaffected.
 	var/datum/translated_speech/translation = try_begin_translation(speaker, raw_message, is_custom_emote, understood, message_obscured)
 	if(translation)
 		raw_message = translation.wrapped_text()
-	// FENYSHA EDIT ADDITION END
+	// //MASSMETA EDIT ADDITION END (autotranslate)
 
 	// Create map text prior to modifying message for goonchat
 	if (use_runechat && !HAS_TRAIT(src, TRAIT_DEAF))
 		if (is_custom_emote)
 			create_chat_message(speaker, null, message_mods[MODE_CUSTOM_SAY_EMOTE], spans, EMOTE_MESSAGE)
 		else
-			// FENYSHA EDIT CHANGE BEGIN - AUTOTRANSLATE - capture the bubble so it can be retexted
+			//MASSMETA EDIT ADDITION BEGIN (autotranslate)
 			// ORIGINAL: create_chat_message(speaker, message_language, raw_message, spans)
 			var/datum/chatmessage/bubble = create_chat_message(speaker, message_language, raw_message, spans)
 			translation?.attach_runechat(bubble)
-			// FENYSHA EDIT CHANGE END
+			//MASSMETA EDIT ADDITION END (autotranslate)
 
 	// Recompose message for AI hrefs, language incomprehension.
 	message = compose_message(speaker, message_language, raw_message, radio_freq, radio_freq_name, radio_freq_color, spans, message_mods)
@@ -409,11 +407,11 @@ GLOBAL_LIST_INIT(message_modes_stat_limits, list(
 	var/hearflags = NONE
 	if(show_message(message, MSG_AUDIBLE, deaf_message, deaf_type, avoid_highlight))
 		hearflags |= HEAR_HEARD
-	// FENYSHA EDIT ADDITION BEGIN - AUTOTRANSLATE
+	// //MASSMETA EDIT ADDITION BEGIN (autotranslate)
 	// Dispatched last: a cache hit resolves synchronously, so both surfaces
 	// have to exist before this runs.
 	translation?.begin()
-	// FENYSHA EDIT ADDITION END
+	// //MASSMETA EDIT ADDITION END (autotranslate)
 	if(understood)
 		hearflags |= HEAR_UNDERSTOOD
 	return hearflags
@@ -536,11 +534,11 @@ GLOBAL_LIST_INIT(message_modes_stat_limits, list(
 	return list("message" = message, "tts_message" = tts_message, "tts_filter" = tts_filter)
 
 /mob/living/proc/radio(message, list/message_mods = list(), list/spans, language)
-	//SKYRAT EDIT ADDITION BEGIN
+	//MASSMETA EDIT ADDITION BEGIN (autotranslate)
 	if((message_mods[MODE_HEADSET] || message_mods[RADIO_EXTENSION]) && !(mobility_flags & MOBILITY_USE) && !isAI(src) && !ispAI(src) && !ismecha(loc)) // If can't use items, you can't press the button
 		to_chat(src, span_warning("You can't use the radio right now as you can't reach the button!"))
 		return ITALICS | REDUCE_RANGE
-	//SKYRAT EDIT END
+	//MASSMETA EDIT ADDITION END (autotranslate)
 	var/obj/item/implant/radio/imp = locate() in src
 	if(imp?.radio.is_on())
 		if(message_mods[MODE_HEADSET])

@@ -7200,4 +7200,5 @@
 #include "interface\fonts\vcr_osd_mono.dm"
 #include "massmeta\modular_meta_features.dm"
 #include "modular_meta\main_modular_include.dm"
+#include "modular_meta\features\autotranslate\includes.dm"
 // END_INCLUDE

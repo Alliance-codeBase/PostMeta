@@ -184,22 +184,21 @@
 			LAZYSET(language_icons, language_icon_key, language_icon)
 		LAZYADD(prefixes, "\icon[language_icon]")
 
-	// FENYSHA EDIT ADDITION BEGIN - AUTOTRANSLATE
+	// MASSMETA EDIT ADDITION BEGIN (autotranslate)
 	// Capture the body and its icon prefixes separately so set_display_text()
-	// can re-render just the body later. See fenysha_events/code/modules/autotranslate/runechat.dm
 	translate_prefix = prefixes?.Join("&nbsp;")
 	translate_body = text
-	// FENYSHA EDIT ADDITION END
+	// MASSMETA EDIT ADDITION END
 
 	text = "[prefixes?.Join("&nbsp;")][text]"
 
 	// We dim italicized text to make it more distinguishable from regular text
 	var/tgt_color = extra_classes.Find("italics") ? target.chat_color_darkened : target.chat_color
 
-	// FENYSHA EDIT ADDITION BEGIN - AUTOTRANSLATE
+	// MASSMETA EDIT ADDITION BEGIN (autotranslate)
 	translate_wrapper_open = "<span style='color: [tgt_color]'><span class='center [extra_classes.Join(" ")]'>"
 	translate_wrapper_close = "</span></span>"
-	// FENYSHA EDIT ADDITION END
+	// MASSMETA EDIT ADDITION END
 
 	// Approximate text height
 	var/complete_text = "<span style='color: [tgt_color]'><span class='center [extra_classes.Join(" ")]'>[owner.apply_message_emphasis(text)]</span></span>"
