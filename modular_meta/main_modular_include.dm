@@ -58,6 +58,7 @@
 #include "features\arcades\includes.dm"
 #include "features\progressive_traitor\includes.dm"
 #include "features\unmanned_vechicle\includes.dm"
+//autotranslate
 #include "features\autotranslate\includes.dm"
 
 /* --- Reverts --- */
