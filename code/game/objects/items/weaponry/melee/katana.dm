@@ -60,7 +60,8 @@
 	// АХАХХАХАХАХА
 	if prob(67)
 		force = 10
+		name = "rusted strange bloody katana"
 		if prob(13)
-		// О НЕТ
-		force = 220
-		name = "cursed strange bloody katana"
+			// О НЕТ
+			force = 220
+			name = "cursed strange bloody katana"
