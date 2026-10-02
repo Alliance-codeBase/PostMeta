@@ -54,10 +54,13 @@
 	icon_state = "bloody_katana"
 	force = 20
 
-/obj/item/katana/Initialize(mapload)
+/obj/item/katana/blood_katana/Initialize(mapload)
 	. = ..()
 
+	// АХАХХАХАХАХА
 	if prob(67)
 		force = 10
 		if prob(13)
+		// О НЕТ
 		force = 220
+		name = "cursed strange bloody katana"
