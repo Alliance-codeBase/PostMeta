@@ -47,3 +47,17 @@
 	slot_flags = null
 
 //Ninja energy katana is located in the antagonist module.
+
+/obj/item/katana/blood_katana
+	name = "strange bloody katana"
+	desc = "Very strange looking sword-like piece of rust.. steel? With a Bloody like implementations. You feel really strange energy from it... Woefully underpowered in D67."
+	icon_state = "bloody_katana"
+	force = 20
+
+/obj/item/katana/Initialize(mapload)
+	. = ..()
+
+	if prob(67)
+		force = 10
+		if prob(13)
+		force = 220
