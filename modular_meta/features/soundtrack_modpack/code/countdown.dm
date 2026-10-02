@@ -34,11 +34,11 @@
 	play_soundtrack_music('modular_meta/features/soundtrack_modpack/sound/soundtrack/future_perception.ogg')
 
 /obj/machinery/nuclearbomb
-	var/sound/countdown_music = null
+	var/sound/countdown_music = 'modular_meta/features/soundtrack_modpack/sound/soundtrack/countdown.ogg'
 
 /obj/machinery/nuclearbomb/arm_nuke(mob/armer)
 	. = ..()
-	countdown_music = play_soundtrack_music('modular_meta/features/soundtrack_modpack/sound/soundtrack/countdown.ogg')
+	play_soundtrack_music(countdown_music)
 
 /obj/machinery/nuclearbomb/disarm_nuke(mob/disarmer)
 	. = ..()
