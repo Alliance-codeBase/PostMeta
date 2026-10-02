@@ -1,0 +1,12 @@
+{
+	"version": 1,
+	"map_name": "Birdshot Station",
+	"map_path": "map_files/Birdshot",
+	"map_file": "birdshot.dmm",
+	"shuttles": {
+		"cargo": "cargo_birdshot",
+		"ferry": "ferry_fancy",
+		"whiteship": "whiteship_birdshot",
+		"emergency": "emergency_birdshot"
+	}
+}
