@@ -4874,6 +4874,19 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /turf/closed/wall,
 /area/station/service/kitchen)
+"bOJ" = (
+/obj/machinery/door/window/brigdoor/left/directional/west{
+	name = "Secondary AI Core Access";
+	pixel_x = -4;
+	req_access = list("ai_upload")
+	},
+/obj/machinery/holopad/secure,
+/obj/effect/turf_decal/box/red/corners,
+/obj/effect/turf_decal/box/red/corners{
+	dir = 4
+	},
+/turf/open/floor/iron/dark,
+/area/station/ai/satellite/chamber)
 "bON" = (
 /obj/effect/turf_decal/siding/white{
 	dir = 8
@@ -5384,19 +5397,7 @@
 	id = "AI";
 	pixel_y = 26
 	},
-/obj/machinery/door/window/brigdoor/right/directional/east{
-	name = "Tertiary AI Core Access";
-	pixel_x = 4;
-	req_access = list("ai_upload")
-	},
 /obj/structure/cable,
-/obj/machinery/holopad/secure,
-/obj/effect/turf_decal/box/red/corners{
-	dir = 1
-	},
-/obj/effect/turf_decal/box/red/corners{
-	dir = 8
-	},
 /turf/open/floor/iron/dark,
 /area/station/ai/satellite/chamber)
 "cax" = (
@@ -9286,20 +9287,10 @@
 /turf/open/floor/iron/white/small,
 /area/station/command/heads_quarters/cmo)
 "dor" = (
+/obj/structure/cable,
 /obj/machinery/flasher/directional/west{
 	id = "AI";
 	pixel_y = 26
-	},
-/obj/structure/cable,
-/obj/machinery/door/window/brigdoor/left/directional/west{
-	name = "Secondary AI Core Access";
-	pixel_x = -4;
-	req_access = list("ai_upload")
-	},
-/obj/machinery/holopad/secure,
-/obj/effect/turf_decal/box/red/corners,
-/obj/effect/turf_decal/box/red/corners{
-	dir = 4
 	},
 /turf/open/floor/iron/dark,
 /area/station/ai/satellite/chamber)
@@ -17374,11 +17365,10 @@
 /area/station/science/lab)
 "gbf" = (
 /obj/effect/mapping_helpers/broken_floor,
+/obj/structure/cable,
 /obj/machinery/power/smes{
-	capacity = 1.8e+008;
 	charge = 2e+005
 	},
-/obj/structure/cable,
 /turf/open/floor/plating,
 /area/station/maintenance/disposal/incinerator)
 "gbh" = (
@@ -32289,6 +32279,21 @@
 "kFY" = (
 /turf/closed/wall/r_wall,
 /area/station/medical/morgue)
+"kGi" = (
+/obj/machinery/door/window/brigdoor/right/directional/east{
+	name = "Tertiary AI Core Access";
+	pixel_x = 4;
+	req_access = list("ai_upload")
+	},
+/obj/machinery/holopad/secure,
+/obj/effect/turf_decal/box/red/corners{
+	dir = 8
+	},
+/obj/effect/turf_decal/box/red/corners{
+	dir = 1
+	},
+/turf/open/floor/iron/dark,
+/area/station/ai/satellite/chamber)
 "kGn" = (
 /obj/effect/spawner/structure/window/reinforced,
 /turf/open/floor/plating,
@@ -99770,7 +99775,7 @@ bsy
 dNq
 yjV
 fpY
-fpY
+oRm
 uTA
 uTA
 uTA
@@ -100026,8 +100031,8 @@ dDB
 yjV
 yjV
 fpY
-fpY
-oRm
+kqX
+cbm
 uTA
 apZ
 vzK
@@ -100284,7 +100289,7 @@ yjV
 fpY
 nZx
 uTA
-tof
+bZy
 cfc
 veA
 csF
@@ -100541,7 +100546,7 @@ yjV
 fpY
 uTA
 uTA
-bZy
+bOJ
 cfk
 fkj
 dMg
@@ -101568,8 +101573,8 @@ aJq
 yjV
 fpY
 tof
-uTA
-cbi
+tof
+kGi
 cfk
 fkj
 dPa
@@ -101826,7 +101831,7 @@ yjV
 fpY
 nZx
 uTA
-uTA
+cbi
 duI
 veA
 dPd
@@ -102082,8 +102087,8 @@ aJq
 yjV
 yjV
 fpY
-fpY
-fpY
+kqX
+kqX
 uTA
 bat
 qAQ
