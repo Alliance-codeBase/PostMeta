@@ -47,3 +47,23 @@
 	slot_flags = null
 
 //Ninja energy katana is located in the antagonist module.
+
+//MASSMETA EDIT BEGIN
+/obj/item/katana/blood_katana
+	name = "strange bloody katana"
+	desc = "Very strange looking sword-like piece of rust.. steel? With a Bloody like implementations. You feel really strange energy from it... Woefully underpowered in D67."
+	icon_state = "bloody_katana"
+	force = 20
+
+/obj/item/katana/blood_katana/Initialize(mapload)
+	. = ..()
+
+	// АХАХХАХАХАХА
+	if (prob(67))
+		force = 10
+		name = "rusted strange bloody katana"
+		if (prob(13))
+			// О НЕТ
+			force = 220
+			name = "cursed strange bloody katana"
+//MASSMETA EDIT END
