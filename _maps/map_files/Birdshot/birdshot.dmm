@@ -6761,6 +6761,10 @@
 	pixel_y = -23
 	},
 /obj/effect/decal/cleanable/dirt,
+/obj/machinery/door/window/brigdoor/left/directional/west{
+	name = "Primary AI Core Access";
+	req_access = list("ai_upload")
+	},
 /turf/open/floor/iron/dark/textured,
 /area/station/ai/satellite/chamber)
 "czg" = (
@@ -10012,6 +10016,10 @@
 /area/station/hallway/primary/central/fore)
 "dCR" = (
 /obj/structure/cable/layer3,
+/obj/machinery/camera/directional/south{
+	c_tag = "AI Chamber - Core";
+	network = list("aicore")
+	},
 /turf/open/floor/circuit/red,
 /area/station/ai/satellite/chamber)
 "dCU" = (
@@ -11201,9 +11209,9 @@
 /area/station/science/auxlab/firing_range)
 "dZD" = (
 /obj/structure/cable/layer3,
-/obj/machinery/camera/directional/south{
-	c_tag = "AI Chamber - Core";
-	network = list("aicore")
+/obj/machinery/door/window/brigdoor/right/directional/east{
+	name = "Primary AI Core Access";
+	req_access = list("ai_upload")
 	},
 /turf/open/floor/iron/dark/textured,
 /area/station/ai/satellite/chamber)
@@ -34264,15 +34272,6 @@
 /obj/effect/turf_decal/tile/neutral,
 /turf/open/floor/iron,
 /area/station/hallway/primary/central/fore)
-"lnM" = (
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/machinery/door/window/brigdoor/right/directional/north{
-	atom_integrity = 300;
-	name = "AI Core Chamber Access";
-	req_access = list("ai_upload")
-	},
-/turf/open/floor/circuit/red,
-/area/station/ai/satellite/chamber)
 "lnN" = (
 /obj/effect/turf_decal/tile/blue/opposingcorners{
 	dir = 8
@@ -48192,11 +48191,6 @@
 "qan" = (
 /obj/structure/cable/layer3,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/machinery/door/window/brigdoor/left/directional/north{
-	atom_integrity = 300;
-	name = "AI Core Chamber Access";
-	req_access = list("ai_upload")
-	},
 /turf/open/floor/circuit/red,
 /area/station/ai/satellite/chamber)
 "qav" = (
@@ -100534,7 +100528,7 @@ cfk
 fkj
 dMg
 cyk
-lnM
+eMU
 kZv
 cLR
 cRI
