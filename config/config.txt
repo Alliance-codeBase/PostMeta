@@ -677,3 +677,7 @@ POLICY_JSON_PATH policy.json
 # People can spoof this CID and ignore that element of stickybans forever, but they can equally
 # just keep generating new ones. Kind of doesn't matter.
 IGNORED_CIDS 4055623708
+#AUTOTRANSLATE
+TRANSLATE_HTTP_URL http://127.0.0.1:5000
+TRANSLATE_HTTP_TOKEN your_token_here
+TRANSLATE_HTTP_TIMEOUT_SECONDS 5
