@@ -5384,12 +5384,18 @@
 	id = "AI";
 	pixel_y = 26
 	},
-/obj/structure/cable/multilayer/connected,
-/obj/effect/turf_decal/box/red,
 /obj/machinery/door/window/brigdoor/right/directional/east{
 	name = "Tertiary AI Core Access";
 	pixel_x = 4;
 	req_access = list("ai_upload")
+	},
+/obj/structure/cable,
+/obj/machinery/holopad/secure,
+/obj/effect/turf_decal/box/red/corners{
+	dir = 1
+	},
+/obj/effect/turf_decal/box/red/corners{
+	dir = 8
 	},
 /turf/open/floor/iron/dark,
 /area/station/ai/satellite/chamber)
@@ -6195,11 +6201,11 @@
 "coi" = (
 /obj/structure/cable/layer3,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/machinery/door/window/left/directional/south{
-	name = "AI Security Door"
-	},
 /obj/machinery/flasher/directional/east{
 	id = "ai"
+	},
+/obj/machinery/door/window/left/directional/south{
+	name = "AI Security Door"
 	},
 /turf/open/floor/circuit/red,
 /area/station/ai/satellite/chamber)
@@ -6761,10 +6767,6 @@
 	pixel_y = -23
 	},
 /obj/effect/decal/cleanable/dirt,
-/obj/machinery/door/window/brigdoor/left/directional/west{
-	name = "Primary AI Core Access";
-	req_access = list("ai_upload")
-	},
 /turf/open/floor/iron/dark/textured,
 /area/station/ai/satellite/chamber)
 "czg" = (
@@ -7514,11 +7516,11 @@
 /area/station/service/chapel)
 "cLR" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/machinery/door/window/right/directional/south{
-	name = "AI Security Door"
-	},
 /obj/machinery/flasher/directional/west{
 	id = "ai"
+	},
+/obj/machinery/door/window/right/directional/south{
+	name = "AI Security Door"
 	},
 /turf/open/floor/circuit/red,
 /area/station/ai/satellite/chamber)
@@ -9294,6 +9296,11 @@
 	pixel_x = -4;
 	req_access = list("ai_upload")
 	},
+/obj/machinery/holopad/secure,
+/obj/effect/turf_decal/box/red/corners,
+/obj/effect/turf_decal/box/red/corners{
+	dir = 4
+	},
 /turf/open/floor/iron/dark,
 /area/station/ai/satellite/chamber)
 "dov" = (
@@ -9563,7 +9570,7 @@
 	id = "AI Core shutters";
 	name = "AI Core Shutter"
 	},
-/obj/structure/cable/layer3,
+/obj/structure/cable/multilayer/connected,
 /turf/open/floor/catwalk_floor,
 /area/station/ai/satellite/chamber)
 "dus" = (
@@ -10016,10 +10023,6 @@
 /area/station/hallway/primary/central/fore)
 "dCR" = (
 /obj/structure/cable/layer3,
-/obj/machinery/camera/directional/south{
-	c_tag = "AI Chamber - Core";
-	network = list("aicore")
-	},
 /turf/open/floor/circuit/red,
 /area/station/ai/satellite/chamber)
 "dCU" = (
@@ -10405,7 +10408,7 @@
 /area/station/hallway/secondary/dock)
 "dKQ" = (
 /obj/structure/cable/layer3,
-/turf/closed/wall/r_wall,
+/turf/open/floor/iron/dark/textured,
 /area/station/ai/satellite/chamber)
 "dKY" = (
 /obj/machinery/light/small/directional/south{
@@ -11208,11 +11211,11 @@
 /turf/open/floor/iron/white,
 /area/station/science/auxlab/firing_range)
 "dZD" = (
-/obj/structure/cable/layer3,
-/obj/machinery/door/window/brigdoor/right/directional/east{
-	name = "Primary AI Core Access";
-	req_access = list("ai_upload")
+/obj/machinery/camera/directional/south{
+	c_tag = "AI Chamber - Core";
+	network = list("aicore")
 	},
+/obj/structure/cable/layer3,
 /turf/open/floor/iron/dark/textured,
 /area/station/ai/satellite/chamber)
 "dZF" = (
@@ -11242,9 +11245,9 @@
 /turf/open/floor/iron,
 /area/station/maintenance/department/medical/central)
 "dZZ" = (
-/obj/structure/cable/layer3,
 /obj/machinery/atmospherics/components/unary/vent_scrubber/on/layer2,
 /obj/effect/decal/cleanable/dirt,
+/obj/structure/cable/layer3,
 /turf/open/floor/iron/dark,
 /area/station/ai/satellite/chamber)
 "eam" = (
@@ -14282,6 +14285,14 @@
 /obj/effect/mapping_helpers/airlock/access/all/engineering/atmos,
 /turf/open/floor/iron,
 /area/station/engineering/atmos/pumproom)
+"fcQ" = (
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/machinery/door/window/brigdoor/right/directional/south{
+	name = "AI Security Door";
+	req_access = list("ai_upload")
+	},
+/turf/open/floor/circuit/red,
+/area/station/ai/satellite/chamber)
 "fcU" = (
 /obj/structure/window/spawner/directional/south,
 /obj/structure/flora/bush/large/style_random{
@@ -14520,6 +14531,10 @@
 /obj/structure/table,
 /turf/open/floor/iron/dark/textured_large,
 /area/station/service/kitchen)
+"fhN" = (
+/obj/machinery/holopad/secure,
+/turf/open/floor/iron/dark/textured,
+/area/station/ai/satellite/chamber)
 "fhT" = (
 /obj/structure/sink/directional/east,
 /obj/structure/mirror/directional/west,
@@ -16602,7 +16617,6 @@
 	name = "AI Core Shutter"
 	},
 /obj/structure/cable,
-/obj/machinery/power/apc/auto_name/directional/east,
 /turf/open/floor/catwalk_floor,
 /area/station/ai/satellite/chamber)
 "fNR" = (
@@ -18036,7 +18050,7 @@
 "gnA" = (
 /obj/structure/cable,
 /obj/machinery/light/small/directional/north,
-/obj/machinery/holopad/secure,
+/obj/machinery/power/apc/auto_name/directional/north,
 /turf/open/floor/circuit/red,
 /area/station/ai/satellite/chamber)
 "gnB" = (
@@ -25050,7 +25064,7 @@
 /obj/machinery/atmospherics/pipe/smart/simple/green/visible{
 	dir = 9
 	},
-/turf/closed/wall/r_wall,
+/turf/open/floor/iron/dark/textured,
 /area/station/ai/satellite/chamber)
 "iyr" = (
 /obj/machinery/light/cold/directional/north,
@@ -48191,6 +48205,10 @@
 "qan" = (
 /obj/structure/cable/layer3,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/machinery/door/window/brigdoor/left/directional/south{
+	name = "AI Security Door";
+	req_access = list("ai_upload")
+	},
 /turf/open/floor/circuit/red,
 /area/station/ai/satellite/chamber)
 "qav" = (
@@ -100528,7 +100546,7 @@ cfk
 fkj
 dMg
 cyk
-eMU
+fcQ
 kZv
 cLR
 cRI
@@ -101040,8 +101058,8 @@ jBA
 xTV
 dua
 gnA
-eDh
 dZn
+fhN
 cEK
 wct
 eCf
