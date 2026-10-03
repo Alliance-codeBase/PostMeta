@@ -5661,9 +5661,8 @@
 	},
 /obj/structure/table/reinforced/titaniumglass,
 /obj/item/radio/intercom/directional/east,
-/obj/machinery/fax{
-	fax_name = "Chief Engineer's Office";
-	name = "Chief Engineer's Fax Machine";
+/obj/machinery/fax/heads/ce{
+	pixel_x = 0;
 	pixel_y = 7
 	},
 /turf/open/floor/iron,
@@ -13308,9 +13307,8 @@
 	pixel_y = 26
 	},
 /obj/structure/sign/poster/official/random/directional/south,
-/obj/machinery/fax{
-	fax_name = "Quartermaster's Office";
-	name = "Quartermaster's Fax Machine";
+/obj/machinery/fax/heads/qm{
+	pixel_x = 0;
 	pixel_y = 7
 	},
 /turf/open/floor/wood,
@@ -17773,10 +17771,7 @@
 /obj/machinery/atmospherics/components/unary/vent_scrubber/on/layer2{
 	dir = 1
 	},
-/obj/machinery/fax{
-	fax_name = "Head of Personnel's Office";
-	name = "Head of Personnel's Fax Machine"
-	},
+/obj/machinery/fax/heads/hop,
 /turf/open/floor/wood/tile,
 /area/station/command/heads_quarters/hop)
 "ghK" = (
@@ -24512,12 +24507,11 @@
 /obj/effect/turf_decal/tile/neutral/fourcorners,
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/table/glass,
-/obj/machinery/fax{
-	fax_name = "Research Director's Office";
-	name = "Research Director's Fax Machine";
+/obj/structure/cable,
+/obj/machinery/fax/heads/rd{
+	pixel_x = 0;
 	pixel_y = 9
 	},
-/obj/structure/cable,
 /turf/open/floor/iron/dark,
 /area/station/command/heads_quarters/rd)
 "ipF" = (
@@ -26848,14 +26842,13 @@
 /obj/effect/turf_decal/siding/dark_red{
 	dir = 5
 	},
-/obj/machinery/fax{
-	fax_name = "Head of Security's Office";
-	name = "Head of Security's Fax Machine";
-	pixel_y = 9
-	},
 /obj/structure/table/glass,
 /obj/machinery/firealarm/directional/east,
 /obj/machinery/light/small/directional/north,
+/obj/machinery/fax/heads/hos{
+	pixel_x = 0;
+	pixel_y = 9
+	},
 /turf/open/floor/stone,
 /area/station/command/heads_quarters/hos)
 "iWp" = (
@@ -33901,12 +33894,11 @@
 "liG" = (
 /obj/structure/cable,
 /obj/structure/table/glass,
-/obj/machinery/fax{
-	fax_name = "Captain's Office";
-	name = "Captain's Fax Machine";
+/obj/machinery/power/apc/auto_name/directional/west,
+/obj/machinery/fax/heads/captain{
+	pixel_x = 0;
 	pixel_y = 11
 	},
-/obj/machinery/power/apc/auto_name/directional/west,
 /turf/open/floor/wood/large,
 /area/station/command/heads_quarters/captain)
 "liH" = (
@@ -70163,11 +70155,6 @@
 /area/station/cargo/boutique)
 "wTU" = (
 /obj/structure/table/glass,
-/obj/machinery/fax{
-	fax_name = "Chief Medical Officer's Office";
-	name = "Chief Medical Officer's Fax Machine";
-	pixel_y = 13
-	},
 /obj/effect/mapping_helpers/broken_floor,
 /obj/machinery/button/door/directional/south{
 	id = "cmoprivacy";
@@ -70183,6 +70170,10 @@
 	req_access = list("medical")
 	},
 /obj/machinery/keycard_auth/wall_mounted/directional/east,
+/obj/machinery/fax/heads/cmo{
+	pixel_x = 0;
+	pixel_y = 13
+	},
 /turf/open/floor/wood/parquet,
 /area/station/command/heads_quarters/cmo)
 "wTX" = (
