@@ -1518,10 +1518,11 @@
 /turf/open/floor/plating/airless,
 /area/station/science/ordnance/bomb)
 "aDC" = (
-/obj/effect/turf_decal/stripes/end{
-	dir = 4
-	},
 /obj/structure/cable,
+/obj/effect/spawner/random/techstorage/custom_shuttle,
+/obj/structure/rack,
+/obj/effect/turf_decal/tile/neutral/opposingcorners,
+/obj/effect/turf_decal/bot,
 /turf/open/floor/iron/dark,
 /area/station/engineering/storage/tech)
 "aEa" = (
@@ -52495,6 +52496,13 @@
 "ruY" = (
 /turf/open/floor/plating,
 /area/station/maintenance/fore/lesser)
+"rvm" = (
+/obj/structure/cable,
+/obj/effect/turf_decal/stripes/end{
+	dir = 4
+	},
+/turf/open/floor/iron/dark,
+/area/station/engineering/storage/tech)
 "rvp" = (
 /turf/closed/mineral/random/stationside,
 /area/station/maintenance/hallway/abandoned_command)
@@ -96696,7 +96704,7 @@ iOx
 mCL
 nFa
 pDK
-cgt
+rvm
 kmC
 nFa
 aJq
