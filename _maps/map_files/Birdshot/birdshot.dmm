@@ -8746,7 +8746,6 @@
 "dfo" = (
 /obj/structure/cable,
 /obj/machinery/status_display/ai/directional/north,
-/mob/living/silicon/robot/shell/cell,
 /turf/open/floor/circuit/red,
 /area/station/ai/satellite/chamber)
 "dfM" = (
@@ -8838,7 +8837,6 @@
 /obj/machinery/power/terminal{
 	dir = 8
 	},
-/mob/living/silicon/robot/shell/cell,
 /turf/open/floor/circuit/red,
 /area/station/ai/satellite/chamber)
 "dhu" = (
@@ -42242,9 +42240,6 @@
 /obj/effect/mapping_helpers/broken_floor,
 /turf/open/floor/iron,
 /area/station/maintenance/starboard/aft)
-"nZx" = (
-/turf/closed/mineral/random/stationside,
-/area/station/ai/satellite/chamber)
 "nZz" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 8
@@ -65423,7 +65418,6 @@
 "vzK" = (
 /obj/machinery/light/small/directional/west,
 /obj/machinery/atmospherics/components/unary/vent_pump/siphon/monitored/helium_output{
-	chamber_id = "helium";
 	dir = 4
 	},
 /turf/open/floor/engine/helium,
@@ -100031,8 +100025,8 @@ dDB
 yjV
 yjV
 fpY
-kqX
-cbm
+uTA
+tof
 uTA
 apZ
 vzK
@@ -100287,7 +100281,7 @@ blb
 blb
 yjV
 fpY
-nZx
+fpY
 uTA
 bZy
 cfc
@@ -101829,7 +101823,7 @@ dDB
 aJq
 yjV
 fpY
-nZx
+fpY
 uTA
 cbi
 duI
@@ -102087,8 +102081,8 @@ aJq
 yjV
 yjV
 fpY
-kqX
-kqX
+uTA
+uTA
 uTA
 bat
 qAQ
