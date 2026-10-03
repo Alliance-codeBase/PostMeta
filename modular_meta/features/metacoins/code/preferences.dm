@@ -1,7 +1,7 @@
 /datum/preference/choiced/metacoin_notify
 	category = PREFERENCE_CATEGORY_GAME_PREFERENCES
 	savefile_identifier = PREFERENCE_PLAYER
-	savefile_key = "metacoin_notice"
+	savefile_key = "metacoin_notify"
 
 /datum/preference/choiced/metacoin_notify/init_possible_values()
 	return list("Both", "Only sound", "Only chat notification", "Nothing")
