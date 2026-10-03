@@ -480,6 +480,7 @@
 							U.uplink_handler.set_telecrystals(crystals)
 							message_admins("[key_name_admin(usr)] changed [current]'s telecrystal count to [crystals].")
 							log_admin("[key_name(usr)] changed [current]'s telecrystal count to [crystals].")
+<<<<<<< HEAD
 			if("progression")
 				if(!check_rights(R_FUN))
 					return
@@ -514,6 +515,8 @@
 					message_admins("[key_name_admin(usr)] failed to give [current] a traitor objective ([objective_typepath]).")
 					log_admin("[key_name(usr)] failed to give [current] a traitor objective ([objective_typepath]).")
 				//MASSMETA ADDITION END (progressive_traitor)
+=======
+>>>>>>> upstream/master
 			if("uplink")
 				var/datum/antagonist/traitor/traitor_datum = has_antag_datum(/datum/antagonist/traitor)
 				if(!give_uplink(antag_datum = traitor_datum || null))

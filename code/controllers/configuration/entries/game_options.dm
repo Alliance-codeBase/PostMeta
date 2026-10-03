@@ -44,8 +44,6 @@
 
 /datum/config_entry/flag/allow_ai_multicam // allow ai multicamera mode
 
-/datum/config_entry/flag/disable_human_mood
-
 /datum/config_entry/flag/disable_secborg // disallow secborg model to be chosen.
 
 /datum/config_entry/flag/disable_peaceborg
@@ -62,6 +60,7 @@
 	integer = FALSE
 	min_val = 0
 
+<<<<<<< HEAD
 /// Determines the ideal player count for maximum progression per minute.
 // MASSMETA EDIT ADDITION BEGIN (progressive_traitor)
 /datum/config_entry/number/traitor_ideal_player_count
@@ -81,6 +80,8 @@
 	default = 6
 	min_val = 1
 //MASSMETA ADDDITION END (progressive_traitor)
+=======
+>>>>>>> upstream/master
 /datum/config_entry/number/changeling_scaling_coeff //how much does the amount of players get divided by to determine changelings
 	default = 6
 	integer = FALSE
@@ -414,6 +415,10 @@
 	min_val = 0
 
 /datum/config_entry/number/ratcap
+	default = 64
+	min_val = 0
+
+/datum/config_entry/number/relicmobcap
 	default = 64
 	min_val = 0
 
