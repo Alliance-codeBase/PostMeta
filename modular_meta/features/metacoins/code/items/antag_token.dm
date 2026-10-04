@@ -80,6 +80,18 @@
 	antag_datum = /datum/antagonist/spy
 	default_min_pop = 5
 
+/datum/metacoinshop/antag_role/bloodsucker
+	id = "bloodsucker"
+	name = "Bloodsucker"
+	ui_order = 50
+	desc = " Gentelmen of the past, mostly forgotten by everyone after so many years, \
+	but the vampire clans never forgot the taste of the blood. And you can make them great \
+	again!!!"
+	ruleset_tag = "Roundstart Bloodsucker"
+	jobban_flag = ROLE_BLOODSUCKER
+	antag_datum = /datum/antagonist/bloodsucker
+	default_min_pop = 20
+
 /datum/metacoinshop/listing/preround/antag_token/reset(datum/metacoin_shop_controller/shop)
 	refund_all(shop)
 	pending_by_ckey = list()
