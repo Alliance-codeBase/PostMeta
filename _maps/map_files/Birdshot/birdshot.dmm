@@ -420,7 +420,6 @@
 /turf/open/floor/iron/dark/side,
 /area/station/hallway/primary/central/fore)
 "aba" = (
-/obj/machinery/duct,
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/light/directional/west,
 /turf/open/floor/iron/white/small,
@@ -42178,6 +42177,7 @@
 /obj/structure/disposalpipe/segment{
 	dir = 6
 	},
+/obj/machinery/duct,
 /turf/open/floor/iron/white/small,
 /area/station/commons/toilet/restrooms)
 "nMq" = (
@@ -65443,10 +65443,8 @@
 /turf/open/floor/iron/white,
 /area/station/medical/medbay/central)
 "vsD" = (
-/obj/structure/sink/directional/south,
-/obj/structure/mirror/directional/north,
 /obj/machinery/duct,
-/turf/open/floor/iron/white/small,
+/turf/closed/wall,
 /area/station/commons/toilet/restrooms)
 "vsJ" = (
 /obj/structure/disposalpipe/segment{
@@ -107524,7 +107522,7 @@ hlE
 lft
 wqj
 izk
-wqj
+vsD
 knB
 qUt
 qvr
@@ -107780,7 +107778,7 @@ pIf
 upF
 jgF
 wqj
-vsD
+rEa
 aba
 mQD
 qUt
