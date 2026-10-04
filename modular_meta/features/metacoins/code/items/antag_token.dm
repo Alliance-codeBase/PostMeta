@@ -84,7 +84,7 @@
 	id = "bloodsucker"
 	name = "Bloodsucker"
 	ui_order = 50
-	desc = " Jentelmen of the past, mostly forgotten by everyone after so many years, \
+	desc = " Gentelmen of the past, mostly forgotten by everyone after so many years, \
 	but the vampire clans never forgot the taste of the blood. And you can make them great \
 	again!!!"
 	ruleset_tag = "Roundstart Bloodsucker"
