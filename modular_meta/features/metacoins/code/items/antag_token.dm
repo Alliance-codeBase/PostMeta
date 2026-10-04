@@ -84,8 +84,8 @@
 	id = "bloodsucker"
 	name = "Bloodsucker"
 	ui_order = 50
-	desc = " Jentelmen of the past, mostly forgotten by everyone after so many years \
-	but vampire clans never forgot taste of the blood. And you can make them great \
+	desc = " Jentelmen of the past, mostly forgotten by everyone after so many years, \
+	but the vampire clans never forgot the taste of the blood. And you can make them great \
 	again!!!"
 	ruleset_tag = "Roundstart Bloodsucker"
 	jobban_flag = ROLE_BLOODSUCKER
