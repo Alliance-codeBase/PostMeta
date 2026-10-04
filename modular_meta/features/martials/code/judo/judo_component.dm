@@ -26,7 +26,8 @@
 	return judo_flow
 
 /datum/component/judo_state/proc/increment_flow()
-	judo_flow++
+	judo_flow += 10
+	to_chat("flow = [judo_flow]")
 
 /datum/component/judo_state/proc/reset()
 	judo_tier = 0
