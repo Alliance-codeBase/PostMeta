@@ -2,13 +2,14 @@
 	var/current_progression = 0
 
 /obj/item/disk/computer/virus/frame/send_virus(obj/item/modular_computer/pda/source, obj/item/modular_computer/pda/target, mob/living/user, message)
+	if(isnull(target))
+		return ..()
 	var/had_uplink = !isnull(target.GetComponent(/datum/component/uplink))
 	. = ..()
 	if(!. || had_uplink)
 		return
 	var/datum/component/uplink/hidden_uplink = target.GetComponent(/datum/component/uplink)
 	var/datum/uplink_handler/handler = hidden_uplink.uplink_handler
-	handler.has_progression = TRUE
 	handler.has_objectives = TRUE
 	handler.can_take_objectives = FALSE
 	handler.progression_points = min(SStraitor.current_global_progression, current_progression)

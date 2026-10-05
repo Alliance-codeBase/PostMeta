@@ -27,6 +27,7 @@
 
 /datum/controller/subsystem/traitor/Initialize()
 	. = ..()
+	current_progression_scaling = 1 MINUTES * CONFIG_GET(number/traitor_scaling_multiplier)
 	category_handler = new()
 	traitor_debug_panel = new(category_handler)
 
@@ -42,10 +43,6 @@
 	current_global_progression = (STATION_TIME_PASSED()) * CONFIG_GET(number/traitor_scaling_multiplier)
 	var/progression_scaling_delta = (wait / (1 MINUTES)) * current_progression_scaling
 	var/player_count = length(GLOB.alive_player_list)
-	// Has a maximum of 1 minute, however the value can be lower if there are lower players than the ideal
-	// player count for a traitor to be threatening. Rounds to the nearest 10% of a minute to prevent weird
-	// values from appearing in the UI. Traitor scaling multiplier bypasses the limit and only multiplies the end value.
-	// from all of our calculations.
 	current_progression_scaling = max(min(
 		(player_count / CONFIG_GET(number/traitor_ideal_player_count)) * 1 MINUTES,
 		1 MINUTES
@@ -57,10 +54,9 @@
 	for(var/datum/uplink_handler/handler in uplink_handlers)
 		if(!handler.has_progression || QDELETED(handler))
 			uplink_handlers -= handler
+			continue
 		var/deviance = (previous_global_progression - handler.progression_points) / progression_scaling_deviance
 		if(abs(deviance) < 0.01)
-			// If deviance is less than 1%, just set them to the current global progression
-			// Prevents problems with precision errors.
 			handler.progression_points = current_global_progression
 		else
 			var/amount_to_give = progression_scaling_delta + (progression_scaling_delta * deviance)
@@ -69,8 +65,7 @@
 			handler.on_update()
 
 /datum/controller/subsystem/traitor/proc/register_uplink_handler(datum/uplink_handler/uplink_handler)
-	if(!uplink_handler.has_progression)
-		return
+	uplink_handler.has_progression = TRUE
 	uplink_handlers |= uplink_handler
 	RegisterSignal(uplink_handler, COMSIG_QDELETING, PROC_REF(uplink_handler_deleted), override = TRUE)
 

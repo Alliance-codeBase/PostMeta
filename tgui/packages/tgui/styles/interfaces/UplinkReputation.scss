@@ -35,7 +35,7 @@ $bestGradient: linear-gradient(
   hsl(330, 34%, 45%)
 );
 
-$_rep_map: (
+$reputation_gradients: (
   'bad': $badGradient,
   'normal': $normalGradient,
   'good': $goodGradient,
@@ -44,7 +44,7 @@ $_rep_map: (
   'best': $bestGradient,
 );
 
-@each $reputation-name, $gradient-value in $_rep_map {
+@each $reputation-name, $gradient-value in $reputation_gradients {
   .reputation-#{$reputation-name} {
     background-image: $gradient-value !important;
   }
