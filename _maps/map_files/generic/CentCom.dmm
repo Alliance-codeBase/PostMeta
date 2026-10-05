@@ -6216,7 +6216,7 @@
 "us" = (
 /obj/structure/lattice,
 /obj/structure/sign/warning/docking/directional/south,
-/turf/open/space/basic,
+/turf/open/floor/fakespace,
 /area/centcom/central_command_areas/supply)
 "ut" = (
 /obj/docking_port/stationary{
@@ -7101,7 +7101,7 @@
 /turf/open/floor/iron,
 /area/centcom/tdome/administration)
 "xs" = (
-/turf/open/space/basic,
+/turf/open/floor/fakespace,
 /area/centcom/central_command_areas/supply)
 "xt" = (
 /obj/structure/flora/bush/sparsegrass/style_random,
@@ -8264,7 +8264,7 @@
 /area/centcom/tdome/administration)
 "Bd" = (
 /obj/structure/lattice/catwalk,
-/turf/open/space/basic,
+/turf/open/floor/fakespace,
 /area/centcom/central_command_areas/supply)
 "Bf" = (
 /obj/machinery/door/airlock/centcom{
@@ -9907,7 +9907,7 @@
 "GD" = (
 /obj/structure/lattice/catwalk,
 /obj/structure/marker_beacon/bronze,
-/turf/open/space/basic,
+/turf/open/floor/fakespace,
 /area/centcom/central_command_areas/supply)
 "GF" = (
 /obj/structure/flora/bush/lavendergrass/style_random,
@@ -10466,7 +10466,7 @@
 /area/centcom/central_command_areas/control)
 "It" = (
 /obj/structure/sign/warning/directional/west,
-/turf/open/space/basic,
+/turf/open/floor/fakespace,
 /area/centcom/central_command_areas/supply)
 "Iv" = (
 /obj/effect/turf_decal/siding/wood{
@@ -14827,7 +14827,7 @@
 /area/centcom/tdome/administration)
 "Ws" = (
 /obj/structure/sign/warning/directional/east,
-/turf/open/space/basic,
+/turf/open/floor/fakespace,
 /area/centcom/central_command_areas/supply)
 "Wt" = (
 /obj/effect/turf_decal/tile/yellow/fourcorners,
@@ -15197,7 +15197,7 @@
 /area/centcom/tdome/observation)
 "XI" = (
 /obj/structure/lattice,
-/turf/open/space/basic,
+/turf/open/floor/fakespace,
 /area/centcom/central_command_areas/supply)
 "XJ" = (
 /obj/structure/flora/bush/lavendergrass/style_random,
