@@ -37,15 +37,8 @@ SUBSYSTEM_DEF(modpacks)
 
 	GLOB.modpacks_tgui.ui_interact(mob)
 
-//Show modpacks button on lobby screen
-//ORIGINAL FILE: code/_onclick/hud/new_player.dm
-/atom/movable/screen/lobby/button/bottom/poll
-	icon = 'modular_meta/__modpack/mods_button.dmi'
-	name = "View Loaded Modpacks"
-	icon_state = "mods"
-	base_icon_state = "mods"
-	screen_loc = "TOP:-122,CENTER:-26"
-
-/atom/movable/screen/lobby/button/bottom/poll/Click(location, control, params)
-	. = ..()
-	usr.client?.modpacks_list()
+/datum/lobby_menu/on_message(type, payload, href_list)
+	if(type == "action" && payload["action"] == "modpacks")
+		client.modpacks_list()
+		return TRUE
+	return ..()
