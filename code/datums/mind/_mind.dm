@@ -480,7 +480,7 @@
 							U.uplink_handler.set_telecrystals(crystals)
 							message_admins("[key_name_admin(usr)] changed [current]'s telecrystal count to [crystals].")
 							log_admin("[key_name(usr)] changed [current]'s telecrystal count to [crystals].")
-<<<<<<< HEAD
+			//MASSMETA ADDITION START (progressive_traitor)
 			if("progression")
 				if(!check_rights(R_FUN))
 					return
@@ -493,7 +493,6 @@
 				uplink.uplink_handler.progression_points = progression
 				message_admins("[key_name_admin(usr)] changed [current]'s progression point count to [progression].")
 				log_admin("[key_name(usr)] changed [current]'s progression point count to [progression].")
-				//MASSMETA ADDITION START (progressive_traitor)
 				uplink.uplink_handler.update_objectives()
 				uplink.uplink_handler.generate_objectives()
 			if("give_objective")
@@ -514,9 +513,7 @@
 					to_chat(usr, span_warning("Failed to generate the objective!"))
 					message_admins("[key_name_admin(usr)] failed to give [current] a traitor objective ([objective_typepath]).")
 					log_admin("[key_name(usr)] failed to give [current] a traitor objective ([objective_typepath]).")
-				//MASSMETA ADDITION END (progressive_traitor)
-=======
->>>>>>> upstream/master
+			//MASSMETA ADDITION END (progressive_traitor)
 			if("uplink")
 				var/datum/antagonist/traitor/traitor_datum = has_antag_datum(/datum/antagonist/traitor)
 				if(!give_uplink(antag_datum = traitor_datum || null))

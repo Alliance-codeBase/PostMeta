@@ -441,6 +441,11 @@ GLOBAL_LIST_EMPTY(conveyors_by_id)
 	var/id = ""
 	/// The set time between movements of the conveyor belts
 	var/conveyor_speed = 0.2
+	// MASSMETA EDIT ADDITION START (event)
+	var/sound/lever_start = 'sound/machines/lever/lever_start.ogg'
+	var/sound/lever_stop = 'sound/machines/lever/lever_stop.ogg'
+	// MASSMETA EDIT ADDTTION END (event)
+
 
 /obj/machinery/conveyor_switch/Initialize(mapload, newid)
 	. = ..()
@@ -516,8 +521,11 @@ GLOBAL_LIST_EMPTY(conveyors_by_id)
 
 /// Updates the switch's `position` and `last_pos` variable. Useful so that the switch can properly cycle between the forwards, backwards and neutral positions.
 /obj/machinery/conveyor_switch/proc/update_position(direction)
+
 	if(position == CONVEYOR_OFF)
-		playsound(src, 'sound/machines/lever/lever_start.ogg', 40, TRUE)
+	// MASSMETA EDIT CHANGE START (event)
+	// Я не буду расписывать original, здесь был хардкод звука, я заменил на var, всё пака олухи
+		playsound(src, lever_start, 40, TRUE)
 
 		if(oneway)   //is it a oneway switch
 			position = oneway
@@ -527,8 +535,9 @@ GLOBAL_LIST_EMPTY(conveyors_by_id)
 			else
 				position = CONVEYOR_BACKWARDS
 	else
-		playsound(src, 'sound/machines/lever/lever_stop.ogg', 40, TRUE)
+		playsound(src, lever_stop, 40, TRUE)
 		position = CONVEYOR_OFF
+	// MASSMETA EDIT CHANGE END (event)
 
 /obj/machinery/conveyor_switch/proc/on_user_activation(mob/user, direction)
 	add_fingerprint(user)

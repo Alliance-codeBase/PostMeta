@@ -1,0 +1,19 @@
+.anomalous {
+  color: #ff72ce;
+  font-size: 1.3em;
+  font-weight: bold;
+  text-shadow: 0 0 5px #ff3dbb;
+  animation: anomalous-pulse 900ms ease-in-out infinite alternate;
+}
+
+.anomalous a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+@keyframes anomalous-pulse {
+  to {
+    color: #ffe5fb;
+    text-shadow: 0 0 12px #ff3dbb;
+  }
+}

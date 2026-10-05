@@ -114,8 +114,9 @@
 #define MAX_HIGH_PRESSURE_DAMAGE 2
 /// The amount of damage someone takes when in a low pressure area scales up over time, starting at BASE_LOW_PRESSURE_DAMAGE, up to MAX_LOW_PRESSURE_DAMAGE.
 #define BASE_LOW_PRESSURE_DAMAGE 2
-#define MAX_LOW_PRESSURE_DAMAGE (BASE_LOW_PRESSURE_DAMAGE * 2.5)
-
+// MASSMETA EDIT START (pressure_damage_reduced)
+#define MAX_LOW_PRESSURE_DAMAGE (BASE_LOW_PRESSURE_DAMAGE * 2)
+// MASSMETA EDIT END (pressure_damage_reduced)
 /// Humans are slowed by the difference between bodytemp and BODYTEMP_COLD_DAMAGE_LIMIT divided by this
 #define COLD_SLOWDOWN_FACTOR 20
 

@@ -58,6 +58,8 @@
 #include "features\arcades\includes.dm"
 #include "features\progressive_traitor\includes.dm"
 #include "features\unmanned_vechicle\includes.dm"
+#include "features\title_screenz\includes.dm"
+#include "features\_code_helpers\includes.dm"
 
 /* --- Reverts --- */
 
@@ -79,6 +81,7 @@
 #include "tweaks\better_ui\includes.dm"
 #include "tweaks\del_required_experiments\includes.dm"
 #include "tweaks\fonts\includes.dm"
+#include "tweaks\force_say\includes.dm"
 #include "tweaks\russian_translation\includes.dm"
 #include "tweaks\gases\includes.dm"
 #include "tweaks\heads_on_belts\includes.dm"

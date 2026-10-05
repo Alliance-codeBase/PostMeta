@@ -505,6 +505,11 @@
 
 	var/mob_oxyloss = get_oxy_loss()
 	if(mob_oxyloss >= OXYLOSS_PASSOUT_THRESHOLD)
+		//MASSMETA EDIT ADDITION BEGIN (force_say)
+		var/mob/living/carbon/human/passing_out_human = src
+		if(istype(passing_out_human))
+			passing_out_human.force_say(FORCE_SAY_BLACKOUT, immediate = TRUE)
+		//MASSMETA EDIT ADDITION END
 		ADD_TRAIT(src, TRAIT_KNOCKEDOUT, OXYLOSS_TRAIT)
 	else
 		REMOVE_TRAIT(src, TRAIT_KNOCKEDOUT, OXYLOSS_TRAIT)

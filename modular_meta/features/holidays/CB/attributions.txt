@@ -1,0 +1,3 @@
+Audio and UI assets are from SCP - Containment Breach (Regalis and contributors).
+https://github.com/Regalis11/scpcb/blob/master/Credits.txt
+License: CC BY-SA 3.0 - https://creativecommons.org/licenses/by-sa/3.0/
