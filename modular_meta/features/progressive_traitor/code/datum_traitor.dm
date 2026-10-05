@@ -21,6 +21,11 @@
 	generate_replacement_codes() // amazing ui shenanigans
 	. = ..()
 
+	if(uplink_handler)
+		uplink_handler.has_progression = TRUE
+		uplink_handler.progression_points = max(uplink_handler.progression_points, SStraitor.current_global_progression)
+		SStraitor.register_uplink_handler(uplink_handler)
+
 	if(give_secondary_objectives)
 		uplink_handler.has_objectives = TRUE
 		uplink_handler.generate_objectives()

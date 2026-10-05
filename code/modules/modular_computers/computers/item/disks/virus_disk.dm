@@ -146,11 +146,7 @@
 				target_mind = pick(backup_players)
 		hidden_uplink = target.AddComponent(/datum/component/uplink, target_mind, enabled = TRUE, starting_tc = telecrystals)
 		hidden_uplink.unlock_code = unlock_code
-<<<<<<< HEAD
-		SStraitor.register_uplink_handler(hidden_uplink.uplink_handler)
-=======
 		hidden_uplink.uplink_handler.owner = target_mind
->>>>>>> upstream/master
 	else
 		hidden_uplink.uplink_handler.add_telecrystals(telecrystals)
 	telecrystals = 0

@@ -1,7 +1,13 @@
 /datum/controller/subsystem/traitor
+	ss_flags = SS_KEEP_TIMING
+	wait = 10 SECONDS
+	runlevels = RUNLEVEL_GAME | RUNLEVEL_POSTGAME
 	/// File to load configurations from.
 	var/configuration_path = "config/traitor_objective.json"
 	var/progression_scaling_deviance = 20 MINUTES
+	var/current_global_progression = 0
+	var/current_progression_scaling = 1 MINUTES
+	var/list/datum/uplink_handler/uplink_handlers = list()
 	/// Global configuration data that gets applied to each objective when it is created.
 	/// Basic objective format
 	/// '/datum/traitor_objective/path/to/objective': {
@@ -62,5 +68,12 @@
 			handler.progression_points += amount_to_give
 			handler.on_update()
 
+/datum/controller/subsystem/traitor/proc/register_uplink_handler(datum/uplink_handler/uplink_handler)
+	if(!uplink_handler.has_progression)
+		return
+	uplink_handlers |= uplink_handler
+	RegisterSignal(uplink_handler, COMSIG_QDELETING, PROC_REF(uplink_handler_deleted), override = TRUE)
 
-
+/datum/controller/subsystem/traitor/proc/uplink_handler_deleted(datum/uplink_handler/uplink_handler)
+	SIGNAL_HANDLER
+	uplink_handlers -= uplink_handler

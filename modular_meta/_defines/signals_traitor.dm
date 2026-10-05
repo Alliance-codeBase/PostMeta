@@ -40,3 +40,5 @@
 /// Called when a machine a traitor has booby trapped triggers its payload
 #define COMSIG_TRAITOR_MACHINE_TRAP_TRIGGERED "traitor_machine_trap_triggered"
 //MASSMETA EDIT ADDITION END (progressive_traitor)
+
+#define DISPLAY_PROGRESSION(time) round(time/60, 0.01)
