@@ -41,6 +41,7 @@ jobs:
             build/behavior_trees
             code/datums/greyscale/json_configs
             icons
+            modular_meta
             sound/runtime
             strings
             tgui/public
