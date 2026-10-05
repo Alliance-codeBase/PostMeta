@@ -13,83 +13,75 @@ jobs:
 
       # Grab pre-requisites
       - parallel:
-        - name: Restore SpacemanDMM cache
-          uses: actions/cache@v6
-          with:
-            path: ~/SpacemanDMM
-            key: ${{ runner.os }}-spacemandmm-${{ hashFiles('dependencies.sh') }}
-            restore-keys: |
-              ${{ runner.os }}-spacemandmm-
+          - name: Restore SpacemanDMM cache
+            uses: actions/cache@v6
+            with:
+              path: ~/SpacemanDMM
+              key: ${{ runner.os }}-spacemandmm-${{ hashFiles('dependencies.sh') }}
+              restore-keys: |
+                ${{ runner.os }}-spacemandmm-
 
-        - name: Setup Bun
-          uses: ./.github/actions/setup_bun
+          - name: Setup Bun
+            uses: ./.github/actions/setup_bun
 
-        - name: Restore Bootstrap cache
-          uses: actions/cache@v6
-          with:
-            path: tools/bootstrap/.cache
-            key: ${{ runner.os }}-bootstrap-${{ hashFiles('/tools/requirements.txt') }}
-            restore-keys: |
-              ${{ runner.os }}-bootstrap-
+          - name: Restore Bootstrap cache
+            uses: actions/cache@v6
+            with:
+              path: tools/bootstrap/.cache
+              key: ${{ runner.os }}-bootstrap-${{ hashFiles('/tools/requirements.txt') }}
+              restore-keys: |
+                ${{ runner.os }}-bootstrap-
 
-        - name: Restore Rust cache
-          uses: actions/cache@v6
-          with:
-            path: ~/.cargo
-            key: ${{ runner.os }}-rust-${{ hashFiles('/tools/ci/ci_dependencies.sh')}}
-            restore-keys: |
-              ${{ runner.os }}-rust-
+          - name: Restore Rust cache
+            uses: actions/cache@v6
+            with:
+              path: ~/.cargo
+              key: ${{ runner.os }}-rust-${{ hashFiles('/tools/ci/ci_dependencies.sh')}}
+              restore-keys: |
+                ${{ runner.os }}-rust-
 
-        - name: Restore Cutter cache
-          uses: actions/cache@v6
-          with:
-            path: tools/icon_cutter/cache
-            key: ${{ runner.os }}-cutter-${{ hashFiles('dependencies.sh') }}
+          - name: Restore Cutter cache
+            uses: actions/cache@v6
+            with:
+              path: tools/icon_cutter/cache
+              key: ${{ runner.os }}-cutter-${{ hashFiles('dependencies.sh') }}
 
-        - name: Setup .NET SDK
-          uses: actions/setup-dotnet@v6
-          with:
-            dotnet-version: 9.x
+          - name: Setup .NET SDK
+            uses: actions/setup-dotnet@v6
+            with:
+              dotnet-version: 9.x
 
-        - name: Install OpenDream
-          uses: robinraju/release-downloader@v1.13
-          with:
-            repository: "OpenDreamProject/OpenDream"
-            tag: "latest"
-            fileName: "DMCompiler_linux-x64.tar.gz"
-            extract: true
+          - name: Install OpenDream
+            uses: robinraju/release-downloader@v1.13
+            with:
+              repository: "OpenDreamProject/OpenDream"
+              tag: "latest"
+              fileName: "DMCompiler_linux-x64.tar.gz"
+              extract: true
 
-        - name: Install tools
-          run: |
-            pip3 install setuptools
-            bash tools/ci/install_spaceman_dmm.sh dreamchecker
-            bash tools/ci/install_ripgrep.sh
-            tools/bootstrap/python -c ''
+          - name: Install tools
+            run: |
+              pip3 install setuptools
+              bash tools/ci/install_spaceman_dmm.sh dreamchecker
+              bash tools/ci/install_ripgrep.sh
+              tools/bootstrap/python -c ''
 
       # Actually run the checks
       - name: Ensure genesis_call.dme is unchanged
         if: ${{ !cancelled() }}
         background: true
         run: bash tools/ci/check_genesis.sh
-<<<<<<< HEAD
-      - name: Run Grep Checks
-        if: steps.linter-setup.conclusion == 'success' && !cancelled()
-        run: |
-            bash tools/ci/check_grep.sh
-            bash modular_meta/tools/massmeta_check_grep.sh # MASSMETA EDIT ADDITION - checking modular_meta code
-      - name: Ticked File Enforcement
-        if: steps.linter-setup.conclusion == 'success' && !cancelled()
-=======
 
       - name: Run grep checks
         if: ${{ !cancelled() }}
         background: true
-        run: bash tools/ci/check_grep.sh
+        run: |
+          bash tools/ci/check_grep.sh
+          bash modular_meta/tools/massmeta_check_grep.sh # MASSMETA EDIT ADDITION - checking modular_meta code
 
       - name: Ticked file enforcement
         if: ${{ !cancelled() }}
         background: true
->>>>>>> upstream/master
         run: |
           tools/bootstrap/python tools/ticked_file_enforcement/ticked_file_enforcement.py < tools/ticked_file_enforcement/schemas/tgstation_dme.json
           tools/bootstrap/python tools/ticked_file_enforcement/ticked_file_enforcement.py < tools/ticked_file_enforcement/schemas/unit_tests.json
