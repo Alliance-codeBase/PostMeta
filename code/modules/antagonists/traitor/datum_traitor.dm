@@ -66,12 +66,7 @@
 			uplink_handler = uplink.uplink_handler
 		uplink_handler.uplink_flag = uplink_flag_given
 		uplink_handler.primary_objectives = objectives
-<<<<<<< HEAD
-		uplink_handler.has_progression = TRUE
-		SStraitor.register_uplink_handler(uplink_handler)
-=======
 
->>>>>>> upstream/master
 		uplink_handler.can_replace_objectives = CALLBACK(src, PROC_REF(can_change_objectives))
 		uplink_handler.replace_objectives = CALLBACK(src, PROC_REF(submit_player_objective))
 

@@ -7,6 +7,7 @@ import {
   Section,
   Stack,
   Tabs,
+  Tooltip,
 } from 'tgui-core/components';
 import { fetchRetry } from 'tgui-core/http';
 import type { BooleanLike } from 'tgui-core/react';
@@ -14,7 +15,6 @@ import type { BooleanLike } from 'tgui-core/react';
 import { resolveAsset } from '../../assets';
 import { useBackend } from '../../backend';
 import { Window } from '../../layouts';
-<<<<<<< HEAD
 import {
   calculateDangerLevel,
   calculateProgression,
@@ -23,8 +23,6 @@ import {
 /* //MASSMETA EDIT CHANGE BEGIN (progressive_traitor)
 ORIGINAL: import { GenericUplink, type Item } from './GenericUplink';
 */
-=======
->>>>>>> upstream/master
 import { GenericUplink, type Item } from './GenericUplink';
 import { type Objective, ObjectiveMenu } from './ObjectiveMenu';
 //MASSMETA EDIT CHANGE END (progressive_traitor)
@@ -52,14 +50,12 @@ type UplinkItem = {
 
 type UplinkData = {
   telecrystals: number;
+  progression_points: number;
   joined_population?: number;
   lockable: BooleanLike;
-<<<<<<< HEAD
   current_expected_progression: number;
   progression_scaling_deviance: number;
   current_progression_scaling: number;
-=======
->>>>>>> upstream/master
   uplink_flag: number;
   assigned_role: string;
   assigned_species: string;
@@ -71,12 +67,8 @@ type UplinkData = {
   current_stock: {
     [key: string]: number;
   };
-<<<<<<< HEAD
 
   has_objectives: BooleanLike;
-  has_progression: BooleanLike;
-=======
->>>>>>> upstream/master
   primary_objectives: {
     [key: number]: string;
   };
@@ -182,24 +174,21 @@ export class Uplink extends Component<any, UplinkState> {
     const { data, act } = useBackend<UplinkData>();
     const {
       telecrystals,
+      progression_points,
       joined_population,
       primary_objectives,
       can_renegotiate,
-<<<<<<< HEAD
       completed_final_objective,
       active_objectives,
       potential_objectives,
       has_objectives,
-      has_progression,
       //MASSMETA EDIT CHANGE START (progressive_traitor)
       maximum_active_objectives,
       maximum_potential_objectives,
       current_expected_progression,
       progression_scaling_deviance,
-      //MASSMETA EDIT CHANGE START (progressive_traitor)
+      //MASSMETA EDIT CHANGE END (progressive_traitor)
       current_progression_scaling,
-=======
->>>>>>> upstream/master
       extra_purchasable,
       extra_purchasable_stock,
       current_stock,
@@ -266,17 +255,11 @@ export class Uplink extends Component<any, UplinkState> {
         },
       });
     }
-    // Get the difference between the current progression and
-    // expected progression
-    let progressionPercentage =
-      current_expected_progression - progression_points;
-    // Clamp it down between 0 and 2
-    progressionPercentage = Math.min(
-      Math.max(progressionPercentage / progression_scaling_deviance, -1),
-      1,
-    );
-    // Round it and convert it into a percentage
-    progressionPercentage = Math.round(progressionPercentage * 1000) / 10;
+    const deviationFromExpected =
+      (current_expected_progression - progression_points) /
+      progression_scaling_deviance;
+    const clampedDeviation = Math.min(Math.max(deviationFromExpected, -1), 1);
+    const progressionPercentage = Math.round(clampedDeviation * 1000) / 10;
     return (
       <Window width={700} height={600} theme="syndicate">
         <Window.Content>
@@ -284,21 +267,16 @@ export class Uplink extends Component<any, UplinkState> {
             <Stack.Item>
               <Section fitted>
                 <Stack fill>
-<<<<<<< HEAD
-                  {!!has_progression && (
+                  {!!has_objectives && (
                     <Stack.Item p="4px">
                       <Tooltip
                         content={
                           <Box>
                             <Box>
                               <Box>Your current level of threat.</Box> Threat
-                              determines
-                              {has_objectives
-                                ? ' the severity of secondary objectives you get and '
-                                : ' '}
-                              what items you can purchase.&nbsp;
+                              determines the severity of secondary objectives
+                              you get.&nbsp;
                               <Box mt={0.5}>
-                                {/* A minute in deciseconds */}
                                 Threat passively increases by{' '}
                                 <Box color="green" as="span">
                                   {calculateProgression(
@@ -335,14 +313,11 @@ export class Uplink extends Component<any, UplinkState> {
                           </Box>
                         }
                       >
-                        {calculateDangerLevel(progression_points, false)}
+                        {calculateDangerLevel(progression_points)}
                       </Tooltip>
                     </Stack.Item>
                   )}
                   {!!(primary_objectives || has_objectives) && (
-=======
-                  {!!primary_objectives && (
->>>>>>> upstream/master
                     <Stack.Item grow={1}>
                       <Tabs fluid>
                         {primary_objectives && (
