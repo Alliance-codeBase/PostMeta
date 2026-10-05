@@ -559,16 +559,13 @@ export function LobbyMenu() {
         </LobbyElement>
 
         {[
-          {
-            id: 'poll',
-            left: -26,
-            enabled: !!ss.canPoll,
-            badge: ss.hasNewPoll,
-          },
+          // MASSMETA EDIT CHANGE BEGIN (modpacks)
+          { id: 'modpacks', left: -26 },
+          // MASSMETA EDIT CHANGE END
           { id: 'crew_manifest', left: 2 },
           { id: 'settings', left: 29, enabled: !!ss.assetsReady },
           { id: 'changelog', left: 57 },
-        ].map(({ id, left, enabled, badge }) => (
+        ].map(({ id, left, enabled }) => (
           <LobbyElement
             key={id}
             top={122}
@@ -580,11 +577,7 @@ export function LobbyMenu() {
               iconState={id}
               enabled={enabled}
               onClick={() => sendAction(id)}
-            >
-              {!!badge && (
-                <img className="lobby__badge" src={icon('new_poll')} alt="" />
-              )}
-            </SpriteButton>
+            />
           </LobbyElement>
         ))}
 
