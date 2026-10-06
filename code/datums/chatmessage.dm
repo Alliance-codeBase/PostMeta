@@ -150,6 +150,8 @@
 	var/chat_color_name_to_use
 
 	// Append radio icon if from a virtual speaker
+	//MASSMETA EDIT CHANGE BEGIN (runechat_icons)
+	/* ORIGINAL
 	if (extra_classes.Find("virtual-speaker"))
 		var/image/r_icon = image('icons/ui/chat/chat_icons.dmi', icon_state = "radio")
 		LAZYADD(prefixes, "\icon[r_icon]")
@@ -157,6 +159,13 @@
 		var/image/r_icon = image('icons/ui/chat/chat_icons.dmi', icon_state = "emote")
 		LAZYADD(prefixes, "\icon[r_icon]")
 		chat_color_name_to_use = target.get_visible_name(add_id_name = FALSE) // use face name for nonverbal messages
+	*/
+	if (extra_classes.Find("virtual-speaker"))
+		LAZYADD(prefixes, "\icon[get_chat_icon("radio")]")
+	else if (extra_classes.Find("emote"))
+		LAZYADD(prefixes, "\icon[get_chat_icon("emote")]")
+		chat_color_name_to_use = target.get_visible_name(add_id_name = FALSE)
+	//MASSMETA EDIT CHANGE END
 
 	if(isnull(chat_color_name_to_use))
 		if(HAS_TRAIT(target, TRAIT_SIGN_LANG))
