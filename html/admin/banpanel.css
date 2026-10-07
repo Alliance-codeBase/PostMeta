@@ -33,6 +33,12 @@
   background-color: #708090;
 }
 
+/* MASSMETA EDIT ADDITION BEGIN (explosives_ban) */
+.explosives {
+  background-color: #a0522d;
+}
+/* MASSMETA EDIT ADDITION END */
+
 .ghostandotherroles {
   background-color: #5c00e6;
 }
