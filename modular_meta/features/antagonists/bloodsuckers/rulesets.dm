@@ -26,12 +26,14 @@
 //                                          //
 //////////////////////////////////////////////
 
-/datum/dynamic_ruleset/midround/bloodsucker
+/datum/dynamic_ruleset/midround/from_living/bloodsucker
 	name = "Vampiric Accident"
 	config_tag = "Midround Bloodsucker"
 	midround_type = LIGHT_MIDROUND
+	jobban_flag = ROLE_TRAITOR
 	preview_antag_datum = /datum/antagonist/bloodsucker
 	pref_flag = ROLE_VAMPIRICACCIDENT
+	ruleset_flags = RULESET_VARIATION
 	min_pop = 15
 	weight = 3
 	max_antag_cap = list("denominator" = 24)
