@@ -197,9 +197,22 @@
 
 /// Called by the remove_antag_datum() and remove_all_antag_datums() mind procs for the antag datum to handle its own removal and deletion.
 /datum/antagonist/bloodsucker/on_removal()
-	UnregisterSignal(SSsunlight, list(COMSIG_SOL_RANKUP_BLOODSUCKERS, COMSIG_SOL_NEAR_START, COMSIG_SOL_END, COMSIG_SOL_RISE_TICK))
+	UnregisterSignal(SSsunlight, list(
+		COMSIG_SOL_RANKUP_BLOODSUCKERS,
+		COMSIG_SOL_NEAR_START,
+		COMSIG_SOL_END,
+		COMSIG_SOL_RISE_TICK,
+		COMSIG_SOL_WARNING_GIVEN,
+	))
 	clear_powers_and_stats()
 	check_cancel_sunlight() //check if sunlight should end
+	if(owner.has_crafting_recipe(/datum/crafting_recipe/vassalrack))
+		owner.forget_crafting_recipe(/datum/crafting_recipe/vassalrack)
+		owner.forget_crafting_recipe(/datum/crafting_recipe/candelabrum)
+		owner.forget_crafting_recipe(/datum/crafting_recipe/brazier)
+		owner.forget_crafting_recipe(/datum/crafting_recipe/bloodthrone)
+		owner.forget_crafting_recipe(/datum/crafting_recipe/blood_mirror)
+		owner.forget_crafting_recipe(/datum/crafting_recipe/meatcoffin)
 	return ..()
 
 /datum/antagonist/bloodsucker/on_body_transfer(mob/living/old_body, mob/living/new_body)
