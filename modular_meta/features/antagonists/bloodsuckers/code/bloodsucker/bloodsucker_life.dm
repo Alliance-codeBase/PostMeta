@@ -15,7 +15,7 @@
 	// Deduct Blood
 	if(!IS_UNCONSCIOUS_OR_CRIT(owner.current) && !HAS_TRAIT(owner.current, TRAIT_IMMOBILIZED) && !HAS_TRAIT(owner.current, TRAIT_NODEATH))
 		INVOKE_ASYNC(src, PROC_REF(AddBloodVolume), -BLOODSUCKER_PASSIVE_BLOOD_DRAIN) // -.1 currently
-	if(HandleHealing())
+	if(HandleHealing() && !owner.current.has_status_effect(/datum/status_effect/bloodsucker_sol))
 		if((COOLDOWN_FINISHED(src, bloodsucker_spam_healing)) && bloodsucker_blood_volume > 0)
 			to_chat(owner.current, span_notice("The power of your blood begins knitting your wounds..."))
 			COOLDOWN_START(src, bloodsucker_spam_healing, BLOODSUCKER_SPAM_HEALING)

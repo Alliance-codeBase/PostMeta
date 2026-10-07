@@ -28,6 +28,21 @@
 	mood_change = 15
 	timeout = 10 MINUTES
 
+/datum/mood_event/coffinsleep
+	description = span_nicegreen("I slept in a coffin during the day. I feel whole again.")
+	mood_change = 10
+	timeout = 6 MINUTES
+
+/datum/mood_event/daylight_1
+	description = span_boldwarning("I slept poorly in a makeshift coffin during the day.")
+	mood_change = -3
+	timeout = 6 MINUTES
+
+/datum/mood_event/daylight_2
+	description = span_boldwarning("I have been scorched by the unforgiving rays of the sun.")
+	mood_change = -6
+	timeout = 6 MINUTES
+
 ///Candelabrum's mood event to non Bloodsucker/Vassals
 /datum/mood_event/vampcandle
 	description = span_boldwarning("Something is making your mind feel... loose.")

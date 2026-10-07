@@ -25,8 +25,6 @@
 	var/obj/structure/bloodsucker/blood_structure_in_use = null
 
 	// TIMERS //
-	///Timer between alerts for Burn messages
-	COOLDOWN_DECLARE(bloodsucker_spam_sol_burn)
 	///Timer between alerts for Healing messages
 	COOLDOWN_DECLARE(bloodsucker_spam_healing)
 
@@ -139,21 +137,20 @@
 	UnregisterSignal(current_mob, list(COMSIG_LIVING_LIFE, COMSIG_ATOM_EXAMINE, COMSIG_LIVING_DEATH))
 	handle_clown_mutation(current_mob, removing = FALSE)
 
-	if(!current_mob.hud_used)
-		return
-
-	var/datum/hud/bloodsucker_hud = current_mob.hud_used
-	bloodsucker_hud.remove_screen_object(HUD_BLOODSUCKER_BLOOD)
-	bloodsucker_hud.remove_screen_object(HUD_BLOODSUCKER_VAMPRANK)
-	bloodsucker_hud.remove_screen_object(HUD_BLOODSUCKER_SUNLIGHT)
+	if(current_mob.hud_used)
+		var/datum/hud/bloodsucker_hud = current_mob.hud_used
+		bloodsucker_hud.remove_screen_object(HUD_BLOODSUCKER_BLOOD, update = FALSE)
+		bloodsucker_hud.remove_screen_object(HUD_BLOODSUCKER_VAMPRANK, update = FALSE)
+		bloodsucker_hud.remove_screen_object(HUD_BLOODSUCKER_SUNLIGHT)
 
 /datum/antagonist/bloodsucker/proc/on_hud_created(datum/source)
 	SIGNAL_HANDLER
-	var/datum/hud/bloodsucker_hud = owner.current.hud_used
+	UnregisterSignal(owner.current, COMSIG_MOB_HUD_CREATED)
 
+	var/datum/hud/bloodsucker_hud = owner.current.hud_used
 	bloodsucker_hud.add_screen_object(/atom/movable/screen/bloodsucker/blood_counter, HUD_BLOODSUCKER_BLOOD, HUD_GROUP_INFO)
 	bloodsucker_hud.add_screen_object(/atom/movable/screen/bloodsucker/rank_counter, HUD_BLOODSUCKER_VAMPRANK, HUD_GROUP_INFO)
-	bloodsucker_hud.add_screen_object(/atom/movable/screen/bloodsucker/sunlight_counter, HUD_BLOODSUCKER_SUNLIGHT, HUD_GROUP_INFO)
+	bloodsucker_hud.add_screen_object(/atom/movable/screen/bloodsucker/sunlight_counter, HUD_BLOODSUCKER_SUNLIGHT, HUD_GROUP_INFO, update_screen = TRUE)
 
 /datum/antagonist/bloodsucker/get_admin_commands()
 	. = ..()
@@ -175,6 +172,9 @@
 ///The signals registered with the sol subsystem here are reregistered on mind transfer.
 /datum/antagonist/bloodsucker/on_gain()
 	RegisterSignal(SSsunlight, COMSIG_SOL_RANKUP_BLOODSUCKERS, PROC_REF(sol_rank_up))
+	RegisterSignal(SSsunlight, COMSIG_SOL_NEAR_START, PROC_REF(sol_near_start))
+	RegisterSignal(SSsunlight, COMSIG_SOL_END, PROC_REF(on_sol_end))
+	RegisterSignal(SSsunlight, COMSIG_SOL_RISE_TICK, PROC_REF(handle_sol))
 	RegisterSignal(SSsunlight, COMSIG_SOL_WARNING_GIVEN, PROC_REF(give_warning))
 
 	if(IS_FAVORITE_VASSAL(owner.current)) // Vassals shouldnt be getting the same benefits as Bloodsuckers.
