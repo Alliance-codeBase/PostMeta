@@ -276,23 +276,19 @@ img {
 }
 
 // MASSMETA EDIT ADDITION START (init_text)
-$title-screen-height: 480;
-
-@function title-screen-px($map-pixels) {
-  @return calc(100vh * #{$map-pixels} / #{$title-screen-height});
-}
+$init-text-line-size: 5vh;
 
 .lobby__init-text {
   position: absolute;
-  top: title-screen-px(12);
-  left: title-screen-px(12);
-  width: title-screen-px(200);
+  left: 2.5vh;
+  bottom: 2.5vh;
   font-family: 'Grand9K Pixel Rus', monospace;
-  font-size: title-screen-px(6);
+  font-size: $init-text-line-size;
   line-height: 1;
   color: white;
-  -webkit-text-stroke: title-screen-px(2) black;
+  -webkit-text-stroke: 0.4vh black;
   paint-order: stroke fill;
+  white-space: nowrap;
   pointer-events: none;
   transition: opacity 3s;
 
@@ -302,8 +298,8 @@ $title-screen-height: 480;
 }
 
 .lobby__init-text-title {
-  margin-bottom: title-screen-px(6);
+  margin-bottom: $init-text-line-size;
   font-family: 'Pix Cyrillic', monospace;
-  font-size: title-screen-px(12);
+  font-size: 2 * $init-text-line-size;
 }
 // MASSMETA EDIT ADDITION END (init_text)
