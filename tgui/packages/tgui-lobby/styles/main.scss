@@ -274,3 +274,36 @@ img {
     transform: translateY(s(-8px));
   }
 }
+
+// MASSMETA EDIT ADDITION START (init_text)
+$title-screen-height: 480;
+
+@function title-screen-px($map-pixels) {
+  @return calc(100vh * #{$map-pixels} / #{$title-screen-height});
+}
+
+.lobby__init-text {
+  position: absolute;
+  top: title-screen-px(12);
+  left: title-screen-px(12);
+  width: title-screen-px(200);
+  font-family: 'Grand9K Pixel Rus', monospace;
+  font-size: title-screen-px(6);
+  line-height: 1;
+  color: white;
+  -webkit-text-stroke: title-screen-px(2) black;
+  paint-order: stroke fill;
+  pointer-events: none;
+  transition: opacity 3s;
+
+  &--faded {
+    opacity: 0;
+  }
+}
+
+.lobby__init-text-title {
+  margin-bottom: title-screen-px(6);
+  font-family: 'Pix Cyrillic', monospace;
+  font-size: title-screen-px(12);
+}
+// MASSMETA EDIT ADDITION END (init_text)
