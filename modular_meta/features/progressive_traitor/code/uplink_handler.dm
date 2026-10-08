@@ -1,4 +1,6 @@
 /datum/uplink_handler
+	var/has_progression = FALSE
+	var/progression_points = 0
 	/// Whether this uplink handler has objectives.
 	var/has_objectives = TRUE
 	/// Whether this uplink handler can TAKE objectives.

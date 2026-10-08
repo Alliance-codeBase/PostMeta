@@ -42,7 +42,6 @@ type UplinkItem = {
   stock_key: string;
   restricted_roles: string;
   restricted_species: string;
-  progression_minimum: number;
   population_minimum: number;
   cost_override_string: string;
   lock_other_purchases: BooleanLike;
@@ -70,7 +69,6 @@ type UplinkData = {
   };
 
   has_objectives: BooleanLike;
-  has_progression: BooleanLike;
   primary_objectives: {
     [key: number]: string;
   };
@@ -133,15 +131,6 @@ export class Uplink extends Component<any, UplinkState> {
     const uplinkSpecies = data.assigned_species;
 
     const uplinkData = await fetchServerData;
-    uplinkData.items = uplinkData.items.sort((a, b) => {
-      if (a.progression_minimum < b.progression_minimum) {
-        return -1;
-      }
-      if (a.progression_minimum > b.progression_minimum) {
-        return 1;
-      }
-      return 0;
-    });
 
     const availableCategories: string[] = [];
     uplinkData.items = uplinkData.items.filter((value) => {
@@ -193,13 +182,12 @@ export class Uplink extends Component<any, UplinkState> {
       active_objectives,
       potential_objectives,
       has_objectives,
-      has_progression,
       //MASSMETA EDIT CHANGE START (progressive_traitor)
       maximum_active_objectives,
       maximum_potential_objectives,
       current_expected_progression,
       progression_scaling_deviance,
-      //MASSMETA EDIT CHANGE START (progressive_traitor)
+      //MASSMETA EDIT CHANGE END (progressive_traitor)
       current_progression_scaling,
       extra_purchasable,
       extra_purchasable_stock,
@@ -220,8 +208,6 @@ export class Uplink extends Component<any, UplinkState> {
     }
     for (let i = 0; i < itemsToAdd.length; i++) {
       const item = itemsToAdd[i];
-      const hasEnoughProgression =
-        progression_points >= item.progression_minimum;
       const hasEnoughPop =
         !joined_population || joined_population >= item.population_minimum;
 
@@ -252,21 +238,7 @@ export class Uplink extends Component<any, UplinkState> {
               null}
           </>
         ),
-        cost: (
-          <Box>
-            {item.cost_override_string || `${item.cost} TC`}
-            {has_progression ? (
-              <>
-                ,&nbsp;
-                <Box as="span">
-                  {calculateDangerLevel(item.progression_minimum, true)}
-                </Box>
-              </>
-            ) : (
-              ''
-            )}
-          </Box>
-        ),
+        cost: <Box>{item.cost_override_string || `${item.cost} TC`}</Box>,
         population_tooltip:
           'This item is not cleared for operations performed against stations crewed by fewer than ' +
           item.population_minimum +
@@ -275,7 +247,6 @@ export class Uplink extends Component<any, UplinkState> {
         disabled:
           !canBuy ||
           !hasEnoughPop ||
-          (has_progression && !hasEnoughProgression) ||
           (item.lock_other_purchases && purchased_items > 0),
         extraData: {
           ref: item.ref,
@@ -284,17 +255,11 @@ export class Uplink extends Component<any, UplinkState> {
         },
       });
     }
-    // Get the difference between the current progression and
-    // expected progression
-    let progressionPercentage =
-      current_expected_progression - progression_points;
-    // Clamp it down between 0 and 2
-    progressionPercentage = Math.min(
-      Math.max(progressionPercentage / progression_scaling_deviance, -1),
-      1,
-    );
-    // Round it and convert it into a percentage
-    progressionPercentage = Math.round(progressionPercentage * 1000) / 10;
+    const deviationFromExpected =
+      (current_expected_progression - progression_points) /
+      progression_scaling_deviance;
+    const clampedDeviation = Math.min(Math.max(deviationFromExpected, -1), 1);
+    const progressionPercentage = Math.round(clampedDeviation * 1000) / 10;
     return (
       <Window width={700} height={600} theme="syndicate">
         <Window.Content>
@@ -302,20 +267,16 @@ export class Uplink extends Component<any, UplinkState> {
             <Stack.Item>
               <Section fitted>
                 <Stack fill>
-                  {!!has_progression && (
+                  {!!has_objectives && (
                     <Stack.Item p="4px">
                       <Tooltip
                         content={
                           <Box>
                             <Box>
                               <Box>Your current level of threat.</Box> Threat
-                              determines
-                              {has_objectives
-                                ? ' the severity of secondary objectives you get and '
-                                : ' '}
-                              what items you can purchase.&nbsp;
+                              determines the severity of secondary objectives
+                              you get.&nbsp;
                               <Box mt={0.5}>
-                                {/* A minute in deciseconds */}
                                 Threat passively increases by{' '}
                                 <Box color="green" as="span">
                                   {calculateProgression(
@@ -352,7 +313,7 @@ export class Uplink extends Component<any, UplinkState> {
                           </Box>
                         }
                       >
-                        {calculateDangerLevel(progression_points, false)}
+                        {calculateDangerLevel(progression_points)}
                       </Tooltip>
                     </Stack.Item>
                   )}

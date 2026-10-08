@@ -5,7 +5,7 @@ This guide will only explain progression values.
 
 ## Definitions
 
-- Progression points OR Progression - A currency that controls what uplink items a player can purchase and what objectives they have accessible to them. Gained passively or by completing objectives and has diminishing returns as it strays from the expected progression
+- Progression points OR Progression - A currency that controls what objectives a player has accessible to them. Gained passively or by completing objectives and has diminishing returns as it strays from the expected progression
 - Expected Progression - A global value that increments by a value of 1 minute every minute, representing the 'time' that a player should be at if they had not completed any objectives.
 - Objectives - An activity or job that a player can take for rewards such as TC and progression points.
 - Player - The user(s) that are playing as the antagonist in this new system.
@@ -28,7 +28,7 @@ Objectives are worth a certain amount of progression points, determined by the c
 ### The traitor subsystem
 - `newjoin_progression_coeff` - The coefficient multiplied by the expected progression for new joining traitors to calculate their starting progression, so that they don't start from scratch
 - `progression_scaling_deviance` - The value that the entire system revolves around. This determines how your disadvantages are calculated, if you stray from the expected progression. Having a progression value that is `progression_scaling_deviance` minutes off of the expected progression means that you won't get any progression at all, and if objectives were configured to suit this, you'd have the highest reduction you can possibly get. From the expected progression to this value, it scales linearly and it also works in the opposite direction.
-- `current_progression_scaling` - Defined at compile time, this determines how fast expected progression scales. So if you have it set to 0.5 MINUTES, it'll take twice as long to unlock uplink items and new objectives.
+- `current_progression_scaling` - Defined at compile time, this determines how fast expected progression scales. So if you have it set to 0.5 MINUTES, it'll take twice as long to unlock new objectives.
 - `CONFIG:TRAITOR_IDEAL_PLAYER_COUNT` - The ideal player count before expected progression stops increasing. If the living player list gets below this value, the current progression scaling will be multiplied by player_count/traitor_ideal_player_count. In essence, this makes it so that progression scales more slowly when there isn't a lot of people alive.
 
 If you want to balance how fast the system progresses, you should look at modifying `current_progression_scaling`. If you want to balance how far someone should be allowed to deviate, you should look at modifying `progression-scaling-deviance`
@@ -43,14 +43,11 @@ If you want to balance how fast the system progresses, you should look at modify
 
 If you want to balance the expected timeframe an objective should be available, you should look at changing the `progression_minimum` or `progression_maximum`. If you want to balance how much objectives reward, you may want to look at modifying `progression_reward`. If you want to look at balancing the cost of an objective depending on the expected progression, you may want to look at `global_progression_influence_intensity`. If you want to look at decreasing or increasing the deviance allowed before objectives become worthless progression-wise, you may want to look at modifying `global_progression_deviance_required`
 
-### Uplink Items
-- `progression_minimum` - The minimum number of progression points required to purchase this uplink item.
-
 ## What NOT to do when balancing
 
 ### Overcompensate
 
-You do not want to overcompensate variables such as `progression_minimum` and `progression_maximum`. Such values need to be an accurate representation of roughly around the time a player should unlock the objective or uplink item. progression_scaling_deviance is supposed to represents the limit that a casual player can be at before it becomes significantly harder for them to progress throughout. You should expect people to be within `progression_scaling_deviance` + `progression_scaling_deviance` * `global_progression_deviance_required`. (Assuming `progression_scaling_deviance` is 20 minutes and `progression_scaling_deviance_required` is 0.5, 20 + 0.5 * 20 = 30; this gives us a value of 30 minutes). This is the expected deviance.
+You do not want to overcompensate variables such as `progression_minimum` and `progression_maximum`. Such values need to be an accurate representation of roughly around the time a player should unlock the objective. progression_scaling_deviance is supposed to represents the limit that a casual player can be at before it becomes significantly harder for them to progress throughout. You should expect people to be within `progression_scaling_deviance` + `progression_scaling_deviance` * `global_progression_deviance_required`. (Assuming `progression_scaling_deviance` is 20 minutes and `progression_scaling_deviance_required` is 0.5, 20 + 0.5 * 20 = 30; this gives us a value of 30 minutes). This is the expected deviance.
 
 ### Reward large amounts of progression points
 

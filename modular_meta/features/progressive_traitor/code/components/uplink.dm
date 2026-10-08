@@ -3,7 +3,6 @@
 	enabled = FALSE,
 	uplink_flag = UPLINK_TRAITORS,
 	starting_tc = TELECRYSTALS_DEFAULT,
-	has_progression = FALSE,
 	datum/uplink_handler/uplink_handler_override,)
 
 	. = ..()
@@ -67,6 +66,8 @@
 		.["completed_final_objective"] = uplink_handler.final_objective
 		.["maximum_active_objectives"] = uplink_handler.maximum_active_objectives
 		.["maximum_potential_objectives"] = uplink_handler.maximum_potential_objectives
+		.["progression_points"] = uplink_handler.progression_points
+		.["current_progression_scaling"] = SStraitor.current_progression_scaling
 		.["current_expected_progression"] = SStraitor.current_global_progression
 		.["progression_scaling_deviance"] = SStraitor.progression_scaling_deviance
 
