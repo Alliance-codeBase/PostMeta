@@ -74,7 +74,8 @@
 		<br>\
 		The hammer remains in production. Replacement handles are sold separately.")
 
-/obj/item/sledgehammer/afterattack(mob/living/target_mob, mob/living/user, list/modifiers, list/attack_modifiers)
+/obj/item/sledgehammer/afterattack(atom/target, mob/living/user, list/modifiers, list/attack_modifiers)
+	var/mob/living/target_mob = target
 	var/atom/throw_target =  get_edge_target_turf(target_mob, get_dir(src, get_step_away(target_mob, src)))
 	if(QDELETED(target_mob))
 		return
@@ -97,6 +98,20 @@
 				target_mob.throw_at(throw_target, 6, 2)
 				target_mob.Stun(1.5 SECONDS)
 				target_mob.Knockdown(4 SECONDS)
+
+	if(!HAS_TRAIT(src, TRAIT_WIELDED)) //destroys windows and grilles in one hit
+		return
+
+	if(target.resistance_flags & INDESTRUCTIBLE)
+		return
+	if(QDELETED(target))
+		return
+	if(istype(target, /obj/structure/window) || istype(target, /obj/structure/grille))
+		target.atom_destruction("sledgehammer")
+		user.do_attack_animation(target, used_item = src)
+		user.changeNext_move(attack_speed)
+		return TRUE
+
 
 	charge_bonus = 0
 	force = HAS_TRAIT(src, TRAIT_WIELDED) ? force_wielded : force_unwielded
@@ -171,24 +186,14 @@
 		playsound(target, pick('sound/effects/meteorimpact.ogg', 'sound/effects/bang.ogg'), 50)
 
 
-	if(!HAS_TRAIT(src, TRAIT_WIELDED)) //destroys windows and grilles in one hit
-		return
-	if(target.resistance_flags & INDESTRUCTIBLE)
-		return
-	if(QDELETED(target))
-		return
-	if(istype(target, /obj/structure/window) || istype(target, /obj/structure/grille))
-		target.atom_destruction("sledgehammer")
-		return TRUE
-
 	if(istype(target, /turf/closed/wall/r_wall))
-		var/turf/closed/wall/wall = TRUE
+		var/turf/closed/wall/wall = target
 		wall.add_dent(WALL_DENT_HIT)
 		wall.Shake(1, 3, 0.1 SECONDS, 0.1 SECONDS)
 		user.changeNext_move(attack_speed)
 		user.do_attack_animation(target, used_item = src)
 		playsound(target, pick('sound/effects/meteorimpact.ogg', 'sound/effects/bang.ogg'), 50)
-		if(prob(15))
+		if(prob(25))
 			wall.dismantle_wall(TRUE)
 		return TRUE
 
@@ -231,15 +236,12 @@
 	if(slot != ITEM_SLOT_HANDS)
 		return
 
+	if(!user.client)
+		return
+
 	RegisterSignal(user.client, COMSIG_CLIENT_MOUSEDOWN, PROC_REF(on_mouse_down))
 	RegisterSignal(user.client, COMSIG_CLIENT_MOUSEUP, PROC_REF(on_mouse_up))
 
-/obj/item/sledgehammer/pickup(mob/user)
-	. = ..()
-	if(user.client)
-		//RegisterSignal(user, COMSIG_MOB_KEYDOWN, PROC_REF(on_key_down))
-		RegisterSignal(user.client, COMSIG_CLIENT_MOUSEDOWN, PROC_REF(on_mouse_down))
-		RegisterSignal(user.client, COMSIG_CLIENT_MOUSEUP, PROC_REF(on_mouse_up))
 
 /obj/item/sledgehammer/dropped(mob/user, silent = FALSE)
 	if(user.client)
