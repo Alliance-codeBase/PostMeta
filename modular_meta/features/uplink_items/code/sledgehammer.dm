@@ -8,7 +8,7 @@
 	righthand_file = 'modular_meta/features/uplink_items/icons/weapon/sledgehammer/mob/inhands/weapons/hammers_righthand.dmi'
 	force = 10
 	throwforce = 10
-	demolition_mod = 1.25
+	demolition_mod = 1.6
 	w_class = WEIGHT_CLASS_BULKY
 	slot_flags = ITEM_SLOT_BACK
 	attack_verb_continuous = list("attacks", "smashes", "slams", "breaks", "wrecks", "obliterates")
@@ -162,6 +162,48 @@
 	if(.)
 		return .
 
+	// silicon dismantling device 3000
+	if(issilicon(target))
+		force += 25
+
+	if(ismecha(target))
+		force += 25
+		playsound(pick('sound/effects/meteorimpact.ogg', 'sound/effects/bang.ogg'), 50)
+
+
+	if(!HAS_TRAIT(src, TRAIT_WIELDED)) //destroys windows and grilles in one hit
+		return
+	if(target.resistance_flags & INDESTRUCTIBLE)
+		return
+	if(QDELETED(target))
+		return
+	if(istype(target, /obj/structure/window) || istype(target, /obj/structure/grille))
+		target.atom_destruction("sledgehammer")
+		return TRUE
+
+	if(istype(target, /turf/closed/wall/r_wall))
+		var/turf/closed/wall/wall = TRUE
+		wall.add_dent(WALL_DENT_HIT)
+		wall.Shake(1, 3, 0.1 SECONDS, 0.1 SECONDS)
+		user.changeNext_move(attack_speed)
+		user.do_attack_animation(target, used_item = src)
+		playsound(target, pick('sound/effects/meteorimpact.ogg', 'sound/effects/bang.ogg'), 50)
+		if(prob(15))
+			wall.dismantle_wall(TRUE)
+		return TRUE
+
+
+	else if(istype(target, /turf/closed/wall))
+		var/turf/closed/wall/wall = target
+		wall.add_dent(WALL_DENT_HIT)
+		wall.Shake(null, 3, 0.1 SECONDS, 0.1 SECONDS)
+		user.changeNext_move(attack_speed)
+		user.do_attack_animation(target, used_item = src)
+		playsound(target, pick('sound/effects/meteorimpact.ogg', 'sound/effects/bang.ogg'), 50)
+		if(prob(40))
+			wall.dismantle_wall(TRUE)
+		return TRUE
+
 	if(!iscarbon(target))
 		return FALSE
 
@@ -181,6 +223,16 @@
 		return TRUE // cancels attack chain after headbash
 
 	return FALSE
+
+
+/obj/item/sledgehammer/equipped(mob/user, slot, initial = FALSE)
+	. = ..()
+
+	if(slot != ITEM_SLOT_HANDS)
+		return
+
+	RegisterSignal(user.client, COMSIG_CLIENT_MOUSEDOWN, PROC_REF(on_mouse_down))
+	RegisterSignal(user.client, COMSIG_CLIENT_MOUSEUP, PROC_REF(on_mouse_up))
 
 /obj/item/sledgehammer/pickup(mob/user)
 	. = ..()
