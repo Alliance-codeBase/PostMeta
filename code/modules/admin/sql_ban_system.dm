@@ -348,7 +348,12 @@
 			break_counter = 0
 
 		var/list/other_job_lists = list(
+			//MASSMETA EDIT CHANGE BEGIN (communication_bans)
+			/* ORIGINAL
 			"Abstract" = list("Appearance", "Emote", "Deadchat", "OOC", "Urgent Adminhelp"),
+			*/
+			"Abstract" = list("Appearance", "Emote", "Deadchat", "OOC", "Urgent Adminhelp", BAN_SAY, BAN_ADMINHELP),
+			//MASSMETA EDIT CHANGE END
 			)
 		for(var/department in other_job_lists)
 			output += "<div class='column'><label class='rolegroup [ckey(department)]'><input type='checkbox' name='[department]' class='hidden' onClick='header_click_all_checkboxes(this)'>[department]</label><div class='content'>"
