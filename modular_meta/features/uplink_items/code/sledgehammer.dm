@@ -9,8 +9,7 @@
 	force = 10
 	throwforce = 10
 	demolition_mod = 1.6
-	w_class = WEIGHT_CLASS_BULKY
-	slot_flags = ITEM_SLOT_BACK
+	w_class = WEIGHT_CLASS_HUGE
 	attack_verb_continuous = list("attacks", "smashes", "slams", "breaks", "wrecks", "obliterates")
 	attack_verb_simple = list("attack", "smash",  "slam", "wreck", "break", "obliterate")
 	hitsound = 'sound/items/weapons/genhit3.ogg'
