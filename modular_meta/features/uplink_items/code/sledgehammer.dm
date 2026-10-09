@@ -31,6 +31,7 @@
 	var/force_wielded = 18
 	var/force_unwielded = 10
 	attack_speed = 1.5 SECONDS
+	var/static/list/slam_verbs = list("slams", "smashes", "rams")
 	var/static/list/phrases = list(
 	"Your grip is still unsteady.",
 	"You tighten your grip on the sledgehammer.",
@@ -192,6 +193,12 @@
 		wall.Shake(1, 3, 0.1 SECONDS, 0.1 SECONDS)
 		user.changeNext_move(attack_speed)
 		user.do_attack_animation(target, used_item = src)
+
+		user.visible_message(
+			span_danger("[user] [pick(slam_verbs)] [src] against [target]!"),
+			span_danger("You slam [src] against [target]!"),
+			)
+
 		playsound(target, pick('sound/effects/meteorimpact.ogg', 'sound/effects/bang.ogg'), 50)
 		if(prob(25))
 			wall.dismantle_wall(TRUE)
@@ -204,6 +211,13 @@
 		wall.Shake(null, 3, 0.1 SECONDS, 0.1 SECONDS)
 		user.changeNext_move(attack_speed)
 		user.do_attack_animation(target, used_item = src)
+
+		user.visible_message(
+			span_danger("[user] [pick(slam_verbs)] [src] against [target]!"),
+			span_danger("You slam [src] against [target]!"),
+			)
+
+
 		playsound(target, pick('sound/effects/meteorimpact.ogg', 'sound/effects/bang.ogg'), 50)
 		if(prob(40))
 			wall.dismantle_wall(TRUE)
