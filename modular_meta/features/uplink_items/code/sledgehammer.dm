@@ -24,10 +24,9 @@
 	var/next_charge
 	var/charging = FALSE
 	var/mouse_held = FALSE
-	var/knockback_bonus
 	var/max_charge = 6
 	var/min_charge = 1
-	var/force_per_charge = 6
+	var/force_per_charge = 8
 	var/wound_bonus_per_charge = 1.5
 	var/force_wielded = 18
 	var/force_unwielded = 10
@@ -37,7 +36,7 @@
 	"You draw the sledgehammer back.",
 	"The weight settles into your hands.",
 	"Your arms tense for a crushing blow.",
-	"You're ready to bring the sledgehammer down.",
+	"You're ready to strike with full force.",
 )
 
 /obj/item/sledgehammer/Initialize(mapload)
@@ -75,6 +74,8 @@
 
 	charge_bonus = 0
 	force = HAS_TRAIT(src, TRAIT_WIELDED) ? force_wielded : force_unwielded
+	throwforce = /obj/item/sledgehammer::throwforce
+	wound_bonus = /obj/item/sledgehammer::wound_bonus
 
 /obj/item/sledgehammer/update_icon_state()
 	icon_state = base_icon_state
@@ -86,6 +87,7 @@
 		'sound/items/weapons/genhit2.ogg',
 		'sound/items/weapons/genhit3.ogg',
 	)
+
 	if(HAS_TRAIT(src, TRAIT_WIELDED) && isliving(target))
 		wound_bonus = 15
 		force = force_wielded
@@ -127,6 +129,32 @@
 				throwforce += force_per_charge * 6
 				wound_bonus += wound_bonus_per_charge * 6
 	..()
+
+
+/obj/item/sledgehammer/pre_attack(atom/target, mob/user, list/modifiers, list/attack_modifiers)
+	. = ..()
+	if(.)
+		return .
+
+	if(!iscarbon(target))
+		return FALSE
+
+
+	var/mob/living/carbon/person_about_to_die_horribly = target
+	var/mob/living/carbon/madman = user
+	var/obj/item/bodypart/head/head = person_about_to_die_horribly.get_bodypart(BODY_ZONE_HEAD)
+
+	if(!person_about_to_die_horribly)
+		return
+
+	if(!head)
+		return
+
+	if((person_about_to_die_horribly.stat == SOFT_CRIT || person_about_to_die_horribly.stat == HARD_CRIT || madman.grab_state == GRAB_NECK) && check_zone(madman.zone_selected) == BODY_ZONE_HEAD)
+		bash_head(person_about_to_die_horribly, madman)
+		return TRUE // cancels attack chain after headbash
+
+	return FALSE
 
 /obj/item/sledgehammer/pickup(mob/user)
 	. = ..()
@@ -195,9 +223,36 @@
 	if(!mouse_held)
 		return FALSE
 
-	while(world.time >= next_charge)
+	while(world.time >= next_charge && charge_bonus < max_charge)
 		charge_bonus++
 		charge_bonus = clamp(charge_bonus, min_charge, max_charge)
-		next_charge = world.time + 1 SECONDS
-		to_chat(user, "debug: current charge is [charge_bonus]")
+		next_charge += 1 SECONDS
 	return TRUE
+
+/obj/item/sledgehammer/proc/bash_head(mob/living/carbon/target, mob/living/user)
+	var/obj/item/bodypart/head/head = target.get_bodypart(BODY_ZONE_HEAD)
+	user.spin(spintime = 2 SECONDS, speed = 1)
+
+	user.visible_message(
+		span_danger("[user] winds up [src], preparing to crush [target]'s head!"),
+		span_alert("You wind up [src], preparing to crush [target]'s head!"),
+	)
+
+	if(!do_after(user, 2.5 SECONDS, target))
+		return
+	if(QDELETED(target) || QDELETED(head) || head.owner != target)
+		return
+
+	user.do_attack_animation(target, used_item = src)
+	playsound(target, pick('modular_meta/features/uplink_items/sound/sledgehammer/flesh_hit1.ogg', 'modular_meta/features/uplink_items/sound/sledgehammer/flesh_hit2.ogg'), 80, TRUE)
+	target.apply_damage(force * 3, BRUTE, head, wound_bonus = 50, attacking_item = src)
+	head.throw_range = 6
+	head.throw_speed = 1
+	head.AddElement(/datum/element/effect_trail, /obj/effect/decal/cleanable/blood/splatter)
+	head.dismember(silent = FALSE)
+	charge_bonus = 0
+	addtimer(CALLBACK(src, PROC_REF(rm_element), head), 2 SECONDS)
+
+/obj/item/sledgehammer/proc/rm_element(obj/item/bodypart/head/head)
+	if(!QDELETED(head))
+		head.RemoveElement(/datum/element/effect_trail, /obj/effect/decal/cleanable/blood/splatter)
