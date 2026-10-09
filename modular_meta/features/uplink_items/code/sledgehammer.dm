@@ -6,8 +6,8 @@
 	base_icon_state = "sledgehammer"
 	lefthand_file = 'modular_meta/features/uplink_items/icons/weapon/sledgehammer/mob/inhands/weapons/hammers_lefthand.dmi'
 	righthand_file = 'modular_meta/features/uplink_items/icons/weapon/sledgehammer/mob/inhands/weapons/hammers_righthand.dmi'
-	force = 15
-	throwforce = 15
+	force = 10
+	throwforce = 10
 	demolition_mod = 1.25
 	w_class = WEIGHT_CLASS_BULKY
 	slot_flags = ITEM_SLOT_BACK
@@ -27,13 +27,24 @@
 	var/knockback_bonus
 	var/max_charge = 6
 	var/min_charge = 1
-	var/force_per_charge = 4
+	var/force_per_charge = 6
 	var/wound_bonus_per_charge = 1.5
+	var/force_wielded = 18
+	var/force_unwielded = 10
+	var/static/list/phrases = list(
+	"Your grip is still unsteady.",
+	"You tighten your grip on the sledgehammer.",
+	"You draw the sledgehammer back.",
+	"The weight settles into your hands.",
+	"Your arms tense for a crushing blow.",
+	"You're ready to bring the sledgehammer down.",
+)
 
 /obj/item/sledgehammer/Initialize(mapload)
 	. = ..()
 	AddComponent(/datum/component/two_handed, \
-		force_multiplier = 5, \
+		force_wielded = force_wielded, \
+		force_unwielded = force_unwielded, \
 		icon_wielded = "[base_icon_state]1", \
 		attacksound = SFX_SWING_HIT, \
 	)
@@ -63,11 +74,11 @@
 				target_mob.Knockdown(4 SECONDS)
 
 	charge_bonus = 0
+	force = HAS_TRAIT(src, TRAIT_WIELDED) ? force_wielded : force_unwielded
 
-/obj/item/sledgehammer/dropped(mob/user, silent)
-	. = ..()
-	charge_bonus = 0
-
+/obj/item/sledgehammer/update_icon_state()
+	icon_state = base_icon_state
+	return ..()
 
 /obj/item/sledgehammer/attack(atom/target, mob/user, list/modifiers, list/attack_modifiers)
 	hitsound = pick(
@@ -77,7 +88,7 @@
 	)
 	if(HAS_TRAIT(src, TRAIT_WIELDED) && isliving(target))
 		wound_bonus = 15
-		force = 18
+		force = force_wielded
 		if(issilicon(target))
 			hitsound = pick(
 				'modular_meta/features/uplink_items/sound/sledgehammer/metal_hit.ogg',
@@ -96,23 +107,23 @@
 				throwforce += force_per_charge
 				wound_bonus += wound_bonus_per_charge
 			if(2)
-				force = force_per_charge * 2
+				force += force_per_charge * 2
 				throwforce += force_per_charge * 2
 				wound_bonus += wound_bonus_per_charge * 2
 			if(3)
-				force = force_per_charge * 3
+				force += force_per_charge * 3
 				throwforce += force_per_charge *3
 				wound_bonus += wound_bonus_per_charge * 3
 			if(4)
-				force = force_per_charge * 4
+				force += force_per_charge * 4
 				throwforce += force_per_charge *4
 				wound_bonus += wound_bonus_per_charge *4
 			if(5)
-				force = force_per_charge * 5
+				force += force_per_charge * 5
 				throwforce += force_per_charge *5
 				wound_bonus += wound_bonus_per_charge * 5
 			if(6)
-				force = force_per_charge * 6
+				force += force_per_charge * 6
 				throwforce += force_per_charge * 6
 				wound_bonus += wound_bonus_per_charge * 6
 	..()
@@ -129,8 +140,8 @@
 		//UnregisterSignal(user, COMSIG_MOB_KEYDOWN)
 		UnregisterSignal(user.client, COMSIG_CLIENT_MOUSEDOWN)
 		UnregisterSignal(user.client, COMSIG_CLIENT_MOUSEUP)
+		charge_bonus = 0
 	return ..()
-
 
 
 /obj/item/sledgehammer/proc/on_mouse_up(client/player, object, location, control, params)
@@ -139,6 +150,7 @@
 	var/list/mods = params2list(params)
 	if(mods[BUTTON] == RIGHT_CLICK)
 		mouse_held = FALSE
+		to_chat(player.mob, span_notice("[phrases[charge_bonus]]"))
 
 /obj/item/sledgehammer/proc/on_mouse_down(client/player, object, location, control, params)
 	SIGNAL_HANDLER
@@ -147,12 +159,11 @@
 	if(mods[BUTTON] != RIGHT_CLICK)
 		return
 
-	var/mob/user = player.mob
-	if(!iscarbon(user) || !user.is_holding(src) || charging)
+	var/mob/living/user = player.mob
+	if(!iscarbon(user) || user.get_active_held_item() != src || charging)
 		return
 
 	INVOKE_ASYNC(src, PROC_REF(begin_charging_attack), user)
-
 
 /obj/item/sledgehammer/proc/begin_charging_attack(mob/living/carbon/user)
 	user = loc
@@ -173,18 +184,10 @@
 
 	charge_bonus = 0
 	next_charge = world.time + 1 SECONDS
-	var/charging_attack = do_after(user, 6 SECONDS, src, extra_checks = CALLBACK(src, PROC_REF(charge_tick), user), timed_action_flags = IGNORE_USER_LOC_CHANGE)
+	do_after(user, 6 SECONDS, src, extra_checks = CALLBACK(src, PROC_REF(charge_tick), user), timed_action_flags = IGNORE_USER_LOC_CHANGE)
 	charging = FALSE
 	mouse_held = FALSE
 
-	var/static/list/phrases = list(
-	"Your grip is still unsteady.",
-	"You tighten your grip on the sledgehammer.",
-	"You draw the sledgehammer back.",
-	"The weight settles into your hands.",
-	"Your arms tense for a crushing blow.",
-	"You're ready to bring the sledgehammer down.",
-)
 /obj/item/sledgehammer/proc/stop_charging_attack(mob/living/carbon/user)
 	user = loc
 
@@ -192,7 +195,7 @@
 	if(!mouse_held)
 		return FALSE
 
-	if(world.time >= next_charge)
+	while(world.time >= next_charge)
 		charge_bonus++
 		charge_bonus = clamp(charge_bonus, min_charge, max_charge)
 		next_charge = world.time + 1 SECONDS
