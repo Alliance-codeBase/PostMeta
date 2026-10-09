@@ -26,10 +26,11 @@
 	var/mouse_held = FALSE
 	var/max_charge = 6
 	var/min_charge = 1
-	var/force_per_charge = 8
+	var/force_per_charge = 9
 	var/wound_bonus_per_charge = 1.5
 	var/force_wielded = 18
 	var/force_unwielded = 10
+	attack_speed = 1.5 SECONDS
 	var/static/list/phrases = list(
 	"Your grip is still unsteady.",
 	"You tighten your grip on the sledgehammer.",
@@ -212,7 +213,7 @@
 
 	charge_bonus = 0
 	next_charge = world.time + 1 SECONDS
-	do_after(user, 6 SECONDS, src, extra_checks = CALLBACK(src, PROC_REF(charge_tick), user), timed_action_flags = IGNORE_USER_LOC_CHANGE)
+	do_after(user, 6 SECONDS, src, extra_checks = CALLBACK(src, PROC_REF(charge_tick), user), timed_action_flags = IGNORE_USER_LOC_CHANGE | IGNORE_SLOWDOWNS)
 	charging = FALSE
 	mouse_held = FALSE
 
@@ -248,11 +249,31 @@
 	target.apply_damage(force * 3, BRUTE, head, wound_bonus = 50, attacking_item = src)
 	head.throw_range = 6
 	head.throw_speed = 1
-	head.AddElement(/datum/element/effect_trail, /obj/effect/decal/cleanable/blood/splatter)
+	RegisterSignal(head, COMSIG_MOVABLE_MOVED, PROC_REF(head_trail))
 	head.dismember(silent = FALSE)
 	charge_bonus = 0
-	addtimer(CALLBACK(src, PROC_REF(rm_element), head), 2 SECONDS)
+	addtimer(CALLBACK(src, PROC_REF(rm_signal), head), 2 SECONDS)
 
-/obj/item/sledgehammer/proc/rm_element(obj/item/bodypart/head/head)
-	if(!QDELETED(head))
-		head.RemoveElement(/datum/element/effect_trail, /obj/effect/decal/cleanable/blood/splatter)
+/obj/item/sledgehammer/proc/head_trail(obj/item/bodypart/head/head, atom/old_loc)
+	SIGNAL_HANDLER
+
+	var/turf/tile = get_turf(head)
+	var/trail_dir = get_dir(old_loc, tile)
+
+	if(!isopenturf(tile) || !trail_dir)
+		return
+
+	var/obj/effect/decal/cleanable/blood/trail_holder/blood_trail = locate() in tile
+	if(!blood_trail)
+		blood_trail = new(tile)
+
+	if(QDELETED(blood_trail))
+		return
+
+	if(ISDIAGONALDIR(trail_dir))
+		trail_dir = -trail_dir
+
+	blood_trail.add_dir_to_trail(trail_dir, blood_to_add = BLOOD_AMOUNT_PER_DECAL)
+
+/obj/item/sledgehammer/proc/rm_signal(obj/item/bodypart/head/head)
+	UnregisterSignal(head, COMSIG_MOVABLE_MOVED)
