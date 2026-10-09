@@ -49,6 +49,31 @@
 		attacksound = SFX_SWING_HIT, \
 	)
 
+	AddElement(/datum/element/examine_lore, lore = "\
+		Originally an ordinary demolition tool, this sturdy sledgehammer owes its commercial success \
+		to an incident Nanotrasen would rather forget.<br>\
+		<br>\
+		A Tiger Cooperative member reportedly took a surplus hammer from a mining outpost's \
+		equipment locker and used it to massacre the responding security detail. \
+		Surviving footage shows him gripping it <b>with both hands</b>, \
+		drawing back and holding his stance before delivering each crushing blow. \
+		When the remaining personnel barricaded themselves inside, \
+		he <span class='bolddanger'>battered through the walls</span>. \
+		Even reinforced sections eventually gave way to repeated, fully wound-up strikes.<br>\
+		<br>\
+		One critically wounded officer tried to crawl away. The attacker stood over him \
+		and raised the hammer for a final blow. \
+		The impact <span class='bolddanger'>tore the officer's head from his shoulders</span>, \
+		sending it down the corridor and leaving a thick streak of blood behind it. \
+		The last distress call ended with hammering on the bridge door.<br>\
+		<br>\
+		Donk Co. acquired the surviving footage and commissioned a mass-produced version \
+		with a reinforced handle and a heavier head. Officially, these improvements were intended \
+		for demanding industrial applications. The demonstration video circulated through \
+		Syndicate channels suggested otherwise.<br>\
+		<br>\
+		The hammer remains in production. Replacement handles are sold separately.")
+
 /obj/item/sledgehammer/afterattack(mob/living/target_mob, mob/living/user, list/modifiers, list/attack_modifiers)
 	var/atom/throw_target =  get_edge_target_turf(target_mob, get_dir(src, get_step_away(target_mob, src)))
 	if(QDELETED(target_mob))
@@ -280,7 +305,8 @@
 /obj/item/sledgehammer/proc/rm_signal(obj/item/bodypart/head/head)
 	UnregisterSignal(head, COMSIG_MOVABLE_MOVED)
 
+// not including detailed instructions on wall destruction, as well as the finish off, as deep-lore element explains it just enough,
+// also understanding mechanics through lore is much better, than just adding a blatant to_chat() with everything required
 /obj/item/sledgehammer/examine(mob/user)
 	. = ..()
 	. += span_notice("Right-click with this in-hand to prepare a charged strike, the more progress bar is completed on the hammer, the harder will be the blow")
-	. += span_notice("Right-click on a person in a soft-crit (or a neck-grab) to prepare a bloody finish off strike!")
