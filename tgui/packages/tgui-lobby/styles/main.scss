@@ -276,7 +276,7 @@ img {
 }
 
 // MASSMETA EDIT ADDITION START (init_text)
-$init-text-line-size: 5vh;
+$init-text-line-size: 2.5vh;
 
 .lobby__init-text {
   position: absolute;
@@ -286,7 +286,7 @@ $init-text-line-size: 5vh;
   font-size: $init-text-line-size;
   line-height: 1;
   color: white;
-  -webkit-text-stroke: 0.4vh black;
+  -webkit-text-stroke: 0.08 * $init-text-line-size black;
   paint-order: stroke fill;
   white-space: nowrap;
   pointer-events: none;
