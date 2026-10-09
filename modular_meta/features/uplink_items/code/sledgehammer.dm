@@ -8,7 +8,7 @@
 	righthand_file = 'modular_meta/features/uplink_items/icons/weapon/sledgehammer/mob/inhands/weapons/hammers_righthand.dmi'
 	force = 10
 	throwforce = 10
-	demolition_mod = 1.6
+	demolition_mod = 3.2
 	w_class = WEIGHT_CLASS_HUGE
 	attack_verb_continuous = list("attacks", "smashes", "slams", "breaks", "wrecks", "obliterates")
 	attack_verb_simple = list("attack", "smash",  "slam", "wreck", "break", "obliterate")
