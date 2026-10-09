@@ -8,7 +8,7 @@
 	righthand_file = 'modular_meta/features/uplink_items/icons/weapon/sledgehammer/mob/inhands/weapons/hammers_righthand.dmi'
 	force = 10
 	throwforce = 10
-	demolition_mod = 3.2
+	demolition_mod = 4
 	w_class = WEIGHT_CLASS_HUGE
 	attack_verb_continuous = list("attacks", "smashes", "slams", "breaks", "wrecks", "obliterates")
 	attack_verb_simple = list("attack", "smash",  "slam", "wreck", "break", "obliterate")
@@ -177,12 +177,12 @@
 	if(.)
 		return .
 
-	// silicon dismantling device 3000
+	//high demolition mod helps us destroy machinery faster, however we do not want to be able to destroy a mecha from few attacks
 	if(issilicon(target))
-		force += 25
+		force -= 10
 
 	if(ismecha(target))
-		force += 25
+		force -= 10
 		playsound(target, pick('sound/effects/meteorimpact.ogg', 'sound/effects/bang.ogg'), 50)
 
 
