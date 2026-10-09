@@ -59,7 +59,7 @@
 		drawing back and holding his stance before delivering each crushing blow. \
 		When the remaining personnel barricaded themselves inside, \
 		he <span class='bolddanger'>battered through the walls</span>. \
-		Even reinforced sections eventually gave way to repeated, fully wound-up strikes.<br>\
+		<b> Even reinforced sections eventually gave way to repeated, fully wound-up strikes. </b> <br>\
 		<br>\
 		One critically wounded officer tried to crawl away. The attacker stood over him \
 		and raised the hammer for a final blow. \
