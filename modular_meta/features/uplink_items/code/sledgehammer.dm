@@ -6,8 +6,8 @@
 	base_icon_state = "sledgehammer"
 	lefthand_file = 'modular_meta/features/uplink_items/icons/weapon/sledgehammer/mob/inhands/weapons/hammers_lefthand.dmi'
 	righthand_file = 'modular_meta/features/uplink_items/icons/weapon/sledgehammer/mob/inhands/weapons/hammers_righthand.dmi'
-	force = 13
-	throwforce = 24
+	force = 15
+	throwforce = 15
 	demolition_mod = 1.25
 	w_class = WEIGHT_CLASS_BULKY
 	slot_flags = ITEM_SLOT_BACK
@@ -21,12 +21,13 @@
 	//force_unwielded = 5
 	//force_wielded = 22
 	var/charge_bonus = 0
-	var/holding_key_right_now = FALSE
 	var/next_charge
+	var/charging = FALSE
+	var/mouse_held = FALSE
 	var/knockback_bonus
 	var/max_charge = 6
 	var/min_charge = 1
-	var/force_per_charge = 6
+	var/force_per_charge = 4
 	var/wound_bonus_per_charge = 1.5
 
 /obj/item/sledgehammer/Initialize(mapload)
@@ -38,28 +39,34 @@
 	)
 
 /obj/item/sledgehammer/afterattack(mob/living/target_mob, mob/living/user, list/modifiers, list/attack_modifiers)
+	var/atom/throw_target =  get_edge_target_turf(target_mob, get_dir(src, get_step_away(target_mob, src)))
 	if(QDELETED(target_mob))
 		return
-
 	if(HAS_TRAIT(src, TRAIT_WIELDED) && isliving(target_mob))
-
 		switch(charge_bonus)
 			if(1)
-				hitsound = 'sound/items/weapons/genhit3.ogg'
+				target_mob.throw_at(throw_target, 1, speed = 0.5)
 			if(2)
-				hitsound = 'sound/items/weapons/genhit3.ogg'
+				target_mob.throw_at(throw_target, 2, speed = 0.7)
 			if(3)
-				hitsound = 'sound/items/weapons/genhit3.ogg'
+				target_mob.throw_at(throw_target, 3, speed = 0.9)
 			if(4)
-				hitsound = 'sound/items/weapons/genhit3.ogg'
+				target_mob.throw_at(throw_target, 4, speed = 1.1)
+				target_mob.Stun(0.2 SECONDS)
 			if(5)
-				hitsound = 'sound/items/weapons/genhit3.ogg'
+				target_mob.throw_at(throw_target, 4, speed = 1.3)
 				target_mob.Stun(0.5 SECONDS)
 				target_mob.Knockdown(2 SECONDS)
 			if(6)
-				hitsound = 'sound/items/weapons/genhit3.ogg'
+				target_mob.throw_at(throw_target, 6, 2)
 				target_mob.Stun(1.5 SECONDS)
 				target_mob.Knockdown(4 SECONDS)
+
+	charge_bonus = 0
+
+/obj/item/sledgehammer/dropped(mob/user, silent)
+	. = ..()
+	charge_bonus = 0
 
 
 /obj/item/sledgehammer/attack(atom/target, mob/user, list/modifiers, list/attack_modifiers)
@@ -69,40 +76,89 @@
 		'sound/items/weapons/genhit3.ogg',
 	)
 	if(HAS_TRAIT(src, TRAIT_WIELDED) && isliving(target))
-		var/atom/throw_target =  get_edge_target_turf(target, get_dir(src, get_step_away(target, src)))
-		var/atom/movable/movable_target = target
 		wound_bonus = 15
 		force = 18
 		if(issilicon(target))
-
 			hitsound = pick(
 				'modular_meta/features/uplink_items/sound/sledgehammer/metal_hit.ogg',
 				'modular_meta/features/uplink_items/sound/sledgehammer/metal_hit2.ogg',
 			)
-
-			movable_target.throw_at(throw_target, 4, 2)
 		if(iscarbon(target))
-			movable_target.throw_at(throw_target, 6, 2)
-			if(charge_bonus >= 3)
+			if(charge_bonus >= 1)
 				hitsound = 'modular_meta/features/uplink_items/sound/sledgehammer/heavy_hit.ogg'
+				if(charge_bonus >= 5)
+					hitsound = 'modular_meta/features/uplink_items/sound/sledgehammer/flesh_hit3.ogg'
 
+		switch(charge_bonus)
+
+			if(1)
+				force += force_per_charge
+				throwforce += force_per_charge
+				wound_bonus += wound_bonus_per_charge
+			if(2)
+				force = force_per_charge * 2
+				throwforce += force_per_charge * 2
+				wound_bonus += wound_bonus_per_charge * 2
+			if(3)
+				force = force_per_charge * 3
+				throwforce += force_per_charge *3
+				wound_bonus += wound_bonus_per_charge * 3
+			if(4)
+				force = force_per_charge * 4
+				throwforce += force_per_charge *4
+				wound_bonus += wound_bonus_per_charge *4
+			if(5)
+				force = force_per_charge * 5
+				throwforce += force_per_charge *5
+				wound_bonus += wound_bonus_per_charge * 5
+			if(6)
+				force = force_per_charge * 6
+				throwforce += force_per_charge * 6
+				wound_bonus += wound_bonus_per_charge * 6
 	..()
 
-/obj/item/sledgehammer/key_down(key, client/user, full_key)
+/obj/item/sledgehammer/pickup(mob/user)
 	. = ..()
-	holding_key_right_now = TRUE
-	if(key == "Z")
-		begin_charging_attack()
+	if(user.client)
+		//RegisterSignal(user, COMSIG_MOB_KEYDOWN, PROC_REF(on_key_down))
+		RegisterSignal(user.client, COMSIG_CLIENT_MOUSEDOWN, PROC_REF(on_mouse_down))
+		RegisterSignal(user.client, COMSIG_CLIENT_MOUSEUP, PROC_REF(on_mouse_up))
+
+/obj/item/sledgehammer/dropped(mob/user, silent = FALSE)
+	if(user.client)
+		//UnregisterSignal(user, COMSIG_MOB_KEYDOWN)
+		UnregisterSignal(user.client, COMSIG_CLIENT_MOUSEDOWN)
+		UnregisterSignal(user.client, COMSIG_CLIENT_MOUSEUP)
+	return ..()
 
 
-/obj/item/sledgehammer/key_up(key, client/user, full_key)
-	. =..()
-	holding_key_right_now = FALSE
-	if(key == "Z")
-		stop_charging_attack()
+
+/obj/item/sledgehammer/proc/on_mouse_up(client/player, object, location, control, params)
+	SIGNAL_HANDLER
+
+	var/list/mods = params2list(params)
+	if(mods[BUTTON] == RIGHT_CLICK)
+		mouse_held = FALSE
+
+/obj/item/sledgehammer/proc/on_mouse_down(client/player, object, location, control, params)
+	SIGNAL_HANDLER
+
+	var/list/mods = params2list(params)
+	if(mods[BUTTON] != RIGHT_CLICK)
+		return
+
+	var/mob/user = player.mob
+	if(!iscarbon(user) || !user.is_holding(src) || charging)
+		return
+
+	INVOKE_ASYNC(src, PROC_REF(begin_charging_attack), user)
+
 
 /obj/item/sledgehammer/proc/begin_charging_attack(mob/living/carbon/user)
 	user = loc
+
+	if(charging)
+		return
 
 	if(!(ismob(user)))
 		return
@@ -112,9 +168,15 @@
 	if((user.incapacitated))
 		return
 
+	charging = TRUE
+	mouse_held = TRUE
+
 	charge_bonus = 0
 	next_charge = world.time + 1 SECONDS
-	var/charging_attack = do_after(user, 6 SECONDS, src, extra_checks = CALLBACK(src, PROC_REF(charge_tick), user))
+	var/charging_attack = do_after(user, 6 SECONDS, src, extra_checks = CALLBACK(src, PROC_REF(charge_tick), user), timed_action_flags = IGNORE_USER_LOC_CHANGE)
+	charging = FALSE
+	mouse_held = FALSE
+
 	var/static/list/phrases = list(
 	"Your grip is still unsteady.",
 	"You tighten your grip on the sledgehammer.",
@@ -127,7 +189,7 @@
 	user = loc
 
 /obj/item/sledgehammer/proc/charge_tick(mob/living/carbon/user)
-	if(!user.client?.keys_held["Alt"] || !user.client?.keys_held["Z"])
+	if(!mouse_held)
 		return FALSE
 
 	if(world.time >= next_charge)
