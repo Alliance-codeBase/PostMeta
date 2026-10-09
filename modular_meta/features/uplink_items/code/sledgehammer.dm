@@ -168,7 +168,7 @@
 
 	if(ismecha(target))
 		force += 25
-		playsound(pick('sound/effects/meteorimpact.ogg', 'sound/effects/bang.ogg'), 50)
+		playsound(target, pick('sound/effects/meteorimpact.ogg', 'sound/effects/bang.ogg'), 50)
 
 
 	if(!HAS_TRAIT(src, TRAIT_WIELDED)) //destroys windows and grilles in one hit
