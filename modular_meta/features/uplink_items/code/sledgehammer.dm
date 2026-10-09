@@ -227,6 +227,8 @@
 	while(world.time >= next_charge && charge_bonus < max_charge)
 		charge_bonus++
 		charge_bonus = clamp(charge_bonus, min_charge, max_charge)
+		user.playsound_local(user, 'sound/vehicles/mecha/skyfall_power_up.ogg', 15)
+		Shake(null, 5, 0.1 SECONDS, 0.1 SECONDS)
 		next_charge += 1 SECONDS
 	return TRUE
 
@@ -277,3 +279,8 @@
 
 /obj/item/sledgehammer/proc/rm_signal(obj/item/bodypart/head/head)
 	UnregisterSignal(head, COMSIG_MOVABLE_MOVED)
+
+/obj/item/sledgehammer/examine(mob/user)
+	. = ..()
+	. += span_notice("Right-click with this in-hand to prepare a charged strike, the more progress bar is completed on the hammer, the harder will be the blow")
+	. += span_notice("Right-click on a person in a soft-crit (or a neck-grab) to prepare a bloody finish off strike!")

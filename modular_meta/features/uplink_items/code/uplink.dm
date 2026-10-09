@@ -26,6 +26,17 @@
 	cost = 12
 	purchasable_from = ~UPLINK_ALL_SYNDIE_OPS
 
+/datum/uplink_item/dangerous/sledgehammer
+	name = "Sledgehammer"
+	desc = "A sturdy surplus sledgehammer, mass-produced by Donk Co.\
+		after a Tiger Cooperative member used an ordinary demolition hammer to massacre the crew of a Nanotrasen mining outpost.\
+		Donk's marketing department saw an opportunity. This, mass-produced version features a reinforced handle, \
+		a heavier head"
+	item = /obj/item/sledgehammer
+	cost = 16
+	purchasable_from = ~UPLINK_ALL_SYNDIE_OPS
+	restricted_roles = list(JOB_STATION_ENGINEER, JOB_CHIEF_ENGINEER)
+
 /datum/uplink_item/dangerous/backstab
 	name = "Backstabing Knife"
 	desc = "A specially designed syndicate's finest knife. \
