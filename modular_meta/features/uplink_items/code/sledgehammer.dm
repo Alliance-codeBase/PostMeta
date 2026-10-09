@@ -1,3 +1,5 @@
+// Code by bruh24, sprites by DrNastiel, sounds are mentioned in attributions.txt in their respectable folder
+
 /obj/item/sledgehammer
 	name = "Sledgehammer"
 	desc = "A mad engineer's choice"
