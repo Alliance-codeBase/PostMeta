@@ -181,7 +181,9 @@
 
 	//high demolition mod helps us destroy machinery faster, however we do not want to be able to destroy a mecha from few attacks
 	if(issilicon(target))
-		force -= 10
+		force -= 17
+		if(charge_bonus >= 3)
+			force -= 25
 
 	if(ismecha(target))
 		force -= 10
