@@ -109,8 +109,8 @@
 	var/illegal_mech_node = TRUE
 
 // Mecha itself
-#define DISMEMBER_CHANCE_HIGH 50
-#define DISMEMBER_CHANCE_LOW 25
+#define DISMEMBER_CHANCE_HIGH 25
+#define DISMEMBER_CHANCE_LOW 10
 
 #define MOVEDELAY_IDLE 3
 #define MOVEDELAY_INVISIBILITY 2
@@ -470,6 +470,9 @@
 
 /obj/vehicle/sealed/mecha/justice/proc/on_ranged_hit(obj/vehicle/sealed/mecha/source, obj/projectile/hitting_projectile)
 	SIGNAL_HANDLER
+
+	if(prob(50))
+		return NONE
 
 	var/obj/effect/justice_engine/active_engine = get_engine_by_state(JUSTICE_ENGINE_ACTIVE)
 	if(isnull(active_engine))
