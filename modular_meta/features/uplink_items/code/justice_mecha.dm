@@ -193,7 +193,7 @@
 	RegisterSignal(src, COMSIG_JUSTICE_INVISIBILITY_DEACTIVATE, PROC_REF(visibility_deactive))
 	transform = transform.Scale(1.04, 1.04)
 	for(var/i in 1 to 3)
-		addtimer(CALLBACK(src, PROC_REF(create_engine)), i * 1 SECONDS)
+		addtimer(CALLBACK(src, PROC_REF(create_engine)), i * 4 SECONDS)
 
 /obj/vehicle/sealed/mecha/justice/generate_actions()
 	. = ..()
