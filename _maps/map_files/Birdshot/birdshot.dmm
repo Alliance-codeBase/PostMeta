@@ -15997,6 +15997,7 @@
 /obj/structure/disposalpipe/segment{
 	dir = 5
 	},
+/obj/structure/reagent_dispensers/watertank,
 /turf/open/floor/iron/white/small,
 /area/station/service/janitor)
 "fuL" = (
@@ -37509,6 +37510,10 @@
 /obj/structure/cable,
 /turf/open/floor/wood/parquet,
 /area/station/service/library)
+"mdg" = (
+/obj/machinery/portable_atmospherics/canister/water_vapor,
+/turf/open/floor/iron/grimy,
+/area/station/service/janitor)
 "mdm" = (
 /obj/structure/chair/office/light{
 	dir = 8
@@ -109633,7 +109638,7 @@ sRL
 uFZ
 jfB
 afZ
-jfB
+mdg
 fPZ
 eeJ
 wjq
