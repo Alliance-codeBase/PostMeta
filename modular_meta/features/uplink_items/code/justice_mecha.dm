@@ -494,7 +494,7 @@
 	deactivate_engines()
 	for(var/mob/mob_occupant as anything in occupants)
 		balloon_alert(mob_occupant, "shields disabled! recharge after 10 seconds!")
-	addtimer(CALLBACK(src, PROC_REF(reactivate_engines)), 10 SECONDS)
+	addtimer(CALLBACK(src, PROC_REF(reactivate_engines)), 30 SECONDS)
 	playsound(src, shields_disabled_sound , 75, FALSE)
 
 /obj/vehicle/sealed/mecha/justice/proc/reactivate_engines()
