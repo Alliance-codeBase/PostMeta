@@ -109,8 +109,8 @@
 	var/illegal_mech_node = TRUE
 
 // Mecha itself
-#define DISMEMBER_CHANCE_HIGH 25
-#define DISMEMBER_CHANCE_LOW 10
+#define DISMEMBER_CHANCE_HIGH 35
+#define DISMEMBER_CHANCE_LOW 15
 
 #define MOVEDELAY_IDLE 3
 #define MOVEDELAY_INVISIBILITY 2
