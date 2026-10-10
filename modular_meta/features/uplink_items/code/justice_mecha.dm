@@ -667,7 +667,7 @@
 			|| is_occupant(something_living))
 				continue
 			if(prob(DISMEMBER_CHANCE_LOW))
-				var/obj/item/bodypart/cut_bodypart = something_living.get_bodypart(pick(BODY_ZONE_R_ARM, BODY_ZONE_R_LEG, BODY_ZONE_L_ARM, BODY_ZONE_L_LEG, BODY_ZONE_HEAD))
+				var/obj/item/bodypart/cut_bodypart = something_living.get_bodypart(pick(BODY_ZONE_R_ARM, BODY_ZONE_R_LEG, BODY_ZONE_L_ARM, BODY_ZONE_L_LEG))
 				cut_bodypart?.dismember(BRUTE)
 			something_living.apply_damage(35, BRUTE)
 		here_we_go = line_turf
