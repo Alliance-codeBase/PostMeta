@@ -349,6 +349,9 @@
 
 		var/list/other_job_lists = list(
 			"Abstract" = list("Appearance", "Emote", "Deadchat", "OOC", "Urgent Adminhelp"),
+			//MASSMETA EDIT ADDITION BEGIN (explosives_ban)
+			"Explosives" = list(BAN_NON_ANTAG_EXPLOSIVES, BAN_ANTAG_EXPLOSIVES),
+			//MASSMETA EDIT ADDITION END
 			)
 		for(var/department in other_job_lists)
 			output += "<div class='column'><label class='rolegroup [ckey(department)]'><input type='checkbox' name='[department]' class='hidden' onClick='header_click_all_checkboxes(this)'>[department]</label><div class='content'>"
@@ -527,6 +530,9 @@
 				roles_to_ban += "Server"
 			if("role")
 				href_list.Remove("Command", "Security", "Engineering", "Medical", "Science", "Supply", "Silicon", "Abstract", "Service", "Ghost and Other Roles", "Antagonist Positions") //remove the role banner hidden input values
+				//MASSMETA EDIT ADDITION BEGIN (explosives_ban)
+				href_list.Remove("Explosives")
+				//MASSMETA EDIT ADDITION END
 				var/delimiter_pos = href_list.Find("roleban_delimiter")
 				if(href_list.len == delimiter_pos)
 					error_state += "Role ban was selected but no roles to ban were selected."
