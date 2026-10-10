@@ -1,10 +1,12 @@
 /datum/metacoinshop/listing/preround/antag_token
 	id = "antag_token"
+	category = /datum/metacoin_category/command_picks
 	name = "Antag Token"
 	desc = "Guarantees one chosen antagonist role at roundstart."
 	price = 650
 	item_type = /obj/item/coin/antagtoken // to get the display icon of ours
 	listing_type = "antag_token"
+	autobuy_supported = FALSE
 	var/list/pending_by_ckey = list()
 	var/slots_left = 3
 
@@ -95,7 +97,7 @@
 /datum/metacoinshop/listing/preround/antag_token/reset(datum/metacoin_shop_controller/shop)
 	refund_all(shop)
 	pending_by_ckey = list()
-	slots_left = 3
+	slots_left = initial(slots_left)
 
 /datum/metacoinshop/listing/preround/antag_token/proc/get_restricted_jobs()
 	var/static/list/restricted_jobs = list(
@@ -318,7 +320,7 @@
 		return FALSE
 
 	pending_by_ckey -= target_ckey
-	slots_left = min(slots_left + 1, 3)
+	slots_left = min(slots_left + 1, initial(slots_left))
 	var/message = failure_text || "Antag token delivery failed."
 	if(shop.wallet.add_metacoins(target_ckey, price))
 		message += " [price] metacoins were refunded."

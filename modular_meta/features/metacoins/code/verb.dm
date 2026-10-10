@@ -23,7 +23,7 @@ ADMIN_VERB(mc_give, R_ADMIN, "Grant Metacoins", "Grant metacoins to a target cke
 	var/datum/metacoins_controller/controller = get_metacoins_controller()
 	var/reward_source = "admin_manual_grant:[user.ckey]"
 	var/reward_reason = "Admin grant: [grant_reason]"
-	var/success = controller.award_metacoins(target_ckey, amount, reward_source, reward_reason, TRUE)
+	var/success = controller.pay_metacoins(target_ckey, amount, list(list("amount" = amount, "source" = reward_source, "reason" = reward_reason)))
 
 	if(!success)
 		var/fail_msg = "[key_name_admin(user)] failed to grant [amount] metacoins to [target_ckey]. Reason='[grant_reason]'."

@@ -74,6 +74,14 @@ export function HomePage({
             }}
           >
             Metacoins Shop
+          </MenuButton>
+          <MenuButton
+            onClick={() => {
+              onAction('metacoins_tip');
+              onClose();
+            }}
+          >
+            Tip
             {/* MASSMETA ADDITION END */}
           </MenuButton>
           <MenuButton

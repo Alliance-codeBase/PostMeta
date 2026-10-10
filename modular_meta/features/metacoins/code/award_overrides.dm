@@ -47,9 +47,10 @@
 	reward = METACOIN_AWARD_HUGE
 
 // Scores
+// they don't pay anymore, the lava stopped feeding. tiers below stay for whoever turns them back on
 
 /datum/award/score/
-	reward = METACOIN_AWARD_CLOSE_TO_NOTHING
+	reward = METACOIN_AWARD_NONE
 
 // METACOIN_AWARD_NONE
 
@@ -85,45 +86,53 @@
 // ONE_POINT
 
 /datum/award/score/maintenance_pill
-	reward = METACOIN_AWARD_ONE_POINT
+	reward = METACOIN_AWARD_NONE
 
 /datum/award/score/progress/fish
-	reward = METACOIN_AWARD_ONE_POINT
+	reward = METACOIN_AWARD_NONE
 
 /datum/award/score/progress/pda_themes
-	reward = METACOIN_AWARD_ONE_POINT
+	reward = METACOIN_AWARD_NONE
 
 /datum/award/score/tendril_score
-	reward = METACOIN_AWARD_ONE_POINT
+	reward = METACOIN_AWARD_NONE
 
 // METACOIN_AWARD_SMALL
 
 /datum/award/score/wendigo_score
-	reward = METACOIN_AWARD_SMALL
+	reward = METACOIN_AWARD_NONE
 
 /datum/award/score/hardcore_random
-	reward = METACOIN_AWARD_SMALL
+	reward = METACOIN_AWARD_NONE
 
 /datum/award/score/style_score
 	reward = METACOIN_AWARD_NONE
 
 /datum/award/score/drake_score
-	reward = METACOIN_AWARD_SMALL
+	reward = METACOIN_AWARD_NONE
 
 /datum/award/score/hierophant_score
-	reward = METACOIN_AWARD_SMALL
+	reward = METACOIN_AWARD_NONE
 
 // METACOIN_AWARD_MED
 
 /datum/award/score/bubblegum_score
-	reward = METACOIN_AWARD_MED
+	reward = METACOIN_AWARD_NONE
 
 /datum/award/score/colussus_score
-	reward = METACOIN_AWARD_MED
+	reward = METACOIN_AWARD_NONE
 
 // METACOIN_AWARD_BIG
 /datum/award/score/thething_score
-	reward = METACOIN_AWARD_BIG //overall rare boss, why not?
+	reward = METACOIN_AWARD_NONE //overall rare boss, why not?
 
 /datum/award/score/legion_score
-	reward = METACOIN_AWARD_BIG // this one is hard to kill y'know?
+	reward = METACOIN_AWARD_NONE // this one is hard to kill y'know?
+
+#undef METACOIN_AWARD_NONE
+#undef METACOIN_AWARD_ONE_POINT
+#undef METACOIN_AWARD_CLOSE_TO_NOTHING
+#undef METACOIN_AWARD_SMALL
+#undef METACOIN_AWARD_MED
+#undef METACOIN_AWARD_BIG
+#undef METACOIN_AWARD_HUGE
