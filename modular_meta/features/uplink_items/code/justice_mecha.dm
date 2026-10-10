@@ -471,7 +471,10 @@
 /obj/vehicle/sealed/mecha/justice/proc/on_ranged_hit(obj/vehicle/sealed/mecha/source, obj/projectile/hitting_projectile)
 	SIGNAL_HANDLER
 
-	if(prob(50))
+	if(prob(40))
+		return NONE
+
+	if(istype(hitting_projectile, /obj/projectile/ion))
 		return NONE
 
 	var/obj/effect/justice_engine/active_engine = get_engine_by_state(JUSTICE_ENGINE_ACTIVE)
