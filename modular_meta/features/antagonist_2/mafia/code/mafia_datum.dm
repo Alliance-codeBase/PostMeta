@@ -17,9 +17,16 @@
 	can_assign_self_objectives = FALSE
 	preview_outfit = /datum/outfit/bloodsucker_outfit
 
+	// БЛЯ ПРОСТО СКОПИРОВАНО С ГЛАМУРА ДЕМОНА ГРЕХА И СОСАТЕЛЯ КРОВИ БРУХА
+	// ЭТО ПЕРЕМЕННАЯ ГДЕ КОРОЧЕ КУДА НАЗНАЧЕН МАФИОЗНИК КАКАЯ СЕМЬЯ
+	var/gang
+
+	// ЭТО СПИСОК СЕМЕЙ, ВЫДАЁТСЯ ПРИ ЕСТЕСТВЕННОМ ЯВЛЕНИЕ В МИР ОПГШНИКА
+	var/static/list/gang = list(SEMYA_KRASNOVY, FAMILY_GIOVANI, FAMILY_KONICHIWA, FAMILY_GOLDSHTEIN)
+
 /datum/antagonist/mafia/New()
 	. = ..()
-	gang = pick(demonsins)
+	gang = pick(gang)
 
 /datum/antagonist/mafia/forge_objectives()
 	var/datum/objective/mafia/objct
