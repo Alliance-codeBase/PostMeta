@@ -6,7 +6,8 @@
 // - Ctrl+клик          -> накопление заряда (полоска над мехом; повторно - остановить)
 // - обычный клик       -> выстрел (чем выше заряд, тем сильнее урон)
 // - Луч пробивает всё (стены, мебель, машины...), кроме живых мобов и мехов
-// - Голосовой помощник сообщает пилоту о состоянии оружия
+// - Тактический ИИ «ВЕГА» (женский голос, .ogg) озвучивает пилоту состояние оружия
+// - ЕМАГ: на полном заряде луч дезинтегрирует цель
 // ============================================================================
 
 #define POSITRON_MAX_CHARGE 3
@@ -44,14 +45,25 @@
 #define POSITRON_VOICE_FIRED_CHARGED 'modular_meta/features/positron_mech_rifle/voice/fired_charged.ogg' // усиленный выстрел
 #define POSITRON_VOICE_BATTERY_SPENT 'modular_meta/features/positron_mech_rifle/voice/battery_spent.ogg' // отработанная батарея извлечена
 #define POSITRON_VOICE_BATTERY_REMOVED 'modular_meta/features/positron_mech_rifle/voice/battery_removed.ogg' // батарея извлечена вручную / при снятии орудия
-#define POSITRON_VOICE_VOLUME 80
+#define POSITRON_VOICE_HIT 'modular_meta/features/positron_mech_rifle/voice/hit.ogg' // цель поражена
+#define POSITRON_VOICE_EMAGGED 'modular_meta/features/positron_mech_rifle/voice/emagged.ogg' // защитные протоколы отключены (после емага)
+#define POSITRON_VOICE_DISINTEGRATE 'modular_meta/features/positron_mech_rifle/voice/disintegrate.ogg' // цель дезинтегрирована
+#define POSITRON_VOICE_VOLUME 65
+/// Пауза между репликами в очереди (подбери под длину твоих записей)
+#define POSITRON_VOICE_LINE_TIME (1.5 SECONDS)
+/// Дополнительная пауза ПОСЛЕ реплики до следующей (задержка между фразами)
+#define POSITRON_VOICE_GAP (0.8 SECONDS)
+/// Имя тактического ИИ винтовки
+#define POSITRON_AI_NAME "ВЕГА"
 
 // ============================================================================
 // БАТАРЕЯ
 // ============================================================================
 /obj/item/positron_battery
 	name = "позитронная батарея"
-	desc = "Одноразовая батарея с нестабильной позитронной материей. Рассчитана ровно на один выстрел."
+	desc = "Герметичный цилиндр с магнитно удерживаемой позитронной материей. Внутри она непрерывно рвётся аннигилировать, \
+		и только тонкая плёнка из силовых полей мешает этому. Рассчитана ровно на один выстрел: после него поля схлопываются, \
+		и остаётся лишь выгоревшая оболочка. Не бросать и не ронять."
 	icon = 'modular_meta/features/positron_mech_rifle/icons/positron_rifle.dmi' // TODO: свой дмик
 	icon_state = "positron_battery"
 	w_class = WEIGHT_CLASS_NORMAL
@@ -67,7 +79,7 @@
 
 /obj/item/positron_battery/examine(mob/user)
 	. = ..()
-	. += span_notice("Её можно вставить в меха, на котором установлена позитронная винтовка.")
+	. += span_notice("Применить на меха с установленной позитронной винтовкой PR-1, чтобы зарядить её.")
 
 /// Использование батареи на меха = попытка зарядить винтовку
 /obj/item/positron_battery/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
@@ -85,13 +97,15 @@
 // Выстрел делает базовый /weapon/action() (снаряд, прицел, лог, кулдаун, kickback).
 // Мы только: проверяем батарею, выставляем звук, считаем заряд, выбрасываем батарею.
 // ============================================================================
+// ВАЖНО: в desc имя ИИ пишем текстом (значения var по умолчанию должны быть константой).
+// Если меняешь POSITRON_AI_NAME - поменяй и здесь.
 /obj/item/mecha_parts/mecha_equipment/weapon/positron_rifle
 	name = "PR-1 \"Позитронная винтовка\""
-	desc = "Тяжёлое энергетическое орудие для мехов. Выстреливает позитронным лучом, \
-		пробивающим любые препятствия, но задерживаемым живыми целями. \
-		Использует одну позитронную батарею на выстрел. Ctrl+клик - зарядить, клик - выстрелить. \
-		Усиленный выстрел отбрасывает мех назад. Полный заряд ослепляет, поджигает и отбрасывает цель, \
-		а боргов и мехов выводит из строя электромагнитным импульсом."
+	desc = "Тяжёлое позитронное орудие PR-1 для боевых мехов. Выпускает сфокусированный луч позитронной материи: \
+		он прошивает стены, мебель и технику, но застревает в живых целях и корпусах мехов. \
+		Работает от одноразовой позитронной батареи, один выстрел на батарею.\n\n\
+		В комплекте идёт тактический ИИ «ВЕГА», который голосом сообщает пилоту о состоянии орудия: \
+		заряд, боезапас, попадания."
 	icon_state = "mecha_laser" // TODO: свой спрайт
 	equip_cooldown = 2 SECONDS
 	energy_drain = 0
@@ -115,6 +129,11 @@
 	var/datum/progressbar/charge_bar
 	/// Пилот, который запустил зарядку (ему показываем полоску)
 	var/mob/charge_user
+	/// Очередь реплик ИИ (чтобы они не накладывались друг на друга)
+	var/list/voice_queue = list()
+	var/voice_playing = FALSE
+	/// Уже ли ИИ предупредил пилота о снятых ограничителях (емаг)
+	var/emag_notified = FALSE
 
 /obj/item/mecha_parts/mecha_equipment/weapon/positron_rifle/Destroy()
 	if(charge_timer)
@@ -127,10 +146,28 @@
 /obj/item/mecha_parts/mecha_equipment/weapon/positron_rifle/examine(mob/user)
 	. = ..()
 	. += span_notice("Батарея: [battery ? "установлена" : "отсутствует"].")
+	. += span_notice("Управление: <b>клик</b> - выстрел, <b>Ctrl+клик</b> - зарядка (повторно - остановить зарядку).")
+	. += span_notice("Чем дольше зарядка, тем сильнее выстрел. На полном заряде цель ослепляется, загорается и отбрасывается, \
+		а борги и мехи получают электромагнитный импульс. Усиленный выстрел отбрасывает мех назад.")
+	if(obj_flags & EMAGGED)
+		. += span_warning("Пломба на блоке ограничителей сорвана, а контрольные цепи тактического ИИ «[POSITRON_AI_NAME]» заметно оплавлены.")
+
+/// ЕМАГ: срывает ограничители. Применять на винтовку ДО установки в меха (когда она вне корпуса)
+/obj/item/mecha_parts/mecha_equipment/weapon/positron_rifle/emag_act(mob/user, obj/item/card/emag/emag_card)
+	if(obj_flags & EMAGGED)
+		return FALSE
+	obj_flags |= EMAGGED
+	emag_notified = FALSE
+	do_sparks(3, TRUE, src)
+	if(user)
+		to_chat(user, span_warning("Вы взламываете блок ограничителей [src]. Тактический ИИ «[POSITRON_AI_NAME]» на мгновение замолкает..."))
+	return TRUE
 
 /// Винтовку снимают с меха - батарея вылетает (родительский detach из weapons.dm сохраняем)
 /obj/item/mecha_parts/mecha_equipment/weapon/positron_rifle/detach(atom/moveto)
 	stop_charging(silent = TRUE)
+	voice_queue.Cut()
+	voice_playing = FALSE
 	// Полоску убираем ДО parent: он обнуляет chassis
 	hide_bar()
 	eject_battery(voice = FALSE)
@@ -141,8 +178,27 @@
 /obj/item/mecha_parts/mecha_equipment/weapon/positron_rifle/proc/announce(voice_line)
 	if(!chassis || !voice_line)
 		return
+	// Одну и ту же реплику дважды в очереди не держим
+	if(voice_line in voice_queue)
+		return
+	// Очередь не растёт бесконечно
+	if(length(voice_queue) >= 3)
+		return
+	voice_queue += voice_line
+	if(!voice_playing)
+		play_next_voice()
+
+/obj/item/mecha_parts/mecha_equipment/weapon/positron_rifle/proc/play_next_voice()
+	if(!length(voice_queue) || !chassis)
+		voice_playing = FALSE
+		voice_queue.Cut()
+		return
+	voice_playing = TRUE
+	var/voice_line = voice_queue[1]
+	voice_queue.Cut(1, 2)
 	for(var/mob/occupant as anything in chassis.occupants)
 		occupant.playsound_local(get_turf(chassis), voice_line, POSITRON_VOICE_VOLUME, FALSE)
+	addtimer(CALLBACK(src, PROC_REF(play_next_voice)), POSITRON_VOICE_LINE_TIME + POSITRON_VOICE_GAP)
 
 // --- Полоска заряда ---------------------------------------------------------
 /obj/item/mecha_parts/mecha_equipment/weapon/positron_rifle/proc/update_bar()
@@ -174,6 +230,9 @@
 	playsound(chassis || src, POSITRON_SND_INSERT, 60, TRUE)
 	to_chat(user, span_notice("Вы вставляете [new_battery] в [src]."))
 	announce(POSITRON_VOICE_BATTERY_LOADED)
+	if((obj_flags & EMAGGED) && !emag_notified)
+		emag_notified = TRUE
+		announce(POSITRON_VOICE_EMAGGED)
 	return TRUE
 
 /obj/item/mecha_parts/mecha_equipment/weapon/positron_rifle/proc/eject_battery(voice = TRUE)
@@ -329,12 +388,15 @@
 	impact_type = /obj/effect/projectile/impact/laser/blue
 	/// Уровень заряда, с которым выпущен луч
 	var/charge_level = 0
+	/// Винтовка была взломана емагом в момент выстрела
+	var/emagged_shot = FALSE
 
 /// К моменту fire() базовый weapon/action() уже выставил firer и fired_from
 /obj/projectile/beam/positron/fire(angle, atom/direct_target)
 	var/obj/item/mecha_parts/mecha_equipment/weapon/positron_rifle/rifle = fired_from
 	if(istype(rifle))
 		charge_level = rifle.last_shot_level
+		emagged_shot = !!(rifle.obj_flags & EMAGGED)
 		damage = round(POSITRON_BASE_DAMAGE + (charge_level * POSITRON_DAMAGE_PER_CHARGE), 1)
 	return ..()
 
@@ -348,15 +410,30 @@
 
 /obj/projectile/beam/positron/on_hit(atom/target, blocked = 0, pierce_hit)
 	. = ..()
-	if(isliving(target) || ismecha(target))
+	var/hit_creature = isliving(target) || ismecha(target)
+	if(hit_creature)
 		playsound(target, POSITRON_SND_HIT_MOB, 70, TRUE)
 	else
 		playsound(target, POSITRON_SND_HIT_WALL, 60, TRUE)
-	if(blocked < 100 && POSITRON_IS_FULL_CHARGE(charge_level))
+	if(blocked >= 100)
+		return
+	var/full = POSITRON_IS_FULL_CHARGE(charge_level)
+	var/voice_line
+	if(hit_creature)
+		voice_line = (full && emagged_shot) ? POSITRON_VOICE_DISINTEGRATE : POSITRON_VOICE_HIT
+	if(full)
 		apply_overcharge_effects(target)
+	// Озвучка попадания: чуть позже реплики о выстреле, чтобы они не накладывались
+	var/obj/item/mecha_parts/mecha_equipment/weapon/positron_rifle/rifle = fired_from
+	if(voice_line && istype(rifle))
+		addtimer(CALLBACK(rifle, TYPE_PROC_REF(/obj/item/mecha_parts/mecha_equipment/weapon/positron_rifle, announce), voice_line), 0.2 SECONDS)
 
-/// Эффекты полного заряда: ослепление, поджог, отбрасывание; электроника (борги, мехи) - ЭМИ
+/// Эффекты полного заряда: ослепление, поджог, отбрасывание; электроника (борги, мехи) - ЭМИ.
+/// Если винтовка взломана емагом - цель дезинтегрируется.
 /obj/projectile/beam/positron/proc/apply_overcharge_effects(atom/target)
+	if(emagged_shot && (isliving(target) || ismecha(target)))
+		disintegrate_target(target)
+		return
 	if(iscyborg(target) || ismecha(target))
 		target.emp_act(EMP_LIGHT)
 		return
@@ -370,6 +447,26 @@
 	var/atom/throw_target = get_edge_target_turf(victim, angle2dir(angle))
 	victim.throw_at(throw_target, POSITRON_KNOCKBACK_RANGE, POSITRON_KNOCKBACK_SPEED, firer)
 
+/// Дезинтеграция цели (только при емаге и полном заряде)
+/obj/projectile/beam/positron/proc/disintegrate_target(atom/target)
+	// Логируем: кто из пилотов стрелял
+	var/mob/pilot
+	if(ismecha(firer))
+		var/obj/vehicle/sealed/mecha/firing_mech = firer
+		for(var/mob/occupant as anything in firing_mech.occupants)
+			pilot = occupant
+			break
+	if(isliving(target))
+		var/mob/living/victim = target
+		if(pilot)
+			log_combat(pilot, victim, "disintegrated", fired_from, "positron beam (emagged, full charge)")
+		victim.visible_message(span_userdanger("[victim] рассыпается в светящуюся пыль под позитронным лучом!"))
+		victim.dust()
+	else if(ismecha(target))
+		var/obj/vehicle/sealed/mecha/victim_mech = target
+		victim_mech.visible_message(span_userdanger("Позитронный луч прожигает [victim_mech] насквозь!"))
+		victim_mech.take_damage(victim_mech.max_integrity, BURN, LASER)
+
 #undef POSITRON_MAX_CHARGE
 #undef POSITRON_CHARGE_TIME
 #undef POSITRON_BASE_DAMAGE
@@ -381,3 +478,4 @@
 #undef POSITRON_KNOCKBACK_SPEED
 #undef POSITRON_RECOIL_STEP_DELAY
 #undef POSITRON_IS_FULL_CHARGE
+#undef POSITRON_VOICE_GAP
