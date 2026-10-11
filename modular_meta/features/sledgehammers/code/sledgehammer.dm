@@ -44,7 +44,6 @@
 		force_wielded = force_wielded, \
 		icon_wielded = "[base_icon_state]1", \
 	)
-	AddElement(/datum/element/cuffable_item)
 
 /obj/item/sledgehammer/update_icon_state()
 	icon_state = "[base_icon_state]0"

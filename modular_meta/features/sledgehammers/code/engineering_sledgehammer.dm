@@ -21,6 +21,7 @@
 
 /obj/item/sledgehammer/engineering/Initialize(mapload)
 	. = ..()
+	AddElement(/datum/element/cuffable_item)
 	RegisterSignal(src, COMSIG_ITEM_INTERACTING_WITH_ATOM, PROC_REF(on_interacting_with_atom))
 
 /obj/item/sledgehammer/engineering/examine(mob/user)
