@@ -7226,5 +7226,5 @@
 #include "modular_meta\features\antagonist_2\cartel\code\cartel_objectives.dm"
 #include "modular_meta\features\antagonist_2\mafia\code\mafia_datum.dm"
 #include "modular_meta\features\antagonist_2\mafia\code\mafia_objectives.dm"
-#include "modular_meta\features\antagonist_2\niggas\code\niggas_datum.dm"
+#include "modular_meta\features\antagonist_2\ghetto_criminal\code\ghetto_criminal_datum.dm"
 // END_INCLUDE
