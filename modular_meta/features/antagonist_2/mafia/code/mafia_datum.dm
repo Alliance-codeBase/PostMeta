@@ -24,14 +24,14 @@
 /datum/antagonist/mafia/forge_objectives()
 	var/datum/objective/mafia/objct
 
-/datum/antagonist/sinfuldemon/greet()
+/datum/antagonist/mafia/greet()
 	to_chat(owner.current, span_warning("<b>You are member of organised criminal group. You are a part of [gang], who find their way to this deep-space station.</b>"))
 
 /datum/antagonist/mafia/on_gain()
 	forge_objectives()
 	owner.current.add_faction("mafia")
 
-/datum/antagonist/sinfuldemon/on_removal()
+/datum/antagonist/mafia/on_removal()
 	owner.current.add_faction("mafia")
 
 #undef SEMYA_KRASNOVY
