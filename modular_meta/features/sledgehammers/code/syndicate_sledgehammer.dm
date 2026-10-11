@@ -18,6 +18,30 @@
 	force_wielded = 18
 	wall_hits_to_smash = 2
 	reinforced_wall_hits_to_smash = 4
+	lore = "\
+		Originally an ordinary demolition tool, this sturdy sledgehammer owes its commercial success \
+		to an incident Nanotrasen would rather forget.<br>\
+		<br>\
+		A Tiger Cooperative member reportedly took a surplus hammer from a mining outpost's \
+		equipment locker and used it to massacre the responding security detail. \
+		Surviving footage shows him gripping it <b>with both hands</b>, \
+		drawing back and holding his stance before delivering each crushing blow. \
+		When the remaining personnel barricaded themselves inside, \
+		he <span class='bolddanger'>battered through the walls</span>. \
+		<b> Even reinforced sections eventually gave way to repeated, fully wound-up strikes. </b> <br>\
+		<br>\
+		One critically wounded officer tried to crawl away. The attacker stood over him \
+		and raised the hammer for a final blow. \
+		The impact <span class='bolddanger'>tore the officer's head from his shoulders</span>, \
+		sending it down the corridor and leaving a thick streak of blood behind it. \
+		The last distress call ended with hammering on the bridge door.<br>\
+		<br>\
+		Donk Co. acquired the surviving footage and commissioned a mass-produced version \
+		with a reinforced handle and a heavier head. Officially, these improvements were intended \
+		for demanding industrial applications. The demonstration video circulated through \
+		Syndicate channels suggested otherwise.<br>\
+		<br>\
+		The hammer remains in production. Replacement handles are sold separately."
 	var/charge = 0
 	var/maximum_charge = 6
 	var/charge_step_duration = 1 SECONDS
@@ -42,33 +66,6 @@
 		"Your arms tense for a crushing blow.",
 		"You're ready to strike with full force.",
 	)
-
-/obj/item/sledgehammer/syndicate/Initialize(mapload)
-	. = ..()
-	AddElement(/datum/element/examine_lore, lore = "\
-		Originally an ordinary demolition tool, this sturdy sledgehammer owes its commercial success \
-		to an incident Nanotrasen would rather forget.<br>\
-		<br>\
-		A Tiger Cooperative member reportedly took a surplus hammer from a mining outpost's \
-		equipment locker and used it to massacre the responding security detail. \
-		Surviving footage shows him gripping it <b>with both hands</b>, \
-		drawing back and holding his stance before delivering each crushing blow. \
-		When the remaining personnel barricaded themselves inside, \
-		he <span class='bolddanger'>battered through the walls</span>. \
-		<b> Even reinforced sections eventually gave way to repeated, fully wound-up strikes. </b> <br>\
-		<br>\
-		One critically wounded officer tried to crawl away. The attacker stood over him \
-		and raised the hammer for a final blow. \
-		The impact <span class='bolddanger'>tore the officer's head from his shoulders</span>, \
-		sending it down the corridor and leaving a thick streak of blood behind it. \
-		The last distress call ended with hammering on the bridge door.<br>\
-		<br>\
-		Donk Co. acquired the surviving footage and commissioned a mass-produced version \
-		with a reinforced handle and a heavier head. Officially, these improvements were intended \
-		for demanding industrial applications. The demonstration video circulated through \
-		Syndicate channels suggested otherwise.<br>\
-		<br>\
-		The hammer remains in production. Replacement handles are sold separately.")
 
 /obj/item/sledgehammer/syndicate/examine(mob/user)
 	. = ..()

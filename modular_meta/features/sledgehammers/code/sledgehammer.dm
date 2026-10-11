@@ -2,7 +2,7 @@
 
 /obj/item/sledgehammer
 	name = "sledgehammer"
-	desc = "A heavy demolition hammer. Wielded with both hands, it smashes windows, grilles and plain walls."
+	desc = "Steel head, hickory handle, no moving parts. It does not care whether it hits a wall, a window or a skull, as long as you swing it with both hands. A sticker on the handle reads: FOR STRUCTURAL USE ONLY."
 	icon = 'modular_meta/features/sledgehammers/icons/sledgehammer.dmi'
 	icon_state = "sledgehammer0"
 	base_icon_state = "sledgehammer"
@@ -25,6 +25,17 @@
 	attack_verb_simple = list("smash", "slam", "bash", "pound")
 	custom_materials = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT * 5)
 	var/force_wielded = 20
+	var/lore = "\
+		The second generation of the Nanotrasen demolition sledgehammer was designed \
+		with crew safety as the highest priority.<br>\
+		<br>\
+		The head is now forged in one piece and no longer flies off mid-swing. \
+		The handle is longer, keeping the user's own knees out of the striking arc. \
+		The grip is wrapped in rubber, which the safety department lists as electrical insulation. \
+		The head is still solid steel.<br>\
+		<br>\
+		In internal trials the new model cut workplace injuries by a third. \
+		The remaining injuries are classified as user error."
 	var/knockback_range = 1
 	var/wall_hits_to_smash = 4
 	var/reinforced_wall_hits_to_smash
@@ -44,6 +55,7 @@
 		force_wielded = force_wielded, \
 		icon_wielded = "[base_icon_state]1", \
 	)
+	AddElement(/datum/element/examine_lore, lore = lore)
 
 /obj/item/sledgehammer/update_icon_state()
 	icon_state = "[base_icon_state]0"
