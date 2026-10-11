@@ -91,7 +91,7 @@
 		after a Tiger Cooperative member used an ordinary demolition hammer to massacre the crew of a Nanotrasen mining outpost.\
 		Donk's marketing department saw an opportunity. This, mass-produced version features a reinforced handle, \
 		a heavier head"
-	item = /obj/item/sledgehammer
+	item = /obj/item/sledgehammer/syndicate
 	cost = 16
 	purchasable_from = ~UPLINK_ALL_SYNDIE_OPS
 	restricted_roles = list(JOB_STATION_ENGINEER, JOB_CHIEF_ENGINEER)

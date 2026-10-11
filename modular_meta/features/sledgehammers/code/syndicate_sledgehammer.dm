@@ -1,56 +1,50 @@
 // Code by bruh24, sprites by DrNastiel, sounds are mentioned in attributions.txt in their respectable folder
 
-/obj/item/sledgehammer
+/obj/item/sledgehammer/syndicate
 	name = "Sledgehammer"
 	desc = "A mad engineer's choice"
 	icon = 'modular_meta/features/sledgehammers/icons/syndicate_sledgehammer.dmi'
-	icon_state = "sledgehammer"
-	base_icon_state = "sledgehammer"
 	lefthand_file = 'modular_meta/features/sledgehammers/icons/syndicate_sledgehammer_lefthand.dmi'
 	righthand_file = 'modular_meta/features/sledgehammers/icons/syndicate_sledgehammer_righthand.dmi'
 	force = 10
-	throwforce = 10
 	demolition_mod = 4
-	w_class = WEIGHT_CLASS_HUGE
-	attack_verb_continuous = list("attacks", "smashes", "slams", "breaks", "wrecks", "obliterates")
-	attack_verb_simple = list("attack", "smash",  "slam", "wreck", "break", "obliterate")
-	hitsound = 'sound/items/weapons/genhit3.ogg'
-	sharpness = NONE
-	armor_type = /datum/armor/item_fireaxe
-	wound_bonus = -15
-	//exposed_wound_bonus = 20
-	//force_unwielded = 5
-	//force_wielded = 22
-	var/charge_bonus = 0
-	var/next_charge
-	var/charging = FALSE
-	var/mouse_held = FALSE
-	var/max_charge = 6
-	var/min_charge = 1
-	var/force_per_charge = 9
-	var/wound_bonus_per_charge = 1.5
-	var/force_wielded = 18
-	var/force_unwielded = 10
 	attack_speed = 1.5 SECONDS
-	var/static/list/slam_verbs = list("slams", "smashes", "rams")
-	var/static/list/phrases = list(
-	"Your grip is still unsteady.",
-	"You tighten your grip on the sledgehammer.",
-	"You draw the sledgehammer back.",
-	"The weight settles into your hands.",
-	"Your arms tense for a crushing blow.",
-	"You're ready to strike with full force.",
-)
-
-/obj/item/sledgehammer/Initialize(mapload)
-	. = ..()
-	AddComponent(/datum/component/two_handed, \
-		force_wielded = force_wielded, \
-		force_unwielded = force_unwielded, \
-		icon_wielded = "[base_icon_state]1", \
-		attacksound = SFX_SWING_HIT, \
+	w_class = WEIGHT_CLASS_HUGE
+	slot_flags = NONE
+	obj_flags = NONE
+	attack_verb_continuous = list("attacks", "smashes", "slams", "breaks", "wrecks", "obliterates")
+	attack_verb_simple = list("attack", "smash", "slam", "wreck", "break", "obliterate")
+	wound_bonus = -15
+	force_wielded = 18
+	wall_hits_to_smash = 2
+	reinforced_wall_hits_to_smash = 4
+	var/charge = 0
+	var/maximum_charge = 6
+	var/charge_step_duration = 1 SECONDS
+	var/charging = FALSE
+	var/charge_button_held = FALSE
+	var/next_charge_time
+	var/force_per_charge = 9
+	var/wielded_wound_bonus = 15
+	var/wound_bonus_per_charge = 1.5
+	var/silicon_force_penalty = 17
+	var/charged_silicon_force_penalty = 42
+	var/mecha_force_penalty = 10
+	var/static/list/head_crush_sounds = list(
+		'modular_meta/features/sledgehammers/sound/flesh_hit1.ogg',
+		'modular_meta/features/sledgehammers/sound/flesh_hit2.ogg',
+	)
+	var/static/list/charge_phrases = list(
+		"Your grip is still unsteady.",
+		"You tighten your grip on the sledgehammer.",
+		"You draw the sledgehammer back.",
+		"The weight settles into your hands.",
+		"Your arms tense for a crushing blow.",
+		"You're ready to strike with full force.",
 	)
 
+/obj/item/sledgehammer/syndicate/Initialize(mapload)
+	. = ..()
 	AddElement(/datum/element/examine_lore, lore = "\
 		Originally an ordinary demolition tool, this sturdy sledgehammer owes its commercial success \
 		to an incident Nanotrasen would rather forget.<br>\
@@ -76,308 +70,176 @@
 		<br>\
 		The hammer remains in production. Replacement handles are sold separately.")
 
-/obj/item/sledgehammer/afterattack(atom/target, mob/living/user, list/modifiers, list/attack_modifiers)
-	var/mob/living/target_mob = target
-	var/atom/throw_target =  get_edge_target_turf(target_mob, get_dir(src, get_step_away(target_mob, src)))
-	if(QDELETED(target_mob))
-		return
-	if(HAS_TRAIT(src, TRAIT_WIELDED) && isliving(target_mob))
-		switch(charge_bonus)
-			if(1)
-				target_mob.throw_at(throw_target, 1, speed = 0.5)
-			if(2)
-				target_mob.throw_at(throw_target, 2, speed = 0.7)
-			if(3)
-				target_mob.throw_at(throw_target, 3, speed = 0.9)
-			if(4)
-				target_mob.throw_at(throw_target, 4, speed = 1.1)
-				target_mob.Stun(0.2 SECONDS)
-			if(5)
-				target_mob.throw_at(throw_target, 4, speed = 1.3)
-				target_mob.Stun(0.5 SECONDS)
-				target_mob.Knockdown(2 SECONDS)
-			if(6)
-				target_mob.throw_at(throw_target, 6, 2)
-				target_mob.Stun(1.5 SECONDS)
-				target_mob.Knockdown(4 SECONDS)
+/obj/item/sledgehammer/syndicate/examine(mob/user)
+	. = ..()
+	. += span_notice("Right-click with this in-hand to prepare a charged strike, the more progress bar is completed on the hammer, the harder will be the blow")
 
-	if(!HAS_TRAIT(src, TRAIT_WIELDED)) //destroys windows and grilles in one hit
-		return
-
-	if(target.resistance_flags & INDESTRUCTIBLE)
-		return
-	if(QDELETED(target))
-		return
-	if(istype(target, /obj/structure/window) || istype(target, /obj/structure/grille))
-		target.atom_destruction("sledgehammer")
-		user.do_attack_animation(target, used_item = src)
-		user.changeNext_move(attack_speed)
-		return TRUE
-
-
-	charge_bonus = 0
-	force = HAS_TRAIT(src, TRAIT_WIELDED) ? force_wielded : force_unwielded
-	throwforce = /obj/item/sledgehammer::throwforce
-	wound_bonus = /obj/item/sledgehammer::wound_bonus
-
-/obj/item/sledgehammer/update_icon_state()
-	icon_state = base_icon_state
-	return ..()
-
-/obj/item/sledgehammer/attack(atom/target, mob/user, list/modifiers, list/attack_modifiers)
-	hitsound = pick(
-		'sound/items/weapons/genhit1.ogg',
-		'sound/items/weapons/genhit2.ogg',
-		'sound/items/weapons/genhit3.ogg',
-	)
-
-	if(HAS_TRAIT(src, TRAIT_WIELDED) && isliving(target))
-		wound_bonus = 15
-		force = force_wielded
-		if(issilicon(target))
-			hitsound = pick(
-				'modular_meta/features/sledgehammers/sound/metal_hit.ogg',
-				'modular_meta/features/sledgehammers/sound/metal_hit2.ogg',
-			)
-		if(iscarbon(target))
-			if(charge_bonus >= 1)
-				hitsound = 'modular_meta/features/sledgehammers/sound/heavy_hit.ogg'
-				if(charge_bonus >= 5)
-					hitsound = 'modular_meta/features/sledgehammers/sound/flesh_hit3.ogg'
-
-		switch(charge_bonus)
-
-			if(1)
-				force += force_per_charge
-				throwforce += force_per_charge
-				wound_bonus += wound_bonus_per_charge
-			if(2)
-				force += force_per_charge * 2
-				throwforce += force_per_charge * 2
-				wound_bonus += wound_bonus_per_charge * 2
-			if(3)
-				force += force_per_charge * 3
-				throwforce += force_per_charge *3
-				wound_bonus += wound_bonus_per_charge * 3
-			if(4)
-				force += force_per_charge * 4
-				throwforce += force_per_charge *4
-				wound_bonus += wound_bonus_per_charge *4
-			if(5)
-				force += force_per_charge * 5
-				throwforce += force_per_charge *5
-				wound_bonus += wound_bonus_per_charge * 5
-			if(6)
-				force += force_per_charge * 6
-				throwforce += force_per_charge * 6
-				wound_bonus += wound_bonus_per_charge * 6
-	..()
-
-
-/obj/item/sledgehammer/pre_attack(atom/target, mob/user, list/modifiers, list/attack_modifiers)
+/obj/item/sledgehammer/syndicate/pre_attack(atom/target, mob/living/user, list/modifiers, list/attack_modifiers)
 	. = ..()
 	if(.)
 		return .
-
-	//high demolition mod helps us destroy machinery faster, however we do not want to be able to destroy a mecha from few attacks
 	if(issilicon(target))
-		force -= 17
-		if(charge_bonus >= 3)
-			force -= 25
-
+		MODIFY_ATTACK_FORCE(attack_modifiers, -(charge >= 3 ? charged_silicon_force_penalty : silicon_force_penalty))
 	if(ismecha(target))
-		force -= 10
-		playsound(target, pick('sound/effects/meteorimpact.ogg', 'sound/effects/bang.ogg'), 50)
-
-
-	if(istype(target, /turf/closed/wall/r_wall))
-		var/turf/closed/wall/wall = target
-		wall.add_dent(WALL_DENT_HIT)
-		wall.Shake(1, 3, 0.1 SECONDS, 0.1 SECONDS)
-		user.changeNext_move(attack_speed)
-		user.do_attack_animation(target, used_item = src)
-
-		user.visible_message(
-			span_danger("[user] [pick(slam_verbs)] [src] against [target]!"),
-			span_danger("You slam [src] against [target]!"),
-			)
-
-		playsound(target, pick('sound/effects/meteorimpact.ogg', 'sound/effects/bang.ogg'), 50)
-		if(prob(25))
-			wall.dismantle_wall(TRUE)
-		return TRUE
-
-
-	else if(istype(target, /turf/closed/wall))
-		var/turf/closed/wall/wall = target
-		wall.add_dent(WALL_DENT_HIT)
-		wall.Shake(null, 3, 0.1 SECONDS, 0.1 SECONDS)
-		user.changeNext_move(attack_speed)
-		user.do_attack_animation(target, used_item = src)
-
-		user.visible_message(
-			span_danger("[user] [pick(slam_verbs)] [src] against [target]!"),
-			span_danger("You slam [src] against [target]!"),
-			)
-
-
-		playsound(target, pick('sound/effects/meteorimpact.ogg', 'sound/effects/bang.ogg'), 50)
-		if(prob(40))
-			wall.dismantle_wall(TRUE)
-		return TRUE
-
-	if(!iscarbon(target))
+		MODIFY_ATTACK_FORCE(attack_modifiers, -mecha_force_penalty)
+	if(!can_crush_head(target, user))
 		return FALSE
+	crush_head(target, user)
+	return TRUE
 
-
-	var/mob/living/carbon/person_about_to_die_horribly = target
-	var/mob/living/carbon/madman = user
-	var/obj/item/bodypart/head/head = person_about_to_die_horribly.get_bodypart(BODY_ZONE_HEAD)
-
-	if(!person_about_to_die_horribly)
-		return
-
-	if(!head)
-		return
-
-	if((person_about_to_die_horribly.stat == SOFT_CRIT || person_about_to_die_horribly.stat == HARD_CRIT || madman.grab_state == GRAB_NECK) && check_zone(madman.zone_selected) == BODY_ZONE_HEAD)
-		bash_head(person_about_to_die_horribly, madman)
-		return TRUE // cancels attack chain after headbash
-
-	return FALSE
-
-
-/obj/item/sledgehammer/equipped(mob/user, slot, initial = FALSE)
+/obj/item/sledgehammer/syndicate/attack(mob/living/target_mob, mob/living/user, list/modifiers, list/attack_modifiers)
+	if(!HAS_TRAIT(src, TRAIT_WIELDED))
+		return ..()
+	MODIFY_ATTACK_FORCE(attack_modifiers, force_per_charge * charge)
+	wound_bonus = wielded_wound_bonus + wound_bonus_per_charge * charge
 	. = ..()
+	wound_bonus = initial(wound_bonus)
 
-	if(slot != ITEM_SLOT_HANDS)
-		return
+/obj/item/sledgehammer/syndicate/afterattack(atom/target, mob/living/user, list/modifiers, list/attack_modifiers)
+	. = ..()
+	charge = 0
 
+/obj/item/sledgehammer/syndicate/fling(mob/living/target, atom/throw_target, mob/living/user)
+	switch(charge)
+		if(1)
+			target.throw_at(throw_target, 1, 0.5)
+		if(2)
+			target.throw_at(throw_target, 2, 0.7)
+		if(3)
+			target.throw_at(throw_target, 3, 0.9)
+		if(4)
+			target.throw_at(throw_target, 4, 1.1)
+			target.Stun(0.2 SECONDS)
+		if(5)
+			target.throw_at(throw_target, 4, 1.3)
+			target.Stun(0.5 SECONDS)
+			target.Knockdown(2 SECONDS)
+		if(6)
+			target.throw_at(throw_target, 6, 2)
+			target.Stun(1.5 SECONDS)
+			target.Knockdown(4 SECONDS)
+
+/obj/item/sledgehammer/syndicate/equipped(mob/user, slot, initial = FALSE)
+	. = ..()
 	if(!user.client)
 		return
+	if(slot != ITEM_SLOT_HANDS)
+		UnregisterSignal(user.client, list(COMSIG_CLIENT_MOUSEDOWN, COMSIG_CLIENT_MOUSEUP))
+		return
+	RegisterSignal(user.client, COMSIG_CLIENT_MOUSEDOWN, PROC_REF(on_mouse_down), override = TRUE)
+	RegisterSignal(user.client, COMSIG_CLIENT_MOUSEUP, PROC_REF(on_mouse_up), override = TRUE)
 
-	RegisterSignal(user.client, COMSIG_CLIENT_MOUSEDOWN, PROC_REF(on_mouse_down))
-	RegisterSignal(user.client, COMSIG_CLIENT_MOUSEUP, PROC_REF(on_mouse_up))
-
-
-/obj/item/sledgehammer/dropped(mob/user, silent = FALSE)
+/obj/item/sledgehammer/syndicate/dropped(mob/user, silent = FALSE)
 	if(user.client)
-		//UnregisterSignal(user, COMSIG_MOB_KEYDOWN)
-		UnregisterSignal(user.client, COMSIG_CLIENT_MOUSEDOWN)
-		UnregisterSignal(user.client, COMSIG_CLIENT_MOUSEUP)
-		charge_bonus = 0
+		UnregisterSignal(user.client, list(COMSIG_CLIENT_MOUSEDOWN, COMSIG_CLIENT_MOUSEUP))
+	charge = 0
 	return ..()
 
+/obj/item/sledgehammer/syndicate/pick_hitsound(mob/living/target_mob)
+	if(HAS_TRAIT(src, TRAIT_WIELDED) && iscarbon(target_mob) && charge >= 5)
+		return 'modular_meta/features/sledgehammers/sound/flesh_hit3.ogg'
+	return ..()
 
-/obj/item/sledgehammer/proc/on_mouse_up(client/player, object, location, control, params)
+/obj/item/sledgehammer/syndicate/proc/on_mouse_down(client/source, atom/object, turf/location, control, params)
 	SIGNAL_HANDLER
 
-	var/list/mods = params2list(params)
-	if(mods[BUTTON] == RIGHT_CLICK)
-		mouse_held = FALSE
-		to_chat(player.mob, span_notice("[phrases[charge_bonus]]"))
-
-/obj/item/sledgehammer/proc/on_mouse_down(client/player, object, location, control, params)
-	SIGNAL_HANDLER
-
-	var/list/mods = params2list(params)
-	if(mods[BUTTON] != RIGHT_CLICK)
+	var/list/mouse_modifiers = params2list(params)
+	if(mouse_modifiers[BUTTON] != RIGHT_CLICK)
 		return
-
-	var/mob/living/user = player.mob
+	var/mob/living/user = source.mob
 	if(!iscarbon(user) || user.get_active_held_item() != src || charging)
 		return
+	INVOKE_ASYNC(src, PROC_REF(charge_up), user)
 
-	INVOKE_ASYNC(src, PROC_REF(begin_charging_attack), user)
+/obj/item/sledgehammer/syndicate/proc/on_mouse_up(client/source, atom/object, turf/location, control, params)
+	SIGNAL_HANDLER
 
-/obj/item/sledgehammer/proc/begin_charging_attack(mob/living/carbon/user)
-	user = loc
-
-	if(charging)
+	var/list/mouse_modifiers = params2list(params)
+	if(mouse_modifiers[BUTTON] != RIGHT_CLICK)
 		return
+	charge_button_held = FALSE
+	if(charge)
+		to_chat(source.mob, span_notice(charge_phrases[charge]))
 
-	if(!(ismob(user)))
-		return
-	if(!(HAS_TRAIT(src, TRAIT_WIELDED)))
+/obj/item/sledgehammer/syndicate/proc/charge_up(mob/living/carbon/user)
+	if(!HAS_TRAIT(src, TRAIT_WIELDED))
 		balloon_alert(user, "wield first!")
-		return stop_charging_attack()
-	if((user.incapacitated))
+		return
+	if(user.incapacitated)
 		return
 
 	charging = TRUE
-	mouse_held = TRUE
-
-	charge_bonus = 0
-	next_charge = world.time + 1 SECONDS
-	do_after(user, 6 SECONDS, src, extra_checks = CALLBACK(src, PROC_REF(charge_tick), user), timed_action_flags = IGNORE_USER_LOC_CHANGE | IGNORE_SLOWDOWNS)
+	charge_button_held = TRUE
+	charge = 0
+	next_charge_time = world.time + charge_step_duration
+	do_after(user, maximum_charge * charge_step_duration, src, extra_checks = CALLBACK(src, PROC_REF(charge_tick), user), timed_action_flags = IGNORE_USER_LOC_CHANGE | IGNORE_SLOWDOWNS)
 	charging = FALSE
-	mouse_held = FALSE
+	charge_button_held = FALSE
 
-/obj/item/sledgehammer/proc/stop_charging_attack(mob/living/carbon/user)
-	user = loc
-
-/obj/item/sledgehammer/proc/charge_tick(mob/living/carbon/user)
-	if(!mouse_held)
+/obj/item/sledgehammer/syndicate/proc/charge_tick(mob/living/carbon/user)
+	if(!charge_button_held)
 		return FALSE
 
-	while(world.time >= next_charge && charge_bonus < max_charge)
-		charge_bonus++
-		charge_bonus = clamp(charge_bonus, min_charge, max_charge)
+	while(world.time >= next_charge_time && charge < maximum_charge)
+		charge++
 		user.playsound_local(user, 'sound/vehicles/mecha/skyfall_power_up.ogg', 15)
-		Shake(null, 5, 0.1 SECONDS, 0.1 SECONDS)
-		next_charge += 1 SECONDS
+		Shake(pixelshifty = 5, duration = 0.1 SECONDS, shake_interval = 0.1 SECONDS)
+		next_charge_time += charge_step_duration
 	return TRUE
 
-/obj/item/sledgehammer/proc/bash_head(mob/living/carbon/target, mob/living/user)
-	var/obj/item/bodypart/head/head = target.get_bodypart(BODY_ZONE_HEAD)
-	user.spin(spintime = 2 SECONDS, speed = 1)
+/obj/item/sledgehammer/syndicate/proc/can_crush_head(atom/target, mob/living/user)
+	if(!iscarbon(target) || check_zone(user.zone_selected) != BODY_ZONE_HEAD || HAS_TRAIT(user, TRAIT_PACIFISM))
+		return FALSE
+	var/mob/living/carbon/victim = target
+	var/obj/item/bodypart/head/head = victim.get_bodypart(BODY_ZONE_HEAD)
+	if(isnull(head) || !head.can_dismember())
+		return FALSE
+	var/neck_grabbed = user.pulling == victim && user.grab_state >= GRAB_NECK
+	return victim.stat == SOFT_CRIT || victim.stat == HARD_CRIT || neck_grabbed
 
+/obj/item/sledgehammer/syndicate/proc/crush_head(mob/living/carbon/victim, mob/living/user)
+	if(DOING_INTERACTION_WITH_TARGET(user, victim))
+		return
+	var/obj/item/bodypart/head/head = victim.get_bodypart(BODY_ZONE_HEAD)
+	user.spin(spintime = 2 SECONDS, speed = 1)
 	user.visible_message(
-		span_danger("[user] winds up [src], preparing to crush [target]'s head!"),
-		span_alert("You wind up [src], preparing to crush [target]'s head!"),
+		span_danger("[user] winds up [src], preparing to crush [victim]'s head!"),
+		span_alert("You wind up [src], preparing to crush [victim]'s head!"),
 	)
 
-	if(!do_after(user, 2.5 SECONDS, target))
+	if(!do_after(user, 2.5 SECONDS, victim))
 		return
-	if(QDELETED(target) || QDELETED(head) || head.owner != target)
+	if(QDELETED(victim) || QDELETED(head) || head.owner != victim)
 		return
 
-	user.do_attack_animation(target, used_item = src)
-	playsound(target, pick('modular_meta/features/sledgehammers/sound/flesh_hit1.ogg', 'modular_meta/features/sledgehammers/sound/flesh_hit2.ogg'), 80, TRUE)
-	target.apply_damage(force * 3, BRUTE, head, wound_bonus = 50, attacking_item = src)
+	user.do_attack_animation(victim, used_item = src)
+	playsound(victim, pick(head_crush_sounds), 80, TRUE)
+	victim.apply_damage(force * 3, BRUTE, head, wound_bonus = 50, attacking_item = src)
+	log_combat(user, victim, "crushed the head of", src)
 	head.throw_range = 6
 	head.throw_speed = 1
-	RegisterSignal(head, COMSIG_MOVABLE_MOVED, PROC_REF(head_trail))
+	RegisterSignal(head, COMSIG_MOVABLE_MOVED, PROC_REF(on_head_moved))
 	head.dismember(silent = FALSE)
-	charge_bonus = 0
-	addtimer(CALLBACK(src, PROC_REF(rm_signal), head), 2 SECONDS)
+	charge = 0
+	addtimer(CALLBACK(src, PROC_REF(stop_head_trail), head), 2 SECONDS)
 
-/obj/item/sledgehammer/proc/head_trail(obj/item/bodypart/head/head, atom/old_loc)
+/obj/item/sledgehammer/syndicate/proc/on_head_moved(obj/item/bodypart/head/head, atom/old_loc)
 	SIGNAL_HANDLER
 
-	var/turf/tile = get_turf(head)
-	var/trail_dir = get_dir(old_loc, tile)
-
-	if(!isopenturf(tile) || !trail_dir)
+	var/turf/head_turf = get_turf(head)
+	var/trail_direction = get_dir(old_loc, head_turf)
+	if(!isopenturf(head_turf) || !trail_direction)
 		return
 
-	var/obj/effect/decal/cleanable/blood/trail_holder/blood_trail = locate() in tile
+	var/obj/effect/decal/cleanable/blood/trail_holder/blood_trail = locate() in head_turf
 	if(!blood_trail)
-		blood_trail = new(tile)
-
+		blood_trail = new(head_turf)
 	if(QDELETED(blood_trail))
 		return
 
-	if(ISDIAGONALDIR(trail_dir))
-		trail_dir = -trail_dir
+	if(ISDIAGONALDIR(trail_direction))
+		trail_direction = -trail_direction
+	blood_trail.add_dir_to_trail(trail_direction, blood_to_add = BLOOD_AMOUNT_PER_DECAL)
 
-	blood_trail.add_dir_to_trail(trail_dir, blood_to_add = BLOOD_AMOUNT_PER_DECAL)
-
-/obj/item/sledgehammer/proc/rm_signal(obj/item/bodypart/head/head)
+/obj/item/sledgehammer/syndicate/proc/stop_head_trail(obj/item/bodypart/head/head)
 	UnregisterSignal(head, COMSIG_MOVABLE_MOVED)
-
-// not including detailed instructions on wall destruction, as well as the finish off, as deep-lore element explains it just enough,
-// also understanding mechanics through lore is much better, than just adding a blatant to_chat() with everything required
-/obj/item/sledgehammer/examine(mob/user)
-	. = ..()
-	. += span_notice("Right-click with this in-hand to prepare a charged strike, the more progress bar is completed on the hammer, the harder will be the blow")
