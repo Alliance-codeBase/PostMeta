@@ -19,14 +19,14 @@
 
 	// БЛЯ ПРОСТО СКОПИРОВАНО С ГЛАМУРА ДЕМОНА ГРЕХА И СОСАТЕЛЯ КРОВИ БРУХА
 	// ЭТО ПЕРЕМЕННАЯ ГДЕ КОРОЧЕ КУДА НАЗНАЧЕН МАФИОЗНИК КАКАЯ СЕМЬЯ
-	var/gang
+	var/my_gang
 
 	// ЭТО СПИСОК СЕМЕЙ, ВЫДАЁТСЯ ПРИ ЕСТЕСТВЕННОМ ЯВЛЕНИЕ В МИР ОПГШНИКА
-	var/static/list/gang = list(SEMYA_KRASNOVY, FAMILY_GIOVANI, FAMILY_KONICHIWA, FAMILY_GOLDSHTEIN)
+	var/static/list/all_gangs = list(SEMYA_KRASNOVY, FAMILY_GIOVANI, FAMILY_KONICHIWA, FAMILY_GOLDSHTEIN)
 
 /datum/antagonist/mafia/New()
 	. = ..()
-	gang = pick(gang)
+	my_gang = pick(all_gangs)
 
 /datum/antagonist/mafia/forge_objectives()
 	var/datum/objective/mafia/objct
