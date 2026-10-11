@@ -1,7 +1,11 @@
 #define THROW_COMBO "GD"
 #define SPIN_COMBO "GGD"
+#define WHEELTHROW_COMBO "GDH"
 #define GROUND_COMBO "GG"
-#define TWIST_COMBO "GGH"
+#define TWIST_COMBO "GD"
+#define GB_SEGMENT_1 "EDEG"
+#define GB_SEGMENT_2 "DDGE"
+#define GB_SEGMENT_3 "DDGE"
 
 /datum/martial_art/judo
 	name = "corporate judo"
@@ -19,7 +23,6 @@
 	RegisterSignal(holder, COMSIG_MOB_EQUIPPED_ITEM, PROC_REF(check_baton))
 	for(var/obj/item/item in new_holder.held_items)
 		check_baton(equipped_item = item, slot = ITEM_SLOT_HANDS)
-
 	to_chat(new_holder, span_userdanger("The nanites of this belt grant you mastery of corporate judo!"))
 
 /datum/martial_art/judo/deactivate_style(mob/living/remove_from)
@@ -27,7 +30,6 @@
 	if(state)
 		state.reset()
 		qdel(state)
-
 	UnregisterSignal(holder, COMSIG_MOB_EQUIPPED_ITEM)
 	to_chat(remove_from, span_userdanger("You are forgetting the mastery of corporate judo..."))
 	return ..()
@@ -36,20 +38,25 @@
 	SIGNAL_HANDLER
 	if(!istype(equipped_item, /obj/item/melee/baton))
 		return
-
 	if(slot != ITEM_SLOT_HANDS)
 		return
-
 	to_chat(holder, span_warning("Your hands are rejecting the [equipped_item] against your will!"))
 	holder.dropItemToGround(equipped_item)
+
+//ИНТЕНТЫ
 
 /datum/martial_art/judo/harm_act(mob/living/attacker, mob/living/defender)
 	var/datum/component/judo_state/state = attacker.GetComponent(/datum/component/judo_state)
 	if(!state)
 		return MARTIAL_ATTACK_FAIL
 
-	if(state && state.grabbed_mob == defender)
-		return ground_harm(attacker, defender) // Если мы кого-то держим — выкручиваем руку
+	if(state.grabbed_mob == defender)
+		if(state.get_tier() >= 1)
+			add_to_streak("H", defender)
+			if(findtext(streak, TWIST_COMBO))
+				reset_streak()
+				return twist(attacker, defender)
+		return ground_harm(attacker, defender)
 
 	if(defender.check_block(attacker, 10, attacker.name, UNARMED_ATTACK))
 		return MARTIAL_ATTACK_FAIL
@@ -57,11 +64,6 @@
 	add_to_streak("H", defender)
 	if(check_streak(attacker, defender))
 		return MARTIAL_ATTACK_SUCCESS
-
-	if(defender.has_status_effect(/datum/status_effect/off_balance) && attacker.body_position == LYING_DOWN)
-		defender.Knockdown(3 SECONDS)
-		defender.apply_damage(10, BRUTE)
-		to_chat(attacker, "лег свип") // тест
 
 	attacker.do_attack_animation(defender)
 	var/picked_hit_type = pick("robust", "strike", "punch")
@@ -76,7 +78,7 @@
 		attacker,
 	)
 	to_chat(attacker, span_danger("You [picked_hit_type] [defender]!"))
-	log_combat(attacker, defender, "attacked ([picked_hit_type]'d)(judo)")
+	log_combat(attacker, defender, "([picked_hit_type]'d)([src])")
 	return MARTIAL_ATTACK_SUCCESS
 
 /datum/martial_art/judo/disarm_act(mob/living/attacker, mob/living/defender)
@@ -93,7 +95,6 @@
 
 	if(attacker == defender)
 		return MARTIAL_ATTACK_FAIL
-
 	return MARTIAL_ATTACK_INVALID
 
 /datum/martial_art/judo/grab_act(mob/living/attacker, mob/living/defender)
@@ -110,36 +111,28 @@
 	if(state.grabbed_mob)
 		return MARTIAL_ATTACK_INVALID
 
-	// Если ты лежишь, и цель лежит — можно бороться в партере
+	// Оба лежат — партер
 	if(attacker.body_position == LYING_DOWN && defender.body_position == LYING_DOWN)
 		add_to_streak("G", defender)
 		if(check_streak(attacker, defender))
 			return MARTIAL_ATTACK_SUCCESS
-		// Если комбо не сложилось — просто захват
-		attacker.do_attack_animation(defender)
-		defender.visible_message(
-			span_danger("[attacker] борется с [defender] в партере!"),
-			span_userdanger("[attacker] борется с вами в партере!"),
-			span_hear("Вы слышите борьбу!"),
-			null,
-			attacker,
-		)
-		to_chat(attacker, span_danger("Вы боретесь с [defender] в партере!"))
 		defender.apply_damage(5, STAMINA)
 		return MARTIAL_ATTACK_SUCCESS
 
-	if(attacker.grab_state == GRAB_PASSIVE)
-    	// первый граб — пассивный
-		defender.grabbedby(attacker, TRUE)
-	else if(attacker.grab_state == GRAB_AGGRESSIVE)
-		// второй граб — цель падает
-		defender.Knockdown(3 SECONDS)
-
-	// Если ты стоишь — стандартный граб
-	if(attacker.body_position != LYING_DOWN)
-		add_to_streak("G", defender)
-		if(check_streak(attacker, defender))
+	// Атакующий лежит, цель стоит
+	if(attacker.body_position == LYING_DOWN)
+		if(attacker.grab_state == GRAB_PASSIVE)
+			defender.grabbedby(attacker, TRUE)
 			return MARTIAL_ATTACK_SUCCESS
+		else if(attacker.grab_state == GRAB_AGGRESSIVE)
+			defender.Knockdown(3 SECONDS)
+			return MARTIAL_ATTACK_SUCCESS
+		return MARTIAL_ATTACK_SUCCESS
+
+	// Атакующий стоит
+	add_to_streak("G", defender)
+	if(check_streak(attacker, defender))
+		return MARTIAL_ATTACK_SUCCESS
 
 	return MARTIAL_ATTACK_INVALID
 
@@ -156,26 +149,32 @@
 		defender.Stun(0.5 SECONDS)
 		return MARTIAL_ATTACK_SUCCESS
 
-	attacker.changeNext_move(CLICK_CD_MELEE / (1 + state.get_flow() / 10) / 4)
+	attacker.changeNext_move(CLICK_CD_MELEE / 4)
 	return MARTIAL_ATTACK_SUCCESS
 
-/datum/martial_art/judo/reset_streak(mob/living/new_target)
-	. = ..()
-
-/datum/martial_art/judo/proc/apply_flow_effect(mob/living/attacker)
-	var/datum/component/judo_state/state = attacker.GetComponent(/datum/component/judo_state)
-	if(!state)
-		return
-
-	attacker.changeNext_move(CLICK_CD_MELEE / (1 + state.get_flow())) // ТЕСТ НАДО ПОМЕНЯТЬ НЕ ЗАБУДЬ
-	to_chat(attacker, "flow = [state.get_flow()]")
-
+//ПРОВЕРКА КОМБО
 
 /datum/martial_art/judo/proc/check_streak(mob/living/attacker, mob/living/defender)
 	var/datum/component/judo_state/state = attacker.GetComponent(/datum/component/judo_state)
 	if(!state)
 		return FALSE
 
+	// Golden Blast: сегмент 3
+	if(findtext(streak, GB_SEGMENT_1 + GB_SEGMENT_2 + GB_SEGMENT_3))
+		reset_streak()
+		return golden_blast_segment(attacker, defender, 3)
+
+	// Golden Blast: сегмент 2
+	if(findtext(streak, GB_SEGMENT_1 + GB_SEGMENT_2))
+		reset_streak()
+		return golden_blast_segment(attacker, defender, 2)
+
+	// Golden Blast: сегмент 1
+	if(findtext(streak, GB_SEGMENT_1))
+		reset_streak()
+		return golden_blast_segment(attacker, defender, 1)
+
+	// T2 партер: вывих
 	if(attacker.body_position == LYING_DOWN && defender.body_position == LYING_DOWN && findtext(streak, TWIST_COMBO))
 		if(state.get_tier() >= 1)
 			reset_streak()
@@ -184,10 +183,18 @@
 			reset_streak()
 			return FALSE
 
+	// T1 партер: захват
 	if(attacker.body_position == LYING_DOWN && defender.body_position == LYING_DOWN && findtext(streak, GROUND_COMBO))
 		reset_streak()
 		return ground(attacker, defender)
 
+	// T3 стойка
+	if(findtext(streak, WHEELTHROW_COMBO))
+		if(state.get_tier() >= 2)
+			reset_streak()
+			return wheelthrow(attacker, defender)
+
+	// T2 стойка
 	if(findtext(streak, SPIN_COMBO))
 		if(state.get_tier() >= 1)
 			reset_streak()
@@ -196,13 +203,15 @@
 			reset_streak()
 			return FALSE
 
+	// T1 стойка
 	if(findtext(streak, THROW_COMBO))
 		reset_streak()
 		return Throw(attacker, defender)
+
 	return FALSE
 
+//СТОЙКА
 
-//стойка
 /datum/martial_art/judo/proc/Throw(mob/living/attacker, mob/living/defender)
 	if(defender.body_position != STANDING_UP)
 		return FALSE
@@ -219,9 +228,7 @@
 			has_obstacle = TRUE
 	if(!has_obstacle && behind_attacker)
 		target_turf = behind_attacker
-		to_chat(attacker, "т1 Через себя") // тест
-	else
-		to_chat(attacker, "т1 на месте") // тест
+
 	attacker.do_attack_animation(defender)
 	playsound(attacker, 'sound/items/weapons/slam.ogg', 50, TRUE, -1)
 	playsound(attacker, 'sound/items/style/combo_dull1.ogg', 50, TRUE, -1)
@@ -229,18 +236,20 @@
 	if(target_turf != defender.loc)
 		defender.forceMove(target_turf)
 		defender.SpinAnimation(10, 1)
+		defender.dir = turn(defender.dir, 180)
+
 	defender.Knockdown(5 SECONDS)
-	log_combat(attacker, defender, "slammed (Judo)")
+	log_combat(attacker, defender, "slammed ([src])")
+
 	var/datum/component/judo_state/state = attacker.GetComponent(/datum/component/judo_state)
 	if(!state)
 		return FALSE
 	state.set_tier(1)
-	state.increment_flow()
 	state.refresh_timer(attacker, src)
-	apply_flow_effect(attacker)
 	return TRUE
 
 /datum/martial_art/judo/proc/Throw2(mob/living/attacker, mob/living/defender)
+	// цель стоит
 	if(defender.body_position != LYING_DOWN)
 		var/turf/behind_attacker = get_step(attacker, turn(attacker.dir, 180))
 		var/turf/target_turf = defender.loc
@@ -254,9 +263,7 @@
 				has_obstacle = TRUE
 		if(!has_obstacle && behind_attacker)
 			target_turf = behind_attacker
-			to_chat(attacker, "т2 Через себя") // тест
-		else
-			to_chat(attacker, "т2 на месте") // тест
+
 		attacker.do_attack_animation(defender)
 		playsound(attacker, 'sound/items/weapons/slam.ogg', 50, TRUE, -1)
 		playsound(attacker, 'sound/items/style/combo_cool3.ogg', 50, TRUE, -1)
@@ -264,86 +271,75 @@
 		if(target_turf != defender.loc)
 			defender.forceMove(target_turf)
 			defender.SpinAnimation(10, 1)
-			defender.apply_damage(15, BRUTE)
+			defender.dir = turn(defender.dir, 180)
+			defender.apply_damage(15, OXY)
+
 		defender.Paralyze(7 SECONDS)
+		defender.Knockdown(7 SECONDS)
+		log_combat(attacker, defender, "slammed T2 ([src])")
 
 		var/datum/component/judo_state/state = attacker.GetComponent(/datum/component/judo_state)
 		if(!state)
 			return FALSE
 		state.set_tier(2)
-		state.increment_flow()
 		state.refresh_timer(attacker, src)
-		apply_flow_effect(attacker)
 		return TRUE
 
+	// цель лежит
 	else
 		attacker.do_attack_animation(defender)
 		playsound(attacker, 'sound/items/weapons/slam.ogg', 50, TRUE, -1)
+		playsound(attacker, 'sound/items/style/combo_cool3.ogg', 50, TRUE, -1)
+
+		defender.SpinAnimation(10, 1)
+		defender.dir = turn(defender.dir, 180)
+
 		defender.apply_damage(45, STAMINA)
-		to_chat(attacker, "т2 добивание") // тест
+		defender.Paralyze(7 SECONDS)
+		defender.Knockdown(7 SECONDS)
+		log_combat(attacker, defender, "T2 ground strike ([src])")
 
 		var/datum/component/judo_state/state = attacker.GetComponent(/datum/component/judo_state)
 		if(!state)
 			return FALSE
-
 		state.set_tier(2)
-		state.increment_flow()
 		state.refresh_timer(attacker, src)
-		apply_flow_effect(attacker)
 		return TRUE
 
+/datum/martial_art/judo/proc/wheelthrow(mob/living/attacker, mob/living/defender)
+	if(attacker.body_position != LYING_DOWN)
+		playsound(get_turf(attacker), 'sound/effects/magic/tail_swing.ogg', 40, TRUE)
+		defender.SpinAnimation(10, 1)
+	else
+		playsound(get_turf(attacker), 'sound/items/weapons/slam.ogg', 40, TRUE)
 
-// механ партера
-/datum/martial_art/judo/proc/ground_tick(mob/living/attacker, mob/living/defender)
-	var/datum/component/judo_state/state = attacker.GetComponent(/datum/component/judo_state)
-	if(!state || state.grabbed_mob != defender)
-		return
-	if(defender.body_position != LYING_DOWN)
-		return
-	defender.apply_damage(15, STAMINA)
-	to_chat(attacker, "партер удержание") //тест
-	addtimer(CALLBACK(src, PROC_REF(ground_tick), attacker, defender), 1 SECONDS, TIMER_UNIQUE | TIMER_STOPPABLE)
-
-/datum/martial_art/judo/proc/ground_harm(mob/living/attacker, mob/living/defender)
-	var/datum/component/judo_state/state = attacker.GetComponent(/datum/component/judo_state)
-	if(!state || state.grabbed_mob != defender)
-		return FALSE
-	var/obj/item/bodypart/arm = pick(list(
-	defender.get_bodypart(BODY_ZONE_L_ARM),
-	defender.get_bodypart(BODY_ZONE_R_ARM)
-))
-	if(!arm)
-		return FALSE
-	attacker.do_attack_animation(defender)
-	to_chat(attacker, "партер вывех") // тест
-	defender.apply_damage(25, BRUTE, arm.body_zone)
-	defender.apply_damage(30, STAMINA)
-	return TRUE
-
-/datum/martial_art/judo/proc/end_ground(mob/living/attacker, mob/living/defender)
+	defender.apply_damage(120, STAMINA)
+	defender.Knockdown(15 SECONDS)
+	defender.set_confusion(10 SECONDS)
 	var/datum/component/judo_state/state = attacker.GetComponent(/datum/component/judo_state)
 	if(!state)
-		return
-	state.grabbed_mob = null
-	state.grabbed_timer = null
-	to_chat(attacker, "партер отпустил") // тест
+		return FALSE
+	state.set_tier(2)
+	state.refresh_timer(attacker, src)
+	log_combat(attacker, defender, "wheel throw / floor pin ([src])")
+	return TRUE
 
-// партер
+//ПАРТЕР
+
 /datum/martial_art/judo/proc/ground(mob/living/attacker, mob/living/defender)
 	if(attacker.body_position != LYING_DOWN || defender.body_position != LYING_DOWN)
 		return FALSE
 
-	var/datum/component/judo_state/state = attacker.GetComponent(/datum/component/judo_state) // <--- ЕДИНСТВЕННОЕ объявление
-	if(!state)
-		return FALSE
-
-	if(state.grabbed_mob)
+	var/datum/component/judo_state/state = attacker.GetComponent(/datum/component/judo_state)
+	if(!state || state.grabbed_mob)
 		return FALSE
 
 	state.grabbed_mob = defender
+	state.has_twisted = FALSE
 	attacker.do_attack_animation(defender)
-	to_chat(attacker, span_danger("Вы захватываете [defender]! Используйте Harm, чтобы выкрутить руку, или ждите, чтобы утомить.")) //мета инфа в спан денжер, хз можно ли?
-	defender.Paralyze(3 SECONDS)
+	to_chat(attacker, span_danger("Вы захватываете [defender]! Используйте Harm для вывиха."))
+	attacker.Immobilize(5 SECONDS)
+	defender.Immobilize(5 SECONDS)
 	defender.drop_all_held_items()
 	defender.apply_damage(10, STAMINA)
 
@@ -351,9 +347,49 @@
 	addtimer(CALLBACK(src, PROC_REF(ground_tick), attacker, defender), 1 SECONDS, TIMER_UNIQUE | TIMER_STOPPABLE)
 
 	state.set_tier(1)
-	state.increment_flow()
 	state.refresh_timer(attacker, src)
-	apply_flow_effect(attacker)
+	return TRUE
+
+/datum/martial_art/judo/proc/ground_tick(mob/living/attacker, mob/living/defender)
+	var/datum/component/judo_state/state = attacker.GetComponent(/datum/component/judo_state)
+	if(!state || state.grabbed_mob != defender)
+		return
+	if(defender.body_position != LYING_DOWN)
+		end_ground(attacker, defender)
+		return
+	if(attacker.body_position != LYING_DOWN)
+		end_ground(attacker, defender)
+		return
+	if(!attacker.Adjacent(defender))
+		end_ground(attacker, defender)
+		return
+
+	defender.apply_damage(15, STAMINA)
+	attacker.Immobilize(1 SECONDS)
+	defender.Immobilize(1 SECONDS)
+	addtimer(CALLBACK(src, PROC_REF(ground_tick), attacker, defender), 1 SECONDS, TIMER_UNIQUE | TIMER_STOPPABLE)
+
+/datum/martial_art/judo/proc/ground_harm(mob/living/attacker, mob/living/defender)
+	var/datum/component/judo_state/state = attacker.GetComponent(/datum/component/judo_state)
+	if(!state || state.grabbed_mob != defender)
+		return FALSE
+	if(state.has_twisted)
+		to_chat(attacker, "уже вывихнута")
+		return FALSE
+	state.has_twisted = TRUE
+
+	var/obj/item/bodypart/arm = pick(list(
+		defender.get_bodypart(BODY_ZONE_L_ARM),
+		defender.get_bodypart(BODY_ZONE_R_ARM)
+	))
+	if(!arm)
+		return FALSE
+
+	attacker.do_attack_animation(defender)
+	defender.apply_damage(25, BRUTE, arm.body_zone)
+	defender.apply_damage(30, STAMINA)
+	defender.Paralyze(5 SECONDS)
+	end_ground(attacker, defender)
 	return TRUE
 
 /datum/martial_art/judo/proc/twist(mob/living/attacker, mob/living/defender)
@@ -369,19 +405,59 @@
 		return FALSE
 
 	attacker.do_attack_animation(defender)
-	to_chat(attacker, "т2 партер ХРУМК") //тест
 	defender.apply_damage(25, BRUTE, arm.body_zone)
 	defender.apply_damage(30, STAMINA)
 	defender.Paralyze(5 SECONDS)
 	end_ground(attacker, defender)
 	state.set_tier(2)
-	state.increment_flow()
 	state.refresh_timer(attacker, src)
-	apply_flow_effect(attacker)
+	return TRUE
 
+/datum/martial_art/judo/proc/end_ground(mob/living/attacker, mob/living/defender)
+	var/datum/component/judo_state/state = attacker.GetComponent(/datum/component/judo_state)
+	if(!state)
+		return
+	state.grabbed_mob = null
+	state.grabbed_timer = null
+	attacker.SetImmobilized(0)
+	defender.SetImmobilized(0)
+
+//Голденбласт
+/datum/martial_art/judo/proc/golden_blast_segment(mob/living/attacker, mob/living/defender, segment)
+	switch(segment)
+		if(1)
+			defender.Stun(2 SECONDS)
+			defender.apply_damage(30, STAMINA)
+			to_chat(attacker, span_notice("GB1: control initiated")) //тест
+			do_sparks(5, FALSE, defender)
+			defender.SpinAnimation(10, 1)
+			defender.set_confusion(5 SECONDS)
+			log_combat(attacker, defender, "golden blast1 ([src])")
+		if(2)
+			defender.Paralyze(3 SECONDS)
+			defender.apply_damage(30, STAMINA)
+			to_chat(attacker, span_notice("GB2: control intensified")) //тест
+			do_sparks(5, FALSE, defender)
+			defender.SpinAnimation(10, 1)
+			defender.set_confusion(5 SECONDS)
+			log_combat(attacker, defender, "golden blast2 ([src])")
+		if(3)
+			defender.Paralyze(5 SECONDS)
+			defender.apply_damage(200, STAMINA)
+			do_sparks(5, FALSE, defender)
+			defender.SpinAnimation(10, 1)
+			defender.Knockdown(30 SECONDS)
+			defender.set_confusion(30 SECONDS)
+			to_chat(attacker, span_notice("GB3: finisher")) //тест
+			attacker.say("GOLDEN BLAST!")
+			log_combat(attacker, defender, "golden blast3 ([src])")
 	return TRUE
 
 #undef THROW_COMBO
 #undef SPIN_COMBO
+#undef WHEELTHROW_COMBO
 #undef GROUND_COMBO
 #undef TWIST_COMBO
+#undef GB_SEGMENT_1
+#undef GB_SEGMENT_2
+#undef GB_SEGMENT_3
