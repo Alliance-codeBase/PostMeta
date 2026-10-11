@@ -32,7 +32,7 @@
 	var/datum/objective/mafia/objct
 
 /datum/antagonist/mafia/greet()
-	to_chat(owner.current, span_warning("<b>You are member of organised criminal group. You are a part of [gang], who find their way to this deep-space station.</b>"))
+	to_chat(owner.current, span_warning("<b>You are member of organised criminal group. You are a part of [my_gang], who find their way to this deep-space station.</b>"))
 
 /datum/antagonist/mafia/on_gain()
 	forge_objectives()
