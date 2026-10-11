@@ -8,7 +8,7 @@
 	show_in_antagpanel = TRUE
 	roundend_category = "mafia"
 	antagpanel_category = "Mafia"
-	pref_flag = ROLE_BLOODSUCKER
+	pref_flag = ROLE_MAFIA
 	antag_hud_name = "mafia"
 	show_name_in_check_antagonists = TRUE
 	hijack_speed = 0.5
