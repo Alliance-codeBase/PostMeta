@@ -31,7 +31,6 @@
 		<br>\
 		The head is now forged in one piece and no longer flies off mid-swing. \
 		The handle is longer, keeping the user's own knees out of the striking arc. \
-		The grip is wrapped in rubber, which the safety department lists as electrical insulation. \
 		The head is still solid steel.<br>\
 		<br>\
 		In internal trials the new model cut workplace injuries by a third. \
