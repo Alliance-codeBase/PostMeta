@@ -1,4 +1,5 @@
 #include "code\sledgehammer.dm"
+#include "code\engineering_sledgehammer.dm"
 #include "code\syndicate_sledgehammer.dm"
 #include "code\supply_pack.dm"
 
@@ -7,5 +8,6 @@
 	name = "Кувалды"
 	group = "Features"
 	desc = "Кувалда в карго для сноса стен и экстренного доступа. \
+		Инженерная кувалда в протолате вскрывает шлюзы как челюсти жизни. \
 		Кувалда синдиката в аплинке инженера."
 	author = "Bruh24, headband0536"
