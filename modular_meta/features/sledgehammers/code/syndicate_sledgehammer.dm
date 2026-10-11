@@ -3,11 +3,11 @@
 /obj/item/sledgehammer
 	name = "Sledgehammer"
 	desc = "A mad engineer's choice"
-	icon = 'modular_meta/features/uplink_items/icons/weapon/sledgehammer/obj/weapons/sledgehammer.dmi'
+	icon = 'modular_meta/features/sledgehammers/icons/syndicate_sledgehammer.dmi'
 	icon_state = "sledgehammer"
 	base_icon_state = "sledgehammer"
-	lefthand_file = 'modular_meta/features/uplink_items/icons/weapon/sledgehammer/mob/inhands/weapons/hammers_lefthand.dmi'
-	righthand_file = 'modular_meta/features/uplink_items/icons/weapon/sledgehammer/mob/inhands/weapons/hammers_righthand.dmi'
+	lefthand_file = 'modular_meta/features/sledgehammers/icons/syndicate_sledgehammer_lefthand.dmi'
+	righthand_file = 'modular_meta/features/sledgehammers/icons/syndicate_sledgehammer_righthand.dmi'
 	force = 10
 	throwforce = 10
 	demolition_mod = 4
@@ -136,14 +136,14 @@
 		force = force_wielded
 		if(issilicon(target))
 			hitsound = pick(
-				'modular_meta/features/uplink_items/sound/sledgehammer/metal_hit.ogg',
-				'modular_meta/features/uplink_items/sound/sledgehammer/metal_hit2.ogg',
+				'modular_meta/features/sledgehammers/sound/metal_hit.ogg',
+				'modular_meta/features/sledgehammers/sound/metal_hit2.ogg',
 			)
 		if(iscarbon(target))
 			if(charge_bonus >= 1)
-				hitsound = 'modular_meta/features/uplink_items/sound/sledgehammer/heavy_hit.ogg'
+				hitsound = 'modular_meta/features/sledgehammers/sound/heavy_hit.ogg'
 				if(charge_bonus >= 5)
-					hitsound = 'modular_meta/features/uplink_items/sound/sledgehammer/flesh_hit3.ogg'
+					hitsound = 'modular_meta/features/sledgehammers/sound/flesh_hit3.ogg'
 
 		switch(charge_bonus)
 
@@ -343,7 +343,7 @@
 		return
 
 	user.do_attack_animation(target, used_item = src)
-	playsound(target, pick('modular_meta/features/uplink_items/sound/sledgehammer/flesh_hit1.ogg', 'modular_meta/features/uplink_items/sound/sledgehammer/flesh_hit2.ogg'), 80, TRUE)
+	playsound(target, pick('modular_meta/features/sledgehammers/sound/flesh_hit1.ogg', 'modular_meta/features/sledgehammers/sound/flesh_hit2.ogg'), 80, TRUE)
 	target.apply_damage(force * 3, BRUTE, head, wound_bonus = 50, attacking_item = src)
 	head.throw_range = 6
 	head.throw_speed = 1

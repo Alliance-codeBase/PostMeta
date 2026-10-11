@@ -10,7 +10,6 @@
 #include "code\weaponry\lrifle.dm"
 #include "code\justice_mecha.dm"
 #include "code\adrenals.dm"
-#include "code\sledgehammer.dm"
 
 /datum/modpack/uplink_items
 	id = "uplink_items"

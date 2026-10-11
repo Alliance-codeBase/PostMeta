@@ -25,6 +25,7 @@
 #include "features\oguzok_cook\includes.dm"
 #include "features\quirk_augmented\includes.dm"
 #include "features\quirk_bouncy\includes.dm"
+#include "features\sledgehammers\includes.dm"
 #include "features\meta_maps\includes.dme"
 #include "features\soviet_crate\includes.dm"
 #include "features\uplink_items\includes.dm"
