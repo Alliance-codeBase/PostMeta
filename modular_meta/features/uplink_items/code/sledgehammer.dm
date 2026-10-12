@@ -312,9 +312,6 @@
 	charging = FALSE
 	mouse_held = FALSE
 
-/obj/item/sledgehammer/proc/stop_charging_attack(mob/living/carbon/user)
-	user = loc
-
 /obj/item/sledgehammer/proc/charge_tick(mob/living/carbon/user)
 	if(!mouse_held)
 		return FALSE
