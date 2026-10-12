@@ -299,7 +299,7 @@
 		return
 	if(!(HAS_TRAIT(src, TRAIT_WIELDED)))
 		balloon_alert(user, "wield first!")
-		return stop_charging_attack()
+		return
 	if((user.incapacitated))
 		return
 
