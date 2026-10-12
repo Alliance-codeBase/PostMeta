@@ -18,9 +18,6 @@
 	sharpness = NONE
 	armor_type = /datum/armor/item_fireaxe
 	wound_bonus = -15
-	//exposed_wound_bonus = 20
-	//force_unwielded = 5
-	//force_wielded = 22
 	var/charge_bonus = 0
 	var/next_charge
 	var/charging = FALSE
@@ -171,6 +168,10 @@
 				force += force_per_charge * 6
 				throwforce += force_per_charge * 6
 				wound_bonus += wound_bonus_per_charge * 6
+
+		if(issilicon(target))
+			force = clamp(force, 1, 45)
+
 	..()
 
 
@@ -179,19 +180,17 @@
 	if(.)
 		return .
 
-	//high demolition mod helps us destroy machinery faster, however we do not want to be able to destroy a mecha from few attacks
-	if(issilicon(target))
-		force -= 17
-		if(charge_bonus >= 3)
-			force -= 25
-
 	if(ismecha(target))
 		force -= 10
 		playsound(target, pick('sound/effects/meteorimpact.ogg', 'sound/effects/bang.ogg'), 50)
 
 
-	if(istype(target, /turf/closed/wall/r_wall))
+	if(istype(target, /turf/closed/wall/r_wall) && HAS_TRAIT(src, TRAIT_WIELDED))
 		var/turf/closed/wall/wall = target
+
+		if(wall.resistance_flags & INDESTRUCTIBLE)
+			return
+
 		wall.add_dent(WALL_DENT_HIT)
 		wall.Shake(1, 3, 0.1 SECONDS, 0.1 SECONDS)
 		user.changeNext_move(attack_speed)
@@ -207,8 +206,7 @@
 			wall.dismantle_wall(TRUE)
 		return TRUE
 
-
-	else if(istype(target, /turf/closed/wall))
+	else if(istype(target, /turf/closed/wall) && HAS_TRAIT(src, TRAIT_WIELDED))
 		var/turf/closed/wall/wall = target
 		wall.add_dent(WALL_DENT_HIT)
 		wall.Shake(null, 3, 0.1 SECONDS, 0.1 SECONDS)
@@ -240,7 +238,7 @@
 	if(!head)
 		return
 
-	if((person_about_to_die_horribly.stat == SOFT_CRIT || person_about_to_die_horribly.stat == HARD_CRIT || madman.grab_state == GRAB_NECK) && check_zone(madman.zone_selected) == BODY_ZONE_HEAD)
+	if((person_about_to_die_horribly.stat == SOFT_CRIT || person_about_to_die_horribly.stat == HARD_CRIT || madman.grab_state == GRAB_NECK && madman.pulling == person_about_to_die_horribly) && check_zone(madman.zone_selected) == BODY_ZONE_HEAD)
 		bash_head(person_about_to_die_horribly, madman)
 		return TRUE // cancels attack chain after headbash
 
@@ -275,7 +273,8 @@
 	var/list/mods = params2list(params)
 	if(mods[BUTTON] == RIGHT_CLICK)
 		mouse_held = FALSE
-		to_chat(player.mob, span_notice("[phrases[charge_bonus]]"))
+		if(!isnull(charge_bonus) || charge_bonus != 0)
+			to_chat(player.mob, span_notice("[phrases[charge_bonus]]"))
 
 /obj/item/sledgehammer/proc/on_mouse_down(client/player, object, location, control, params)
 	SIGNAL_HANDLER
@@ -340,6 +339,12 @@
 	if(!do_after(user, 2.5 SECONDS, target))
 		return
 	if(QDELETED(target) || QDELETED(head) || head.owner != target)
+		return
+	if(head.bodypart_flags & BODYPART_UNREMOVABLE)
+		user.do_attack_animation(target, used_item = src)
+		target.apply_damage(300, BRUTE, head, wound_bonus = 50, attacking_item = src)
+		playsound(target, pick('modular_meta/features/uplink_items/sound/sledgehammer/flesh_hit1.ogg', 'modular_meta/features/uplink_items/sound/sledgehammer/flesh_hit2.ogg'), 80, TRUE)
+		target.cause_wound_of_type_and_severity(WOUND_BLUNT, head, WOUND_SEVERITY_MODERATE, WOUND_SEVERITY_CRITICAL)
 		return
 
 	user.do_attack_animation(target, used_item = src)
