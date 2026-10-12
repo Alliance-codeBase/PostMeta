@@ -273,7 +273,7 @@
 	var/list/mods = params2list(params)
 	if(mods[BUTTON] == RIGHT_CLICK)
 		mouse_held = FALSE
-		if(!isnull(charge_bonus) || charge_bonus > 0)
+		if(charge_bonus > 0)
 			to_chat(player.mob, span_notice("[phrases[charge_bonus]]"))
 
 /obj/item/sledgehammer/proc/on_mouse_down(client/player, object, location, control, params)
