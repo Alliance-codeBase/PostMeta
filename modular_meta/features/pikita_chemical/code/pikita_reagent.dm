@@ -17,13 +17,13 @@
 
 /datum/reagent/toxin/etymologypolymorphism/on_mob_life(mob/living/carbon/affected_mob, seconds_per_tick, metabolization_ratio)
 	. = ..()
+	var/need_mob_update
 	switch(current_cycle)
 		if(5 to INFINITY)
-			need_mob_update = affected_mob.adjust_organ_loss(ORGAN_SLOT_BRAIN, 5)
-	if(!SPT_PROB(5, seconds_per_tick))
-		return
-	switch(rand(1, 2))
-		if(1)
-			affected_mob.say(pick("Пипита", "Пикита", "Pikita", "Pipita", "Пипетка", "Кипита", "Пипоид", "Pipipipipipipipipipipupupakita!!", "Пипипипипипипипипипипупупакита!!", "Пепега", "Пепета"), forced = /datum/reagent/toxin/etymologypolymorphism)
-		if(2)
-			to_chat(affected_mob, span_warning("Your mind is stuck on this stupid word!"))
+			need_mob_update = affected_mob.adjust_organ_loss(ORGAN_SLOT_BRAIN, 1)
+			switch(rand(1, 2))
+			if(1)
+				affected_mob.say(pick("Пипита", "Пикита", "Pikita", "Pipita", "Пипетка", "Кипита", "Пипоид", "Pipipipipipipipipipipupupakita!!", "Пипипипипипипипипипипупупакита!!", "Пепега", "Пепета"), forced = /datum/reagent/toxin/etymologypolymorphism)
+			if(2)
+				to_chat(affected_mob, span_warning("Your mind is stuck on this stupid word!"))
+			return UPDATE_MOB_HEALTH
