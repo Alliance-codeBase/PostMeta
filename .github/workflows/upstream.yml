@@ -2,7 +2,8 @@
 
 on:
   schedule:
-    - cron: '0 17 * * 3'
+    - cron: '0 20 * * 3'
+      timezone: 'Europe/Moscow'
   workflow_dispatch:
 
 jobs:

@@ -116,20 +116,9 @@ export const getDangerLevel = (progression_points: number) => {
   return ranks[ranks.length - 1];
 };
 
-export const calculateDangerLevel = (
-  progression_points: number,
-  textOnly: boolean,
-) => {
-  const minutes = progression_points / 600;
+export const calculateDangerLevel = (progression_points: number) => {
   const displayedProgression = calculateProgression(progression_points);
   const dangerLevel = getDangerLevel(progression_points);
-  if (textOnly) {
-    return (
-      <Box as="span">
-        {dangerLevel.title} ({displayedProgression})
-      </Box>
-    );
-  }
   return (
     <Box
       color="white"

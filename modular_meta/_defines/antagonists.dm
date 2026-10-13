@@ -99,8 +99,11 @@
 #define COMSIG_SOL_WARNING_GIVEN "comsig_sol_warning_given"
 #define COMSIG_BLOODSUCKER_ON_LIFETICK "comsig_bloodsucker_on_lifetick"
 
-#define DANGER_LEVEL_SOL_ROSE 1
-#define DANGER_LEVEL_SOL_ENDED 2
+#define DANGER_LEVEL_FIRST_WARNING 1
+#define DANGER_LEVEL_SECOND_WARNING 2
+#define DANGER_LEVEL_THIRD_WARNING 3
+#define DANGER_LEVEL_SOL_ROSE 4
+#define DANGER_LEVEL_SOL_ENDED 5
 
 /**
  * Clan defines

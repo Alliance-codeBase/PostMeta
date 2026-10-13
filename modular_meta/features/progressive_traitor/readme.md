@@ -19,3 +19,6 @@
 - tgui\packages\tgui\interfaces\Uplink\ObjectiveMenu.tsx
 - tgui\packages\tgui\interfaces\Uplink\PrimaryObjectiveMenu.tsx
 - tgui\packages\tgui\interfaces\TraitorObjectiveDebug.tsx
+- tgui\packages\tgui\interfaces\Uplink\calculateDangerLevel.tsx
+- tgui\packages\tgui\styles\interfaces\UplinkReputation.scss
+- tgui\packages\tgui\styles\main.scss

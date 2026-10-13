@@ -6,9 +6,6 @@
 
 
 /datum/antagonist/traitor/infiltrator
-	// Used to denote traitors who have joined midround and therefore have no access to secondary objectives.
-	// Progression elements are best left to the roundstart antagonists
-	// There will still be a timelock on uplink items
 	name = "\improper Infiltrator"
 	give_secondary_objectives = FALSE
 	uplink_flag_given = UPLINK_INFILTRATORS
@@ -18,12 +15,15 @@
 
 
 /datum/antagonist/traitor/on_gain()
-	generate_replacement_codes() // amazing ui shenanigans
+	generate_replacement_codes()
 	. = ..()
 
-	if(give_secondary_objectives)
-		uplink_handler.has_objectives = TRUE
-		uplink_handler.generate_objectives()
+	if(uplink_handler)
+		uplink_handler.progression_points = max(uplink_handler.progression_points, SStraitor.current_global_progression)
+		SStraitor.register_uplink_handler(uplink_handler)
+		if(give_secondary_objectives)
+			uplink_handler.has_objectives = TRUE
+			uplink_handler.generate_objectives()
 
 	owner.teach_crafting_recipe(/datum/crafting_recipe/syndicate_uplink_beacon)
 

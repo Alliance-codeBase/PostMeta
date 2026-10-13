@@ -225,12 +225,12 @@
 	affected_mob.adjust_fire_stacks(8)
 	affected_mob.ignite_mob()
 
-/datum/reagent/anomalous/sleep
+/datum/reagent/anomalous/repose
 	name = "Sleep"
 	taste_description = "warm milk and poppy seeds"
 	reaction = 'modular_meta/features/holidays/CB/sound/294/ahh.ogg'
 
-/datum/reagent/anomalous/sleep/on_mob_life(mob/living/carbon/affected_mob, seconds_per_tick, metabolization_ratio)
+/datum/reagent/anomalous/repose/on_mob_life(mob/living/carbon/affected_mob, seconds_per_tick, metabolization_ratio)
 	. = ..()
 	affected_mob.Sleeping(20 SECONDS)
 
@@ -269,8 +269,11 @@
 	playsound(affected_mob,'sound/effects/magic/lightningshock.ogg', 50, 1)
 	playsound(affected_mob,	'modular_meta/features/butt_farts/sound/farts/dagothgod.ogg', 80)
 	spawn(15)
-		affected_mob.gib()
-		dyn_explosion(affected_mob.loc, 1, 0)
+		if(affected_mob)
+			var/turf/epicenter = get_turf(affected_mob)
+			affected_mob.gib()
+			if(epicenter)
+				dyn_explosion(epicenter, 1, 0)
 
 /datum/reagent/anomalous/organs/on_mob_life(mob/living/carbon/affected_mob, seconds_per_tick, metabolization_ratio)
 	. = ..()
@@ -287,7 +290,7 @@
 	taste_description = "something strangely familiar"
 
 /datum/reagent/anomalous/nothing
-	name = "Nothing"
+	name = "Nothingness"
 	taste_description = "nothing at all"
 	reaction = null
 
