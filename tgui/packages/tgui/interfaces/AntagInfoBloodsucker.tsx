@@ -119,8 +119,8 @@ const BloodsuckerIntro = () => {
                 tooltip={'Blood drank : ' + total_blood_drank + 'u'}
               >
                 <DmIcon
-                  icon="modular_meta/features/antagonists/icons/bloodsuckers/actions_bloodsucker.dmi"
-                  icon_state="blood_drank"
+                  icon="icons/obj/medical/bloodpack.dmi"
+                  icon_state="generic_bloodpack"
                   height="64px"
                   width="64px"
                 />

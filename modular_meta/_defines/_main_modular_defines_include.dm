@@ -9,3 +9,8 @@
 #include "mc.dm"
 #include "mentors.dm"
 #include "signals_traitor.dm"
+#include "holiday.dm"
+#include "span.dm"
+#include "force_say.dm"
+#include "communication_bans.dm"
+#include "explosives_ban.dm"

@@ -48,6 +48,7 @@
 #include "bloodsuckers\code\powers\cloak.dm"
 #include "bloodsuckers\code\powers\feed.dm"
 #include "bloodsuckers\code\powers\fortitude.dm"
+#include "bloodsuckers\code\powers\gohome.dm"
 #include "bloodsuckers\code\powers\masquerade.dm"
 #include "bloodsuckers\code\powers\veil.dm"
 #include "bloodsuckers\code\structures\_bloodsucker_structure.dm"
@@ -78,6 +79,9 @@
 #include "sinful_demon\code\demon_datum.dm"
 #include "sinful_demon\code\demon_objectives.dm"
 #include "sinful_demon\rulesets.dm"
+
+#include "wizard\spells\headburster.dm"
+#include "wizard\spellbook\offensive.dm"
 
 /datum/modpack/antagonists
 	id = "antagonists"

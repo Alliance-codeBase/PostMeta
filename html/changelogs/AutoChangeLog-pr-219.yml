@@ -1,0 +1,5 @@
+author: "Bruh-24"
+delete-after: True
+changes:
+  - rscadd: "Можно устанавливать особую музыку к указанному title-screen. Для этого достаточно лишь элементарно назвать музыкальный файл ровно тем же именем, что и у title screen в конфигурации сервера"
+  - code_imp: "helper /proc/strip_filepath_path(file, file_types)"

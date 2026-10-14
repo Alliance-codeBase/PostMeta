@@ -55,14 +55,10 @@ map nebulastation
 	votable
 endmap
 
-<<<<<<< HEAD
-map pubbystation
-	votable
-endmap
-
 map kilostation
 	maxplayers 15
 	votable
+endmap
 
 map wawastation
 	votable
@@ -70,11 +66,6 @@ map wawastation
 endmap
 
 map protoboxstation
-	votable
-endmap
-
-map bearcat
-	maxplayers 3
 	votable
 endmap
 

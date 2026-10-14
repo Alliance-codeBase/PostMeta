@@ -1,3 +1,5 @@
+//MASSMETA EDIT REMOVAL BEGIN (force_say) (Moved to: modular_meta/tweaks/force_say/code/force_say.dm)
+/*
 /**
  * Alters text when players are injured.
  * Adds text, trims left and right side
@@ -22,6 +24,8 @@
 		if(length(entry) > 1)
 			entry = trim(entry, length(entry))
 	return entry + "-" + pick(phrases)
+*/
+//MASSMETA EDIT REMOVAL END
 
 /**
  * Delegates the speech to the proper channel.
@@ -135,7 +139,12 @@
 		var/target_channel = payload["channel"]
 		if(target_channel == ME_CHANNEL || target_channel == OOC_CHANNEL || target_channel == PRAY_CHANNEL)
 			target_channel = SAY_CHANNEL // No ooc leaks
+		//MASSMETA EDIT CHANGE BEGIN (force_say)
+		/* ORIGINAL
 		delegate_speech(alter_entry(payload), target_channel)
+		*/
+		delegate_forced_speech(payload, target_channel)
+		//MASSMETA EDIT CHANGE END
 		return TRUE
 	if(type == "save")
 		saved_text = "" // so we can differentiate null (nothing saved) and empty (nothing typed)

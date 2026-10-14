@@ -24,6 +24,7 @@
 #include "features\kumiss_beverage\includes.dm"
 #include "features\oguzok_cook\includes.dm"
 #include "features\quirk_augmented\includes.dm"
+#include "features\quirk_bouncy\includes.dm"
 #include "features\meta_maps\includes.dme"
 #include "features\soviet_crate\includes.dm"
 #include "features\uplink_items\includes.dm"
@@ -57,7 +58,11 @@
 #include "features\mentors\includes.dm"
 #include "features\arcades\includes.dm"
 #include "features\progressive_traitor\includes.dm"
+#include "features\communication_bans\includes.dm"
+#include "features\explosives_ban\includes.dm"
 #include "features\unmanned_vechicle\includes.dm"
+#include "features\title_screenz\includes.dm"
+#include "features\_code_helpers\includes.dm"
 
 /* --- Reverts --- */
 
@@ -79,6 +84,8 @@
 #include "tweaks\better_ui\includes.dm"
 #include "tweaks\del_required_experiments\includes.dm"
 #include "tweaks\fonts\includes.dm"
+#include "tweaks\force_say\includes.dm"
+#include "tweaks\runechat_icons\includes.dm"
 #include "tweaks\russian_translation\includes.dm"
 #include "tweaks\gases\includes.dm"
 #include "tweaks\heads_on_belts\includes.dm"
