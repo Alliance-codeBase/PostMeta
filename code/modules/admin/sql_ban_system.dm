@@ -348,8 +348,11 @@
 			break_counter = 0
 
 		var/list/other_job_lists = list(
+			//MASSMETA EDIT CHANGE BEGIN (communication_bans, explosives_ban)
+			/* ORIGINAL
 			"Abstract" = list("Appearance", "Emote", "Deadchat", "OOC", "Urgent Adminhelp"),
-			//MASSMETA EDIT ADDITION BEGIN (explosives_ban)
+			*/
+			"Abstract" = list("Appearance", "Emote", "Deadchat", "OOC", "Urgent Adminhelp", BAN_SAY, BAN_ADMINHELP),
 			"Explosives" = list(BAN_NON_ANTAG_EXPLOSIVES, BAN_ANTAG_EXPLOSIVES),
 			//MASSMETA EDIT ADDITION END
 			)
