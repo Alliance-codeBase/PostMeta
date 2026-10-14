@@ -4,8 +4,8 @@
 /mob/living/silicon/robot/shell/cell/Initialize(mapload)
 	. = ..()
 
-	if(!cell)
-		cell = cell_to_insert
+	if(!cell && cell_to_insert)
+		cell = new cell_to_insert(src)
 
 	return .
 
