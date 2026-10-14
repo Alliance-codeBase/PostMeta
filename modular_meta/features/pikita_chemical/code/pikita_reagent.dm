@@ -22,8 +22,7 @@
 		if(5 to INFINITY)
 			need_mob_update = affected_mob.adjust_organ_loss(ORGAN_SLOT_BRAIN, 1)
 			switch(rand(1, 2))
-			if(1)
-				affected_mob.say(pick("Пипита", "Пикита", "Pikita", "Pipita", "Пипетка", "Кипита", "Пипоид", "Pipipipipipipipipipipupupakita!!", "Пипипипипипипипипипипупупакита!!", "Пепега", "Пепета"), forced = /datum/reagent/toxin/etymologypolymorphism)
-			if(2)
-				to_chat(affected_mob, span_warning("Your mind is stuck on this stupid word!"))
-			return UPDATE_MOB_HEALTH
+				if(1)
+					affected_mob.say(pick("Пипита", "Пикита", "Pikita", "Pipita", "Пипетка", "Кипита", "Пипоид", "Pipipipipipipipipipipupupakita!!", "Пипипипипипипипипипипупупакита!!", "Пепега", "Пепета"), forced = /datum/reagent/toxin/etymologypolymorphism)
+				if(2)
+					to_chat(affected_mob, span_warning("Your mind is stuck on this stupid word!"))
