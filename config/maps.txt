@@ -45,6 +45,11 @@ map metastation
 	#webmap_url https://webmap.affectedarc07.co.uk/maps/tgstation/metastation
 endmap
 
+map northstar
+	minplayers 50
+	votable
+endmap
+
 map tramstation
 	minplayers 25
 	votable

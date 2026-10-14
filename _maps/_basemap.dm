@@ -15,6 +15,7 @@
 	#include "map_files\CatwalkStation\CatwalkStation_2023.dmm"
 	#include "map_files\NebulaStation\NebulaStation.dmm"
 	#include "map_files\KiloStation\KiloStation.dmm"
+	#include "map_files\NorthStar\north_star.dmm"
 	// MASSMETA EDIT BEGIN - Compiling our modular maps too!
 	// there's none
 	// MASSMETA EDIT END
