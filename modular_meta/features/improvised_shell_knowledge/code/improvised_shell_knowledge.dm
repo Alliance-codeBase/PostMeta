@@ -14,7 +14,7 @@
 /obj/item/book/granter/crafting_recipe/improvised_shotgun_shell
 	name = "improvised shell fabrication notes"
 	desc = "Handwritten notes describing how to turn scrap into a crude shotgun shell."
-	icon_state = "book3"
+	icon_state = "book1"
 	remarks = list(
 		"Someone clearly wrote these before the station fell apart.",
 		"Ten pellets of scrap. It's not much, but it's not nothing either.",
