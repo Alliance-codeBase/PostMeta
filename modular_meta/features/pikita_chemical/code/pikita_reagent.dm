@@ -20,6 +20,8 @@
 	switch(current_cycle)
 		if(5 to INFINITY)
 			affected_mob.adjust_organ_loss(ORGAN_SLOT_BRAIN, 1)
+			if(!SPT_PROB(10, seconds_per_tick))
+				return
 			switch(rand(1, 2))
 				if(1)
 					affected_mob.say(pick("Пипита", "Пикита", "Pikita", "Pipita", "Пипетка", "Кипита", "Пипоид", "Pipipipipipipipipipipupupakita!!", "Пипипипипипипипипипипупупакита!!", "Пепега", "Пепета"), forced = /datum/reagent/toxin/etymologypolymorphism)
