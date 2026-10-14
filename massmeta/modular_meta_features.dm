@@ -14,7 +14,6 @@
 //master files (unsorted, TODO: need modularization)
 
 #include "code\obj\items\clothing\belt.dm"
-#include "code\datums\components\crafting\weapon_ammo.dm"
 #include "code\modules\ammunition\ballistic\shotgun.dm"
 #include "code\modules\projectiles\projectile\bullets\shotgun.dm"
 #include "code\modules\map_vote.dm"
