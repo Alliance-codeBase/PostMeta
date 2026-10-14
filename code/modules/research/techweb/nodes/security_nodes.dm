@@ -55,7 +55,11 @@
 		/datum/design/ballistic_shield,
 		/datum/design/handcuffs/sec,
 		/datum/design/bola_energy,
+<<<<<<< HEAD
 		/datum/design/case_portable_recharger, // MASSMETA EDIT (more_cell_interactions)
+=======
+		/datum/design/dragonshell,
+>>>>>>> upstream/master
 	)
 	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = TECHWEB_TIER_2_POINTS)
 	announce_channels = list(RADIO_CHANNEL_SECURITY)
@@ -98,7 +102,7 @@
 	description = "Energy-based weaponry designed for both lethal and non-lethal applications."
 	prerequisite_nodes = list(/datum/techweb_node/riot_supression)
 	unlocked_designs = list(
-		/datum/design/stunrevolver,
+		/datum/design/teslacannon,
 		/datum/design/ioncarbine,
 		/datum/design/temp_gun,
 		/datum/design/lasershell,

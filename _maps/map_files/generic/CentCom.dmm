@@ -1484,8 +1484,7 @@
 /obj/structure/flora/bush/sparsegrass/style_random,
 /obj/structure/flora/bush/lavendergrass/style_random,
 /obj/structure/flora/bush/ferny/style_random,
-/turf/open/floor/iron{
-	icon_state = "asteroid5";
+/turf/open/floor/iron/asteroid_5{
 	name = "plating"
 	},
 /area/centcom/tdome/administration)
@@ -2326,9 +2325,8 @@
 /obj/structure/flora/bush/sparsegrass/style_random,
 /obj/structure/flora/bush/grassy/style_random,
 /obj/structure/flora/bush/ferny/style_random,
-/turf/open/floor/iron{
+/turf/open/floor/iron/asteroid_8{
 	dir = 6;
-	icon_state = "asteroid8";
 	name = "sand"
 	},
 /area/centcom/central_command_areas/fore)
@@ -3595,9 +3593,8 @@
 /obj/structure/flora/bush/sparsegrass/style_random,
 /obj/structure/flora/bush/grassy/style_random,
 /obj/structure/flora/bush/ferny/style_random,
-/turf/open/floor/iron{
+/turf/open/floor/iron/asteroid_8{
 	dir = 6;
-	icon_state = "asteroid8";
 	name = "sand"
 	},
 /area/centcom/central_command_areas/control)
@@ -5017,8 +5014,7 @@
 /obj/structure/flora/bush/sparsegrass/style_random,
 /obj/structure/flora/bush/lavendergrass/style_random,
 /obj/structure/flora/bush/ferny/style_random,
-/turf/open/floor/iron{
-	icon_state = "asteroid5";
+/turf/open/floor/iron/asteroid_5{
 	name = "plating"
 	},
 /area/centcom/central_command_areas/control)
@@ -5347,9 +5343,8 @@
 /obj/structure/flora/bush/sparsegrass/style_random,
 /obj/structure/flora/bush/grassy/style_random,
 /obj/structure/flora/bush/ferny/style_random,
-/turf/open/floor/iron{
+/turf/open/floor/iron/asteroid_8{
 	dir = 6;
-	icon_state = "asteroid8";
 	name = "sand"
 	},
 /area/centcom/central_command_areas/supply)
@@ -5362,8 +5357,7 @@
 /obj/structure/flora/bush/lavendergrass/style_random,
 /obj/structure/flora/bush/ferny/style_random,
 /obj/machinery/light/directional/east,
-/turf/open/floor/iron{
-	icon_state = "asteroid5";
+/turf/open/floor/iron/asteroid_5{
 	name = "plating"
 	},
 /area/centcom/central_command_areas/fore)
@@ -6429,9 +6423,8 @@
 /obj/structure/flora/bush/grassy/style_random,
 /obj/structure/flora/bush/ferny/style_random,
 /obj/machinery/light/directional/south,
-/turf/open/floor/iron{
+/turf/open/floor/iron/asteroid_8{
 	dir = 6;
-	icon_state = "asteroid8";
 	name = "sand"
 	},
 /area/centcom/tdome/administration)
@@ -10092,8 +10085,7 @@
 /obj/structure/flora/bush/sparsegrass/style_random,
 /obj/structure/flora/bush/lavendergrass/style_random,
 /obj/structure/flora/bush/ferny/style_random,
-/turf/open/floor/iron{
-	icon_state = "asteroid5";
+/turf/open/floor/iron/asteroid_5{
 	name = "plating"
 	},
 /area/centcom/tdome/observation)
@@ -11093,8 +11085,7 @@
 /obj/structure/flora/bush/lavendergrass/style_random,
 /obj/structure/flora/bush/ferny/style_random,
 /obj/machinery/light/directional/north,
-/turf/open/floor/iron{
-	icon_state = "asteroid5";
+/turf/open/floor/iron/asteroid_5{
 	name = "plating"
 	},
 /area/centcom/tdome/observation)
@@ -12328,9 +12319,8 @@
 /obj/structure/flora/bush/sparsegrass/style_random,
 /obj/structure/flora/bush/grassy/style_random,
 /obj/structure/flora/bush/ferny/style_random,
-/turf/open/floor/iron{
+/turf/open/floor/iron/asteroid_8{
 	dir = 6;
-	icon_state = "asteroid8";
 	name = "sand"
 	},
 /area/centcom/tdome/observation)
@@ -13880,8 +13870,7 @@
 /obj/structure/flora/bush/lavendergrass/style_random,
 /obj/structure/flora/bush/ferny/style_random,
 /obj/machinery/light/floor,
-/turf/open/floor/iron{
-	icon_state = "asteroid5";
+/turf/open/floor/iron/asteroid_5{
 	name = "plating"
 	},
 /area/centcom/central_command_areas/control)
@@ -14103,9 +14092,8 @@
 /obj/structure/flora/bush/sparsegrass/style_random,
 /obj/structure/flora/bush/grassy/style_random,
 /obj/structure/flora/bush/ferny/style_random,
-/turf/open/floor/iron{
+/turf/open/floor/iron/asteroid_8{
 	dir = 6;
-	icon_state = "asteroid8";
 	name = "sand"
 	},
 /area/centcom/tdome/administration)
