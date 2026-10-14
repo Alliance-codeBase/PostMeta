@@ -19,7 +19,7 @@
 	. = ..()
 	switch(current_cycle)
 		if(5 to INFINITY)
-			affected_mob.adjust_organ_loss(ORGAN_SLOT_BRAIN, 1)
+			affected_mob.adjust_organ_loss(ORGAN_SLOT_BRAIN, 1 * metabolization_ratio * seconds_per_tick)
 			if(!SPT_PROB(10, seconds_per_tick))
 				return
 			switch(rand(1, 2))
