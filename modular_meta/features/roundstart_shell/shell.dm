@@ -1,5 +1,14 @@
 /mob/living/silicon/robot/shell/cell
-	cell = /obj/item/stock_parts/power_store/cell/high
+	var/cell_to_insert = /obj/item/stock_parts/power_store/cell/high
+
+/mob/living/silicon/robot/shell/cell/Initialize(mapload)
+	. = ..()
+
+	if(!cell)
+		cell = cell_to_insert
+
+	return .
 
 /mob/living/silicon/robot/shell/cell/infinity
-	cell = /obj/item/stock_parts/power_store/cell/infinite/abductor
+	cell_to_insert = /obj/item/stock_parts/power_store/cell/infinite/abductor
+

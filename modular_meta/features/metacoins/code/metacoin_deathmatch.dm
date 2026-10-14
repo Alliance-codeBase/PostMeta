@@ -8,7 +8,8 @@
 		return TRUE
 
 	var/to_pay = entry_fee - already_paid
-	var/list/take_result = get_metacoins_controller().take_metacoins(player.ckey, to_pay)
+	var/datum/metacoins_controller/controller = get_metacoins_controller()
+	var/list/take_result = controller.take_metacoins(player.ckey, to_pay)
 	if(!take_result["ok"])
 		var/static/list/error_messages = list(
 			"db_unavailable" = "Metacoin database is unavailable.",
@@ -35,8 +36,8 @@
 	if(paid_amount <= 0)
 		fees_paid -= target_ckey
 		return TRUE
-
-	if(!get_metacoins_controller().add_metacoins(target_ckey, paid_amount))
+	var/datum/metacoins_controller/controller = get_metacoins_controller()
+	if(!controller.add_metacoins(target_ckey, paid_amount))
 		return FALSE
 
 	prize_pool = max(prize_pool - paid_amount, 0)

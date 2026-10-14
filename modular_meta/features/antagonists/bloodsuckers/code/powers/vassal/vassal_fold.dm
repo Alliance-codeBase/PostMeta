@@ -43,14 +43,14 @@
 		target_ref = WEAKREF(owner.pulling)
 		return TRUE
 
-	var/blood_bag = locate(/obj/item/reagent_containers/blood) in user.held_items
-	if(!blood_bag)
-		owner.balloon_alert(owner, "blood bag needed!")
-		return FALSE
-	if(istype(blood_bag, /obj/item/reagent_containers/blood/o_minus/bloodsucker))
-		owner.balloon_alert(owner, "already bloodsucker blood!")
+	for(var/obj/item/reagent_containers/blood/blood_bag as anything in user.get_held_items_of_type(/obj/item/reagent_containers/blood))
+		if(!blood_bag)
+			owner.balloon_alert(owner, "blood bag needed!")
+			return FALSE
+		if(istype(blood_bag, /obj/item/reagent_containers/blood/o_minus/bloodsucker))
+			owner.balloon_alert(owner, "already bloodsucker blood!")
 
-	bloodbag = blood_bag
+		bloodbag = blood_bag
 	return TRUE
 
 /datum/action/cooldown/bloodsucker/vassal_blood/ActivatePower(trigger_flags)
@@ -77,7 +77,7 @@
 		if(!former_vassal || former_vassal.revenge_vassal)
 			target_ref = null
 			return
-		if(do_after(owner, 5 SECONDS, target, progress = TRUE))
+		if(do_after(owner, 5 SECONDS, target, show_progress = TRUE))
 			former_vassal.return_to_fold(revenge_vassal)
 		target_ref = null
 		DeactivatePower()
