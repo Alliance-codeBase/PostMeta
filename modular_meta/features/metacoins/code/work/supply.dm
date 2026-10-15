@@ -5,12 +5,25 @@ GLOBAL_LIST_EMPTY(metacoin_ore_points_by_ckey)
 	. = ..()
 	pay_ore_delivery(user, points - points_before)
 
-/obj/machinery/mineral/ore_redemption/pickup_item(datum/source, atom/movable/target, direction)
+/obj/machinery/mineral/ore_redemption/pickup_item(datum/source, atom/movable/target, atom/old_loc)
 	var/points_before = points
-	var/mob/living/deliverer = target.pulledby
+	var/mob/living/deliverer = find_ore_deliverer(target, old_loc)
 	. = ..()
 	if(isliving(deliverer))
 		pay_ore_delivery(deliverer, points - points_before)
+
+/// Whoever pulled, dropped or threw the ore onto the input. Conveyors and lone boxes have no deliverer
+/obj/machinery/mineral/ore_redemption/proc/find_ore_deliverer(atom/movable/target, atom/old_loc)
+	if(target.pulledby)
+		return target.pulledby
+	var/atom/dropped_from = old_loc
+	while(dropped_from && !isturf(dropped_from)) // hand, satchel in hand, satchel on belt
+		if(ismob(dropped_from))
+			return dropped_from
+		dropped_from = dropped_from.loc
+	if(target.throwing)
+		return target.throwing.get_thrower()
+	return null
 
 /obj/machinery/mineral/ore_redemption/proc/pay_ore_delivery(mob/living/deliverer, delivered_points)
 	if(delivered_points <= 0 || isnull(deliverer.mind))
