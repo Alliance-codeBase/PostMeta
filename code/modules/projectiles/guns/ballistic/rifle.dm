@@ -394,7 +394,7 @@
 	worn_icon_state = "gun"
 	custom_materials = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT * 7.25, /datum/material/wood = SHEET_MATERIAL_AMOUNT * 4, /datum/material/cardboard = SHEET_MATERIAL_AMOUNT, /datum/material/plastic = SMALL_MATERIAL_AMOUNT * 2)
 	accepted_magazine_type = /obj/item/ammo_box/magazine/internal/boltaction/pipegun/pistol
-	projectile_damage_multiplier = 1
+	projectile_damage_multiplier = 1.5
 	projectile_speed_multiplier = 1
 	spread = 15 //kinda inaccurate
 	burst_size = 3 //but it empties the entire magazine when it fires
