@@ -1,8 +1,8 @@
 #include "code\improvised_shell_knowledge.dm"
 
-/datum/modpack/improvised_shell_knowledge
-	id = "improvised_shell_knowledge"
-	name = "Рецепт самодельного дробового патрона"
+/datum/modpack/improvised_shells
+	id = "Improvised Shells"
+	name = "Самодельные боеприпасы"
 	group = "Features"
-	desc = "Книга с рецептом самодельного дробового патрона появляется в технических тунелях."
-	author = "Dolphyuser"
+	desc = "Добавляет самодельные боеприпасы в игру, их рецепт можно найти в техах как редкий лут"
+	author = "Striders13, Dolphyuser"
