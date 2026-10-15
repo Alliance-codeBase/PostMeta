@@ -1,4 +1,4 @@
-#include "features/improvised_shells/includes.dm"
+#include "code\improvised_shells.dm"
 
 /datum/modpack/improvised_shells
 	id = "Improvised Shells"
