@@ -27,20 +27,11 @@
 	dir = 9
 	},
 /area/template_noop)
-<<<<<<< HEAD
 "e" = (
 /obj/structure/table/wood/shuttle_bar,
 /obj/structure/window/reinforced/spawner/directional/east,
-/turf/open/floor/holofloor{
-	dir = 9;
-	icon_state = "wood"
-=======
-"f" = (
-/obj/structure/table/wood,
-/obj/item/flashlight/lamp/green,
 /turf/open/floor/holofloor/wood{
 	dir = 9
->>>>>>> upstream/master
 	},
 /area/template_noop)
 "g" = (
@@ -56,15 +47,12 @@
 	dir = 9
 	},
 /area/template_noop)
-<<<<<<< HEAD
-=======
 "j" = (
 /obj/structure/window/reinforced/spawner/directional/east,
 /turf/open/floor/holofloor/wood{
 	dir = 9
 	},
 /area/template_noop)
->>>>>>> upstream/master
 "k" = (
 /obj/structure/table/wood/poker,
 /obj/item/storage/box/matches,
@@ -72,8 +60,6 @@
 	dir = 9
 	},
 /area/template_noop)
-<<<<<<< HEAD
-=======
 "l" = (
 /obj/structure/chair/stool/bar/directional/south,
 /obj/structure/window/reinforced/spawner/directional/east,
@@ -81,7 +67,6 @@
 	dir = 9
 	},
 /area/template_noop)
->>>>>>> upstream/master
 "m" = (
 /obj/structure/chair/wood,
 /turf/open/floor/holofloor/wood{
@@ -107,9 +92,8 @@
 "s" = (
 /obj/structure/table/wood,
 /obj/item/flashlight/lamp/green,
-/turf/open/floor/holofloor{
-	dir = 9;
-	icon_state = "wood"
+/turf/open/floor/holofloor/wood{
+	dir = 9
 	},
 /area/template_noop)
 "t" = (
@@ -125,14 +109,6 @@
 	},
 /turf/open/floor/holofloor/wood{
 	dir = 9
-	},
-/area/template_noop)
-"v" = (
-/obj/structure/table/wood/poker,
-/obj/item/cigarette/pipe,
-/turf/open/floor/holofloor{
-	dir = 9;
-	icon_state = "wood"
 	},
 /area/template_noop)
 "w" = (
@@ -253,8 +229,6 @@
 	dir = 9
 	},
 /area/template_noop)
-<<<<<<< HEAD
-=======
 "T" = (
 /obj/structure/table/wood/poker,
 /obj/item/cigarette/pipe,
@@ -262,7 +236,6 @@
 	dir = 9
 	},
 /area/template_noop)
->>>>>>> upstream/master
 "U" = (
 /obj/structure/table/wood/poker,
 /obj/item/storage/dice,
@@ -272,20 +245,6 @@
 /area/template_noop)
 "V" = (
 /obj/structure/chair/stool/bar/directional/south,
-/turf/open/floor/holofloor/wood{
-	dir = 9
-	},
-/area/template_noop)
-"W" = (
-/obj/structure/window/reinforced/spawner/directional/east,
-/turf/open/floor/holofloor{
-	dir = 9;
-	icon_state = "wood"
-	},
-/area/template_noop)
-"X" = (
-/obj/structure/chair/stool/bar/directional/south,
-/obj/structure/window/reinforced/spawner/directional/east,
 /turf/open/floor/holofloor/wood{
 	dir = 9
 	},
@@ -325,8 +284,8 @@ u
 u
 z
 z
-W
-X
+j
+l
 e
 c
 G
@@ -358,7 +317,7 @@ p
 (6,1,1) = {"
 m
 P
-v
+T
 o
 z
 F
