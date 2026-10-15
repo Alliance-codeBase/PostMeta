@@ -20,7 +20,7 @@
 #include "features\more_clothes\includes.dm"
 #include "features\hardsuits\includes.dm"
 #include "features\hookahs\includes.dm"
-#include "features\improvised_shell_knowledge\includes.dm"
+#include "features\improvised_shells\includes.dm"
 #include "features\kvass_beverage\includes.dm"
 #include "features\kumiss_beverage\includes.dm"
 #include "features\oguzok_cook\includes.dm"
