@@ -17,7 +17,7 @@ GLOBAL_LIST_EMPTY(metacoin_ore_points_by_ckey)
 	if(target.pulledby)
 		return target.pulledby
 	var/atom/dropped_from = old_loc
-	while(dropped_from && !isturf(dropped_from)) // hand, satchel in hand, satchel on belt
+	while(ismovable(dropped_from)) // hand, satchel in hand, satchel on belt. mapload init passes TRUE here
 		if(ismob(dropped_from))
 			return dropped_from
 		dropped_from = dropped_from.loc
