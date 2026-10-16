@@ -12,14 +12,16 @@ GLOBAL_LIST_EMPTY(metacoin_ore_points_by_ckey)
 	if(isliving(deliverer))
 		pay_ore_delivery(deliverer, points - points_before)
 
-/// Whoever pulled, dropped or threw the ore onto the input. Conveyors and lone boxes have no deliverer
+/// Whoever pulled, dropped or threw the ore onto the input, or dragged in the crate it spilled from. Conveyors and lone boxes have no deliverer
 /obj/machinery/mineral/ore_redemption/proc/find_ore_deliverer(atom/movable/target, atom/old_loc)
 	if(target.pulledby)
 		return target.pulledby
-	var/atom/dropped_from = old_loc
+	var/atom/movable/dropped_from = old_loc
 	while(ismovable(dropped_from)) // hand, satchel in hand, satchel on belt. mapload init passes TRUE here
 		if(ismob(dropped_from))
 			return dropped_from
+		if(dropped_from.pulledby) // cache opened or ore box emptied on the input
+			return dropped_from.pulledby
 		dropped_from = dropped_from.loc
 	if(target.throwing)
 		return target.throwing.get_thrower()
