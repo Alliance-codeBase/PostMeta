@@ -284,7 +284,7 @@ GLOBAL_DATUM(metacoin_shop_controller, /datum/metacoin_shop_controller)
 	if(!user)
 		return
 
-	to_chat(user, span_warning(error_messages[error_code] || fallback_message))
+	to_chat(user, span_warning("[error_messages[error_code] || fallback_message]"))
 	user.playsound_local(user, 'sound/machines/compiler/compiler-failure.ogg', 40, TRUE, use_reverb = FALSE)
 
 /datum/metacoinshop/panel/shop

@@ -112,7 +112,7 @@ GLOBAL_DATUM_INIT(metacoin_tips, /datum/metacoin_tips, new)
 	var/datum/metacoins_controller/controller = get_metacoins_controller()
 	var/list/take = controller.take_metacoins(sender.ckey, cost)
 	if(!take["ok"])
-		to_chat(sender, span_warning(take["error"] == "not_enough" ? "A tip costs [cost] metacoins." : "Database error. Try again later."))
+		to_chat(sender, span_warning("[take["error"] == "not_enough" ? "A tip costs [cost] metacoins." : "Database error. Try again later."]"))
 		return
 	if(!controller.add_metacoins(recipient_ckey, amount))
 		refund_failed_tip(sender)
@@ -128,7 +128,7 @@ GLOBAL_DATUM_INIT(metacoin_tips, /datum/metacoin_tips, new)
 	if(isnull(recipient))
 		return
 	recipient.mob.playsound_local(recipient.mob, 'sound/effects/coin2.ogg', 40, TRUE, use_reverb = FALSE, pressure_affected = FALSE)
-	to_chat(recipient, span_boldnicegreen(tipped_for ? "You got tipped for [tipped_for]!" : "You got tipped!"))
+	to_chat(recipient, span_boldnicegreen("[tipped_for ? "You got tipped for [tipped_for]!" : "You got tipped!"]"))
 	SStgui.update_user_uis(recipient.mob)
 
 /datum/metacoin_tips/proc/refund_failed_tip(client/sender)
