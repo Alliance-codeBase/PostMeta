@@ -261,30 +261,11 @@ GLOBAL_DATUM(metacoin_shop_controller, /datum/metacoin_shop_controller)
 		return "Something went wrong."
 	return message
 
-/datum/metacoinshop/panel/proc/send_error(mob/user, error_code, fallback_message)
-	var/static/list/error_messages = list(
-		"shop_closed" = "Shop is only available before round start.",
-		"open_antag_panel" = "Choose an antagonist role first.",
-		"already_owned" = "You already own this listing.",
-		"sold_out" = "No antag tokens are left for this round.",
-		"job_banned" = "You are jobbanned from this antagonist role.",
-		"disabled_by_config" = "This role is disabled by dynamic config.",
-		"min_pop" = "Current population is too low for this role.",
-		"not_enough" = "Not enough metacoins.",
-		"db_unavailable" = "Database error. Try again later.",
-		"db_failed" = "Database error. Try again later.",
-		"unknown_role" = "Selected role is not valid.",
-		"butt_already_bought" = "You already bought a butt for this round.",
-		"invalid_variant" = "Selected variant is not valid.",
-		"unknown_item" = "This listing does not exist.",
-		"autobuy_enabled" = "Turn off auto-buy to buy this listing by hand.",
-		"invalid_request" = "Invalid purchase request.",
-		"autobuy_cooldown" = "Please wait before changing auto-buy again.",
-	)
+/datum/metacoinshop/panel/proc/send_error(mob/user, error_code)
 	if(!user)
 		return
 
-	to_chat(user, span_warning("[error_messages[error_code] || fallback_message]"))
+	to_chat(user, span_warning(get_metacoin_controller().error_text(error_code)))
 	user.playsound_local(user, 'sound/machines/compiler/compiler-failure.ogg', 40, TRUE, use_reverb = FALSE)
 
 /datum/metacoinshop/panel/shop
@@ -369,7 +350,7 @@ GLOBAL_DATUM(metacoin_shop_controller, /datum/metacoin_shop_controller)
 	if(result["ok"])
 		return TRUE
 
-	send_error(user, result["error"], "Purchase failed.")
+	send_error(user, result["error"])
 	return FALSE
 
 /client/verb/view_metacoin_shop()

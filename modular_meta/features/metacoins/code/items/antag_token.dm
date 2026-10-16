@@ -499,5 +499,5 @@
 	if(result["ok"])
 		return TRUE
 
-	send_error(ui?.user, result["error"], "Antag token purchase failed.")
+	send_error(ui?.user, result["error"])
 	return FALSE
