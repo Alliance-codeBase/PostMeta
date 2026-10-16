@@ -62,7 +62,7 @@ GLOBAL_DATUM_INIT(metacoin_tips, /datum/metacoin_tips, new)
 	INVOKE_ASYNC(src, PROC_REF(tip_clicked), sender, target)
 	return TRUE
 
-/// Every click sounds the same and says nothing, so it never tells whether someone plays the character.
+/// Non-player clicks ring like a real tip, so it never tells whether someone plays the character.
 /datum/metacoin_tips/proc/tip_clicked(client/sender, atom/target)
 	var/datum/metacoins_controller/controller = get_metacoins_controller()
 	var/balance = controller.fetch_balance(sender.ckey)
@@ -72,13 +72,14 @@ GLOBAL_DATUM_INIT(metacoin_tips, /datum/metacoin_tips, new)
 	if(balance < cost)
 		to_chat(sender, span_warning("A tip costs [cost] metacoins."))
 		return
-	sender.mob.playsound_local(sender.mob, 'sound/effects/kaching.ogg', 40, TRUE, use_reverb = FALSE, pressure_affected = FALSE)
-	if(!isliving(target))
-		return
 	var/mob/living/body = target
-	if(isnull(body.mind) || !body.mind.key)
+	if(!isliving(body) || isnull(body.mind) || !body.mind.key)
+		ring_tip(sender) // rings like a real tip
 		return
 	send_tip(sender, ckey(body.mind.key), tipped_for = null, confirm_in_chat = FALSE)
+
+/datum/metacoin_tips/proc/ring_tip(client/sender)
+	sender.mob.playsound_local(sender.mob, 'sound/effects/kaching.ogg', 40, TRUE, use_reverb = FALSE, pressure_affected = FALSE)
 
 /datum/metacoin_tips/proc/tip_admin(client/sender, admin_ckey)
 	if(GLOB.admin_datums[admin_ckey])
@@ -118,8 +119,8 @@ GLOBAL_DATUM_INIT(metacoin_tips, /datum/metacoin_tips, new)
 		return
 
 	log_game("[key_name(sender)] tipped [recipient_ckey] [amount] metacoins[tipped_for ? " for [tipped_for]" : ""].")
+	ring_tip(sender)
 	if(confirm_in_chat)
-		sender.mob.playsound_local(sender.mob, 'sound/effects/kaching.ogg', 40, TRUE, use_reverb = FALSE, pressure_affected = FALSE)
 		to_chat(sender, span_notice("Tip sent."))
 	SStgui.update_user_uis(sender.mob)
 
