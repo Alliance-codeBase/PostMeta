@@ -153,3 +153,7 @@
 #define ROLE_DEMONINFILTRATION "Demon Infiltration"
 
 //Sinful Demon defines ended//
+
+#define ROLE_MAFIA "Member of Mafia"
+
+//Mafia defines ended//
