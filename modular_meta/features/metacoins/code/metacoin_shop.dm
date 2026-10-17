@@ -261,7 +261,8 @@ GLOBAL_DATUM(metacoin_shop_controller, /datum/metacoin_shop_controller)
 	if(!listing_id)
 		return FALSE
 
-	var/result = get_metacoin_controller().buy(owner?.ckey, listing_id, null, owner, variant)
+	var/datum/metacoin_shop_controller/controller = get_metacoin_controller()
+	var/result = controller.buy(owner?.ckey, listing_id, null, owner, variant)
 	if(result["ok"])
 		return TRUE
 
