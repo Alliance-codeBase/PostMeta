@@ -26,6 +26,10 @@
 @include meta.load-css('./components/UnreadCount.scss');
 @include meta.load-css('./components/CommandBar.scss');
 
+//MASSMETA EDIT ADDITION BEGIN (autotranslate)
+@include meta.load-css('./components/Translation.scss');
+//MASSMETA EDIT ADDITION END (autotranslate)
+
 // Layouts
 @include meta.load-css('~tgui/styles/layouts/Layout.scss');
 @include meta.load-css('~tgui/styles/layouts/Window.scss');
