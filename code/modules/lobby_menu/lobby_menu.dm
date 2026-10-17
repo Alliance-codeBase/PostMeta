@@ -247,6 +247,7 @@ ADMIN_VERB(toggle_lobby_transparency, R_ADMIN, "Toggle Lobby Transparency", "Tog
 		"canPoll" = !is_guest_key(client?.key) && SSdbcore.Connect(),
 		"overflowJob" = null,
 		"transparent" = GLOB.lobby_background_transparent,
+		"initText" = get_init_text(), // MASSMETA ADDITION (init_text)
 	))
 
 	check_new_polls()
