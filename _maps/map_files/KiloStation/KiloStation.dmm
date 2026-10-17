@@ -9851,6 +9851,7 @@
 /obj/effect/turf_decal/tile/purple/anticorner/contrasted{
 	dir = 8
 	},
+/obj/effect/spawner/random/decoration/lavalamp,
 /turf/open/floor/iron/showroomfloor,
 /area/station/command/heads_quarters/rd)
 "dls" = (
@@ -11968,6 +11969,16 @@
 /obj/item/integrated_circuit/loaded/hello_world,
 /turf/open/floor/iron/showroomfloor,
 /area/station/engineering/circuit_workshop)
+"dTC" = (
+/obj/effect/turf_decal/tile/green{
+	dir = 4
+	},
+/obj/effect/turf_decal/tile/green/half/contrasted{
+	dir = 1
+	},
+/obj/effect/spawner/random/structure/massmeta_flags/directional/north,
+/turf/open/floor/iron,
+/area/station/hallway/primary/central/fore)
 "dTF" = (
 /obj/machinery/holopad,
 /obj/structure/cable,
@@ -13498,6 +13509,7 @@
 /obj/effect/turf_decal/tile/neutral/anticorner/contrasted{
 	dir = 1
 	},
+/obj/effect/spawner/random/structure/massmeta_flags/directional/south,
 /turf/open/floor/iron/dark,
 /area/station/hallway/primary/starboard)
 "etp" = (
@@ -14692,6 +14704,7 @@
 /obj/effect/turf_decal/tile/neutral/half/contrasted{
 	dir = 8
 	},
+/obj/effect/spawner/random/structure/massmeta_flags/directional/west,
 /turf/open/floor/iron/dark/corner{
 	dir = 8
 	},
@@ -17975,6 +17988,7 @@
 /obj/item/kirbyplants/organic/plant21,
 /obj/effect/turf_decal/tile/red/half/contrasted,
 /obj/effect/turf_decal/tile/neutral,
+/obj/effect/spawner/random/structure/massmeta_flags/directional/south,
 /turf/open/floor/iron/showroomfloor,
 /area/station/security/office)
 "fPQ" = (
@@ -18719,6 +18733,7 @@
 	},
 /obj/structure/table/reinforced/rglass,
 /obj/effect/turf_decal/tile/blue/opposingcorners,
+/obj/effect/spawner/random/decoration/lavalamp,
 /turf/open/floor/iron/showroomfloor,
 /area/station/command/heads_quarters/cmo)
 "gbF" = (
@@ -20496,7 +20511,6 @@
 /obj/effect/turf_decal/tile/neutral/half/contrasted{
 	dir = 1
 	},
-/obj,
 /turf/open/floor/iron/dark,
 /area/station/science/lobby)
 "gFn" = (
@@ -22475,6 +22489,7 @@
 	name = "Primary AI Core Access";
 	req_access = list("ai_upload")
 	},
+/mob/living/silicon/robot/shell/cell,
 /turf/open/floor/engine,
 /area/station/ai/satellite/chamber)
 "hlP" = (
@@ -23989,6 +24004,7 @@
 	dir = 4
 	},
 /obj/effect/turf_decal/tile/neutral/half/contrasted,
+/obj/effect/spawner/random/structure/massmeta_flags/directional/south,
 /turf/open/floor/iron/dark/corner,
 /area/station/hallway/primary/port)
 "hKE" = (
@@ -27289,6 +27305,7 @@
 /obj/effect/turf_decal/tile/red/half/contrasted{
 	dir = 1
 	},
+/obj/effect/spawner/random/structure/massmeta_flags/directional/east,
 /turf/open/floor/iron/showroomfloor,
 /area/station/security/brig)
 "iFm" = (
@@ -32402,6 +32419,15 @@
 /obj/effect/turf_decal/tile/neutral/fourcorners,
 /turf/open/floor/iron,
 /area/station/hallway/primary/starboard)
+"khg" = (
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/obj/effect/turf_decal/tile/red/half/contrasted,
+/obj/effect/turf_decal/tile/neutral,
+/obj/effect/spawner/random/structure/massmeta_flags/directional/south,
+/turf/open/floor/iron,
+/area/station/hallway/primary/aft)
 "khj" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/effect/turf_decal/tile/blue/opposingcorners,
@@ -35285,6 +35311,7 @@
 	name = "Primary AI Core Access";
 	req_access = list("ai_upload")
 	},
+/mob/living/silicon/robot/shell/cell,
 /turf/open/floor/engine,
 /area/station/ai/satellite/chamber)
 "lcN" = (
@@ -35808,6 +35835,7 @@
 /obj/effect/turf_decal/tile/red/half/contrasted{
 	dir = 1
 	},
+/obj/effect/spawner/random/structure/massmeta_flags/directional/east,
 /turf/open/floor/iron/showroomfloor,
 /area/station/security/brig)
 "lmi" = (
@@ -36527,6 +36555,7 @@
 /obj/item/kirbyplants/organic/plant21,
 /obj/effect/turf_decal/tile/red/anticorner/contrasted,
 /obj/effect/turf_decal/tile/neutral,
+/obj/effect/spawner/random/structure/massmeta_flags/directional/east,
 /turf/open/floor/iron,
 /area/station/hallway/primary/aft)
 "lyk" = (
@@ -36657,6 +36686,7 @@
 /obj/structure/table/wood,
 /obj/structure/cable,
 /obj/item/book/manual/wiki/security_space_law,
+/obj/effect/spawner/random/decoration/lavalamp,
 /turf/open/floor/carpet/royalblack,
 /area/station/command/heads_quarters/captain)
 "lBk" = (
@@ -38252,6 +38282,7 @@
 	dir = 4
 	},
 /obj/effect/turf_decal/caution/stand_clear,
+/obj/effect/spawner/random/structure/massmeta_flags/directional/south,
 /turf/open/floor/iron/dark,
 /area/station/hallway/primary/aft)
 "lYX" = (
@@ -46984,6 +47015,16 @@
 /obj/machinery/light/small/directional/south,
 /turf/open/floor/iron/showroomfloor,
 /area/station/medical/psychology)
+"oWu" = (
+/obj/machinery/door/poddoor/preopen{
+	id = "Biohazard";
+	name = "Emergency Research Blast Door"
+	},
+/obj/machinery/door/firedoor,
+/obj/effect/turf_decal/caution/stand_clear,
+/obj/effect/spawner/random/structure/massmeta_flags/directional/east,
+/turf/open/floor/iron/dark,
+/area/station/science/lobby)
 "oWx" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/effect/decal/cleanable/dirt,
@@ -49208,6 +49249,12 @@
 /obj/effect/decal/cleanable/generic,
 /turf/open/floor/plating,
 /area/station/maintenance/department/bridge)
+"pEh" = (
+/obj/structure/sign/flag/massmeta/pmc_wagner{
+	pixel_y = 32
+	},
+/turf/open/floor/iron,
+/area/station/security/prison)
 "pEt" = (
 /obj/machinery/door/airlock/maintenance,
 /obj/structure/cable,
@@ -50670,12 +50717,12 @@
 /obj/machinery/door/firedoor,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/machinery/door/airlock/security/glass{
-	name = "Brig"
-	},
 /obj/structure/cable,
 /obj/structure/disposalpipe/segment,
 /obj/effect/mapping_helpers/airlock/access/all/security/entrance,
+/obj/machinery/door/airlock/security/glass{
+	name = "Brig"
+	},
 /turf/open/floor/iron/dark,
 /area/station/security/brig)
 "qbA" = (
@@ -55429,6 +55476,7 @@
 /obj/effect/turf_decal/tile/neutral{
 	dir = 1
 	},
+/obj/effect/spawner/random/structure/massmeta_flags/directional/north,
 /turf/open/floor/iron,
 /area/station/hallway/secondary/exit/departure_lounge)
 "rDi" = (
@@ -56995,6 +57043,7 @@
 	dir = 1
 	},
 /obj/effect/turf_decal/tile/neutral/half/contrasted,
+/obj/machinery/vending/mod_modules,
 /turf/open/floor/iron/dark,
 /area/station/science/lobby)
 "saW" = (
@@ -57450,15 +57499,10 @@
 /turf/open/floor/circuit/green/telecomms/mainframe,
 /area/station/tcommsat/server)
 "shC" = (
-/obj/machinery/door/airlock/security/glass{
-	id_tag = "innerbrig";
-	name = "Brig"
-	},
-/obj/effect/mapping_helpers/airlock/cyclelink_helper_multi{
-	cycle_id = "brig-entrance-right"
-	},
-/obj/effect/mapping_helpers/airlock/access/all/security/entrance,
 /obj/machinery/door/firedoor,
+/obj/machinery/turnstile/brig{
+	dir = 8
+	},
 /turf/open/floor/iron/dark,
 /area/station/security/brig)
 "shE" = (
@@ -57658,6 +57702,7 @@
 /obj/effect/turf_decal/tile/red/half/contrasted{
 	dir = 1
 	},
+/obj/effect/spawner/random/structure/massmeta_flags/directional/east,
 /turf/open/floor/iron/showroomfloor,
 /area/station/security/brig)
 "skB" = (
@@ -58123,10 +58168,9 @@
 /area/station/security/checkpoint/engineering)
 "srf" = (
 /obj/machinery/door/firedoor,
-/obj/machinery/door/airlock/security/glass{
-	name = "Brig"
+/obj/machinery/turnstile/brig{
+	dir = 1
 	},
-/obj/effect/mapping_helpers/airlock/access/all/security/entrance,
 /turf/open/floor/iron/dark,
 /area/station/security/brig)
 "srm" = (
@@ -58438,6 +58482,7 @@
 	},
 /obj/effect/turf_decal/tile/red/opposingcorners,
 /obj/machinery/light/warm/directional/north,
+/obj/effect/spawner/random/structure/massmeta_flags/directional/north,
 /turf/open/floor/iron/showroomfloor,
 /area/station/service/bar/atrium)
 "suQ" = (
@@ -59056,6 +59101,7 @@
 /obj/effect/turf_decal/tile/red/half/contrasted{
 	dir = 1
 	},
+/obj/effect/spawner/random/structure/massmeta_flags/directional/east,
 /turf/open/floor/iron/showroomfloor,
 /area/station/security/brig)
 "sGB" = (
@@ -64058,6 +64104,7 @@
 /obj/effect/turf_decal/tile/red/half/contrasted{
 	dir = 1
 	},
+/obj/effect/spawner/random/structure/massmeta_flags/directional/east,
 /turf/open/floor/iron/showroomfloor,
 /area/station/security/brig)
 "uhE" = (
@@ -64115,10 +64162,6 @@
 /area/station/engineering/storage_shared)
 "uiu" = (
 /obj/structure/table/wood,
-/obj/item/flashlight/lamp/green{
-	pixel_x = -7;
-	pixel_y = 5
-	},
 /obj/machinery/status_display/evac/directional/north,
 /obj/item/folder/white{
 	pixel_x = 7;
@@ -64129,6 +64172,7 @@
 	pixel_y = 1
 	},
 /obj/item/tgui_book/manual/dsm,
+/obj/effect/spawner/random/decoration/lavalamp,
 /turf/open/floor/carpet,
 /area/station/medical/psychology)
 "uix" = (
@@ -70012,10 +70056,6 @@
 	dir = 4
 	},
 /obj/structure/cable,
-/obj/machinery/door/airlock/security/glass{
-	id_tag = "outerbrig";
-	name = "Brig"
-	},
 /obj/effect/mapping_helpers/airlock/cyclelink_helper_multi{
 	cycle_id = "brig-entrance-right"
 	},
@@ -70023,6 +70063,10 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/effect/mapping_helpers/airlock/access/all/security/entrance,
 /obj/machinery/door/firedoor,
+/obj/machinery/door/airlock/security/glass{
+	id_tag = "innerbrig";
+	name = "Brig"
+	},
 /turf/open/floor/iron/dark,
 /area/station/security/brig)
 "was" = (
@@ -70104,6 +70148,7 @@
 	},
 /obj/machinery/recharger,
 /obj/structure/table/wood,
+/obj/effect/spawner/random/decoration/lavalamp,
 /turf/open/floor/carpet/blue,
 /area/station/command/heads_quarters/hop)
 "wcg" = (
@@ -71093,23 +71138,11 @@
 /turf/open/floor/iron/showroomfloor,
 /area/station/science/lab)
 "wqZ" = (
-/obj/structure/disposalpipe/segment{
-	dir = 4
-	},
-/obj/structure/cable,
-/obj/machinery/door/airlock/security/glass{
-	id_tag = "innerbrig";
-	name = "Brig"
-	},
-/obj/effect/mapping_helpers/airlock/cyclelink_helper_multi{
-	cycle_id = "brig-entrance-right"
-	},
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/effect/mapping_helpers/airlock/access/all/security/entrance,
 /obj/machinery/door/firedoor,
+/obj/effect/turf_decal/caution/stand_clear,
+/obj/effect/spawner/random/structure/massmeta_flags/directional/east,
 /turf/open/floor/iron/dark,
-/area/station/security/brig)
+/area/station/hallway/primary/starboard)
 "wrc" = (
 /obj/effect/spawner/structure/window/reinforced,
 /obj/structure/cable,
@@ -73806,6 +73839,7 @@
 /obj/effect/turf_decal/tile/neutral/half/contrasted{
 	dir = 8
 	},
+/obj/effect/spawner/random/decoration/lavalamp,
 /turf/open/floor/iron/dark,
 /area/station/command/heads_quarters/ce)
 "xio" = (
@@ -74141,16 +74175,11 @@
 /turf/open/floor/iron/showroomfloor,
 /area/station/medical/psychology)
 "xmO" = (
-/obj/machinery/door/airlock/security/glass{
-	id_tag = "outerbrig";
-	name = "Brig"
-	},
-/obj/effect/mapping_helpers/airlock/cyclelink_helper_multi{
-	cycle_id = "brig-entrance-right"
-	},
-/obj/effect/mapping_helpers/airlock/access/all/security/entrance,
 /obj/effect/landmark/navigate_destination/sec,
 /obj/machinery/door/firedoor,
+/obj/machinery/turnstile/brig{
+	dir = 8
+	},
 /turf/open/floor/iron/dark,
 /area/station/security/brig)
 "xmQ" = (
@@ -74393,6 +74422,7 @@
 /obj/effect/turf_decal/tile/red/half/contrasted{
 	dir = 1
 	},
+/obj/effect/spawner/random/structure/massmeta_flags/directional/east,
 /turf/open/floor/iron/showroomfloor,
 /area/station/security/brig)
 "xrA" = (
@@ -85758,7 +85788,7 @@ mTJ
 tMu
 lhv
 twX
-mqC
+pEh
 jhP
 sAv
 sAv
@@ -99899,7 +99929,7 @@ jeR
 jkk
 shC
 sFF
-wqZ
+war
 dzS
 bHv
 qVs
@@ -102164,7 +102194,7 @@ dXI
 dkA
 ovv
 ovv
-nIx
+dTC
 iFm
 ocO
 eAl
@@ -104525,7 +104555,7 @@ ekM
 ekM
 ayY
 uiM
-wWm
+khg
 gmG
 rnd
 dyP
@@ -114008,7 +114038,7 @@ fkw
 hDK
 ege
 rhe
-ykP
+wqZ
 xcV
 peE
 kUN
@@ -114246,7 +114276,7 @@ bBF
 sxB
 kBP
 kBP
-kBP
+oWu
 vFY
 ofs
 mnl
