@@ -214,6 +214,8 @@ GAME_VERB_HIDDEN(/client, reset_held_keys_verb, "Reset Held Keys")
 		// MASSMETA ADDITION
 		if("metacoins_shop")
 			client?.metacoin_shop_prompt()
+		if("metacoins_tip")
+			client?.open_metacoin_tips()
 		// MASSMETA ADDITION
 		if("settings")
 			client?.prefs.current_window = PREFERENCE_TAB_GAME_PREFERENCES
