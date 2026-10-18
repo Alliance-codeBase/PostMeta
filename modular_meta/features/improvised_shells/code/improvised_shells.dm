@@ -29,6 +29,5 @@
 	to_chat(user, span_warning("The book turns to dust in your hands."))
 	qdel(src)
 
-/datum/modpack/improvised_shells/Initialize()
-	. = ..()
-	GLOB.common_loot[/obj/item/book/granter/crafting_recipe/improvised_shotgun_shell] = 1
+/datum/modpack/improvised_shells/initialize(mapload)
+	    GLOB.common_loot[/obj/item/book/granter/crafting_recipe/improvised_shotgun_shell] = 1
