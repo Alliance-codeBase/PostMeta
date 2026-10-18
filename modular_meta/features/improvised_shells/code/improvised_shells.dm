@@ -30,4 +30,5 @@
 	qdel(src)
 
 /datum/modpack/improvised_shells/initialize(mapload)
-	    GLOB.common_loot[/obj/item/book/granter/crafting_recipe/improvised_shotgun_shell] = 1
+    . = ..()
+    GLOB.rarity_loot[/obj/item/book/granter/crafting_recipe/improvised_shotgun_shell] = 1
