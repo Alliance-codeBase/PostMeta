@@ -29,10 +29,7 @@
 	to_chat(user, span_warning("The book turns to dust in your hands."))
 	qdel(src)
 
-/datum/modpack/improvised_shells/initialize()
+/datum/modpack/improvised_shells/Initialize()
 	. = ..()
-	if(.)
-		return
-	GLOB.uncommon_loot += list(
-		list(/obj/item/book/granter/crafting_recipe/improvised_shotgun_shell = 1),
-	)
+	// Убираем двойную вложенность списков и добавляем напрямую по ключу веса
+	GLOB.common_loot[/obj/item/book/granter/crafting_recipe/improvised_shotgun_shell] = 1
