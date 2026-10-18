@@ -31,5 +31,4 @@
 
 /datum/modpack/improvised_shells/Initialize()
 	. = ..()
-	// Убираем двойную вложенность списков и добавляем напрямую по ключу веса
 	GLOB.common_loot[/obj/item/book/granter/crafting_recipe/improvised_shotgun_shell] = 1
