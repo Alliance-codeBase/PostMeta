@@ -19,3 +19,9 @@
 			insert_icon("modpack-[modpack_id]", uni_icon(icon, "preview"))
 
 #undef MODPACKS_SET
+
+/datum/asset/simple/namespaced/lobby_menu_icons/register()
+	assets["modpacks.png"] = 'modular_meta/__modpack/icons/modpacks.png'
+	assets["modpacks_highlighted.png"] = 'modular_meta/__modpack/icons/modpacks_highlighted.png'
+	assets["modpacks_pressed.png"] = 'modular_meta/__modpack/icons/modpacks_pressed.png'
+	return ..()

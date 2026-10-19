@@ -37,33 +37,35 @@ export const Modpacks = (props) => {
   return (
     <Window title="Список модификаций" width={480} height={580}>
       <Window.Content>
-        <NoticeBox>
-          В данный момент идёт наполнение меню модификаций, в игре модицикаций
-          больше чем вы можете тут видеть.
-        </NoticeBox>
-        <Tabs>
-          <Tabs.Tab
-            selected={selectedCategory === 'Features'}
-            onClick={() => setSelectedCategory('Features')}
-          >
-            Фичи и добавления
-          </Tabs.Tab>
-          <Tabs.Tab
-            selected={selectedCategory === 'Tweaks'}
-            onClick={() => setSelectedCategory('Tweaks')}
-          >
-            Твики и доработки
-          </Tabs.Tab>
-          <Tabs.Tab
-            selected={selectedCategory === 'Reverts'}
-            onClick={() => setSelectedCategory('Reverts')}
-          >
-            Откаты и баланс
-          </Tabs.Tab>
-        </Tabs>
-        {(selectedCategory === 'Features' && <FeaturesTable />) ||
-          (selectedCategory === 'Tweaks' && <TweaksTable />) ||
-          (selectedCategory === 'Reverts' && <RevertsTable />)}
+        <Stack fill vertical>
+          <Stack.Item>
+            <Tabs>
+              <Tabs.Tab
+                selected={selectedCategory === 'Features'}
+                onClick={() => setSelectedCategory('Features')}
+              >
+                Фичи и добавления
+              </Tabs.Tab>
+              <Tabs.Tab
+                selected={selectedCategory === 'Tweaks'}
+                onClick={() => setSelectedCategory('Tweaks')}
+              >
+                Твики и доработки
+              </Tabs.Tab>
+              <Tabs.Tab
+                selected={selectedCategory === 'Reverts'}
+                onClick={() => setSelectedCategory('Reverts')}
+              >
+                Откаты и баланс
+              </Tabs.Tab>
+            </Tabs>
+          </Stack.Item>
+          <Stack.Item grow>
+            {(selectedCategory === 'Features' && <FeaturesTable />) ||
+              (selectedCategory === 'Tweaks' && <TweaksTable />) ||
+              (selectedCategory === 'Reverts' && <RevertsTable />)}
+          </Stack.Item>
+        </Stack>
       </Window.Content>
     </Window>
   );
@@ -122,6 +124,7 @@ const FeaturesTable = () => {
                           .includes(searchText.toLowerCase())
                       : true),
                 )
+                .sort((a, b) => a.name.localeCompare(b.name))
                 .map((feature) => (
                   <Collapsible
                     color="transparent"
@@ -214,6 +217,7 @@ const TweaksTable = () => {
                           .includes(searchText.toLowerCase())
                       : true),
                 )
+                .sort((a, b) => a.name.localeCompare(b.name))
                 .map((translate) => (
                   <Collapsible
                     color="transparent"
@@ -308,6 +312,7 @@ const RevertsTable = () => {
                           .includes(searchText.toLowerCase())
                       : true),
                 )
+                .sort((a, b) => a.name.localeCompare(b.name))
                 .map((revert) => (
                   <Collapsible
                     color="transparent"

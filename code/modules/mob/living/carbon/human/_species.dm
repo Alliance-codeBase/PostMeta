@@ -69,6 +69,8 @@ GLOBAL_LIST_EMPTY(features_by_species)
 		BODY_ZONE_R_LEG = /obj/item/bodypart/leg/right,
 		BODY_ZONE_CHEST = /obj/item/bodypart/chest,
 	)
+	///A list to override what gets put in a species' survival box. keys are defined in code\__DEFINES\survival_box.dm
+	var/list/survival_box_overrides = list()
 	///Internal organs that are unique to this race, like a tail or other cosmetic organs. list(typepath of organ 1, typepath of organ 2 = "Round").
 	var/list/mutant_organs = list()
 	///Replaces default brain with a different organ
@@ -157,6 +159,9 @@ GLOBAL_LIST_EMPTY(features_by_species)
 
 	/// Should we preload this species's organs?
 	var/preload = TRUE
+
+	/// Should the character preview dummy load all organs? Required for i.e organ_set_bonus visual effects
+	var/character_preview_load_all_organs = FALSE
 
 	/// Do we try to prevent reset_perspective() from working? Useful for Dullahans to stop perspective changes when they're looking through their head.
 	var/prevent_perspective_change = FALSE
@@ -382,7 +387,7 @@ GLOBAL_LIST_EMPTY(features_by_species)
 		doll.update_body_zones()
 
 	if(old_species.type != type)
-		replace_body(human_who_gained_species, src)
+		replace_body(human_who_gained_species, src, old_species)
 
 	if(!human_who_gained_species.get_bloodtype()?.is_species_universal) // Clown blood is forever.
 		//Assigns exotic blood type if the species has one
@@ -391,6 +396,9 @@ GLOBAL_LIST_EMPTY(features_by_species)
 		//Otherwise, check if the previous species had an exotic bloodtype and we do not have one and assign a random blood type
 		else if(old_species.exotic_bloodtype && isnull(exotic_bloodtype))
 			human_who_gained_species.set_blood_type(random_human_blood_type())
+
+	if(character_preview_load_all_organs)
+		human_who_gained_species.visual_only_organs = FALSE
 
 	regenerate_organs(human_who_gained_species, old_species, replace_current = FALSE, visual_only = human_who_gained_species.visual_only_organs, replace_missing = replace_missing)
 	// Update locked slots AFTER all organ and body stuff is handled
@@ -557,7 +565,7 @@ GLOBAL_LIST_EMPTY(features_by_species)
 		if(ITEM_SLOT_HANDS)
 			if(!(H.mobility_flags & MOBILITY_PICKUP))
 				return FALSE
-			if(H.get_empty_held_indexes())
+			if(length(H.get_empty_held_indexes()))
 				return TRUE
 			return FALSE
 		if(ITEM_SLOT_MASK)
@@ -681,6 +689,10 @@ GLOBAL_LIST_EMPTY(features_by_species)
 
 /// Equips the necessary species-relevant gear before putting on the rest of the uniform.
 /datum/species/proc/pre_equip_species_outfit(datum/job/job, mob/living/carbon/human/equipping, visuals_only = FALSE)
+	return
+
+/// Equips species-relevant gear after putting on an outfit.
+/datum/species/proc/post_equip_species_outfit(mob/living/carbon/human/equipping, visuals_only = FALSE)
 	return
 
 /**
@@ -879,8 +891,6 @@ GLOBAL_LIST_EMPTY(features_by_species)
 			armor_block += 10
 			target.adjust_disgust(2)
 
-	playsound(target.loc, attacking_bodypart.unarmed_attack_sound, 25, TRUE, -1)
-
 	if(grappled && attacking_bodypart.grappled_attack_verb)
 		atk_verb = attacking_bodypart.grappled_attack_verb
 		atk_verb_continuous = attacking_bodypart.grappled_attack_verb_continuous
@@ -899,6 +909,14 @@ GLOBAL_LIST_EMPTY(features_by_species)
 	var/attack_type = attacking_bodypart.attack_type
 	var/kicking = (atk_effect == ATTACK_EFFECT_KICK)
 	var/final_armor_block = armor_block
+
+	var/smack_sound = attacking_bodypart.unarmed_attack_sound
+	var/smack_attack = (atk_effect == ATTACK_EFFECT_KICK || atk_effect == ATTACK_EFFECT_PUNCH || atk_effect == ATTACK_EFFECT_SMASH)
+	if(smack_attack && attack_type == BRUTE && (affecting.bodytype & BODYTYPE_ROBOTIC))
+		smack_sound = 'sound/effects/bang.ogg'
+
+	playsound(target, smack_sound, atk_effect == ATTACK_EFFECT_SMASH ? 33 : 25, TRUE, -1)
+
 	if(kicking || grappled) //kicks and punches when grappling bypass armor slightly.
 		if(damage >= 12 || (damage >= 9 && prob(66)))
 			target.force_say()
@@ -1217,7 +1235,7 @@ GLOBAL_LIST_EMPTY(features_by_species)
 		humi.apply_damage(burn_damage, BURN, spread_damage = TRUE, wound_clothing = FALSE)
 
 	// For cold damage, we cap at the threshold if you're dead
-	if(humi.get_fire_loss() >= abs(HEALTH_THRESHOLD_DEAD) && humi.stat == DEAD)
+	if(humi.get_fire_loss() >= abs(humi.dead_threshold) && humi.stat == DEAD)
 		return
 
 	// Apply some burn / brute damage to the body (Dependent if the person is hulk or not)
@@ -1326,7 +1344,9 @@ GLOBAL_LIST_EMPTY(features_by_species)
 			if(HAS_TRAIT(H, TRAIT_RESISTLOWPRESSURE))
 				H.clear_alert(ALERT_PRESSURE)
 			else
-				var/pressure_damage = min(round(1 + (H.seconds_in_low_pressure / 80 SECONDS), 0.05) * BASE_LOW_PRESSURE_DAMAGE, MAX_LOW_PRESSURE_DAMAGE) * seconds_per_tick
+				// MASSMETA EDIT START (pressure_damage_reduced)
+				var/pressure_damage = min(round(1 + (H.seconds_in_low_pressure / 180 SECONDS), 0.05) * BASE_LOW_PRESSURE_DAMAGE, MAX_LOW_PRESSURE_DAMAGE) * seconds_per_tick
+				// MASSMETA EDIT END (pressure_damage_reduced)
 				pressure_damage *= GET_PHYSIOLOGY(H, BRUTE) * GET_PHYSIOLOGY(H, PHYS_COEFF_PRESSURE)
 				H.adjust_brute_loss(pressure_damage, required_bodytype = BODYTYPE_ORGANIC)
 				H.throw_alert(ALERT_PRESSURE, /atom/movable/screen/alert/lowpressure, 2)
@@ -1908,20 +1928,20 @@ GLOBAL_LIST_EMPTY(features_by_species)
 	return to_add
 
 ///Handles replacing all of the bodyparts with their species version during set_species()
-/datum/species/proc/replace_body(mob/living/carbon/target, datum/species/new_species)
+/datum/species/proc/replace_body(mob/living/carbon/target, datum/species/new_species, datum/species/old_species)
 	new_species ||= target.dna.species //If no new species is provided, assume its src.
 	//Note for future: Potentionally add a new C.dna.species() to build a template species for more accurate limb replacement
 
-	var/list/final_bodypart_overrides = new_species.bodypart_overrides.Copy()
+	var/list/new_bodypart_overrides = new_species.bodypart_overrides.Copy()
 	if((new_species.digitigrade_customization == DIGITIGRADE_OPTIONAL && target.dna.features[FEATURE_LEGS] == DIGITIGRADE_LEGS) || new_species.digitigrade_customization == DIGITIGRADE_FORCED)
-		final_bodypart_overrides[BODY_ZONE_R_LEG] = /obj/item/bodypart/leg/right/digitigrade
-		final_bodypart_overrides[BODY_ZONE_L_LEG] = /obj/item/bodypart/leg/left/digitigrade
+		new_bodypart_overrides[BODY_ZONE_R_LEG] = /obj/item/bodypart/leg/right/digitigrade
+		new_bodypart_overrides[BODY_ZONE_L_LEG] = /obj/item/bodypart/leg/left/digitigrade
 
 	for(var/obj/item/bodypart/old_part as anything in target.get_bodyparts())
 		if((old_part.change_exempt_flags & BP_BLOCK_CHANGE_SPECIES) || (old_part.bodypart_flags & BODYPART_IMPLANTED))
 			continue
-
-		var/path = final_bodypart_overrides?[old_part.body_zone]
+		// update all our existing limbs
+		var/path = new_bodypart_overrides?[old_part.body_zone]
 		var/obj/item/bodypart/new_part
 		if(path)
 			new_part = new path()
@@ -1929,6 +1949,22 @@ GLOBAL_LIST_EMPTY(features_by_species)
 			new_part.update_limb(is_creating = TRUE)
 			new_part.set_initial_damage(old_part.brute_dam, old_part.burn_dam)
 		qdel(old_part)
+
+	var/list/old_bodypart_overrides = old_species.bodypart_overrides.Copy()
+	if(length(new_bodypart_overrides) <= length(old_bodypart_overrides))
+		return // we updated all the limbs the character deserves
+	// but there are cases where the old species naturally lacked limbs
+	for(var/zone in new_bodypart_overrides)
+		// find a limb that the character doesn't have because of their old species
+		if(new_bodypart_overrides.Find(zone) && old_bodypart_overrides.Find(zone))
+			continue
+		var/path = new_bodypart_overrides[zone]
+		if(!path)
+			return
+
+		var/obj/item/bodypart/new_part = new path()
+		new_part.replace_limb(target, TRUE)
+		new_part.update_limb(is_creating = TRUE)
 
 /// Creates body parts for the target completely from scratch based on the species
 /datum/species/proc/create_fresh_body(mob/living/carbon/target)

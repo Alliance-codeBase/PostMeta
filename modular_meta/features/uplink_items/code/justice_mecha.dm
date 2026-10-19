@@ -109,8 +109,8 @@
 	var/illegal_mech_node = TRUE
 
 // Mecha itself
-#define DISMEMBER_CHANCE_HIGH 50
-#define DISMEMBER_CHANCE_LOW 25
+#define DISMEMBER_CHANCE_HIGH 35
+#define DISMEMBER_CHANCE_LOW 15
 
 #define MOVEDELAY_IDLE 3
 #define MOVEDELAY_INVISIBILITY 2
@@ -193,7 +193,7 @@
 	RegisterSignal(src, COMSIG_JUSTICE_INVISIBILITY_DEACTIVATE, PROC_REF(visibility_deactive))
 	transform = transform.Scale(1.04, 1.04)
 	for(var/i in 1 to 3)
-		addtimer(CALLBACK(src, PROC_REF(create_engine)), i * 1 SECONDS)
+		addtimer(CALLBACK(src, PROC_REF(create_engine)), i * 4 SECONDS)
 
 /obj/vehicle/sealed/mecha/justice/generate_actions()
 	. = ..()
@@ -471,6 +471,12 @@
 /obj/vehicle/sealed/mecha/justice/proc/on_ranged_hit(obj/vehicle/sealed/mecha/source, obj/projectile/hitting_projectile)
 	SIGNAL_HANDLER
 
+	if(prob(40))
+		return NONE
+
+	if(istype(hitting_projectile, /obj/projectile/ion))
+		return NONE
+
 	var/obj/effect/justice_engine/active_engine = get_engine_by_state(JUSTICE_ENGINE_ACTIVE)
 	if(isnull(active_engine))
 		return NONE
@@ -491,7 +497,7 @@
 	deactivate_engines()
 	for(var/mob/mob_occupant as anything in occupants)
 		balloon_alert(mob_occupant, "shields disabled! recharge after 10 seconds!")
-	addtimer(CALLBACK(src, PROC_REF(reactivate_engines)), 10 SECONDS)
+	addtimer(CALLBACK(src, PROC_REF(reactivate_engines)), 30 SECONDS)
 	playsound(src, shields_disabled_sound , 75, FALSE)
 
 /obj/vehicle/sealed/mecha/justice/proc/reactivate_engines()
@@ -664,7 +670,7 @@
 			|| is_occupant(something_living))
 				continue
 			if(prob(DISMEMBER_CHANCE_LOW))
-				var/obj/item/bodypart/cut_bodypart = something_living.get_bodypart(pick(BODY_ZONE_R_ARM, BODY_ZONE_R_LEG, BODY_ZONE_L_ARM, BODY_ZONE_L_LEG, BODY_ZONE_HEAD))
+				var/obj/item/bodypart/cut_bodypart = something_living.get_bodypart(pick(BODY_ZONE_R_ARM, BODY_ZONE_R_LEG, BODY_ZONE_L_ARM, BODY_ZONE_L_LEG))
 				cut_bodypart?.dismember(BRUTE)
 			something_living.apply_damage(35, BRUTE)
 		here_we_go = line_turf
@@ -891,33 +897,16 @@
 	obj_flags |= EMAGGED
 	for(var/found_illegal_mech_nods in SSresearch.techweb_nodes)
 		var/datum/techweb_node/justice/illegal_mech_node = SSresearch.techweb_nodes[found_illegal_mech_nods]
+
+		if(!istype(illegal_mech_node, /datum/techweb_node/justice/))
+			continue
+
 		if(!illegal_mech_node?.illegal_mech_node)
 			continue
 		for(var/design_path in illegal_mech_node.unlocked_designs)
 			var/datum/design/illegal_mech_design = SSresearch.techweb_designs[design_path]
-			illegal_local_designs |= illegal_mech_design
-			cached_designs |= illegal_mech_design
-	say("R$c!i&ed ERROR de#i$ns. C@n%ec$%ng to ~NULL~ se%ve$s.")
-	playsound(src, 'sound/machines/uplink/uplinkerror.ogg', 50, TRUE)
-	update_static_data_for_all_viewers()
-	return TRUE
-
-/obj/machinery/mecha_part_fabricator/emag_act(mob/user, obj/item/card/emag/emag_card)
-	if(obj_flags & EMAGGED)
-		return FALSE
-	if(!HAS_TRAIT(user, TRAIT_KNOW_ROBO_WIRES))
-		to_chat(user, span_warning("You're unsure about [emag_card ? "where to swipe [emag_card] over" : "how to override"] [src] for any effect. Maybe if you had more knowledge of robotics..."))
-
-		return FALSE
-	obj_flags |= EMAGGED
-	for(var/found_illegal_mech_nods in SSresearch.techweb_nodes)
-		var/datum/techweb_node/justice/illegal_mech_node = SSresearch.techweb_nodes[found_illegal_mech_nods]
-		if(!illegal_mech_node?.illegal_mech_node)
-			continue
-		for(var/design_path in illegal_mech_node.unlocked_designs)
-			var/datum/design/illegal_mech_design = SSresearch.techweb_designs[design_path]
-			illegal_local_designs |= illegal_mech_design
-			cached_designs |= illegal_mech_design
+			illegal_local_designs |= illegal_mech_design.type
+			cached_designs |= illegal_mech_design.type
 	say("R$c!i&ed ERROR de#i$ns. C@n%ec$%ng to ~NULL~ se%ve$s.")
 	playsound(src, 'sound/machines/uplink/uplinkerror.ogg', 50, TRUE)
 	update_static_data_for_all_viewers()

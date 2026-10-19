@@ -1,0 +1,4 @@
+author: "headband0536"
+delete-after: True
+changes:
+  - admin: "В колонке Abstract бан панели появились роли Say и Adminhelp"
