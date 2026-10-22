@@ -44,7 +44,7 @@
 	AddComponent(/datum/component/two_handed, \
 		force_wielded = force_wielded, \
 		force_unwielded = force_unwielded, \
-		icon_wielded = "[base_icon_state]1", \
+		update_icon_state = TRUE, \
 		attacksound = SFX_SWING_HIT, \
 	)
 
