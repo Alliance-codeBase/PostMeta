@@ -4,7 +4,8 @@
 	name = "Sledgehammer"
 	desc = "A mad engineer's choice"
 	icon = 'modular_meta/features/uplink_items/icons/weapon/sledgehammer/obj/weapons/sledgehammer.dmi'
-	icon_state = "sledgehammer"
+	icon_state = "sledgehammer0"
+	inhand_icon_state = "sledgehammer0"
 	base_icon_state = "sledgehammer"
 	lefthand_file = 'modular_meta/features/uplink_items/icons/weapon/sledgehammer/mob/inhands/weapons/hammers_lefthand.dmi'
 	righthand_file = 'modular_meta/features/uplink_items/icons/weapon/sledgehammer/mob/inhands/weapons/hammers_righthand.dmi'
