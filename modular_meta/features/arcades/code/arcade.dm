@@ -11,10 +11,10 @@
 	if(machine_stat & (NOPOWER|BROKEN))
 		return
 
-		ui = SStgui.try_update_ui(user, src, ui)
-		if(!ui)
-			ui = new(user, src, "CssDoom", name)
-			ui.open()
+	ui = SStgui.try_update_ui(user, src, ui)
+	if(!ui)
+		ui = new(user, src, "CssDoom", name)
+		ui.open()
 
 /obj/machinery/computer/arcade/doom/ui_data(mob/user)
 	return list()
