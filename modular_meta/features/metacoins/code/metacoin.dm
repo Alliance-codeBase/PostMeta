@@ -30,6 +30,12 @@ GLOBAL_DATUM(metacoins_controller, /datum/metacoins_controller)
 /datum/metacoins_controller/proc/register_round_callbacks()
 	SSticker.OnRoundstart(CALLBACK(src, PROC_REF(on_round_start)))
 	SSticker.OnRoundend(CALLBACK(src, PROC_REF(grant_round_end_rewards)))
+	RegisterSignal(SSdcs, COMSIG_GLOB_MOB_LOGGED_IN, PROC_REF(on_mob_logged_in))
+
+/datum/metacoins_controller/proc/on_mob_logged_in(datum/source, mob/logged_in)
+	SIGNAL_HANDLER
+	if(isliving(logged_in))
+		logged_in.AddComponent(/datum/component/treatment_journal)
 
 /datum/metacoins_controller/proc/on_round_start()
 	round_awards_applied = FALSE
@@ -52,8 +58,6 @@ GLOBAL_DATUM(metacoins_controller, /datum/metacoins_controller)
 	if(round_awards_applied)
 		return
 
-	round_awards_applied = TRUE
-
 	var/list/goal_bonus = goal_rewards()
 	var/capture_bonus = capture_total()
 	var/list/processed_ckeys = list()
@@ -69,7 +73,13 @@ GLOBAL_DATUM(metacoins_controller, /datum/metacoins_controller)
 			rewards += capture_reward(player_ckey, capture_bonus)
 		if(length(rewards))
 			award_entries(player_ckey, rewards)
+
+	round_awards_applied = TRUE
+	for(var/player_ckey in round_award_log_by_ckey)
+		pay_metacoins(player_ckey, get_round_bonus(player_ckey), group_by_reason(get_round_award_log(player_ckey)))
+
 /// Main proc for your awards. Integrate it wherever you like to
+/// It all piles up into one fat check at round end, anything awarded after that is paid right away
 ///
 /// Arguments:
 /// * target_ckey - Player ckey that receives metacoins.
@@ -131,8 +141,8 @@ GLOBAL_DATUM(metacoins_controller, /datum/metacoins_controller)
 	if(total_amount <= 0)
 		return FALSE
 
-	if(!add_metacoins(target_ckey, total_amount))
-		return FALSE
+	if(round_awards_applied)
+		INVOKE_ASYNC(src, PROC_REF(pay_metacoins), target_ckey, total_amount, pay_rewards, sound)
 
 	if(!allow_repeat)
 		for(var/list/reward_entry as anything in pay_rewards)
@@ -141,6 +151,13 @@ GLOBAL_DATUM(metacoins_controller, /datum/metacoins_controller)
 	for(var/list/reward_entry as anything in pay_rewards)
 		add_round_award_log_entry(target_ckey, reward_entry["amount"], reward_entry["source"], reward_entry["reason"])
 
+	return TRUE
+
+/// Pays metacoins to the balance right away and tells the player what for.
+/datum/metacoins_controller/proc/pay_metacoins(target_ckey, total_amount, list/pay_rewards, sound = TRUE)
+	if(!add_metacoins(target_ckey, total_amount))
+		return FALSE
+
 	notify_reward(target_ckey, total_amount, pay_rewards, sound)
 
 	var/mob/player_mob = get_mob_by_ckey(target_ckey)
@@ -148,6 +165,15 @@ GLOBAL_DATUM(metacoins_controller, /datum/metacoins_controller)
 		SStgui.update_user_uis(player_mob)
 
 	return TRUE
+
+/datum/metacoins_controller/proc/group_by_reason(list/rewards)
+	var/list/amount_by_reason = list()
+	for(var/list/reward as anything in rewards)
+		amount_by_reason[reward["reason"]] += reward["amount"]
+	var/list/grouped_rewards = list()
+	for(var/reason in amount_by_reason)
+		grouped_rewards += list(list("amount" = amount_by_reason[reason], "reason" = reason))
+	return grouped_rewards
 
 /datum/metacoins_controller/proc/get_round_rewards(target_ckey)
 	var/list/rewards = list()
@@ -176,7 +202,7 @@ GLOBAL_DATUM(metacoins_controller, /datum/metacoins_controller)
 		return 0
 
 	var/datum/award/award_path = award_type
-	var/reward = award_path.reward
+	var/reward = initial(award_path.reward)
 	if(isnull(reward))
 		reward = 50
 
@@ -236,7 +262,6 @@ GLOBAL_DATUM(metacoins_controller, /datum/metacoins_controller)
 
 /datum/metacoins_controller/proc/is_evacuation_condition_met(target_ckey)
 	var/datum/mind/player_mind = get_round_mind(target_ckey)
-	var/mob/living/carbon/carbon_current = player_mind.current
 	if(!player_mind)
 		return FALSE
 
@@ -248,7 +273,7 @@ GLOBAL_DATUM(metacoins_controller, /datum/metacoins_controller)
 
 	var/mob/player_mob = player_mind.current
 	var/area/player_area = get_area(player_mob)
-	if(!player_area || istype(player_area, /area/shuttle/escape/brig) && iscarbon(player_mob) && carbon_current.handcuffed)
+	if(!player_area || is_imprisoned(player_mind))
 		return FALSE
 
 	var/turf/player_turf = get_turf(player_mob)
@@ -308,7 +333,7 @@ GLOBAL_DATUM(metacoins_controller, /datum/metacoins_controller)
 		return
 
 	var/mob/player_mob = get_mob_by_ckey(target_ckey)
-	if(!player_mob)
+	if(!player_mob?.client)
 		return
 
 	var/notice = player_mob.client.prefs.read_preference(/datum/preference/choiced/metacoin_notify)
@@ -347,6 +372,64 @@ GLOBAL_DATUM(metacoins_controller, /datum/metacoins_controller)
 		balance = query.item[1] || 0
 	qdel(query)
 	return balance
+
+/// Returns the balances of the given ckeys keyed by ckey in one query, or null when the database is unavailable. Ckeys without a player row are left out.
+/datum/metacoins_controller/proc/fetch_balances(list/target_ckeys)
+	if(!length(target_ckeys))
+		CRASH("fetch_balances needs at least one ckey")
+	if(!SSdbcore.Connect())
+		return null
+
+	var/list/query_arguments = list()
+	var/list/placeholders = list()
+	for(var/index in 1 to length(target_ckeys))
+		query_arguments["ckey[index]"] = target_ckeys[index]
+		placeholders += ":ckey[index]"
+
+	var/datum/db_query/query = SSdbcore.NewQuery(
+		"SELECT ckey, metacoins FROM [format_table_name("player")] WHERE ckey IN ([placeholders.Join(",")])",
+		query_arguments,
+	)
+	if(!query.warn_execute(async = FALSE))
+		qdel(query)
+		return null
+
+	var/list/balances = list()
+	while(query.NextRow(async = FALSE))
+		balances[query.item[1]] = query.item[2] || 0
+	qdel(query)
+	return balances
+
+/// Takes each amount from its ckey in one query, leaving out players who no longer have enough. Returns how many players were charged, or null when the database is unavailable.
+/datum/metacoins_controller/proc/take_metacoins_from_each(list/amounts_by_ckey)
+	if(!length(amounts_by_ckey))
+		CRASH("take_metacoins_from_each needs at least one ckey")
+	if(!SSdbcore.Connect())
+		return null
+
+	var/list/query_arguments = list()
+	var/list/placeholders = list()
+	var/list/amount_cases = list()
+	var/index = 0
+	for(var/target_ckey in amounts_by_ckey)
+		index++
+		query_arguments["ckey[index]"] = target_ckey
+		query_arguments["amount[index]"] = amounts_by_ckey[target_ckey]
+		placeholders += ":ckey[index]"
+		amount_cases += "WHEN :ckey[index] THEN :amount[index]"
+
+	var/amount_for_ckey = "CASE ckey [amount_cases.Join(" ")] END"
+	var/datum/db_query/query = SSdbcore.NewQuery(
+		"UPDATE [format_table_name("player")] SET metacoins = metacoins - [amount_for_ckey] WHERE ckey IN ([placeholders.Join(",")]) AND metacoins >= [amount_for_ckey]",
+		query_arguments,
+	)
+	if(!query.warn_execute(async = FALSE))
+		qdel(query)
+		return null
+
+	var/charged_count = query.affected
+	qdel(query)
+	return charged_count
 
 /datum/metacoins_controller/proc/add_metacoins(target_ckey, amount)
 	if(!target_ckey || amount <= 0)
@@ -411,8 +494,8 @@ GLOBAL_DATUM(metacoins_controller, /datum/metacoins_controller)
 	data["coinIcon"] = METACOIN_ICON_PATH
 	data["coinIconState"] = METACOIN_ICON_STATE
 	data["roundAwardsApplied"] = controller.round_awards_applied
-	data["roundAwarded"] = client_ckey ? controller.get_round_bonus(client_ckey) : 0
-	data["roundAwardLog"] = client_ckey ? controller.get_round_award_log(client_ckey) : list()
+	data["roundAwarded"] = controller.round_awards_applied && client_ckey ? controller.get_round_bonus(client_ckey) : 0
+	data["roundAwardLog"] = controller.round_awards_applied && client_ckey ? controller.get_round_award_log(client_ckey) : list()
 	data["canOpenShop"] = TRUE
 
 	var/balance = controller.fetch_balance(client_ckey)
