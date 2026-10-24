@@ -1,5 +1,5 @@
 /obj/item/card/emag/hemag
-	color = rgb(75, 150, 255)
+	icon = 'modular_meta/features/hemag/preview.dmi'
 	name = "Holograpic Card"
 	desc = "Holographic Emag, doesn't looks that here for long"
 
