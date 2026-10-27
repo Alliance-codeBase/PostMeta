@@ -6,6 +6,7 @@
 	var/alert_sounds = list()
 	///Sounds made when command report is received
 	var/command_report_sounds = list()
+	var/halloween_report_sounds = list()
 	///Event audio, can be used for specific event announcements and is assoc key - sound. If no sound is found the default is used.area
 	var/event_sounds = list()
 	///Override this to have a custom message to show instead of the normal priority announcement
@@ -21,3 +22,6 @@
 
 /datum/centcom_announcer/proc/get_rand_report_sound()
 	return pick(command_report_sounds)
+
+/datum/centcom_announcer/proc/get_hlwn_report_sound()
+	return pick(halloween_report_sounds)

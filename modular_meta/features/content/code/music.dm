@@ -2,8 +2,6 @@
 	var/mob/living/carbon/human/music_owner
 	var/atom/movable/chase_threat
 
-	var/const/FAR = 101
-	var/const/CLOSE = 102
 	var/const/VERY_CLOSE = 103
 	var/const/CHASE_INTRO  = 104
 	var/const/CHASE_LOOP = 105
@@ -34,27 +32,17 @@
 	if(intro_playing || chase_looped_playing)
 		return
 
-	if(current_distance > 20)
+	if(current_distance > 10)
 		if(current_step != 0)
 			current_step = 0
 			stop_ambient_channel()
 
-	else if(current_distance <= 20 && current_distance > 14)
+	else if(current_distance <= 10 && current_distance > 3)
 		if(current_step != 1)
 			current_step = 1
-			play_ambient_step('modular_meta/features/content/sound/far.ogg')
-
-	else if(current_distance <= 14 && current_distance > 8)
-		if(current_step != 2)
-			current_step = 2
-			play_ambient_step('modular_meta/features/content/sound/close.ogg')
-
-	else if(current_distance <= 8 && current_distance > 2)
-		if(current_step != 3)
-			current_step = 3
 			play_ambient_step('modular_meta/features/content/sound/veryclose.ogg')
 
-	else if(current_distance <= 2)
+	else if(current_distance <= 3)
 		switch_to_final_chase()
 
 /datum/chase_music_handler/proc/play_ambient_step(sound_file)
@@ -73,7 +61,7 @@
 
 /datum/chase_music_handler/proc/switch_to_final_chase()
 	intro_playing = TRUE
-	current_step = 4
+	current_step = 2
 
 	stop_ambient_channel()
 
@@ -98,7 +86,7 @@
 /datum/chase_music_handler/proc/stop_all_music()
 	if(!music_owner || !music_owner.client)
 		return
-	for(var/active_channel in list(FAR, CLOSE, VERY_CLOSE, CHASE_INTRO, CHASE_LOOP))
+	for(var/active_channel in list(VERY_CLOSE, CHASE_INTRO, CHASE_LOOP))
 		var/sound/mute_sound = sound(channel = active_channel)
 		mute_sound.status = SOUND_MUTE
 		music_owner.client << mute_sound

@@ -12,7 +12,7 @@
 	sight = SEE_SELF|SEE_MOBS|SEE_OBJS|SEE_TURFS
 	health = INFINITY
 	maxHealth = INFINITY
-	speed = 0
+	speed = -0.2
 	faction = list(FACTION_HOSTILE)
 
 	lighting_cutoff_red = 255
@@ -82,8 +82,8 @@
 	attack_verb_simple = "snap"
 	attack_sound = list('modular_meta/features/content/sound/neck_snap_1.ogg', 'modular_meta/features/content/sound/neck_snap_2.ogg')
 	armour_penetration = 100
-	melee_damage_lower = 90
-	melee_damage_upper = 110
+	melee_damage_lower = 70
+	melee_damage_upper = 80
 
 	move_resist = MOVE_RESIST_DEFAULT
 	move_force = MOVE_FORCE_DEFAULT

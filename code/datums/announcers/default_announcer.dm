@@ -2,6 +2,7 @@
 	welcome_sounds = list('sound/announcer/default/welcome.ogg')
 	alert_sounds = list('sound/announcer/default/attention.ogg')
 	command_report_sounds = list('sound/announcer/default/commandreport.ogg')
+	halloween_report_sounds = list('modular_meta/features/content/sound/happy_halloween.ogg')
 	event_sounds = list(ANNOUNCER_AIMALF = 'sound/announcer/default/aimalf.ogg',
 		ANNOUNCER_ALIENS = 'sound/announcer/default/aliens.ogg',
 		ANNOUNCER_ANIMES = 'sound/announcer/default/animes.ogg',

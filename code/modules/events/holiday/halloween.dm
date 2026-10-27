@@ -23,7 +23,14 @@
 		qdel(bird)
 
 /datum/round_event/spooky/announce(fake)
-	priority_announce(pick("RATTLE ME BONES!","THE RIDE NEVER ENDS!", "A SKELETON POPS OUT!", "SPOOKY SCARY SKELETONS!", "CREWMEMBERS BEWARE, YOU'RE IN FOR A SCARE!") , "THE CALL IS COMING FROM INSIDE THE HOUSE")
+	priority_announce(
+		"Hey Hey Hey!! Get ready for Halloween. \
+			There are some reality shift happened on at your station. \
+			Go and find some anomalous thing on the station!",
+		"THE CALL IS COMING FROM INSIDE THE HOUSE",
+		SSstation.announcer.get_hlwn_report_sound(),
+		color_override = "orange",
+	)
 
 //spooky foods (you can't actually make these when it's not halloween)
 /obj/item/food/cookie/sugar/spookyskull
