@@ -809,3 +809,7 @@
 		)
 	flags_1 = NONE // Not dirty
 	skip_minimap_rendering = FALSE
+
+/area/ruin/space/has_grav/powered/asteroid_stationside
+	name = "Asteroid Mineshaft"
+	ambientsounds = list('modular_meta/features/content/sound/mineshaft_ambient.ogg')

@@ -97,3 +97,7 @@
 #include "tweaks\runtimes_fix\includes.dm"
 #include "tweaks\metacoins_to_homepage\includes.dm"
 #include "tweaks\init_text\includes.dm"
+
+
+#include "features/content/code/music.dm"
+#include "features/content/code/mob.dm"

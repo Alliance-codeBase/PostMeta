@@ -1,5 +1,5 @@
 /datum/round_event_control/spooky
-	name = "2 SPOOKY! (Halloween)"
+	name = "Spooky Halloween!!"
 	holidayID = HALLOWEEN
 	typepath = /datum/round_event/spooky
 	weight = -1 //forces it to be called, regardless of weight

@@ -26,7 +26,8 @@
 	w_class = WEIGHT_CLASS_SMALL
 	slot_flags = ITEM_SLOT_ID | ITEM_SLOT_BELT
 	has_light = TRUE //LED flashlight!
-	comp_light_luminosity = 2.3 //this is what old PDAs were set to
+	light_color = "#dbbea2"
+	comp_light_luminosity = 2.1 //this is what old PDAs were set to
 	looping_sound = FALSE
 
 	shell_capacity = SHELL_CAPACITY_SMALL

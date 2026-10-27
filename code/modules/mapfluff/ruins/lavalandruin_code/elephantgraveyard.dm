@@ -362,3 +362,46 @@
 	name = "important-looking note"
 	desc = "This note is well written, and seems to have been put here so you'd find it."
 	default_raw_text = "If you find this... you don't need to know who I am.<BR><BR>You need to leave this place. I dunno what shit they did to me out here, but I don't think I'm going to be making it out of here.<BR><BR>This place... it wears down your psyche. The other researchers out here laughed it off but... They were the first to go.<BR><BR>One by one they started turning on each other. The more they found out, the more they started fighting and arguing...<BR>As I speak now, I had to... I wound up having to put most of my men down. I know what I had to do, and I know there's no way left for me to live with myself.<BR> If anyone ever finds this, just don't touch the graves.<BR><BR>DO NOT. TOUCH. THE GRAVES. Don't be a dumbass, like we all were."
+
+/obj/structure/closet/crate/grave/filled/event
+	first_open = TRUE
+
+/obj/structure/closet/crate/grave/filled/event/Initialize(mapload)
+	. = ..()
+	if(prob(33))
+		icon_state = "grave_lead"
+		if(prob(3))
+			lead_tomb = TRUE
+
+/obj/structure/closet/crate/grave/filled/event/i/PopulateContents()
+	new /obj/effect/decal/cleanable/blood/gibs/old(src)
+
+/obj/structure/closet/crate/grave/filled/event/ii/PopulateContents()
+	if(prob(50))
+		new /obj/item/storage/spooky(src)
+	else
+		new /obj/item/storage/box/papersack/halloween(src)
+
+/obj/item/storage/box/papersack/halloween
+	desc = "It's slightly moist and smells like a spooky skeletons."
+
+/obj/item/storage/box/papersack/halloween/Initialize(mapload)
+	. = ..()
+	for(var/distrobuteinbag in 0 to 5)
+		var/type = pick(/obj/item/food/cookie/sugar/spookyskull,
+		/obj/item/food/cookie/sugar/spookycoffin,
+		/obj/item/food/candy_corn,
+		/obj/item/food/candy,
+		/obj/item/food/candiedapple,
+		/obj/item/food/chocolatebar,
+		/obj/item/organ/brain )
+		new type(src)
+
+/obj/item/gift/anything/halloween
+	name = "mystery pumpkin"
+	desc = "There's may be only two things: Trick, or Threat!"
+	icon_state = "pumpkin"
+	inhand_icon_state = null
+
+/obj/structure/closet/crate/grave/filled/event/iii/PopulateContents()
+	new /obj/item/gift/anything/halloween(src)

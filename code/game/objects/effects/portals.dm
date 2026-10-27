@@ -162,8 +162,8 @@
 			var/obj/projectile/proj = moving
 			proj.ignore_source_check = TRUE
 		new /obj/effect/temp_visual/portal_animation(start_turf, src, moving)
-		playsound(start_turf, SFX_PORTAL_ENTER, 50, TRUE, SHORT_RANGE_SOUND_EXTRARANGE)
-		playsound(real_target, SFX_PORTAL_ENTER, 50, TRUE, SHORT_RANGE_SOUND_EXTRARANGE)
+		playsound(start_turf, 'sound/effects/podwoosh.ogg', 50, TRUE, SHORT_RANGE_SOUND_EXTRARANGE)
+		playsound(real_target, 'sound/effects/podwoosh.ogg', 50, TRUE, SHORT_RANGE_SOUND_EXTRARANGE)
 		return TRUE
 	return FALSE
 

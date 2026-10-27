@@ -26,6 +26,17 @@
 		/obj/structure/closet/crate/decorations = 15,
 		/obj/effect/decal/remains/human/smokey/maintenance = 7,
 		/obj/structure/destructible/cult/pants_altar = 1,
+		/obj/effect/spawner/random/structure/event_grave = 330,
+	)
+
+/obj/effect/spawner/random/structure/event_grave
+	name = "grave spawner"
+	icon_state = "crate_secure"
+	loot = list(
+		/obj/structure/closet/crate/grave/filled/event = 2,
+		/obj/structure/closet/crate/grave/filled/event/i = 1,
+		/obj/structure/closet/crate/grave/filled/event/ii = 4,
+		/obj/structure/closet/crate/grave/filled/event/iii = 4,
 	)
 
 /obj/effect/spawner/random/structure/crate_abandoned

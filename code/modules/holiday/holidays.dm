@@ -718,7 +718,7 @@ GLOBAL_LIST_INIT(holiday_mail, list())
 
 /datum/holiday/halloween
 	name = HALLOWEEN
-	begin_day = 29
+	begin_day = 20
 	begin_month = OCTOBER
 	end_day = 2
 	end_month = NOVEMBER

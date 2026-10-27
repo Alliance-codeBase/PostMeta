@@ -95,6 +95,11 @@
 	name = "\improper Science Public Zoo"
 	icon_state = "cytology"
 
+/area/station/science/containment
+	name = "\improper Containment Zone"
+	sound_environment = SOUND_AREA_SMALL_ENCLOSED
+	ambientsounds = list('modular_meta/features/content/sound/thedread.ogg')
+
 /*
 * Ordnance Areas
 */
