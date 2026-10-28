@@ -18,11 +18,13 @@ type Character = {
 type Data = {
   players: string[];
   characters: Character[];
+  cost: number;
+  amount: number;
 };
 
 export const MetaCoinTips = () => {
   const { act, data } = useBackend<Data>();
-  const { players, characters } = data;
+  const { players, characters, cost, amount } = data;
   const [search, setSearch] = useState('');
   const query = search.toLowerCase();
   const ckeyQuery = query.replace(/[^a-z0-9]/g, '');
@@ -34,6 +36,9 @@ export const MetaCoinTips = () => {
   return (
     <Window title="Tip" width={420} height={520}>
       <Window.Content scrollable>
+        <NoticeBox info>
+          A tip costs you {cost} metacoins. The player gets {amount}.
+        </NoticeBox>
         <Section>
           <Stack>
             <Stack.Item grow>

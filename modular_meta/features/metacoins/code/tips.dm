@@ -9,11 +9,11 @@ GLOBAL_DATUM_INIT(metacoin_tips, /datum/metacoin_tips, new)
 
 /// Returns a chat link that tips the mentor for a mentorhelp answer.
 /datum/metacoin_tips/proc/get_mentorhelp_link(mentor_ckey)
-	return "<a href='byond://?src=[REF(src)];tip_mentor=[mentor_ckey]'>\[Tip\]</a>"
+	return "<a href='byond://?src=[REF(src)];tip_mentor=[mentor_ckey]'>\[Tip [amount]\]</a>"
 
 /// Returns a chat link that tips the admin who ended an ahelp ticket.
 /datum/metacoin_tips/proc/get_ahelp_link(admin_ckey)
-	return "<a href='byond://?src=[REF(src)];tip_admin=[admin_ckey]'>\[Tip\]</a>"
+	return "<a href='byond://?src=[REF(src)];tip_admin=[admin_ckey]'>\[Tip [amount]\]</a>"
 
 /datum/metacoin_tips/Topic(href, list/href_list)
 	. = ..()
@@ -43,7 +43,7 @@ GLOBAL_DATUM_INIT(metacoin_tips, /datum/metacoin_tips, new)
 	sender.mouse_override_icon = cursor_icon
 	sender.mob.update_mouse_pointer()
 	addtimer(CALLBACK(src, PROC_REF(stop_picking), sender), picking_duration, TIMER_UNIQUE|TIMER_OVERRIDE)
-	to_chat(sender, span_notice("Click whoever you want to tip. Click anything else to keep your coins."))
+	to_chat(sender, span_notice("Click whoever you want to tip. It costs you [cost] metacoins, they get [amount]. Click anything else to keep your coins."))
 	return TRUE
 
 /// Disarms the tip, leaving alone intercepts and cursors that other code put there since.
@@ -118,6 +118,7 @@ GLOBAL_DATUM_INIT(metacoin_tips, /datum/metacoin_tips, new)
 		refund_failed_tip(sender)
 		return
 
+	controller.add_round_award_log_entry(recipient_ckey, amount, "tip", tipped_for ? "Tip for [tipped_for]" : "Tip", paid = TRUE)
 	log_game("[key_name(sender)] tipped [recipient_ckey] [amount] metacoins[tipped_for ? " for [tipped_for]" : ""].")
 	ring_tip(sender)
 	if(confirm_in_chat)
@@ -128,7 +129,7 @@ GLOBAL_DATUM_INIT(metacoin_tips, /datum/metacoin_tips, new)
 	if(isnull(recipient))
 		return
 	recipient.mob.playsound_local(recipient.mob, 'sound/effects/coin2.ogg', 40, TRUE, use_reverb = FALSE, pressure_affected = FALSE)
-	to_chat(recipient, span_boldnicegreen("[tipped_for ? "You got tipped for [tipped_for]!" : "You got tipped!"]"))
+	to_chat(recipient, span_boldnicegreen("[tipped_for ? "You got tipped [amount] metacoins for [tipped_for]!" : "You got tipped [amount] metacoins!"]"))
 	SStgui.update_user_uis(recipient.mob)
 
 /datum/metacoin_tips/proc/refund_failed_tip(client/sender)
@@ -149,6 +150,12 @@ GLOBAL_DATUM_INIT(metacoin_tips, /datum/metacoin_tips, new)
 	return list(
 		"players" = player_ckeys,
 		"characters" = characters,
+	)
+
+/datum/metacoinshop/panel/tips/ui_static_data(mob/user)
+	return list(
+		"cost" = GLOB.metacoin_tips.cost,
+		"amount" = GLOB.metacoin_tips.amount,
 	)
 
 /datum/metacoinshop/panel/tips/ui_act(action, params, datum/tgui/ui, datum/ui_state/state)

@@ -75,8 +75,13 @@ GLOBAL_DATUM(metacoins_controller, /datum/metacoins_controller)
 			award_entries(player_ckey, rewards)
 
 	round_awards_applied = TRUE
+	pay_round_award_logs()
+
+/datum/metacoins_controller/proc/pay_round_award_logs()
 	for(var/player_ckey in round_award_log_by_ckey)
-		pay_metacoins(player_ckey, get_round_bonus(player_ckey), group_by_reason(get_round_award_log(player_ckey)))
+		var/list/unpaid_awards = get_unpaid_round_awards(player_ckey)
+		if(length(unpaid_awards))
+			pay_metacoins(player_ckey, sum_awards(unpaid_awards), group_by_reason(unpaid_awards))
 
 /// Main proc for your awards. Integrate it wherever you like to
 /// It all piles up into one fat check at round end, anything awarded after that is paid right away
@@ -149,7 +154,7 @@ GLOBAL_DATUM(metacoins_controller, /datum/metacoins_controller)
 			source_awards[reward_entry["source"]] = TRUE
 
 	for(var/list/reward_entry as anything in pay_rewards)
-		add_round_award_log_entry(target_ckey, reward_entry["amount"], reward_entry["source"], reward_entry["reason"])
+		add_round_award_log_entry(target_ckey, reward_entry["amount"], reward_entry["source"], reward_entry["reason"], paid = round_awards_applied)
 
 	return TRUE
 
@@ -216,11 +221,21 @@ GLOBAL_DATUM(metacoins_controller, /datum/metacoins_controller)
 	if(!islist(award_log))
 		return 0
 
-	var/total_reward = 0
-	for(var/list/award_entry in award_log)
-		total_reward += award_entry["amount"] || 0
+	return sum_awards(award_log)
 
+/datum/metacoins_controller/proc/sum_awards(list/awards)
+	var/total_reward = 0
+	for(var/list/award_entry as anything in awards)
+		total_reward += award_entry["amount"]
 	return total_reward
+
+/// Log entries not paid yet, tips are paid right away
+/datum/metacoins_controller/proc/get_unpaid_round_awards(target_ckey)
+	var/list/unpaid_awards = list()
+	for(var/list/award_entry as anything in round_award_log_by_ckey[target_ckey])
+		if(!award_entry["paid"])
+			unpaid_awards += list(award_entry)
+	return unpaid_awards
 
 /datum/metacoins_controller/proc/get_round_award_log(target_ckey)
 	if(!target_ckey)
@@ -232,7 +247,7 @@ GLOBAL_DATUM(metacoins_controller, /datum/metacoins_controller)
 
 	return award_log.Copy()
 
-/datum/metacoins_controller/proc/add_round_award_log_entry(target_ckey, amount, source, reason)
+/datum/metacoins_controller/proc/add_round_award_log_entry(target_ckey, amount, source, reason, paid)
 	if(!target_ckey || amount <= 0)
 		return
 
@@ -246,6 +261,7 @@ GLOBAL_DATUM(metacoins_controller, /datum/metacoins_controller)
 		"source" = source || "unknown",
 		"reason" = reason || "No reason",
 		"time" = time2text(world.realtime, "YYYY-MM-DD hh:mm:ss"),
+		"paid" = paid,
 	))
 
 /datum/metacoins_controller/proc/get_round_mind(target_ckey)
