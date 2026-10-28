@@ -1,0 +1,46 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><base href="../../"><link rel="stylesheet" href="dmdoc.css"><title>modular_meta/features/metacoins/readme.md - /tg/ Station 13</title></head><body><header><a href="index.html">/tg/ Station 13</a> - <a href="index.html#modules">Modules</a> - <a href="index.html#types">Types</a></header><main><h1>modular_meta/features/metacoins/readme.md <a href="https://github.com/Alliance-codeBase/PostMeta/blob/071aa60e41d4b4b31234a9750e1108d18e9376c2/modular_meta/features/metacoins/readme.md"><img src="git.png" width="16" height="16" title="modular_meta/features/metacoins/readme.md"></a></h1><table class="summary" cellspacing="0"><tr><td colspan="2"><h2 id="module-id-metacoins">Module ID: metacoins</h2><h3 id="description">Description:</h3>
+<p>Meta currency for useful work in the round. Spent in the preround shop and on tips.</p>
+<p>Want to sell something? Copy, paste, profit:</p>
+<ul>
+<li>code\items_listing.dm - every hook a listing can override, with notes</li>
+<li>code\items\preround.dm, the commented block on top - on_bought, bought_on_spawn and variants for preround and persistent listings</li>
+<li>code\items\preround.dm, eva_kit - filling a box with set up items, the old way and the tg way</li>
+<li>code\items\preround.dm, donk_pockets - variants</li>
+<li>code\items\preround_leisure.dm, butt - an &quot;other&quot; listing that installs an organ instead of handing out an item, and refusing a purchase</li>
+<li>code\items\preround_skillchips.dm, skillchip - implanting into the body and refunding when it fails</li>
+<li>code\items\persistent.dm, the commented block on top - checking whether a persistent reward is bought</li>
+</ul>
+<h3 id="tg-proc-file-changes">TG Proc/File Changes:</h3>
+<p>code\datums\achievements_awards.dm - 94 - 99 - every achievement gives you some coins!
+tgui\packages\tgui\interfaces\DeathmatchPanel.tsx
+tgui\packages\tgui\interfaces\DeathmatchLobby.tsx - those two are for paid matches :D
+code\modules\deathmatch\deathmatch_controller.dm -
+code\modules\escape_menu\escape_menu.dm - tip button
+tgui\packages\tgui-escape-menu\pages\HomePage.tsx - tip button
+modular_meta\features\mentors\code\mentorpm.dm - tip link on mentor answers</p>
+<h3 id="modular-overrides">Modular Overrides:</h3>
+<ul>
+<li>/obj/item/shockpaddles/do_help</li>
+<li>/turf/ChangeTurf</li>
+<li>/turf/open/build_with_floor_tiles</li>
+<li>/obj/machinery/mineral/ore_redemption/base_item_interaction, pickup_item</li>
+<li>/obj/machinery/computer/piratepad_control/civilian/send</li>
+<li>/datum/admin_help/Close, Resolve</li>
+</ul>
+<h3 id="defines">Defines:</h3>
+<ul>
+<li></li>
+</ul>
+<h3 id="tgui-files">TGUI Files:</h3>
+<ul>
+<li>tgui\packages\tgui\interfaces\MetaCoinAntagToken.tsx</li>
+<li>tgui\packages\tgui\interfaces\MetaCoins.tsx</li>
+<li>tgui\packages\tgui\interfaces\MetaCoinShop.tsx</li>
+<li>tgui\packages\tgui\interfaces\MetaCoinTips.tsx</li>
+<li>tgui\packages\tgui\interfaces\MetaCoinSlot.tsx</li>
+<li>tgui\packages\tgui\styles\interfaces\MetaCoinSlot.scss</li>
+</ul>
+<h3 id="credits">Credits:</h3>
+<ul>
+<li></li>
+</ul></td></tr></table></main><footer>tgstation.dme <a href="https://github.com/Alliance-codeBase/PostMeta/tree/071aa60e41d4b4b31234a9750e1108d18e9376c2">071aa60</a> (master) — <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/crates/dmdoc/README.md">dmdoc 1.11.0</a></footer></body></html>
