@@ -69687,7 +69687,7 @@
 /obj/effect/turf_decal/tile/red{
 	dir = 1
 	},
-/obj/item/clothing/suit/spooky_ghost_sheet,
+/obj/item/clothing/suit/costume/ghost_sheet,
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/iron,
 /area/station/hallway/primary/central)
