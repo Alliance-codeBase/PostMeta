@@ -186,7 +186,7 @@
 /area/virtual_domain)
 "gD" = (
 /obj/effect/mob_spawn/ghost_role/human/virtual_domain/syndie,
-/turf/open/floor/mineral/plastitanium,
+/turf/open/chasm,
 /area/virtual_domain)
 "hg" = (
 /obj/structure/window/reinforced/plasma/plastitanium,
@@ -472,7 +472,7 @@
 "rP" = (
 /obj/machinery/light/small/directional/south,
 /obj/effect/mob_spawn/ghost_role/human/virtual_domain/syndie,
-/turf/open/floor/mineral/plastitanium,
+/turf/open/chasm,
 /area/virtual_domain)
 "sg" = (
 /obj/machinery/ore_silo,
@@ -824,10 +824,6 @@
 	dir = 4
 	},
 /turf/open/floor/mineral/plastitanium/red,
-/area/virtual_domain)
-"Ia" = (
-/obj/effect/mob_spawn/ghost_role/human/virtual_domain/syndie,
-/turf/open/floor/carpet/royalblack,
 /area/virtual_domain)
 "Id" = (
 /obj/machinery/power/shuttle_engine/huge{
@@ -2160,7 +2156,7 @@ ru
 ru
 vp
 ru
-Ia
+gD
 Ci
 ru
 Sq
