@@ -1,13 +1,27 @@
+// adding something to the shop? copy-paste examples are listed in the module readme.md
 /datum/metacoinshop/listing
 	var/id
 	var/name
 	var/desc
 	var/price
 	var/item_type
+	var/datum/metacoin_category/category
 	var/listing_type = "item"
 	var/icon
 	var/icon_state
 	var/list/variant_options = list()
+	/// Whether players can have this listing bought for them at every roundstart.
+	var/autobuy_supported = FALSE
+
+/datum/metacoinshop/listing/New()
+	. = ..()
+	if(isnull(item_type) && length(variant_options))
+		var/datum/metacoinshop/listing_variant/first_variant = default_variant(variant_options[1])
+		item_type = initial(first_variant.item_type)
+
+// linked with MetaCoinShop.tsx: the shop window lights up this same first variant when nothing is picked. change both
+/datum/metacoinshop/listing/proc/default_variant(group)
+	return variant_options[group][1]
 
 /// Is called after a successful purchase.
 /datum/metacoinshop/listing/proc/on_bought(datum/metacoin_shop_controller/shop, target_ckey, mob/player_mob, client/player_client, balance_after, role_id = null)
@@ -35,6 +49,7 @@
 	return list(
 		"id" = id,
 		"kind" = listing_type,
+		"category" = category,
 		"name" = name,
 		"desc" = desc,
 		"price" = price,
@@ -44,6 +59,7 @@
 		"owned" = is_owned(target_ckey, owned_items),
 		"canAfford" = !isnull(balance) && balance >= price,
 		"variantOptions" = serialize_variants(),
+		"autoBuySupported" = autobuy_supported,
 	)
 
 /datum/metacoinshop/listing/proc/serialize_variants()
@@ -95,6 +111,8 @@
 /// - group - the option group key from variant_options
 /datum/metacoinshop/listing/proc/parse_choice(variant, group)
 	var/datum/metacoinshop/listing_variant/first_variant = variant_options[group][1]
+	if(isnull(variant))
+		return initial(first_variant.id)
 	var/list/chosen = json_decode(variant)
 	if(islist(chosen))
 		var/chosen_id = chosen[group]
@@ -122,6 +140,14 @@
 
 	return item_path
 
+/datum/metacoinshop/listing/proc/get_chosen_variant(datum/metacoin_shop_controller/shop, target_ckey)
+	var/option_name = variant_options[1]
+	var/saved_variant = shop.get_pending_variant(target_ckey, src.id)
+	return get_variant_datum(option_name, parse_choice(saved_variant, option_name))
+
+/datum/metacoinshop/listing/preround
+	autobuy_supported = TRUE
+
 /datum/metacoinshop/listing/preround/buy(datum/metacoin_shop_controller/shop, target_ckey, client/player_client, variant, role_id)
 	if(!shop.is_open())
 		return list("ok" = FALSE, "error" = "shop_closed")
@@ -134,6 +160,10 @@
 	if(id in pending_items)
 		return list("ok" = FALSE, "error" = "already_owned")
 
+	var/error_code = purchase_error(shop, target_ckey, variant)
+	if(error_code)
+		return list("ok" = FALSE, "error" = error_code)
+
 	var/list/take = shop.wallet.take_metacoins(target_ckey, price)
 	if(!take["ok"])
 		return take
@@ -143,6 +173,25 @@
 	on_bought(shop, target_ckey, player_mob, player_client, take["balance"])
 	notify_bought(player_mob, "Purchased [name] for [price] metacoins. It will be delivered on first roundstart spawn.")
 	return list("ok" = TRUE)
+
+/// Returns the error code that keeps the player from buying this listing for the round, or null when nothing does.
+/datum/metacoinshop/listing/preround/proc/purchase_error(datum/metacoin_shop_controller/shop, target_ckey, variant)
+	if(id in shop.get_pending_items(target_ckey))
+		return "already_owned"
+	if(!is_valid_variant(variant))
+		return "invalid_variant"
+	return null
+
+/datum/metacoinshop/listing/proc/is_valid_variant(variant)
+	if(isnull(variant))
+		return TRUE
+	var/list/chosen = safe_json_decode(variant)
+	if(!islist(chosen))
+		return FALSE
+	for(var/group in chosen)
+		if(isnull(get_variant_datum(group, chosen[group])))
+			return FALSE
+	return TRUE
 
 /datum/metacoinshop/listing/preround/deliver(datum/metacoin_shop_controller/shop, target_ckey, mob/living/carbon/human/human_spawned, client/player_client)
 	if(!item_type)
@@ -156,6 +205,10 @@
 
 	if(!human_spawned.put_in_hands(new_item))
 		new_item.forceMove(get_turf(human_spawned))
+
+/datum/metacoinshop/listing/preround/proc/hand_over(mob/living/carbon/human/receiver, obj/item/item)
+	if(!receiver.equip_to_storage(item, ITEM_SLOT_BACK))
+		receiver.put_in_hands(item)
 
 /datum/metacoinshop/listing/preround/other
 	listing_type = "other"
