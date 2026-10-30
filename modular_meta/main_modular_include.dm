@@ -51,6 +51,7 @@
 #include "features\jukeboxes_to_bartender\includes.dm"
 #include "features\bot_topic\includes.dm"
 #include "features\metacoins\includes.dm"
+#include "features\supporter\includes.dm"
 #include "features\spaceman_races\includes.dm"
 #include "features\ntts-nd-tg-tts\includes.dm"
 #include "features\meta_redesign\includes.dm"
