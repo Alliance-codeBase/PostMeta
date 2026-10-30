@@ -450,6 +450,10 @@ ADMIN_VERB(cmd_controller_view_ui, R_SERVER|R_DEBUG, "Controller Overview", "Vie
 			// Loop.
 			Master.StartProcessing(0)
 
+	// MASSMETA EDIT ADDITION START (supporters)
+	supportify()
+	// MASSMETA EDIT ADDITION END (supporters)
+
 	// MASSMETA EDIT
 	var/time = (REALTIMEOFDAY - start_timeofday) / 10
 	SStitle.total_init_time = max(0, round(time, 0.1))

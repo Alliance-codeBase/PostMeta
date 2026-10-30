@@ -83,12 +83,19 @@ GAME_VERB(/client, ooc, VERB_OOC, null)
 	var/list/key_tags
 	var/key_prefix = ""
 	var/visible_unlock = prefs.unlock_content && (prefs.toggles & MEMBER_PUBLIC)
+	// MASSMETA EDIT ADDITION START (supporter)
+	var/is_supporter = (ckey in GLOB.supporters)
+	// MASSMETA EDIT ADDITION END (supporter)
 
 	// heart first lol
 	if(prefs.hearted)
 		LAZYADD(key_tags, "emoji-heart")
 	if(visible_unlock)
 		LAZYADD(key_tags, "byond_member")
+	// MASSMETA EDIT ADDITION START (supporter)
+	if(is_supporter)
+		LAZYADD(key_tags, "emoji-trophy")
+	// MASSMETA EDIT ADDITION END (supporter)
 
 	if(LAZYLEN(key_tags))
 		var/datum/asset/spritesheet_batched/chat/sheet = get_asset_datum(/datum/asset/spritesheet_batched/chat)
@@ -98,7 +105,7 @@ GAME_VERB(/client, ooc, VERB_OOC, null)
 
 	keyname = "[key_prefix][keyname]"
 
-	if(visible_unlock)
+	if(visible_unlock || is_supporter) // MASSMETA EDIT (supporter)
 		keyname = "<font color='[prefs.read_preference(/datum/preference/color/ooc_color) || GLOB.normal_ooc_colour]'>[keyname]</font>"
 
 	//The linkify span classes and linkify=TRUE below make ooc text get clickable chat href links if you pass in something resembling a url
