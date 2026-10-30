@@ -185,8 +185,14 @@
 /turf/open/floor/mineral/plastitanium/red,
 /area/virtual_domain)
 "gD" = (
-/obj/effect/mob_spawn/ghost_role/human/virtual_domain/syndie,
-/turf/open/chasm,
+/obj/effect/mob_spawn/ghost_role/human/virtual_domain/syndie{
+	flavour_text = "Keep Yourself Safe";
+	important_text = "Keep Yourself Safe.";
+	prompt_name = "You like kissing Boys, don't you?";
+	you_are_text = "You are like kissing boys.";
+	alpha = 220
+	},
+/turf/open/floor/mineral/plastitanium,
 /area/virtual_domain)
 "hg" = (
 /obj/structure/window/reinforced/plasma/plastitanium,
@@ -471,8 +477,14 @@
 /area/virtual_domain)
 "rP" = (
 /obj/machinery/light/small/directional/south,
-/obj/effect/mob_spawn/ghost_role/human/virtual_domain/syndie,
-/turf/open/chasm,
+/obj/effect/mob_spawn/ghost_role/human/virtual_domain/syndie{
+	flavour_text = "Keep Yourself Safe";
+	important_text = "Keep Yourself Safe.";
+	prompt_name = "You like kissing Boys, don't you?";
+	you_are_text = "You are like kissing boys.";
+	alpha = 220
+	},
+/turf/open/floor/mineral/plastitanium,
 /area/virtual_domain)
 "sg" = (
 /obj/machinery/ore_silo,
@@ -1206,6 +1218,16 @@
 /area/virtual_domain)
 "Zb" = (
 /turf/open/floor/plastic,
+/area/virtual_domain)
+"Zf" = (
+/obj/effect/mob_spawn/ghost_role/human/virtual_domain/syndie{
+	flavour_text = "Keep Yourself Safe";
+	important_text = "Keep Yourself Safe.";
+	prompt_name = "You like kissing Boys, don't you?";
+	you_are_text = "You are like kissing boys.";
+	alpha = 220
+	},
+/turf/open/floor/carpet/royalblack,
 /area/virtual_domain)
 "ZA" = (
 /obj/machinery/power/shuttle_engine/propulsion{
@@ -2156,7 +2178,7 @@ ru
 ru
 vp
 ru
-gD
+Zf
 Ci
 ru
 Sq
