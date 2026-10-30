@@ -1341,21 +1341,13 @@ GLOBAL_LIST_EMPTY(features_by_species)
 			if(HAS_TRAIT(human, TRAIT_RESISTLOWPRESSURE))
 				human.clear_alert(ALERT_PRESSURE)
 			else
-<<<<<<< HEAD
 				// MASSMETA EDIT START (pressure_damage_reduced)
-				var/pressure_damage = min(round(1 + (H.seconds_in_low_pressure / 180 SECONDS), 0.05) * BASE_LOW_PRESSURE_DAMAGE, MAX_LOW_PRESSURE_DAMAGE) * seconds_per_tick
+				var/pressure_damage = min(round(1 + (human.seconds_in_low_pressure / 180 SECONDS), 0.05) * BASE_LOW_PRESSURE_DAMAGE, MAX_LOW_PRESSURE_DAMAGE) * seconds_per_tick
 				// MASSMETA EDIT END (pressure_damage_reduced)
-				pressure_damage *= GET_PHYSIOLOGY(H, BRUTE) * GET_PHYSIOLOGY(H, PHYS_COEFF_PRESSURE)
-				H.adjust_brute_loss(pressure_damage, required_bodytype = BODYTYPE_ORGANIC)
-				H.throw_alert(ALERT_PRESSURE, /atom/movable/screen/alert/lowpressure, 2)
-			H.seconds_in_low_pressure += seconds_per_tick
-=======
-				var/pressure_damage = min(round(1 + (human.seconds_in_low_pressure / 80 SECONDS), 0.05) * BASE_LOW_PRESSURE_DAMAGE, MAX_LOW_PRESSURE_DAMAGE) * seconds_per_tick
 				pressure_damage *= GET_PHYSIOLOGY(human, PHYS_COEFF_PRESSURE)
 				human.adjust_brute_loss(pressure_damage, required_bodytype = BODYTYPE_ORGANIC)
 				human.throw_alert(ALERT_PRESSURE, /atom/movable/screen/alert/lowpressure, 2)
 			human.seconds_in_low_pressure += seconds_per_tick
->>>>>>> upstream/master
 
 /**
  *	Handles exposure to the skin of various gases.
