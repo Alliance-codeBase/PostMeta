@@ -7223,4 +7223,13 @@
 #include "interface\fonts\vcr_osd_mono.dm"
 #include "massmeta\modular_meta_features.dm"
 #include "modular_meta\main_modular_include.dm"
+#include "modular_meta\features\antagonist_2\includes.dm"
+#include "modular_meta\features\antagonist_2\anton_barankin\code\anton_barankin_datum.dm"
+#include "modular_meta\features\antagonist_2\anton_barankin\code\anton_barankin_objectives.dm"
+#include "modular_meta\features\antagonist_2\cartel\code\cartel_datum.dm"
+#include "modular_meta\features\antagonist_2\cartel\code\cartel_objectives.dm"
+#include "modular_meta\features\antagonist_2\mafia\ruleset.dm"
+#include "modular_meta\features\antagonist_2\mafia\code\mafia_datum.dm"
+#include "modular_meta\features\antagonist_2\mafia\code\mafia_objectives.dm"
+#include "modular_meta\features\antagonist_2\ghetto_criminal\code\ghetto_criminal_datum.dm"
 // END_INCLUDE
