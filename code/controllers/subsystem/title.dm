@@ -7,13 +7,13 @@ SUBSYSTEM_DEF(title)
 	var/icon/previous_icon
 	var/turf/closed/indestructible/splashscreen/splash_turf
 	// MASSMETA ADDITION
-	/// A holder for maptext that displays initialization information on the title screen
-	var/obj/effect/abstract/init_order_holder/maptext_holder
+	/// Initialization information shown in the lobby menu
+	var/list/init_text
 
 	/// A list of initialization information
 	var/list/init_infos = list()
 	/// Tracks the number of dots to display
-	var/num_dots = 1
+	var/dot_count = 1
 	/// The total time taken to initialize the game
 	var/total_init_time = -1
 	// MASSMETA ADDITION END
@@ -79,6 +79,8 @@ SUBSYSTEM_DEF(title)
 	previous_icon = SStitle.previous_icon
 // MASSMETA ADDITION
 	init_infos = SStitle.init_infos
+	init_text = SStitle.init_text
+	total_init_time = SStitle.total_init_time
 
 #define MAX_INIT_TEXT 40
 
@@ -101,7 +103,7 @@ SUBSYSTEM_DEF(title)
 		init_infos[init_category][2] = stage
 		init_infos[init_category][3] += seconds
 	if(major_update)
-		num_dots = (num_dots % 6 + 1)
+		dot_count = (dot_count % 6 + 1)
 	if(length(init_infos) > MAX_INIT_TEXT)
 		init_infos.Cut(1, length(init_infos) - MAX_INIT_TEXT + 1)
 	update_init_text()
@@ -113,87 +115,39 @@ SUBSYSTEM_DEF(title)
 	init_infos -= init_category
 	update_init_text()
 
-/// Updates the displayed initialization text according to all initialization information, unless the round has started,
-/// at which point you don't need anymore information anymore.
+/// Sends the initialization information to every lobby menu until the round starts
 /datum/controller/subsystem/title/proc/update_init_text()
 	if(SSticker.HasRoundStarted())
-		if(maptext_holder)
-			maptext_holder.maptext = null
 		return
-
-	if(!maptext_holder)
-		if(!splash_turf)
-			return
-		maptext_holder = new(splash_turf)
-
-	maptext_holder.maptext = "<span class='maptext' style='font-size: 6px;'>"
-	maptext_holder.maptext += "<span class='big' style='font-size: 12px;'>"
-	if(SSticker?.current_state == GAME_STATE_PREGAME)
-		var/total_init_text_time = (total_init_time == -1) ? (world.time / 10) : total_init_time
-		var/total_time_formatted = "[total_init_text_time]s"
-		switch(total_init_text_time)
-			if(0 to 60)
-				total_time_formatted = "<font color='green'>[total_init_text_time]s</font>"
-			if(60 to 120)
-				total_time_formatted = "<font color='yellow'>[total_init_text_time]s</font>"
-			if(120 to INFINITY)
-				total_time_formatted = "<font color='red'>[total_init_text_time]s</font>"
-
-		maptext_holder.maptext += "Initialized (in [total_time_formatted])"
-	else
-		maptext_holder.maptext += "Initializing game"
-		for(var/i in 1 to num_dots)
-			maptext_holder.maptext += "."
-	maptext_holder.maptext += "</span><br>"
-	for(var/sstype in init_infos)
-		var/list/init_data = init_infos[sstype]
-		var/init_name = init_data[1]
+	var/list/lines = list()
+	for(var/init_category in init_infos)
+		var/list/init_data = init_infos[init_category]
+		var/init_name = html_encode(init_data[1])
 		var/init_stage = init_data[2]
 		var/init_time = isnum(init_data[3]) ? "([init_data[3]]s)" : ""
-		maptext_holder.maptext += "<br>[init_name] [init_stage] [init_time]"
-	maptext_holder.maptext += "<br></span>"
+		lines += "[init_name] [init_stage] [init_time]"
+	init_text = list(
+		"title" = get_init_title(),
+		"lines" = lines,
+	)
+	for(var/datum/lobby_menu/menu as anything in GLOB.lobby_menus)
+		menu.send_init_text()
 
-/// Simply fades out the initialization text
-/datum/controller/subsystem/title/proc/fade_init_text()
-	update_init_text()
-	animate(maptext_holder, alpha = 0, time = 3 SECONDS)
+/datum/controller/subsystem/title/proc/get_init_title()
+	if(SSticker.current_state != GAME_STATE_PREGAME)
+		var/title = "Initializing game"
+		for(var/dot_number in 1 to dot_count)
+			title += "."
+		return title
 
-/// Abstract holder for maptext on the lobby screen
-/obj/effect/abstract/init_order_holder
-	icon = null
-	icon_state = null
-	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
-	maptext_height = 500
-	maptext_width = 200
-	maptext_x = 12
-	maptext_y = 12
-	plane = SPLASHSCREEN_PLANE
-	pixel_x = -64
-	/// Conceals the holder from clients who don't want to see it
-	var/image/hide_me
-
-/obj/effect/abstract/init_order_holder/Initialize(mapload)
-	. = ..()
-	for(var/mob/dead/new_player/lobby_goer as anything in GLOB.new_player_list)
-		check_client(lobby_goer.client)
-
-/// Check if the client should see or should not see the initialization information. Updates accordingly.
-/obj/effect/abstract/init_order_holder/proc/check_client(client/seer)
-	if(isnull(seer))
-		return
-	if(!seer.prefs.read_preference(/datum/preference/toggle/show_init_stats))
-		hide_from_client(seer)
-		return
-	show_to_client(seer)
-
-/// Hides the initialization information from the client
-/obj/effect/abstract/init_order_holder/proc/hide_from_client(client/seer)
-	if(isnull(hide_me))
-		hide_me = image(loc = src)
-		hide_me.override = TRUE
-	seer?.images |= hide_me
-
-/// Shows the initialization information to the client (if already hidden, otherwise nothing happens)
-/obj/effect/abstract/init_order_holder/proc/show_to_client(client/seer)
-	seer?.images -= hide_me
+	var/total_init_text_time = (total_init_time == -1) ? (world.time / 10) : total_init_time
+	var/time_color
+	switch(total_init_text_time)
+		if(0 to 60)
+			time_color = "green"
+		if(60 to 120)
+			time_color = "yellow"
+		if(120 to INFINITY)
+			time_color = "red"
+	return "Initialized (in <font color='[time_color]'>[total_init_text_time]s</font>)"
 // MASSMETA ADDITION END
