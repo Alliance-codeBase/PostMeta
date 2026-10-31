@@ -18,8 +18,8 @@
 	var/desc
 	/// as in code\modules\jobs\departments\departments.dm. Needed for UI sorting purpouses.
 	var/ui_order = 100
-/// Check dynamic.toml, put here your ruleset tag \
-(The name of it, e.g ["Roundstart Traitor"]) Under no circumstances there shall be midround antag, or any other that spawns with unique loadout.
+	/// Check dynamic.toml, put here your ruleset tag
+	/// (The name of it, e.g ["Roundstart Traitor"]) Under no circumstances there shall be midround antag, or any other that spawns with unique loadout.
 	var/ruleset_tag
 	/// check code\__DEFINES\role_preferences.dm , when bought role is banned, then it will try to refund the metacoins.
 	var/jobban_flag
@@ -495,7 +495,8 @@
 	if(!role_id)
 		return FALSE
 
-	var/result = get_metacoin_controller().buy(owner?.ckey, "antag_token", role_id, owner)
+	var/datum/metacoin_shop_controller/controller = get_metacoin_controller()
+	var/result = controller.buy(owner?.ckey, "antag_token", role_id, owner)
 	if(result["ok"])
 		return TRUE
 

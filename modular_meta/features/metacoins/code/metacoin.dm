@@ -42,7 +42,9 @@ GLOBAL_DATUM(metacoins_controller, /datum/metacoins_controller)
 	round_award_log_by_ckey = list()
 	awarded_sources_by_ckey = list()
 
-	if(METACOIN_REWARD_ROUNDSTART_READY <= 0)
+	var/roundstart_reward = METACOIN_REWARD_ROUNDSTART_READY
+
+	if(roundstart_reward <= 0)
 		return
 
 	var/list/ready_ckeys = list()
