@@ -19,7 +19,6 @@
 	. = ..()
 	pixel_x = rand(-10,10)
 	pixel_y = rand(-10,10)
-	icon_state = "giftdeliverypackage[rand(1,5)]"
 
 	if(isnull(contains_type))
 		contains_type = get_gift_type()

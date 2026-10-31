@@ -1,12 +1,14 @@
 /obj/machinery/light
-	bulb_colour = "#f1e6dc"
-	bulb_power =  1.2
+	bulb_colour = "#d39e6c"
+	bulb_power =  0.9
 
 /obj/machinery/light/dim
-	bulb_colour = "#cab8a5"
+	bulb_colour = "#d39e6c"
+	bulb_power =  0.7
 
 /obj/machinery/light/warm
-	bulb_colour = "#ffcb93"
+	bulb_colour = "#fdac56"
 
 /obj/machinery/light/small
-	bulb_colour = "#e0cbb3"
+	bulb_colour = "#c9a787"
+	bulb_power =  0.9

@@ -44,6 +44,21 @@ Unused icons for new areas are "awaycontent1" ~ "awaycontent30"
 /area/awaymission/secret
 	area_flags = NOTELEPORT|HIDDEN_AREA
 
+/area/awaymission/secret/secretful
+	name = "Beyond reality"
+	static_lighting = FALSE
+	base_lighting_alpha = 250
+	base_lighting_color = "#f8ebb1"
+	requires_power = FALSE
+
+/area/awaymission/secret/secretful/open
+	base_lighting_alpha = 255
+	base_lighting_color = "#fffeda"
+
+/area/awaymission/secret/secretful/nolight
+	static_lighting = TRUE
+	base_lighting_alpha = 0
+
 /area/awaymission/secret/unpowered
 	always_unpowered = TRUE
 

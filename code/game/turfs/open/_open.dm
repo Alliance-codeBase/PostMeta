@@ -520,6 +520,13 @@
 	icon_state = /turf/open/floor/stone::icon_state
 	name = /turf/open/floor/stone::name
 
+/turf/open/indestructible/carpet
+	icon = 'modular_meta/features/content/icons/floors.dmi'
+	icon_state = "carpet"
+	name = "dry carpet"
+	footstep = FOOTSTEP_CARPET
+	barefootstep = FOOTSTEP_CARPET_BAREFOOT
+
 /turf/open/Initalize_Atmos(time)
 	excited = FALSE
 	update_visuals()

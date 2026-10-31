@@ -1,4 +1,4 @@
-GLOBAL_DATUM(colored_assistant, /datum/colored_assistant)
+GLOBAL_DATUM(colored_assistant, /datum/colored_assistant/halloween)
 
 /*
 Assistant
@@ -62,10 +62,15 @@ Assistant
 	jobtype = /datum/job/assistant
 	id_trim = /datum/id_trim/job/assistant
 	belt = /obj/item/modular_computer/pda/crew/assistant
+	head = list(
+		/obj/item/clothing/head/utility/hardhat/pumpkinhead,
+		/obj/item/clothing/head/costume/papersack/smiley,
+		/obj/item/clothing/head/costume/witchwig,
+		)
 
 /datum/outfit/job/assistant/pre_equip(mob/living/carbon/human/target)
 	..()
-	give_holiday_hat(target)
+	//give_holiday_hat(target)
 	give_jumpsuit(target)
 
 /datum/outfit/job/assistant/proc/give_holiday_hat(mob/living/carbon/human/target)
