@@ -197,9 +197,6 @@ GLOBAL_LIST_INIT(message_modes_stat_limits, list(
 		message = uppertext(message)
 
 	var/list/message_data = treat_message(message) // unfortunately we still need this
-	//MASSMETA EDIT ADDITION BEGIN (force_say)
-	interrupt_speech(message_data, message_mods)
-	//MASSMETA EDIT ADDITION END
 	message = message_data["message"]
 	var/tts_message = message_data["tts_message"]
 	var/list/tts_filter = message_data["tts_filter"]
@@ -310,6 +307,10 @@ GLOBAL_LIST_INIT(message_modes_stat_limits, list(
 	var/message = ""
 	var/speaker_name = span_name("[message_mods[MODE_SPEAKER_NAME_OVERRIDE] || speaker]")
 
+	//MASSMETA EDIT ADDITION BEGIN (autotranslate)
+	var/message_obscured = FALSE
+	//MASSMETA EDIT ADDITION END (autotranslate)
+
 	// Infinite range implies something like telecomms, ie something that should never be distance modified
 	if(message_range != INFINITY && !HAS_TRAIT(src, TRAIT_GOOD_HEARING))
 		var/raw_dist = get_dist(speaker, src)
@@ -352,6 +353,9 @@ GLOBAL_LIST_INIT(message_modes_stat_limits, list(
 		// Out of message range but within eavesdrop range - alter displayed message
 		if(outside_dist > 0)
 			raw_message = stars(raw_message)
+			//MASSMETA EDIT ADDITION BEGIN (autotranslate)
+			message_obscured = TRUE
+			//MASSMETA EDIT ADDITION END (autotranslate)
 
 	// we need to send this signal before compose_message() is used since other signals need to modify
 	// the raw_message first. After the raw_message is passed through the various signals, it's ready to be formatted
@@ -394,12 +398,24 @@ GLOBAL_LIST_INIT(message_modes_stat_limits, list(
 		deaf_message = span_notice("You can't hear yourself!")
 		deaf_type = MSG_AUDIBLE // Since you should be able to hear yourself without looking
 
+	//MASSMETA EDIT ADDITION BEGIN (autotranslate)
+	// Marks the spoken text so the chat panel can find it later. The wrapper
+	// spans are stripped by generate_image(), so runechat is unaffected.
+	var/datum/translated_speech/translation = try_begin_translation(speaker, raw_message, is_custom_emote, understood, message_obscured)
+	if(translation)
+		raw_message = translation.wrapped_text()
+	//MASSMETA EDIT ADDITION END (autotranslate)
+
 	// Create map text prior to modifying message for goonchat
 	if (use_runechat && !HAS_TRAIT(src, TRAIT_DEAF))
 		if (is_custom_emote)
 			create_chat_message(speaker, null, message_mods[MODE_CUSTOM_SAY_EMOTE], spans, EMOTE_MESSAGE)
 		else
-			create_chat_message(speaker, message_language, raw_message, spans)
+			//MASSMETA EDIT ADDITION BEGIN (autotranslate)
+			// ORIGINAL: create_chat_message(speaker, message_language, raw_message, spans)
+			var/datum/chatmessage/bubble = create_chat_message(speaker, message_language, raw_message, spans)
+			translation?.attach_runechat(bubble)
+			//MASSMETA EDIT ADDITION END (autotranslate)
 
 	// Recompose message for AI hrefs, language incomprehension.
 	message = compose_message(speaker, message_language, raw_message, radio_freq, radio_freq_name, radio_freq_color, spans, message_mods)
@@ -407,6 +423,11 @@ GLOBAL_LIST_INIT(message_modes_stat_limits, list(
 	var/hearflags = NONE
 	if(show_message(message, MSG_AUDIBLE, deaf_message, deaf_type, avoid_highlight))
 		hearflags |= HEAR_HEARD
+	//MASSMETA EDIT ADDITION BEGIN (autotranslate)
+	// Dispatched last: a cache hit resolves synchronously, so both surfaces
+	// have to exist before this runs.
+	translation?.begin()
+	//MASSMETA EDIT ADDITION END (autotranslate)
 	if(understood)
 		hearflags |= HEAR_UNDERSTOOD
 	return hearflags
