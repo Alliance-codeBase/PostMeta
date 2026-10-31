@@ -308,7 +308,7 @@
 
 	QDEL_LIST(food_items)
 	visible_message(span_warning("Hookah shatters into pieces with a loud crash!"))
-	playsound(src, SFX_SHATTER, 50)
+	playsound(src, /datum/sound_effect/shatter, 50)
 	return ..()
 
 /obj/item/hookah/pickup(mob/user)

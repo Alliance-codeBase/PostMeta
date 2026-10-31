@@ -46,7 +46,7 @@
 		force_wielded = force_wielded, \
 		force_unwielded = force_unwielded, \
 		update_icon_state = TRUE, \
-		attacksound = SFX_SWING_HIT, \
+		attacksound = /datum/sound_effect/swing_hit, \
 	)
 
 	AddElement(/datum/element/examine_lore, lore = "\
