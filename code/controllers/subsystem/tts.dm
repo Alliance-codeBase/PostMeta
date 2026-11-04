@@ -212,8 +212,8 @@ SUBSYSTEM_DEF(tts)
 	if(response_pitch.errored || response_pitch.status_code != 200)
 
 		if(response_pitch.errored)
-		// MASSMETA EDIT START (ntts && /tg/tts) \
-		ORIGINAL: stack_trace(response.error)
+		// MASSMETA EDIT START (ntts && /tg/tts)
+		// ORIGINAL: stack_trace(response.error)
 			stack_trace(response_pitch.error)
 		// MASSMETA EDIT END (ntts && /tg/tts)
 		pitch_enabled = FALSE

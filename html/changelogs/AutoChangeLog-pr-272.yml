@@ -1,0 +1,4 @@
+author: "--> Dolphyuser"
+delete-after: True
+changes:
+  - rscadd: "Теперь Improvised Shell крафтится только после прочтения книги из техов."

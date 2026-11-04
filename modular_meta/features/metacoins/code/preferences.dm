@@ -45,7 +45,8 @@
 	if(.)
 		return
 
-	var/datum/metacoinshop/persistent/persistent = get_metacoin_controller().persistent
+	var/datum/metacoin_shop_controller/controller = get_metacoin_controller()
+	var/datum/metacoinshop/persistent/persistent = controller.persistent
 	var/owner_ckey = owner?.ckey
 	if(!COOLDOWN_FINISHED(src, pref_cooldown))
 		to_chat(ui.user, span_warning("Please wait before changing your preferences again"))

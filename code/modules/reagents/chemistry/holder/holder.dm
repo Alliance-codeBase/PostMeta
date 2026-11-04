@@ -473,6 +473,11 @@
 	if(amount <= 0)
 		return FALSE
 
+	//MASSMETA EDIT ADDITION BEGIN (explosives_ban)
+	if(refuse_explosive_transfer(target_holder, target_id, target_atom, transferred_by))
+		return FALSE
+	//MASSMETA EDIT ADDITION END
+
 	var/trans_data = null
 	var/list/r_to_send = methods ? list() : null // Validated list of reagents to be exposed
 	var/list/transfer_log = list()
