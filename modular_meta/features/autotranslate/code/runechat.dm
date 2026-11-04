@@ -44,7 +44,7 @@
 /// Renders body text through the captured wrapper.
 /datum/chatmessage/proc/render_body(body)
 	var/mob/viewer = owned_by?.mob
-	var/emphasised = viewer ? viewer.apply_message_emphasis(body) : body
+	var/emphasised = body
 	return "[translate_wrapper_open][translate_prefix][emphasised][translate_wrapper_close]"
 
 /**

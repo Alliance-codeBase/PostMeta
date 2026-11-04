@@ -7220,4 +7220,5 @@
 #include "massmeta\modular_meta_features.dm"
 #include "modular_meta\main_modular_include.dm"
 #include "modular_meta\features\autotranslate\includes.dm"
+#include "modular_meta\features\autotranslate\code\runechat.dm"
 // END_INCLUDE
