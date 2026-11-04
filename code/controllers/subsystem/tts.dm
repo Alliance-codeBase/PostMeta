@@ -877,7 +877,6 @@ SUBSYSTEM_DEF(tts)
 	for (var/voice in available_speakers)
 		if (findtext(voice, "Glados")) // remind me to make it configurable via config, hardcode is bad.
 			return voice
-		if (length(available_speakers))
-			return pick(available_speakers)
-		CRASH("Cant find voice for vendor! At least one voice must me for vendors")
+	CRASH("Cant find voice for vendor! At least one voice must me for vendors")
+	//return pick(available_speakers)
 // MASSMETA ADD END
