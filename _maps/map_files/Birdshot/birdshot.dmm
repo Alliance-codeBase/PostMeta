@@ -7314,7 +7314,7 @@
 	pixel_x = 3;
 	pixel_y = 4
 	},
-/obj/item/food/cornchips/purple{
+/obj/item/food/chips/corn/purple{
 	pixel_x = -6;
 	pixel_y = -3
 	},
@@ -41438,7 +41438,7 @@
 /obj/machinery/camera/autoname/directional/east,
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/table,
-/obj/item/food/cornchips/green,
+/obj/item/food/chips/corn/green,
 /turf/open/floor/iron/dark/smooth_large,
 /area/station/cargo/bitrunning/den)
 "nyi" = (
@@ -74374,7 +74374,7 @@
 /obj/structure/rack,
 /obj/machinery/flasher/directional/west,
 /obj/item/storage/toolbox/electrical,
-/obj/structure/sign/plaques/kiddie{
+/obj/structure/plaque/kiddie{
 	pixel_x = 0;
 	pixel_y = -28
 	},
@@ -74423,7 +74423,7 @@
 	pixel_x = 3;
 	pixel_y = 9
 	},
-/obj/structure/sign/plaques/kiddie/perfect_drone{
+/obj/structure/plaque/kiddie/perfect_drone{
 	pixel_x = 0;
 	pixel_y = -28
 	},
