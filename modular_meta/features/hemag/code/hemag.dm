@@ -17,7 +17,7 @@
 		used = TRUE
 		SSblackbox.record_feedback("tally", "atom_emagged", 1, interacting_with.type)
 		to_chat(user, span_danger("[src] vanishes to nothing!")) //Aaaand, it's gone
-		playsound(src, 'modular_meta/features/hemag/sound/wewewew.ogg', 100)
+		playsound(src, 'sound/machines/wewewew.ogg', 100)
 		animate(src, transform = matrix() * 1.5, time = 1 SECONDS, easing = SINE_EASING)
 		animate(transform = matrix() * 0.1, time = 2 SECONDS, easing = SINE_EASING)
 		QDEL_IN(src, 3 SECONDS)
