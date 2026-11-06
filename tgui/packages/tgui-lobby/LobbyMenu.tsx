@@ -2,6 +2,7 @@ import { useCallback, useEffect, useReducer, useRef, useState } from 'react';
 import { Tooltip } from 'tgui-core/components';
 import { assetMap } from './assets';
 import { playCollapseSound, playExpandSound, playSelectSound } from './audio';
+import { InitText, type InitTextData } from './InitText'; // MASSMETA EDIT ADDITION (init_text)
 
 type StationTrait = {
   ref: string;
@@ -34,6 +35,9 @@ export type ServerState = {
   overflowJob: string | null;
   traitFeedback: string | null;
   transparent: boolean;
+  // MASSMETA EDIT ADDITION START (init_text)
+  initText: InitTextData | null;
+  // MASSMETA EDIT ADDITION END (init_text)
 };
 
 type LobbyState = {
@@ -482,6 +486,9 @@ export function LobbyMenu() {
       className={`lobby ${ss.transparent ? 'lobby--transparent' : ''}`}
       style={backgroundStyle}
     >
+      {/* MASSMETA EDIT ADDITION START (init_text) */}
+      {!!ss.initText && <InitText text={ss.initText} faded={!blipEnabled} />}
+      {/* MASSMETA EDIT ADDITION END (init_text) */}
       <div className="lobby__anchor">
         <LobbyElement top={0} left={-61} zIndex={1} collapsed={collapsed}>
           <img className="lobby__sprite" src={icon('background')} alt="" />
