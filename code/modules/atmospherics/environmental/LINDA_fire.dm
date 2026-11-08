@@ -32,6 +32,10 @@
 	if (cached_moles[/datum/gas/oxygen] < 0.5)
 		return
 
+	//MASSMETA ADDTION (liquids)
+	if(liquids && liquids.liquid_group && !liquids.fire_state)
+		liquids.liquid_group.ignite_turf(src)
+	//MASSMETA ADDITION END
 	var/plas_trit_h2_threshold = (\
 		   cached_moles[/datum/gas/plasma] > 0.5\
 		|| cached_moles[/datum/gas/tritium] > 0.5\

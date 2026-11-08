@@ -1381,6 +1381,7 @@
 	if(delayed_close_requested)
 		delayed_close_requested = FALSE
 		addtimer(CALLBACK(src, PROC_REF(close)), FORCING_DOOR_CHECKS)
+	SEND_SIGNAL(src, COMSIG_ATOM_DOOR_OPEN) //MASSMETA ADDITION (liquids)
 	return TRUE
 
 /// Additional checks depending on what we want to happen to door (should we try and open it normally, or do we want this open at all costs?)
@@ -1434,6 +1435,18 @@
 	if(killthis)
 		SSexplosions.med_mov_atom += killthis
 	SEND_SIGNAL(src, COMSIG_AIRLOCK_CLOSE, forced)
+
+	var/turf/open/open_turf = get_turf(src)
+	if(open_turf.liquids)
+		var/datum/liquid_group/turfs_group = open_turf.liquids.liquid_group
+		turfs_group.remove_from_group(open_turf)
+		turfs_group.try_split(open_turf)
+		for(var/dir in GLOB.cardinals)
+			var/turf/open/direction_turf = get_step(open_turf, dir)
+			if(!isopenturf(direction_turf) || !direction_turf.liquids)
+				continue
+			turfs_group.check_edges(direction_turf)
+
 	set_airlock_state(AIRLOCK_CLOSING, animated = TRUE, force_type = forced)
 	layer = CLOSED_DOOR_LAYER
 	if(air_tight)
