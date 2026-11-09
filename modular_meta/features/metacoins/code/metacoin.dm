@@ -103,6 +103,8 @@ GLOBAL_DATUM(metacoins_controller, /datum/metacoins_controller)
 		amount = reward_value
 	if(!target_ckey || amount <= 0)
 		return FALSE
+	if(target_ckey in GLOB.supporters)
+		amount *= 1.2 // 20% more
 
 	var/list/rewards = list(list(
 		"amount" = amount,

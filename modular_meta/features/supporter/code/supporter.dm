@@ -1,5 +1,14 @@
 GLOBAL_ALIST_INIT(supporters, alist())
 
+/*
+	Quick note:
+	client.issupporter() - to check that a player has ever donated any sum more than 6$ (500rub is approximately 6 dollars)
+	client.issupporter(1) - to check for additional subscriptions from subscription services
+	like boosty, patreon) (if there any), 1 as a magic num here defines a tier of your sub
+*/
+
+
+
 /// checks whether this person is a supporter
 /client/proc/issupporter(tier = 0)
 	if(!SSdbcore.Connect())
