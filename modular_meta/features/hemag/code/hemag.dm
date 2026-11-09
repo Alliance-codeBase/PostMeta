@@ -23,3 +23,17 @@
 		QDEL_IN(src, 3 SECONDS)
 		return ITEM_INTERACT_SUCCESS
 	return NONE // In a perfect world this would be blocking, but this is not a perfect world
+
+/datum/market_item/misc/hemag //idk what I'm cooking here, that should work, right?
+	name = /obj/item/card/emag/hemag::name
+	desc = "Rare key of almost any technology security system, too bad that it can handle only 1 use"
+	item = /obj/item/card/emag/hemag
+	price_min = 220 * 5
+	price_max = CARGO_CRATE_VALUE * 10
+	stock_max = 2
+	availability_prob = 19
+//Code reference: /datum/market_item/misc/self_surgery_skillchip
+/datum/market_item/misc/hemag/buy(obj/item/market_uplink/uplink, mob/buyer, shipping_method, legal_status)
+	. = ..()
+	if(.)
+		availability_prob *= 0.5
