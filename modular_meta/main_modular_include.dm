@@ -23,6 +23,7 @@
 #include "features\improvised_shells\includes.dm"
 #include "features\kvass_beverage\includes.dm"
 #include "features\kumiss_beverage\includes.dm"
+#include "features\liquids\includes.dm"
 #include "features\oguzok_cook\includes.dm"
 #include "features\quirk_augmented\includes.dm"
 #include "features\quirk_bouncy\includes.dm"
@@ -64,7 +65,6 @@
 #include "features\unmanned_vechicle\includes.dm"
 #include "features\title_screenz\includes.dm"
 #include "features\_code_helpers\includes.dm"
-#include "features\liquids\includes.dm"
 
 /* --- Reverts --- */
 
