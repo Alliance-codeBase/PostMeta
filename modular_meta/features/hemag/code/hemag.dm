@@ -1,6 +1,6 @@
 /obj/item/card/emag/hemag
 	icon = 'modular_meta/features/hemag/preview.dmi'
-	name = "Holograpic Card"
+	name = "Holograpic Cryptographic"
 	desc = "Holographic Emag, doesn't looks that here for long"
 	var/used = FALSE
 
@@ -26,7 +26,7 @@
 
 /datum/market_item/misc/hemag //idk what I'm cooking here, that should work, right?
 	name = /obj/item/card/emag/hemag::name
-	desc = "Rare key of almost any technology security system, too bad that it can handle only 1 use"
+	desc = "An holographic replica of an plastic card, which seemingly resemble a traditional cryptographic sequencer, known in the space of Spinward as an EMAG, it glows with a soft purple light. It sends a sharp sting through  your finger at the slightest touch."
 	item = /obj/item/card/emag/hemag
 	price_min = 220 * 5
 	price_max = CARGO_CRATE_VALUE * 10
