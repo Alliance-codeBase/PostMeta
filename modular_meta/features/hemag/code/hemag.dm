@@ -26,7 +26,7 @@
 
 /datum/market_item/misc/hemag //idk what I'm cooking here, that should work, right?
 	name = /obj/item/card/emag/hemag::name
-	desc = "An holographic replica of an plastic card, which seemingly resemble a traditional cryptographic sequencer, known in the space of Spinward as an EMAG, it glows with a soft purple light. It sends a sharp sting through  your finger at the slightest touch."
+	desc = "An holographic replica of an plastic card, which seemingly resemble a traditional cryptographic sequencer, known in the space of Spinward as an EMAG, it glows with a soft purple light. It sends a sharp sting through your finger at the slightest touch."
 	item = /obj/item/card/emag/hemag
 	price_min = 220 * 5
 	price_max = CARGO_CRATE_VALUE * 10
