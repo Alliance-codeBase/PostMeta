@@ -1,7 +1,6 @@
 /datum/status_effect/water_affected
 	id = "wateraffected"
 	alert_type = null
-	duration = -1
 
 /datum/status_effect/water_affected/on_apply()
 	//We should be inside a liquid turf if this is applied
@@ -9,10 +8,16 @@
 	return TRUE
 
 /datum/status_effect/water_affected/proc/calculate_water_slow()
-	owner.add_movespeed_modifier(/datum/movespeed_modifier/status_effect/water_affected, update = TRUE)
+	var/turf/owner_turf = get_turf(owner)
+	var/slowdown_amount = 0
+	if(!QDELETED(owner_turf?.liquids) && !QDELETED(owner_turf.liquids.liquid_group))
+		slowdown_amount = owner_turf.liquids.liquid_group.group_overlay_state * 0.5
+	owner.add_or_update_variable_movespeed_modifier(/datum/movespeed_modifier/status_effect/water_affected, multiplicative_slowdown = slowdown_amount)
 
 /datum/movespeed_modifier/status_effect/water_affected
 	id = MOVESPEED_ID_LIQUID
+	variable = TRUE
+	multiplicative_slowdown = 0
 
 /datum/movespeed_modifier/status_effect/water_affected/New(mob/living/owner)
 	. = ..()
@@ -39,8 +44,8 @@
 	owner.remove_movespeed_modifier(/datum/movespeed_modifier/status_effect/water_affected)
 
 /datum/status_effect/ocean_affected
+	id = "oceanaffected"
 	alert_type = null
-	duration = -1
 
 /datum/status_effect/ocean_affected/tick()
 	var/turf/ocean_turf = get_turf(owner)

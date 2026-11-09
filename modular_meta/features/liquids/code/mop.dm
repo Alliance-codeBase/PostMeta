@@ -13,8 +13,6 @@
 		return soak_up_liquids(target_turf, user)
 	return wipe_liquids(target_turf, user)
 
-	. = ..()
-
 /obj/item/mop/proc/soak_up_liquids(turf/target_turf, mob/living/user)
 	var/free_space = reagents.maximum_volume - reagents.total_volume
 	if(free_space < 1)
