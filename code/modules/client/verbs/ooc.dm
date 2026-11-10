@@ -94,7 +94,7 @@ GAME_VERB(/client, ooc, VERB_OOC, null)
 		LAZYADD(key_tags, "byond_member")
 	// MASSMETA EDIT ADDITION START (supporter)
 	if(is_supporter)
-		LAZYADD(key_tags, "emoji-trophy")
+		LAZYADD(key_tags, "meta")
 	// MASSMETA EDIT ADDITION END (supporter)
 
 	if(LAZYLEN(key_tags))
