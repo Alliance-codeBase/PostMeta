@@ -31,8 +31,8 @@
 /datum/metacoinshop/listing/proc/bought_on_spawn(datum/metacoin_shop_controller/shop, target_ckey, mob/living/carbon/human/human_spawned, obj/item/item, client/player_client)
 	return
 
-// It's like the same ^^^ but you may edit variables of stuff in params, like human_spawned or item. e.g you may buy a baton, \
-then have it variable edit'ed like so item.force = 25, potentially escaping any additional hardcode or unneeded bloat
+// It's like the same ^^^ but you may edit variables of stuff in params, like human_spawned or item. e.g you may buy a baton,
+// then have it variable edit'ed like so item.force = 25, potentially escaping any additional hardcode or unneeded bloat
 
 /datum/metacoinshop/listing/proc/persistent_grant(datum/metacoin_shop_controller/shop, target_ckey, mob/living/spawned, client/player_client)
 	return

@@ -10,9 +10,9 @@
 		'modular_meta/features/april_fools_day/beepsky/sounds/trahnu.ogg',
 		'modular_meta/features/april_fools_day/beepsky/sounds/dog_shit.ogg',
 		), 100, FALSE)
+*/
 
 /datum/sound_effect/law_april
-	key = "law_april"
 	file_paths = list(
 		'modular_meta/features/april_fools_day/beepsky/sounds/zasranets.ogg',
 		'modular_meta/features/april_fools_day/beepsky/sounds/asshole.ogg',
@@ -21,4 +21,4 @@
 		'modular_meta/features/april_fools_day/beepsky/sounds/ubludok.ogg',
 		'modular_meta/features/april_fools_day/beepsky/sounds/voba.ogg',
 	)
-*/
+
