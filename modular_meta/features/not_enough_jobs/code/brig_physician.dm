@@ -20,6 +20,11 @@
 	suit = /obj/item/clothing/suit/toggle/labcoat/brig_physician
 	head = /obj/item/clothing/head/soft/brig_physician
 	ears = /obj/item/radio/headset/headset_med/brig_physician
+	glasses = /obj/item/clothing/glasses/hud/medsechud
+	belt = /obj/item/storage/belt/medical/brig_physician
+	l_pocket = /obj/item/modular_computer/pda/crew/medical
+	pda_slot = ITEM_SLOT_LPOCKET
+	implants = list(/obj/item/implant/mindshield)
 	backpack = /obj/item/storage/backpack/brig_physician
 	satchel = /obj/item/storage/backpack/satchel/brig_physician
 	duffelbag = /obj/item/storage/backpack/duffelbag/brig_physician
@@ -150,6 +155,22 @@
 	worn_icon_state = "secmed"
 	inhand_icon_state = "security"
 
+/obj/item/storage/belt/medical/brig_physician/PopulateContents()
+	new /obj/item/reagent_containers/hypospray/brig_physician(src)
+	new /obj/item/stack/medical/suture/medicated(src)
+	new /obj/item/stack/medical/mesh/advanced(src)
+	new /obj/item/stack/medical/wrap/gauze/twelve(src)
+	new /obj/item/healthanalyzer/advanced(src)
+	new /obj/item/reagent_containers/hypospray/medipen/atropine(src)
+
+/obj/item/reagent_containers/hypospray/brig_physician
+	name = "brig physician's hypospray"
+	desc = "A medical autoinjector designed to administer medicine through protective clothing."
+	icon_state = "sec_hypo"
+	inhand_icon_state = "combat_hypo"
+	ignore_flags = TRUE
+	list_reagents = list(/datum/reagent/medicine/omnizine = 30)
+
 /obj/item/storage/bag/garment/brig_physician
 	name = "brig physician's garment bag"
 
@@ -191,6 +212,11 @@
 	new /obj/item/healthanalyzer(src)
 	new /obj/item/storage/backpack/duffelbag/sec/surgery(src)
 	new /obj/item/defibrillator/loaded(src)
+	new /obj/item/reagent_containers/blood/o_minus(src)
+	new /obj/item/reagent_containers/blood/o_minus(src)
+	new /obj/item/clothing/glasses/hud/medsechud(src)
+	new /obj/item/emergency_bed(src)
+	new /obj/item/storage/box/bodybags(src)
 	new /obj/item/sensor_device(src)
 	new /obj/item/storage/medkit/regular(src)
 	new /obj/item/storage/medkit/brute(src)
