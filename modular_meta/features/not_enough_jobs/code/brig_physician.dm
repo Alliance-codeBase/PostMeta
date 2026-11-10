@@ -197,3 +197,8 @@
 	new /obj/item/storage/medkit/fire(src)
 	new /obj/item/storage/medkit/toxin(src)
 	new /obj/item/storage/medkit/o2(src)
+
+
+/datum/station_trait/cybernetic_revolution/New()
+	. = ..()
+	job_to_cybernetic += list(/datum/job/brig_physician = /obj/item/organ/cyberimp/arm/toolkit/surgery,)
