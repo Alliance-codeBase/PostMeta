@@ -5,4 +5,4 @@
 	group = "Features"
 	name = "Not Enough Jobs"
 	desc = "Новые работы"
-	author = "Bruh24"
+	author = "Bruh24; Monkestation(Brig Physician)"
