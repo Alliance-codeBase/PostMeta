@@ -1,0 +1,2 @@
+#define JOB_BRIG_PHYSICIAN "Brig Physician"
+#define JOB_DISPLAY_ORDER_BRIG_PHYSICIAN 6

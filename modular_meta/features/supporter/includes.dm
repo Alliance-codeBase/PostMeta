@@ -1,4 +1,5 @@
 #include "code\supporter.dm"
+#include "code\job_lock.dm"
 
 /datum/modpack/supporter
 	id = "supporter"

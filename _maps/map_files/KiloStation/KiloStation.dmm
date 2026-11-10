@@ -2,6 +2,12 @@
 "aaa" = (
 /turf/open/space/basic,
 /area/space)
+"aab" = (
+/obj/effect/landmark/start/brig_physician,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/structure/cable,
+/turf/open/floor/iron/showroomfloor,
+/area/station/security/medical)
 "aac" = (
 /obj/structure/cable,
 /obj/machinery/power/smes/full,
@@ -96578,7 +96584,7 @@ yja
 uBM
 jgv
 rjg
-uCd
+aab
 gua
 rNJ
 veN

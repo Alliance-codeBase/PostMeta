@@ -40,6 +40,7 @@
 #include "features\copytech\includes.dm"
 #include "features\cargo_extended\includes.dm"
 #include "features\not_enough_decor\includes.dm"
+#include "features\not_enough_jobs\includes.dm"
 #include "features\mod_vend\includes.dm"
 #include "features\roundstart_shell\includes.dm"
 #include "features\security_extended\includes.dm"

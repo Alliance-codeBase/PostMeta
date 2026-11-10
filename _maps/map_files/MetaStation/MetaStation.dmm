@@ -2,6 +2,11 @@
 "aaa" = (
 /turf/open/space/basic,
 /area/space)
+"aab" = (
+/obj/effect/landmark/start/brig_physician,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/turf/open/floor/iron/white,
+/area/station/security/medical)
 "aag" = (
 /turf/closed/wall,
 /area/station/commons/fitness)
@@ -95704,7 +95709,7 @@ fDT
 sch
 qln
 oPn
-oPn
+aab
 eLw
 sch
 bRF
