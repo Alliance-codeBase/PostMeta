@@ -1,4 +1,5 @@
 #include "code\brig_physician.dm"
+#include "code\coffin.dm"
 #include "code\brig_room.dm"
 #include "code\brig_terminal.dm"
 
