@@ -208,6 +208,9 @@ export type PreferencesMenuData = {
   name_to_use: string;
 
   window: PrefsWindow;
+  /* 	//MASSMETA EDIT ADDITION START (supporter) */
+  supporter_locked?: string[];
+  /* 	//MASSMETA EDIT ADDITION END (supporter) */
 };
 
 export type ServerData = {

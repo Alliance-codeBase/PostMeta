@@ -3,7 +3,7 @@
 /datum/preference_middleware/jobs/get_ui_static_data(mob/user)
 	. = ..()
 	if(!(user.ckey in GLOB.supporters))
-		data["supporter_locked"] = list(JOB_BRIG_PHYSICIAN)
+		.["supporter_locked"] = list(JOB_BRIG_PHYSICIAN)
 
 
 /datum/controller/subsystem/job/check_job_eligibility(mob/dead/new_player/player, datum/job/possible_job, debug_prefix = "", add_job_to_log = FALSE)
