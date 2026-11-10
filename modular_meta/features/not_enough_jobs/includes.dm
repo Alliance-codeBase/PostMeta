@@ -1,4 +1,6 @@
 #include "code\brig_physician.dm"
+#include "code\brig_room.dm"
+#include "code\brig_terminal.dm"
 
 /datum/modpack/not_enough_jobs
 	id = "not_enough_jobs"

@@ -35,7 +35,7 @@
 	department_color = COLOR_SECURITY_RED
 	sechud_icon = 'modular_meta/features/not_enough_jobs/icons/hud.dmi'
 	sechud_icon_state = "hudbrigphysician"
-	minimal_access = list(ACCESS_BRIG_ENTRANCE, ACCESS_BRIG, ACCESS_SECURITY, ACCESS_MEDICAL, ACCESS_MECH_MEDICAL, ACCESS_MORGUE, ACCESS_PHARMACY, ACCESS_SURGERY, ACCESS_MINERAL_STOREROOM)
+	minimal_access = list(ACCESS_BRIG_ENTRANCE, ACCESS_BRIG, ACCESS_BRIG_PHYSICIAN, ACCESS_SECURITY, ACCESS_MEDICAL, ACCESS_MECH_MEDICAL, ACCESS_MORGUE, ACCESS_PHARMACY, ACCESS_SURGERY, ACCESS_MINERAL_STOREROOM)
 	template_access = list(ACCESS_CAPTAIN, ACCESS_CHANGE_IDS, ACCESS_HOS, ACCESS_CMO)
 	job = /datum/job/brig_physician
 
@@ -165,7 +165,8 @@
 
 /obj/item/reagent_containers/hypospray/brig_physician
 	name = "brig physician's hypospray"
-	desc = "A medical autoinjector designed to administer medicine through protective clothing."
+	desc = "A medical autoinjector designed by DeForest with cooperation of Aussec Armory; Allegedly first prototype was stolen from a deceased Cybersun operative during an <b> REDACTED </b>  operation abroad NTSS-<b>REDACTED</b>\
+	this version features an advanced piercing tip to administer medicine through protective clothing."
 	icon_state = "sec_hypo"
 	inhand_icon_state = "combat_hypo"
 	ignore_flags = TRUE
