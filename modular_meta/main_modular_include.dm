@@ -65,6 +65,7 @@
 #include "features\title_screenz\includes.dm"
 #include "features\_code_helpers\includes.dm"
 #include "features\autotranslate\includes.dm"
+#include "features\hemag\includes.dm"
 
 /* --- Reverts --- */
 
