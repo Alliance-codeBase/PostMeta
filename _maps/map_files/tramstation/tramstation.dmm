@@ -15,6 +15,13 @@
 "aac" = (
 /turf/open/misc/asteroid/airless,
 /area/station/asteroid)
+"aad" = (
+/obj/effect/landmark/start/brig_physician,
+/obj/structure/cable,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/turf/open/floor/iron/white,
+/area/station/security/medical)
 "aae" = (
 /obj/structure/cable,
 /obj/machinery/door/airlock/external{
@@ -152940,7 +152947,7 @@ ntp
 mjM
 byh
 nHo
-bxH
+aad
 aFg
 jWn
 ayR

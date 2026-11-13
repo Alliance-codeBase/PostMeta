@@ -61,6 +61,10 @@
 "# Spawn Positions" = 2
 "# Total Positions" = 3
 
+[BRIG_PHYSICIAN]
+"# Spawn Positions" = 1
+"# Total Positions" = 1
+
 [CAPTAIN]
 "# Human Authority Whitelist Setting" = "HUMANS_ONLY"
 "# Playtime Requirements" = 180

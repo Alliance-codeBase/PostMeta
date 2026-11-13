@@ -14,3 +14,5 @@
 #include "force_say.dm"
 #include "communication_bans.dm"
 #include "explosives_ban.dm"
+#include "jobs.dm"
+#include "access.dm"

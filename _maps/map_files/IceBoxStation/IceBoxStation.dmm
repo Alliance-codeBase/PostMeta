@@ -1,4 +1,9 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"aaa" = (
+/obj/effect/landmark/start/brig_physician,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/turf/open/floor/iron/white/textured,
+/area/station/security/medical)
 "aab" = (
 /obj/effect/spawner/random/vending/snackvend,
 /obj/effect/turf_decal/tile/neutral/fourcorners,
@@ -82820,8 +82825,16 @@
 /turf/open/floor/iron/smooth_large,
 /area/station/cargo/drone_bay)
 "xgR" = (
-/obj/structure/bed/medical/emergency,
-/obj/structure/extinguisher_cabinet/directional/west,
+/obj/effect/turf_decal/tile/neutral/half/contrasted{
+	dir = 4
+	},
+/obj/structure/closet/secure_closet/secmed/blue,
+/obj/item/storage/medkit,
+/obj/item/storage/medkit/brute,
+/obj/item/storage/medkit/fire,
+/obj/item/reagent_containers/cup/bottle/multiver,
+/obj/item/storage/box/syringes,
+/obj/item/storage/pill_bottle/iron,
 /turf/open/floor/iron/white/textured,
 /area/station/security/medical)
 "xhk" = (
@@ -247958,7 +247971,7 @@ oWn
 sHb
 foc
 iQj
-uZW
+aaa
 rud
 cAC
 mWM

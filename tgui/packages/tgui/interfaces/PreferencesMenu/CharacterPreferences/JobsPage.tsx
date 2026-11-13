@@ -207,6 +207,9 @@ function JobRow(props: JobRowProps) {
     job_preferences,
     job_required_experience,
     job_days_left,
+    /* 	//MASSMETA EDIT ADDITION START (supporter) */
+    supporter_locked,
+    /* 	//MASSMETA EDIT ADDITION END (supporter) */
   } = data;
 
   const isOverflow = overflow_role === name;
@@ -217,11 +220,25 @@ function JobRow(props: JobRowProps) {
   const createSetPriority = createCreateSetPriorityFromName(name);
 
   const experienceNeeded = job_required_experience?.[name];
+  /* 	//MASSMETA EDIT ADDITION START (supporter) */
+  const supporterLocked = supporter_locked?.includes(name);
+  /* 	//MASSMETA EDIT ADDITION END (supporter) */
+
   const daysLeft = job_days_left ? job_days_left[name] : 0;
 
   let rightSide: ReactNode;
 
-  if (experienceNeeded) {
+  /* 	//MASSMETA EDIT ADDITION START (supporter) */
+  if (supporterLocked) {
+    rightSide = (
+      <Stack pr={1}>
+        <Stack.Item grow textAlign="right" height="stretch">
+          <b>Supporter Only!</b>
+        </Stack.Item>
+      </Stack>
+    );
+    /* 	//MASSMETA EDIT ADDITION END (supporter) */
+  } else if (experienceNeeded) {
     const { experience_type, required_playtime } = experienceNeeded;
     const hoursNeeded = Math.ceil(required_playtime / 60);
 

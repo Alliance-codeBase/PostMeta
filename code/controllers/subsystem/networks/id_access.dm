@@ -249,6 +249,7 @@ SUBSYSTEM_DEF(id_access)
 	desc_by_access[ACCESS_CARGO] = "Cargo Bay"
 	desc_by_access[ACCESS_SECURITY] = "Security"
 	desc_by_access[ACCESS_BRIG] = "Holding Cells"
+	desc_by_access[ACCESS_BRIG_PHYSICIAN] = "Brig Physician" // MASSMETA ADDITION (not_enough_jobs)
 	desc_by_access[ACCESS_COURT] = "Courtroom"
 	desc_by_access[ACCESS_DETECTIVE] = "Detective Office"
 	desc_by_access[ACCESS_MEDICAL] = "Medical"

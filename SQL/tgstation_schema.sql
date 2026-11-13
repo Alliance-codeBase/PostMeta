@@ -428,6 +428,25 @@ CREATE TABLE `metacoin_purchases` (
 -- MASSMETA EDIT ADDITION END (metacoins)
 
 --
+-- Table structure for table `supporter`
+-- MASSMETA EDIT ADDITION START (supporter)
+DROP TABLE IF EXISTS `supporter`;
+CREATE TABLE `supporter` (
+    ckey VARCHAR(32) NOT NULL,
+    discord_id BIGINT UNSIGNED DEFAULT NULL,
+    boosty_id BIGINT UNSIGNED DEFAULT NULL,
+    permanent BOOLEAN NOT NULL DEFAULT FALSE,
+    tier SMALLINT UNSIGNED NOT NULL DEFAULT 0,
+    starts_at DATETIME DEFAULT NULL,
+    expires_at DATETIME DEFAULT NULL,
+    synced_at DATETIME DEFAULT NULL,
+    PRIMARY KEY (ckey),
+    KEY discord_id (discord_id),
+    KEY boosty_id (boosty_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+-- MASSMETA EDIT ADDITION END (supporter)
+
+--
 -- Table structure for table `poll_option`
 --
 

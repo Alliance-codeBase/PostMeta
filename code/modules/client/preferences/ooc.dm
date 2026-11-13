@@ -11,4 +11,4 @@
 	if (!..(preferences))
 		return FALSE
 
-	return is_admin(preferences.parent) || preferences.unlock_content
+	return is_admin(preferences.parent) || preferences.unlock_content || (preferences.parent.ckey in GLOB.supporters) // MASSMETA EDIT (supporter)

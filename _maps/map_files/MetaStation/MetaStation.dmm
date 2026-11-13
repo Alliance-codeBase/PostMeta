@@ -3,13 +3,12 @@
 /turf/open/space/basic,
 /area/space)
 "aab" = (
-/obj/structure/chair{
-	dir = 1
-	},
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/effect/turf_decal/tile/neutral{
 	dir = 8
 	},
 /obj/machinery/light/directional/south,
+/turf/open/floor/iron/white,
 /turf/open/floor/iron,
 /area/station/hallway/secondary/command)
 "aac" = (
@@ -152,6 +151,9 @@
 	dir = 5
 	},
 /obj/structure/window/spawner/directional/east,
+/obj/item/healthanalyzer{
+	pixel_y = -2
+	},
 /turf/open/floor/iron/white,
 /area/station/security/medical)
 "acs" = (
@@ -14384,6 +14386,16 @@
 /obj/effect/turf_decal/stripes/line,
 /turf/open/floor/plating,
 /area/station/maintenance/port/fore)
+"eWi" = (
+/obj/effect/landmark/start/brig_physician,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/effect/turf_decal/tile/neutral{
+	dir = 8
+	},
+/obj/machinery/light/directional/south,
+/turf/open/floor/iron/white,
+/turf/open/floor/iron,
+/area/station/security/medical)
 "eWn" = (
 /obj/effect/landmark/generic_maintenance_landmark,
 /turf/open/floor/plating,
@@ -20078,7 +20090,10 @@
 /obj/effect/turf_decal/trimline/blue/filled/line{
 	dir = 8
 	},
-/obj/structure/bed/medical/emergency,
+/obj/structure/closet/secure_closet/secmed,
+/obj/item/storage/medkit,
+/obj/item/storage/medkit/brute,
+/obj/item/storage/medkit/fire,
 /turf/open/floor/iron/white,
 /area/station/security/medical)
 "gXe" = (
@@ -24943,13 +24958,8 @@
 /turf/open/floor/iron/dark,
 /area/station/security/range)
 "iDF" = (
-/obj/structure/rack,
 /obj/machinery/camera/directional/south{
 	c_tag = "Brig - Infirmary"
-	},
-/obj/item/clothing/under/rank/medical/scrubs/purple,
-/obj/item/healthanalyzer{
-	pixel_y = -2
 	},
 /obj/structure/disposalpipe/segment{
 	dir = 4
@@ -24963,6 +24973,7 @@
 	},
 /obj/structure/window/spawner/directional/east,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/cyan/hidden,
+/obj/effect/spawner/surgery_tray/full/deployed,
 /turf/open/floor/iron/white,
 /area/station/security/medical)
 "iDN" = (
@@ -95714,7 +95725,7 @@ fDT
 sch
 qln
 oPn
-oPn
+eWi
 eLw
 sch
 bRF
