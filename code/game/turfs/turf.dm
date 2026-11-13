@@ -232,6 +232,7 @@ GLOBAL_LIST_EMPTY(station_turfs)
 
 	if(length(vis_contents))
 		vis_contents.Cut()
+	SEND_SIGNAL(src, COMSIG_TURF_DESTROY) //MASSMETA ADDITION (liquids)
 
 /// WARNING WARNING
 /// Turfs DO NOT lose their external signal connections when they get replaced, REMEMBER THIS

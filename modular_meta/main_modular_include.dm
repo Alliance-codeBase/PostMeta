@@ -23,6 +23,7 @@
 #include "features\improvised_shells\includes.dm"
 #include "features\kvass_beverage\includes.dm"
 #include "features\kumiss_beverage\includes.dm"
+#include "features\liquids\includes.dm"
 #include "features\oguzok_cook\includes.dm"
 #include "features\quirk_augmented\includes.dm"
 #include "features\quirk_bouncy\includes.dm"

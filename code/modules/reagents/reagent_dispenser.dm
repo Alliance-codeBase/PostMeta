@@ -208,6 +208,26 @@
 	if(!disassembled)
 		boom()
 
+//MASSMETA EDIT (liquids)
+/obj/structure/reagent_dispensers/proc/tank_leak()
+	if(!leaking || !reagents || reagents.total_volume < amount_to_leak)
+		return FALSE
+
+	var/turf/leak_turf = get_turf(src)
+	if(!isopenturf(leak_turf) || isspaceturf(leak_turf))
+		return FALSE
+
+	var/leak_amount = min(amount_to_leak, reagents.get_reagent_amount(reagent_id))
+	if(leak_amount <= 0)
+		return FALSE
+
+	var/leak_temperature = reagents.chem_temp
+	reagents.remove_reagent(reagent_id, leak_amount)
+	leak_turf.add_liquid(reagent_id, leak_amount, FALSE, leak_temperature)
+
+	playsound(src, 'sound/effects/glug.ogg', 33, TRUE, SILENCED_SOUND_EXTRARANGE)
+	return TRUE
+/* ORIGINAL
 /obj/structure/reagent_dispensers/proc/tank_leak()
 	if(leaking && reagents && reagents.total_volume >= amount_to_leak)
 		reagents.expose(get_turf(src), TOUCH, amount_to_leak / max(amount_to_leak, reagents.total_volume))
@@ -215,6 +235,7 @@
 		playsound(src, 'sound/effects/glug.ogg', 33, TRUE, SILENCED_SOUND_EXTRARANGE)
 		return TRUE
 	return FALSE
+MASSMETA EDIT END */
 
 /obj/structure/reagent_dispensers/proc/knock_down()
 	var/range = reagents.total_volume / REAGENT_SPILL_DIVISOR
