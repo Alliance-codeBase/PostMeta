@@ -347,3 +347,19 @@
 // 	desc = "A switchblade that hits much harder when you stab someone from behind."
 // 	price = 400
 // 	item_type = /obj/item/switchblade/backstab/nt
+
+/datum/metacoinshop/listing/preround/maint_disk
+	id = "maint_disk"
+	category = /datum/metacoin_category/research_surplus
+	name = "Maintenance data disk"
+	desc = "Strange disk with some off brand apps."
+	price = 20
+	variant_options = list("Data-type" = list(
+		/datum/metacoinshop/listing_variant/maint_disk/scan,
+		/datum/metacoinshop/listing_variant/maint_disk/cam,
+		/datum/metacoinshop/listing_variant/maint_disk/mod_control,
+		/datum/metacoinshop/listing_variant/maint_disk/spook,
+		/datum/metacoinshop/listing_variant/maint_disk/arcade,
+		/datum/metacoinshop/listing_variant/maint_disk/theme,
+		/datum/metacoinshop/listing_variant/maint_disk/sword
+	))
