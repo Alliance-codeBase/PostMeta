@@ -6,6 +6,7 @@
 	desc = "Kvaaaaaaaass."
 	icon = 'modular_meta/features/kvass_beverage/icons/soda.dmi'
 	icon_state = "kvass"
+	crushed_icon = 'modular_meta/features/kvass_beverage/icons/janitor.dmi'
 	list_reagents = list(/datum/reagent/consumable/kvass = 30)
 	drink_type = GRAIN
 
