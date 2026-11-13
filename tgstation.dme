@@ -7225,4 +7225,7 @@
 #include "interface\fonts\vcr_osd_mono.dm"
 #include "massmeta\modular_meta_features.dm"
 #include "modular_meta\main_modular_include.dm"
+#include "modular_meta\features\urod_zlodey\ruleset.dm"
+#include "modular_meta\features\urod_zlodey\code\urod_datum.dm"
+#include "modular_meta\features\urod_zlodey\code\urod_objectives.dm"
 // END_INCLUDE
