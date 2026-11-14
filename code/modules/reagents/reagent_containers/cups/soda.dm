@@ -100,9 +100,6 @@
 	var/obj/item/trash/can/crushed_can = new /obj/item/trash/can(target.drop_location())
 	crushed_can.icon = crushed_icon
 	crushed_can.icon_state = crushed_icon_state
-	if(icon_state == "kvass")
-		crushed_can.icon = 'modular_meta/features/kvass_beverage/icons/janitor.dmi'
-	//MASSMETA EDIT END
 	qdel(src)
 	return ITEM_INTERACT_SUCCESS
 
@@ -115,10 +112,6 @@
 	var/obj/item/trash/can/crushed_can = new /obj/item/trash/can(loc)
 	crushed_can.icon = crushed_icon
 	crushed_can.icon_state = crushed_icon_state
-	//MASSMETA EDIT BEGIN (kvass_beverage)
-	if(icon_state == "kvass")
-		crushed_can.icon = 'modular_meta/features/kvass_beverage/icons/janitor.dmi'
-	//MASSMETA EDIT END
 	var/atom/throw_target = get_edge_target_turf(crushed_can, pick(GLOB.alldirs))
 	crushed_can.throw_at(throw_target, rand(1,2), 7)
 	qdel(src)
@@ -293,10 +286,6 @@
 	var/obj/item/trash/can/crushed_can = new /obj/item/trash/can(loc)
 	crushed_can.icon = crushed_icon
 	crushed_can.icon_state = crushed_icon_state
-	//MASSMETA EDIT BEGIN (kvass_beverage)
-	if(icon_state == "kvass")
-		crushed_can.icon = 'modular_meta/features/kvass_beverage/icons/janitor.dmi'
-	//MASSMETA EDIT END
 	moveToNullspace()
 	QDEL_IN(src, 1 SECONDS) // give it a second so it can still be logged for the throw impact
 

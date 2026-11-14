@@ -2,6 +2,8 @@
 //modular override for self-licking, for some reason you CAN lick someone else's wound, but can't do the same for yourself..
 // fixes being unable to lick-self your bleeding wounds as felinids
 /datum/wound/slash/flesh/try_handling(mob/living/user)
+	if(user.combat_mode) // claws out, no licking
+		return FALSE
 	var/self_licking = (user == victim)
 	if((!self_licking && user.pulling != victim) || !HAS_TRAIT(user, TRAIT_WOUND_LICKER) || !victim.try_inject(user, injection_flags = INJECT_TRY_SHOW_ERROR_MESSAGE))
 		return FALSE

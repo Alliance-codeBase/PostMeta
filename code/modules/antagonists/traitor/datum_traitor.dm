@@ -166,7 +166,10 @@
 	ending_objective.owner = owner
 	objectives += ending_objective
 
-/datum/antagonist/traitor/proc/forge_single_generic_objective()
+/datum/antagonist/traitor/proc/forge_single_generic_objective(job_objective)
+	if(prob(JOB_PROB) && job_objective)
+		return job_objective
+
 	//MASSMETA EDIT BEGIN (antagonists_balance)
 	//if(prob(KILL_PROB)
 	if(prob(KILL_PROB) && GLOB.joined_player_list.len >= 10)

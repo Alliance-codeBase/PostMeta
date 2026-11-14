@@ -13,38 +13,38 @@ jobs:
 
       # Grab pre-requisites
       - parallel:
-          - name: Restore SpacemanDMM cache
-            uses: actions/cache@v6
-            with:
-              path: ~/SpacemanDMM
-              key: ${{ runner.os }}-spacemandmm-${{ hashFiles('dependencies.sh') }}
-              restore-keys: |
-                ${{ runner.os }}-spacemandmm-
+        - name: Restore SpacemanDMM cache
+          uses: actions/cache@v6
+          with:
+            path: ~/SpacemanDMM
+            key: ${{ runner.os }}-spacemandmm-${{ hashFiles('dependencies.sh') }}
+            restore-keys: |
+              ${{ runner.os }}-spacemandmm-
 
-          - name: Setup Bun
-            uses: ./.github/actions/setup_bun
+        - name: Setup Bun
+          uses: ./.github/actions/setup_bun
 
-          - name: Restore Bootstrap cache
-            uses: actions/cache@v6
-            with:
-              path: tools/bootstrap/.cache
-              key: ${{ runner.os }}-bootstrap-${{ hashFiles('/tools/requirements.txt') }}
-              restore-keys: |
-                ${{ runner.os }}-bootstrap-
+        - name: Restore Bootstrap cache
+          uses: actions/cache@v6
+          with:
+            path: tools/bootstrap/.cache
+            key: ${{ runner.os }}-bootstrap-${{ hashFiles('/tools/requirements.txt') }}
+            restore-keys: |
+              ${{ runner.os }}-bootstrap-
 
-          - name: Restore Rust cache
-            uses: actions/cache@v6
-            with:
-              path: ~/.cargo
-              key: ${{ runner.os }}-rust-${{ hashFiles('/tools/ci/ci_dependencies.sh')}}
-              restore-keys: |
-                ${{ runner.os }}-rust-
+        - name: Restore Rust cache
+          uses: actions/cache@v6
+          with:
+            path: ~/.cargo
+            key: ${{ runner.os }}-rust-${{ hashFiles('/tools/ci/ci_dependencies.sh')}}
+            restore-keys: |
+              ${{ runner.os }}-rust-
 
-          - name: Restore Cutter cache
-            uses: actions/cache@v6
-            with:
-              path: tools/icon_cutter/cache
-              key: ${{ runner.os }}-cutter-${{ hashFiles('dependencies.sh') }}
+        - name: Restore Cutter cache
+          uses: actions/cache@v6
+          with:
+            path: tools/icon_cutter/cache
+            key: ${{ runner.os }}-cutter-${{ hashFiles('dependencies.sh') }}
 
         - name: Install OpenDream
           uses: robinraju/release-downloader@v1.13
