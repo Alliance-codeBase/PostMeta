@@ -140,7 +140,7 @@
 		return TRUE
 
 	// Back into the encoding the rest of the chat pipeline expects.
-	request.succeed(html_encode(translated))
+	request.succeed(translated)
 	return TRUE
 
 /datum/translation_provider/libretranslate/abort(datum/translation_request/request)

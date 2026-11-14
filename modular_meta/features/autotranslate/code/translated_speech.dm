@@ -102,9 +102,10 @@
 		return FALSE
 	runechat_ref = WEAKREF(bubble)
 	bind_attempts = 0
-	try_bind_runechat()
-	return TRUE
 
+	INVOKE_ASYNC(src, PROC_REF(try_bind_runechat))
+
+	return TRUE
 /**
  * Resolves the bubble and, the first time it is renderable, captures the body
  * text as it was actually rendered - already clipped to the viewer's
@@ -170,7 +171,7 @@
 	state = TRANSLATION_DONE
 	translated_text = text
 	push_chat_update()
-	start_runechat_morph()
+	INVOKE_ASYNC(src, PROC_REF(start_runechat_morph))
 
 /**
  * Tells the chat panel the outcome exactly once.
