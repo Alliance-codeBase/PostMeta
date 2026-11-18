@@ -16,7 +16,7 @@
 	#include "map_files\NebulaStation\NebulaStation.dmm"
 	#include "map_files\KiloStation\KiloStation.dmm"
 	// MASSMETA EDIT BEGIN - Compiling our modular maps too!
-	// there's none
+	#include "map_files\Birdshot\birdshot.dmm"
 	// MASSMETA EDIT END
 #endif
 #ifdef ALL_TEMPLATES
