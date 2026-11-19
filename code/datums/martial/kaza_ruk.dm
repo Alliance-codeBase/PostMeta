@@ -248,8 +248,10 @@
 	// MASSMETA EDIT CHANGE END (krav_maga)
 
 	if(ishuman(source))
-		var/mob/living/carbon/possible_human = source
-	//	var/obj/item/organ/tail/lizard/possible_lizard_tail = possible_human.get_organ_slot(ORGAN_SLOT_EXTERNAL_TAIL) // MASSMETA EDIT REMOVAL START END (krav_maga)
+	// MASSMETA EDIT REMOVAL START (krav_maga)
+	//	var/mob/living/carbon/possible_human = source
+	//	var/obj/item/organ/tail/lizard/possible_lizard_tail = possible_human.get_organ_slot(ORGAN_SLOT_EXTERNAL_TAIL)
+	// MASSMETA EDIT REMOVAL END (krav_maga)
 
 	// MASSMETA EDIT REMOVAL START (krav_maga)
 	/*
