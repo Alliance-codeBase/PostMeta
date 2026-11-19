@@ -1,11 +1,9 @@
 /datum/martial_art/kaza_ruk
 	name = "Krav Maga"
 
-
 /obj/item/clothing/gloves/kaza_ruk/combatglovesplus
 	name = "combat gloves plus"
 	desc = "These tactical gloves are fireproof and electrically insulated. These gloves can teach you to perform Krav Maga using nanochips."
-
 
 /obj/item/clothing/gloves/kaza_ruk/sec
 	name = "krav maga gloves"
