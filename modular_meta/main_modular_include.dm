@@ -78,6 +78,8 @@
 #include "reverts\nanomed\includes.dm"
 #include "reverts\satchels_back\includes.dm"
 #include "reverts\d_sword\includes.dm"
+#include "reverts\krav_maga\includes.dm"
+#include "reverts\kitsune\includes.dm"
 
 /* --- Tweaks --- */
 
