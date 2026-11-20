@@ -1,6 +1,6 @@
 // Code by bruh24, sprites by DrNastiel, sounds are mentioned in attributions.txt in their respectable folder
 
-/obj/item/sledgehammer
+/obj/item/syndicate_sledgehammer
 	name = "Sledgehammer"
 	desc = "A mad engineer's choice"
 	icon = 'modular_meta/features/uplink_items/icons/weapon/sledgehammer/obj/weapons/sledgehammer.dmi'
@@ -40,7 +40,7 @@
 	"You're ready to strike with full force.",
 )
 
-/obj/item/sledgehammer/Initialize(mapload)
+/obj/item/syndicate_sledgehammer/Initialize(mapload)
 	. = ..()
 	AddComponent(/datum/component/two_handed, \
 		force_wielded = force_wielded, \
@@ -74,7 +74,7 @@
 		<br>\
 		The hammer remains in production. Replacement handles are sold separately.")
 
-/obj/item/sledgehammer/afterattack(atom/target, mob/living/user, list/modifiers, list/attack_modifiers)
+/obj/item/syndicate_sledgehammer/afterattack(atom/target, mob/living/user, list/modifiers, list/attack_modifiers)
 	var/mob/living/target_mob = target
 	var/atom/throw_target =  get_edge_target_turf(target_mob, get_dir(src, get_step_away(target_mob, src)))
 	if(QDELETED(target_mob))
@@ -115,14 +115,14 @@
 
 	charge_bonus = 0
 	force = HAS_TRAIT(src, TRAIT_WIELDED) ? force_wielded : force_unwielded
-	throwforce = /obj/item/sledgehammer::throwforce
-	wound_bonus = /obj/item/sledgehammer::wound_bonus
+	throwforce = /obj/item/syndicate_sledgehammer::throwforce
+	wound_bonus = /obj/item/syndicate_sledgehammer::wound_bonus
 
-/obj/item/sledgehammer/update_icon_state()
+/obj/item/syndicate_sledgehammer/update_icon_state()
 	icon_state = base_icon_state
 	return ..()
 
-/obj/item/sledgehammer/attack(atom/target, mob/user, list/modifiers, list/attack_modifiers)
+/obj/item/syndicate_sledgehammer/attack(atom/target, mob/user, list/modifiers, list/attack_modifiers)
 	hitsound = pick(
 		'sound/items/weapons/genhit1.ogg',
 		'sound/items/weapons/genhit2.ogg',
@@ -176,7 +176,7 @@
 	..()
 
 
-/obj/item/sledgehammer/pre_attack(atom/target, mob/user, list/modifiers, list/attack_modifiers)
+/obj/item/syndicate_sledgehammer/pre_attack(atom/target, mob/user, list/modifiers, list/attack_modifiers)
 	. = ..()
 	if(.)
 		return .
@@ -246,7 +246,7 @@
 	return FALSE
 
 
-/obj/item/sledgehammer/equipped(mob/user, slot, initial = FALSE)
+/obj/item/syndicate_sledgehammer/equipped(mob/user, slot, initial = FALSE)
 	. = ..()
 
 	if(slot != ITEM_SLOT_HANDS)
@@ -259,7 +259,7 @@
 	RegisterSignal(user.client, COMSIG_CLIENT_MOUSEUP, PROC_REF(on_mouse_up))
 
 
-/obj/item/sledgehammer/dropped(mob/user, silent = FALSE)
+/obj/item/syndicate_sledgehammer/dropped(mob/user, silent = FALSE)
 	if(user.client)
 		//UnregisterSignal(user, COMSIG_MOB_KEYDOWN)
 		UnregisterSignal(user.client, COMSIG_CLIENT_MOUSEDOWN)
@@ -268,7 +268,7 @@
 	return ..()
 
 
-/obj/item/sledgehammer/proc/on_mouse_up(client/player, object, location, control, params)
+/obj/item/syndicate_sledgehammer/proc/on_mouse_up(client/player, object, location, control, params)
 	SIGNAL_HANDLER
 
 	var/list/mods = params2list(params)
@@ -277,7 +277,7 @@
 		if(charge_bonus > 0)
 			to_chat(player.mob, span_notice("[phrases[charge_bonus]]"))
 
-/obj/item/sledgehammer/proc/on_mouse_down(client/player, object, location, control, params)
+/obj/item/syndicate_sledgehammer/proc/on_mouse_down(client/player, object, location, control, params)
 	SIGNAL_HANDLER
 
 	var/list/mods = params2list(params)
@@ -290,7 +290,7 @@
 
 	INVOKE_ASYNC(src, PROC_REF(begin_charging_attack), user)
 
-/obj/item/sledgehammer/proc/begin_charging_attack(mob/living/carbon/user)
+/obj/item/syndicate_sledgehammer/proc/begin_charging_attack(mob/living/carbon/user)
 	user = loc
 
 	if(charging)
@@ -313,7 +313,7 @@
 	charging = FALSE
 	mouse_held = FALSE
 
-/obj/item/sledgehammer/proc/charge_tick(mob/living/carbon/user)
+/obj/item/syndicate_sledgehammer/proc/charge_tick(mob/living/carbon/user)
 	if(!mouse_held)
 		return FALSE
 
@@ -325,7 +325,7 @@
 		next_charge += 1 SECONDS
 	return TRUE
 
-/obj/item/sledgehammer/proc/bash_head(mob/living/carbon/target, mob/living/user)
+/obj/item/syndicate_sledgehammer/proc/bash_head(mob/living/carbon/target, mob/living/user)
 	var/obj/item/bodypart/head/head = target.get_bodypart(BODY_ZONE_HEAD)
 	user.spin(spintime = 2 SECONDS, speed = 1)
 
@@ -355,7 +355,7 @@
 	charge_bonus = 0
 	addtimer(CALLBACK(src, PROC_REF(rm_signal), head), 2 SECONDS)
 
-/obj/item/sledgehammer/proc/head_trail(obj/item/bodypart/head/head, atom/old_loc)
+/obj/item/syndicate_sledgehammer/proc/head_trail(obj/item/bodypart/head/head, atom/old_loc)
 	SIGNAL_HANDLER
 
 	var/turf/tile = get_turf(head)
@@ -376,11 +376,11 @@
 
 	blood_trail.add_dir_to_trail(trail_dir, blood_to_add = BLOOD_AMOUNT_PER_DECAL)
 
-/obj/item/sledgehammer/proc/rm_signal(obj/item/bodypart/head/head)
+/obj/item/syndicate_sledgehammer/proc/rm_signal(obj/item/bodypart/head/head)
 	UnregisterSignal(head, COMSIG_MOVABLE_MOVED)
 
 // not including detailed instructions on wall destruction, as well as the finish off, as deep-lore element explains it just enough,
 // also understanding mechanics through lore is much better, than just adding a blatant to_chat() with everything required
-/obj/item/sledgehammer/examine(mob/user)
+/obj/item/syndicate_sledgehammer/examine(mob/user)
 	. = ..()
 	. += span_notice("Right-click with this in-hand to prepare a charged strike, the more progress bar is completed on the hammer, the harder will be the blow")

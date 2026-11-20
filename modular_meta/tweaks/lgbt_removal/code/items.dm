@@ -69,3 +69,4 @@
 
 /datum/loadout_item/accessory/pride
 	name = "Patriotic Pin"
+	reskin_datum = /datum/atom_skin/patriotic_pin

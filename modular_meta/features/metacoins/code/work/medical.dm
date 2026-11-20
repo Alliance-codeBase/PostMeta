@@ -45,6 +45,8 @@
 		/datum/surgery_operation/limb/repair_hairline,
 		/datum/surgery_operation/limb/reset_compound,
 		/datum/surgery_operation/limb/repair_compound,
+		/datum/surgery_operation/limb/realign_superstructure,
+		/datum/surgery_operation/limb/attach_fastenings,
 		/datum/surgery_operation/limb/prepare_cranium_repair,
 		/datum/surgery_operation/limb/repair_cranium,
 		/datum/surgery_operation/limb/debride,
