@@ -363,3 +363,11 @@
 		/datum/metacoinshop/listing_variant/maint_disk/theme,
 		/datum/metacoinshop/listing_variant/maint_disk/sword
 	))
+
+/datum/metacoinshop/listing/preround/hemag
+	id = "hemag"
+	category = /datum/metacoin_category/workshop
+	name = "HEmag"
+	desc = "A holographic copy of legendary EMAG-card that can disable most of NT-patented security systems."
+	price = 450
+	item_type = /obj/item/card/emag/hemag
