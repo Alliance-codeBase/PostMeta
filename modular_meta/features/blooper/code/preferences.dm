@@ -67,5 +67,6 @@
 		sound_file = blooper_sounds.sound,
 		pitch = preferences.read_preference(/datum/preference/numeric/blooper_pitch),
 		message = "Так звучит мой голос", // only the length counts, bloops can't read
+		radio = FALSE,
 	)
 	return TRUE

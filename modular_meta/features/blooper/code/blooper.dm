@@ -288,18 +288,19 @@ GLOBAL_LIST_INIT(bloopers, init_bloopers())
  *
  * arguments:
  * * hearers - mobs that get the sound
- * * speaker - who bloops, null for straight into the ear
+ * * speaker - who bloops, null for a plain sound
  * * sound_file - one bloop
  * * pitch - frequency multiplier
  * * message - its length sets the bloop count
+ * * radio - over the radio, straight into the ear and quieter
  */
-/proc/play_blooper(list/hearers, atom/movable/speaker, sound_file, pitch, message)
+/proc/play_blooper(list/hearers, atom/movable/speaker, sound_file, pitch, message, radio)
 	// every few letters earn a bloop, novels get cut
 	var/bloop_count = min(round(length_char(message) / BLOOPER_CHARACTERS_PER_BLOOP) + 1, BLOOPER_MAX_BLOOPS)
 	for(var/i in 1 to bloop_count)
 		// a little wobble, nobody likes a dial tone
 		var/bloop_pitch = pitch + BLOOPER_PITCH_VARIANCE * (rand() - 0.5)
-		addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(bloop), hearers, speaker, sound_file, bloop_pitch), (i - 1) * BLOOPER_INTERVAL)
+		addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(bloop), hearers, speaker, sound_file, bloop_pitch, radio), (i - 1) * BLOOPER_INTERVAL)
 
 #undef BLOOPER_CHARACTERS_PER_BLOOP
 #undef BLOOPER_MAX_BLOOPS
@@ -308,18 +309,20 @@ GLOBAL_LIST_INIT(bloopers, init_bloopers())
 
 /// bloop loudness before the listener's slider
 #define BLOOPER_VOLUME 60
+/// 3/4 of the local bloops, like radio TTS out of the box
+#define BLOOPER_RADIO_VOLUME (BLOOPER_VOLUME * 0.75)
 
 /// one bloop for everyone in hearers, args as in [/proc/play_blooper]
-/proc/bloop(list/hearers, atom/movable/speaker, sound_file, pitch)
+/proc/bloop(list/hearers, atom/movable/speaker, sound_file, pitch, radio)
 	var/turf/source = get_turf(speaker)
 	// gibbed mid-sentence, the rest goes unsaid
 	if(!isnull(speaker) && isnull(source))
 		return
 	for(var/mob/listener as anything in hearers)
 		listener.playsound_local(
-			source,
+			(radio ? null : source), // radio goes straight into the ear
 			soundin = sound_file,
-			vol = BLOOPER_VOLUME,
+			vol = (radio ? BLOOPER_RADIO_VOLUME : BLOOPER_VOLUME),
 			vary = TRUE,
 			frequency = pitch,
 			max_distance = SOUND_RANGE,
@@ -327,3 +330,4 @@ GLOBAL_LIST_INIT(bloopers, init_bloopers())
 		)
 
 #undef BLOOPER_VOLUME
+#undef BLOOPER_RADIO_VOLUME
