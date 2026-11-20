@@ -107,6 +107,23 @@
 				breath = loc_as_obj.handle_internal_lifeform(src, BREATH_VOLUME)
 
 			else if(isturf(loc)) //Breathe from loc as turf
+				//MASSMETA ADDITION (liquids)
+				var/turf/our_turf = loc
+				if(our_turf.liquids && !HAS_TRAIT(src, TRAIT_NOBREATH) && ((body_position == LYING_DOWN && our_turf.liquids.liquid_state >= LIQUID_STATE_WAIST) || (body_position == STANDING_UP && our_turf.liquids.liquid_state >= LIQUID_STATE_FULLTILE)))
+					//Officially trying to breathe underwater
+					if(HAS_TRAIT(src, TRAIT_WATER_BREATHING))
+						failed_last_breath = FALSE
+						clear_alert(ALERT_NOT_ENOUGH_OXYGEN)
+						return FALSE
+					adjust_oxy_loss(3)
+					failed_last_breath = TRUE
+					if(oxyloss <= OXYGEN_DAMAGE_CHOKING_THRESHOLD && !IS_UNCONSCIOUS_OR_CRIT(src))
+						to_chat(src, span_userdanger("You hold in your breath!"))
+					else
+						//Try and drink water
+						our_turf.liquids.liquid_group.transfer_to_atom(src, CHOKE_REAGENTS_INGEST_ON_BREATH_AMOUNT)
+						visible_message(span_warning("[src] chokes on water!"), span_userdanger("You're choking on water!"))
+				//MASSMETA ADDITION END
 				var/breath_moles = 0
 				if(environment)
 					breath_moles = environment.total_moles()*BREATH_PERCENTAGE

@@ -599,6 +599,7 @@
 	set_opacity(FALSE)
 	operating = FALSE
 	air_update_turf(TRUE, FALSE)
+	SEND_SIGNAL(src, COMSIG_ATOM_DOOR_OPEN) //MASSMETA ADDITION (liquids)
 	if(autoclose)
 		autoclose_in(DOOR_CLOSE_WAIT)
 	return TRUE
@@ -625,6 +626,18 @@
 	operating = TRUE
 
 	run_animation(DOOR_CLOSING_ANIMATION)
+
+	var/turf/open/open_turf = get_turf(src)
+	if(open_turf.liquids)
+		var/datum/liquid_group/turfs_group = open_turf.liquids.liquid_group
+		turfs_group.remove_from_group(open_turf)
+		turfs_group.try_split(open_turf)
+		for(var/dir in GLOB.cardinals)
+			var/turf/open/direction_turf = get_step(open_turf, dir)
+			if(!isopenturf(direction_turf) || !direction_turf.liquids)
+				continue
+			turfs_group.check_edges(direction_turf)
+
 	layer = closingLayer
 	var/unpassable_delay = animation_segment_delay(DOOR_CLOSING_UNPASSABLE)
 	SLEEP_NOT_DEL(unpassable_delay)

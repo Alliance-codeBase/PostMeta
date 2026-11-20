@@ -210,6 +210,16 @@ GLOBAL_LIST_INIT(blacklisted_automated_baseturfs, typecacheof(list(
 	return new_turf
 
 /turf/open/ChangeTurf(path, list/new_baseturfs, flags) //Resist the temptation to make this default to keeping air.
+	//MASSMETA ADDITION (liquids)
+	var/obj/effect/abstract/liquid_turf/old_liquids = liquids
+	var/datum/liquid_group/old_group = liquids?.liquid_group
+	var/evaporating = FALSE
+	if(old_group)
+		old_group.remove_from_group(liquids.my_turf)
+		if(SSliquids.evaporation_queue[src])
+			evaporating = TRUE
+			SSliquids.evaporation_queue -= src
+	//MASSMETA ADDITION END
 	if ((flags & CHANGETURF_INHERIT_AIR) && ispath(path, /turf/open))
 		var/datum/gas_mixture/stashed_air = new()
 		stashed_air.copy_from(air)
@@ -229,11 +239,23 @@ GLOBAL_LIST_INIT(blacklisted_automated_baseturfs, typecacheof(list(
 		if(stashed_group)
 			if(stashed_group.should_display || SSair.display_all_groups)
 				stashed_group.display_turf(new_turf)
+		//MASSMETA ADDITION (fluids)
+		if(old_liquids)
+			old_liquids.my_turf = new_turf
+			new_turf.liquids = old_liquids
+			old_group.add_to_group(new_turf)
+			if(evaporating)
+				SSliquids.evaporation_queue[new_turf] = TRUE
+		//MASSMETA ADDITION END
 	else
 		if(excited || excited_group)
 			SSair.remove_from_active(src) //Clean up wall excitement, and refresh excited groups
 		if(ispath(path, /turf/closed) || ispath(path, /turf/cordon))
 			flags |= CHANGETURF_RECALC_ADJACENT
+		//MASSMETA ADDITION (fluids)
+		if(old_liquids)
+			qdel(old_liquids)
+		//MASSMETA ADDITION END
 		return ..()
 
 //If you modify this function, ensure it works correctly with lateloaded map templates.
