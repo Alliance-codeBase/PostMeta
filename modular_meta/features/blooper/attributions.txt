@@ -2,8 +2,27 @@ attention, blah, boo, darwin, drop, fox, friendly, guttural, hack, honey, hospit
 from Paradise Station, https://github.com/ParadiseSS13/Paradise/pull/32678 by Alecksohs, CC BY-SA 3.0.
 darwin, drop, guttural, huh, prompter and wow were made by BlackDog.
 
-banjo, beep, bloop, box_deploy, button_click, chirp, chitter, finger_snap, hoot, lighter, meat_slap, muted_string_high, muted_string_low, muted_string_medium, peep, pop, quack, scope, squeak, timer:
-copies of /tg/station sounds from sound/, CC BY-SA 3.0.
+Copies of /tg/station sounds, CC BY-SA 3.0 unless noted:
+banjo <- sound/runtime/instruments/banjo/Cn3.ogg
+beep <- sound/machines/nuke/general_beep.ogg
+bloop <- sound/misc/bloop.ogg, by Tim Kahn, https://freesound.org/people/tim.kahn/sounds/130377/
+box_deploy <- sound/misc/box_deploy.ogg
+button_click <- sound/effects/pressureplate.ogg
+chirp <- sound/runtime/chatter/griffin_1.ogg
+chitter <- sound/mobs/non-humanoids/insect/chitter.ogg
+finger_snap <- sound/mobs/humanoids/human/snap/fingersnap1.ogg
+hoot <- sound/runtime/chatter/owl_1.ogg
+lighter <- sound/items/lighter/lighter_on.ogg, from BeeStation, https://github.com/BeeStation/BeeStation-Hornet/pull/29
+meat_slap <- sound/effects/meatslap.ogg
+muted_string_high <- sound/runtime/instruments/synthesis_samples/guitar/crisis_muted/C4.ogg
+muted_string_low <- sound/runtime/instruments/synthesis_samples/guitar/crisis_muted/C2.ogg
+muted_string_medium <- sound/runtime/instruments/synthesis_samples/guitar/crisis_muted/C3.ogg
+peep <- sound/mobs/non-humanoids/chicken/chick_peep.ogg
+pop <- sound/effects/pop.ogg
+quack <- sound/effects/quack.ogg
+scope <- sound/items/weapons/scope.ogg
+squeak <- sound/items/toy_squeak/toysqueak1.ogg
+timer <- sound/items/timer.ogg
 
 All clean takes are loudness-normalized with ffmpeg.
-*_muffled, *_radio and *_radio_muffled are ffmpeg-filtered copies of the clean takes, CC BY-SA 3.0 like their sources.
+*_muffled, *_radio and *_radio_muffled are ffmpeg-filtered copies of the clean takes, under the same license as their source.
