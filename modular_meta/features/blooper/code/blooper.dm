@@ -288,7 +288,7 @@ GLOBAL_LIST_INIT(bloopers, init_bloopers())
  *
  * arguments:
  * * hearers - mobs that get the sound
- * * speaker - who bloops, followed as they walk, null for straight into the ear
+ * * speaker - who bloops, null for straight into the ear
  * * sound_file - one bloop
  * * pitch - frequency multiplier
  * * message - its length sets the bloop count
