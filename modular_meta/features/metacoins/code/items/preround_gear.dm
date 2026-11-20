@@ -371,3 +371,12 @@
 	desc = "Uses patented retractable wheel technology. Never sacrifice speed for style - not that this provides much of either."
 	price = 200
 	item_type = /obj/item/clothing/shoes/wheelys
+
+/datum/metacoinshop/listing/preround/syndeye
+	id = "syndeye"
+	category = /datum/metacoin_category/research_surplus
+	name = "Suspicious disk"
+	desc = "App with accses to almost any camera in sector."
+	price = 300
+	item_type = /obj/item/disk/computer/syndicate/camera_app
+
