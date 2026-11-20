@@ -20,14 +20,14 @@
 
 /datum/blooper/banjo
 	name = "Banjo"
-	sound = 'sound/runtime/instruments/banjo/Cn3.ogg'
+	sound = 'modular_meta/features/blooper/sound/banjo.ogg'
 	muffled_sound = 'modular_meta/features/blooper/sound/banjo_muffled.ogg'
 	radio_sound = 'modular_meta/features/blooper/sound/banjo_radio.ogg'
 	radio_muffled_sound = 'modular_meta/features/blooper/sound/banjo_radio_muffled.ogg'
 
 /datum/blooper/beep
 	name = "Beep"
-	sound = 'sound/machines/nuke/general_beep.ogg'
+	sound = 'modular_meta/features/blooper/sound/beep.ogg'
 	muffled_sound = 'modular_meta/features/blooper/sound/beep_muffled.ogg'
 	radio_sound = 'modular_meta/features/blooper/sound/beep_radio.ogg'
 	radio_muffled_sound = 'modular_meta/features/blooper/sound/beep_radio_muffled.ogg'
@@ -41,7 +41,7 @@
 
 /datum/blooper/bloop
 	name = "Bloop"
-	sound = 'sound/misc/bloop.ogg'
+	sound = 'modular_meta/features/blooper/sound/bloop.ogg'
 	muffled_sound = 'modular_meta/features/blooper/sound/bloop_muffled.ogg'
 	radio_sound = 'modular_meta/features/blooper/sound/bloop_radio.ogg'
 	radio_muffled_sound = 'modular_meta/features/blooper/sound/bloop_radio_muffled.ogg'
@@ -55,28 +55,28 @@
 
 /datum/blooper/box_deploy
 	name = "Box Deploy"
-	sound = 'sound/misc/box_deploy.ogg'
+	sound = 'modular_meta/features/blooper/sound/box_deploy.ogg'
 	muffled_sound = 'modular_meta/features/blooper/sound/box_deploy_muffled.ogg'
 	radio_sound = 'modular_meta/features/blooper/sound/box_deploy_radio.ogg'
 	radio_muffled_sound = 'modular_meta/features/blooper/sound/box_deploy_radio_muffled.ogg'
 
 /datum/blooper/button_click
 	name = "Button Click"
-	sound = 'sound/effects/pressureplate.ogg'
+	sound = 'modular_meta/features/blooper/sound/button_click.ogg'
 	muffled_sound = 'modular_meta/features/blooper/sound/button_click_muffled.ogg'
 	radio_sound = 'modular_meta/features/blooper/sound/button_click_radio.ogg'
 	radio_muffled_sound = 'modular_meta/features/blooper/sound/button_click_radio_muffled.ogg'
 
 /datum/blooper/chirp
 	name = "Chirp"
-	sound = 'sound/runtime/chatter/griffin_1.ogg'
+	sound = 'modular_meta/features/blooper/sound/chirp.ogg'
 	muffled_sound = 'modular_meta/features/blooper/sound/chirp_muffled.ogg'
 	radio_sound = 'modular_meta/features/blooper/sound/chirp_radio.ogg'
 	radio_muffled_sound = 'modular_meta/features/blooper/sound/chirp_radio_muffled.ogg'
 
 /datum/blooper/chitter
 	name = "Chitter"
-	sound = 'sound/mobs/non-humanoids/insect/chitter.ogg'
+	sound = 'modular_meta/features/blooper/sound/chitter.ogg'
 	muffled_sound = 'modular_meta/features/blooper/sound/chitter_muffled.ogg'
 	radio_sound = 'modular_meta/features/blooper/sound/chitter_radio.ogg'
 	radio_muffled_sound = 'modular_meta/features/blooper/sound/chitter_radio_muffled.ogg'
@@ -97,7 +97,7 @@
 
 /datum/blooper/finger_snap
 	name = "Finger Snap"
-	sound = 'sound/mobs/humanoids/human/snap/fingersnap1.ogg'
+	sound = 'modular_meta/features/blooper/sound/finger_snap.ogg'
 	muffled_sound = 'modular_meta/features/blooper/sound/finger_snap_muffled.ogg'
 	radio_sound = 'modular_meta/features/blooper/sound/finger_snap_radio.ogg'
 	radio_muffled_sound = 'modular_meta/features/blooper/sound/finger_snap_radio_muffled.ogg'
@@ -139,7 +139,7 @@
 
 /datum/blooper/hoot
 	name = "Hoot"
-	sound = 'sound/runtime/chatter/owl_1.ogg'
+	sound = 'modular_meta/features/blooper/sound/hoot.ogg'
 	muffled_sound = 'modular_meta/features/blooper/sound/hoot_muffled.ogg'
 	radio_sound = 'modular_meta/features/blooper/sound/hoot_radio.ogg'
 	radio_muffled_sound = 'modular_meta/features/blooper/sound/hoot_radio_muffled.ogg'
@@ -167,35 +167,35 @@
 
 /datum/blooper/lighter
 	name = "Lighter"
-	sound = 'sound/items/lighter/lighter_on.ogg'
+	sound = 'modular_meta/features/blooper/sound/lighter.ogg'
 	muffled_sound = 'modular_meta/features/blooper/sound/lighter_muffled.ogg'
 	radio_sound = 'modular_meta/features/blooper/sound/lighter_radio.ogg'
 	radio_muffled_sound = 'modular_meta/features/blooper/sound/lighter_radio_muffled.ogg'
 
 /datum/blooper/meat_slap
 	name = "Meat Slap"
-	sound = 'sound/effects/meatslap.ogg'
+	sound = 'modular_meta/features/blooper/sound/meat_slap.ogg'
 	muffled_sound = 'modular_meta/features/blooper/sound/meat_slap_muffled.ogg'
 	radio_sound = 'modular_meta/features/blooper/sound/meat_slap_radio.ogg'
 	radio_muffled_sound = 'modular_meta/features/blooper/sound/meat_slap_radio_muffled.ogg'
 
 /datum/blooper/muted_string_high
 	name = "Muted String (High)"
-	sound = 'sound/runtime/instruments/synthesis_samples/guitar/crisis_muted/C4.ogg'
+	sound = 'modular_meta/features/blooper/sound/muted_string_high.ogg'
 	muffled_sound = 'modular_meta/features/blooper/sound/muted_string_high_muffled.ogg'
 	radio_sound = 'modular_meta/features/blooper/sound/muted_string_high_radio.ogg'
 	radio_muffled_sound = 'modular_meta/features/blooper/sound/muted_string_high_radio_muffled.ogg'
 
 /datum/blooper/muted_string_low
 	name = "Muted String (Low)"
-	sound = 'sound/runtime/instruments/synthesis_samples/guitar/crisis_muted/C2.ogg'
+	sound = 'modular_meta/features/blooper/sound/muted_string_low.ogg'
 	muffled_sound = 'modular_meta/features/blooper/sound/muted_string_low_muffled.ogg'
 	radio_sound = 'modular_meta/features/blooper/sound/muted_string_low_radio.ogg'
 	radio_muffled_sound = 'modular_meta/features/blooper/sound/muted_string_low_radio_muffled.ogg'
 
 /datum/blooper/muted_string_medium
 	name = "Muted String (Medium)"
-	sound = 'sound/runtime/instruments/synthesis_samples/guitar/crisis_muted/C3.ogg'
+	sound = 'modular_meta/features/blooper/sound/muted_string_medium.ogg'
 	muffled_sound = 'modular_meta/features/blooper/sound/muted_string_medium_muffled.ogg'
 	radio_sound = 'modular_meta/features/blooper/sound/muted_string_medium_radio.ogg'
 	radio_muffled_sound = 'modular_meta/features/blooper/sound/muted_string_medium_radio_muffled.ogg'
@@ -209,14 +209,14 @@
 
 /datum/blooper/peep
 	name = "Peep"
-	sound = 'sound/mobs/non-humanoids/chicken/chick_peep.ogg'
+	sound = 'modular_meta/features/blooper/sound/peep.ogg'
 	muffled_sound = 'modular_meta/features/blooper/sound/peep_muffled.ogg'
 	radio_sound = 'modular_meta/features/blooper/sound/peep_radio.ogg'
 	radio_muffled_sound = 'modular_meta/features/blooper/sound/peep_radio_muffled.ogg'
 
 /datum/blooper/pop
 	name = "Pop"
-	sound = 'sound/effects/pop.ogg'
+	sound = 'modular_meta/features/blooper/sound/pop.ogg'
 	muffled_sound = 'modular_meta/features/blooper/sound/pop_muffled.ogg'
 	radio_sound = 'modular_meta/features/blooper/sound/pop_radio.ogg'
 	radio_muffled_sound = 'modular_meta/features/blooper/sound/pop_radio_muffled.ogg'
@@ -230,28 +230,28 @@
 
 /datum/blooper/quack
 	name = "Quack"
-	sound = 'sound/effects/quack.ogg'
+	sound = 'modular_meta/features/blooper/sound/quack.ogg'
 	muffled_sound = 'modular_meta/features/blooper/sound/quack_muffled.ogg'
 	radio_sound = 'modular_meta/features/blooper/sound/quack_radio.ogg'
 	radio_muffled_sound = 'modular_meta/features/blooper/sound/quack_radio_muffled.ogg'
 
 /datum/blooper/scope
 	name = "Scope"
-	sound = 'sound/items/weapons/scope.ogg'
+	sound = 'modular_meta/features/blooper/sound/scope.ogg'
 	muffled_sound = 'modular_meta/features/blooper/sound/scope_muffled.ogg'
 	radio_sound = 'modular_meta/features/blooper/sound/scope_radio.ogg'
 	radio_muffled_sound = 'modular_meta/features/blooper/sound/scope_radio_muffled.ogg'
 
 /datum/blooper/squeak
 	name = "Squeak"
-	sound = 'sound/items/toy_squeak/toysqueak1.ogg'
+	sound = 'modular_meta/features/blooper/sound/squeak.ogg'
 	muffled_sound = 'modular_meta/features/blooper/sound/squeak_muffled.ogg'
 	radio_sound = 'modular_meta/features/blooper/sound/squeak_radio.ogg'
 	radio_muffled_sound = 'modular_meta/features/blooper/sound/squeak_radio_muffled.ogg'
 
 /datum/blooper/timer
 	name = "Timer"
-	sound = 'sound/items/timer.ogg'
+	sound = 'modular_meta/features/blooper/sound/timer.ogg'
 	muffled_sound = 'modular_meta/features/blooper/sound/timer_muffled.ogg'
 	radio_sound = 'modular_meta/features/blooper/sound/timer_radio.ogg'
 	radio_muffled_sound = 'modular_meta/features/blooper/sound/timer_radio_muffled.ogg'

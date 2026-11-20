@@ -2,4 +2,8 @@ attention, blah, boo, darwin, drop, fox, friendly, guttural, hack, honey, hospit
 from Paradise Station, https://github.com/ParadiseSS13/Paradise/pull/32678 by Alecksohs, CC BY-SA 3.0.
 darwin, drop, guttural, huh, prompter and wow were made by BlackDog.
 
+banjo, beep, bloop, box_deploy, button_click, chirp, chitter, finger_snap, hoot, lighter, meat_slap, muted_string_high, muted_string_low, muted_string_medium, peep, pop, quack, scope, squeak, timer:
+copies of /tg/station sounds from sound/, CC BY-SA 3.0.
+
+All clean takes are loudness-normalized with ffmpeg.
 *_muffled, *_radio and *_radio_muffled are ffmpeg-filtered copies of the clean takes, CC BY-SA 3.0 like their sources.
