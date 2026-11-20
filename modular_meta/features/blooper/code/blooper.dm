@@ -311,6 +311,8 @@ GLOBAL_LIST_INIT(bloopers, init_bloopers())
 #define BLOOPER_VOLUME 60
 /// 3/4 of the local bloops, like radio TTS out of the box
 #define BLOOPER_RADIO_VOLUME (BLOOPER_VOLUME * 0.75)
+/// your own bloops, 60 of 85 like your own TTS voice
+#define BLOOPER_SELF_VOLUME (BLOOPER_VOLUME * 60 / 85)
 
 /// one bloop for everyone in hearers, args as in [/proc/play_blooper]
 /proc/bloop(list/hearers, atom/movable/speaker, sound_file, pitch, radio)
@@ -319,10 +321,16 @@ GLOBAL_LIST_INIT(bloopers, init_bloopers())
 	if(!isnull(speaker) && isnull(source))
 		return
 	for(var/mob/listener as anything in hearers)
+		var/volume = BLOOPER_VOLUME
+		if(radio)
+			volume = BLOOPER_RADIO_VOLUME
+		// your own voice is quieter from the inside
+		else if(listener == speaker)
+			volume = BLOOPER_SELF_VOLUME
 		listener.playsound_local(
 			(radio ? null : source), // radio goes straight into the ear
 			soundin = sound_file,
-			vol = (radio ? BLOOPER_RADIO_VOLUME : BLOOPER_VOLUME),
+			vol = volume,
 			vary = TRUE,
 			frequency = pitch,
 			max_distance = SOUND_RANGE,
@@ -331,3 +339,4 @@ GLOBAL_LIST_INIT(bloopers, init_bloopers())
 
 #undef BLOOPER_VOLUME
 #undef BLOOPER_RADIO_VOLUME
+#undef BLOOPER_SELF_VOLUME

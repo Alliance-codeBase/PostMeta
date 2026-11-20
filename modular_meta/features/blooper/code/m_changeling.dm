@@ -4,7 +4,7 @@
 	var/blooper
 	/// stolen [/atom/movable/var/blooper_pitch]
 	var/blooper_pitch
-	/// stolen [/mob/living/carbon/human/var/blooper_voice]
+	/// stolen [/mob/living/var/blooper_voice]
 	var/blooper_voice
 
 /datum/antagonist/changeling/create_profile(mob/living/carbon/human/target, protect = 0)
