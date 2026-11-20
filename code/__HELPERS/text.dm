@@ -388,11 +388,11 @@
 
 /// Returns a string with the first word of the string capitalized.
 /proc/capitalize(input)
-	return replacetext(input, regex(@"[^A-z]*?([A-z]*)"), /proc/capitalize_word)
+	return replacetext(input, regex(@"[^A-zа-яА-ЯёЁ]*?([A-zа-яА-ЯёЁ]*)"), /proc/capitalize_word) //MASSMETA EDIT (cyrillic)
 
 /// Returns a string with the first letter of each word capitialized
 /proc/full_capitalize(input)
-	return replacetext(input, regex(@"[^A-z]*?([A-z]*)", "g"), /proc/capitalize_word)
+	return replacetext(input, regex(@"[^A-zа-яА-ЯёЁ]*?([A-zа-яА-ЯёЁ]*)", "g"), /proc/capitalize_word) //MASSMETA EDIT (cyrillic)
 
 /// Capitalizes the first symbol in a passed string. Unsafe when used with BYOND string macros, use capitalize() instead!
 /proc/capitalize_word(t)

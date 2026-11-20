@@ -2,6 +2,7 @@ import { useCallback, useEffect, useReducer, useRef, useState } from 'react';
 import { Tooltip } from 'tgui-core/components';
 import { assetMap } from './assets';
 import { playCollapseSound, playExpandSound, playSelectSound } from './audio';
+import { InitText, type InitTextData } from './InitText'; // MASSMETA EDIT ADDITION (init_text)
 
 type StationTrait = {
   ref: string;
@@ -34,6 +35,9 @@ export type ServerState = {
   overflowJob: string | null;
   traitFeedback: string | null;
   transparent: boolean;
+  // MASSMETA EDIT ADDITION START (init_text)
+  initText: InitTextData | null;
+  // MASSMETA EDIT ADDITION END (init_text)
 };
 
 type LobbyState = {
@@ -157,12 +161,14 @@ function SpriteButton({
   onClick,
   children,
   pressedKey,
+  pressedSound = 'ui_select1.ogg'
 }: {
   iconState: string;
   enabled?: boolean;
   onClick?: React.MouseEventHandler;
   children?: React.ReactNode;
   pressedKey?: string;
+  pressedSound?: string;
 }) {
   const displayState = enabled ? iconState : `${iconState}_disabled`;
   const key = pressedKey ?? iconState;
@@ -182,7 +188,7 @@ function SpriteButton({
       className={`sprite-btn ${!enabled ? 'sprite-btn--disabled' : ''}`}
       onClick={(e) => {
         if (!enabled) return;
-        playSelectSound();
+        playSelectSound(pressedSound);
         triggerFlick();
         onClick?.(e);
       }}
@@ -482,6 +488,9 @@ export function LobbyMenu() {
       className={`lobby ${ss.transparent ? 'lobby--transparent' : ''}`}
       style={backgroundStyle}
     >
+      {/* MASSMETA EDIT ADDITION START (init_text) */}
+      {!!ss.initText && <InitText text={ss.initText} faded={!blipEnabled} />}
+      {/* MASSMETA EDIT ADDITION END (init_text) */}
       <div className="lobby__anchor">
         <LobbyElement top={0} left={-61} zIndex={1} collapsed={collapsed}>
           <img className="lobby__sprite" src={icon('background')} alt="" />
@@ -585,6 +594,7 @@ export function LobbyMenu() {
           <LobbyElement top={146} left={-54} zIndex={3} collapsed={collapsed}>
             <SpriteButton
               iconState="start_now"
+              pressedSound="ui_splat.ogg"
               onClick={() => sendAction('start_now')}
             />
           </LobbyElement>

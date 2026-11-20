@@ -7,6 +7,8 @@
 	COOLDOWN_DECLARE(gopnik_time_cooldown) //yes, you need some time for repaint your rusty garbage
 
 /datum/action/vehicle/sealed/gopnik/Trigger(trigger_flags)
+	.=..()
+
 	if(!istype(vehicle_entered_target, /obj/vehicle/sealed/car/cheburek))
 		return
 	if(!COOLDOWN_FINISHED(src, gopnik_time_cooldown))
@@ -23,6 +25,8 @@
 	COOLDOWN_DECLARE(shift_up_cooldown)
 
 /datum/action/vehicle/sealed/gear_up/Trigger(trigger_flags)
+	.=..()
+
 	if(!istype(vehicle_entered_target, /obj/vehicle/sealed/car/cheburek))
 		return
 	if(!COOLDOWN_FINISHED(src, shift_up_cooldown))
@@ -39,6 +43,8 @@
 	COOLDOWN_DECLARE(shift_down_cooldown)
 
 /datum/action/vehicle/sealed/gear_down/Trigger(trigger_flags)
+	.=..()
+
 	if(!istype(vehicle_entered_target, /obj/vehicle/sealed/car/cheburek))
 		return
 	if(!COOLDOWN_FINISHED(src, shift_down_cooldown))
@@ -53,6 +59,8 @@
 	button_icon_state = "car_headlights"
 
 /datum/action/vehicle/sealed/headlights/Trigger(trigger_flags)
+	.=..()
+
 	to_chat(owner, span_notice("You flip the switch for the vehicle's headlights."))
 	vehicle_entered_target.headlights_toggle = !vehicle_entered_target.headlights_toggle
 	vehicle_entered_target.set_light_on(vehicle_entered_target.headlights_toggle)
@@ -68,6 +76,8 @@
 	button_icon_state = "car_blinker"
 
 /datum/action/vehicle/sealed/blinkers/Trigger(trigger_flags)
+	.=..()
+
 	if(!istype(vehicle_entered_target, /obj/vehicle/sealed/car/cheburek))
 		return
 	var/obj/vehicle/sealed/car/cheburek/T = vehicle_entered_target

@@ -10,7 +10,6 @@
 	pref_flag = ROLE_TRAITOR
 	antag_moodlet = /datum/mood_event/focused
 	antag_hud_name = "traitor"
-	hijack_speed = 0.5 //10 seconds per hijack stage by default
 	ui_name = "AntagInfoTraitor"
 	suicide_cry = "FOR THE SYNDICATE!!"
 	preview_outfit = /datum/outfit/traitor
@@ -147,6 +146,7 @@
 	if(is_hijacker)
 		ending_objective = new /datum/objective/hijack
 		ending_objective.owner = owner
+		objectives += ending_objective
 		return
 
 	var/martyr_compatibility = TRUE
@@ -166,7 +166,10 @@
 	ending_objective.owner = owner
 	objectives += ending_objective
 
-/datum/antagonist/traitor/proc/forge_single_generic_objective()
+/datum/antagonist/traitor/proc/forge_single_generic_objective(job_objective)
+	if(prob(JOB_PROB) && job_objective)
+		return job_objective
+
 	//MASSMETA EDIT BEGIN (antagonists_balance)
 	//if(prob(KILL_PROB)
 	if(prob(KILL_PROB) && GLOB.joined_player_list.len >= 10)

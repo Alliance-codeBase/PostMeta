@@ -36,7 +36,8 @@
 	entry_fee = min(max(round(text2num("[entry_fee]") || 0), 0), 1000)
 
 	if(entry_fee > 0)
-		var/current_balance = get_metacoins_controller().fetch_balance(host.ckey)
+		var/datum/metacoins_controller/controller = get_metacoins_controller()
+		var/current_balance = controller.fetch_balance(host.ckey)
 		if(isnull(current_balance))
 			return list("ok" = FALSE, "error" = "db_unavailable")
 		if(current_balance < entry_fee)

@@ -7314,7 +7314,7 @@
 	pixel_x = 3;
 	pixel_y = 4
 	},
-/obj/item/food/cornchips/purple{
+/obj/item/food/chips/corn/purple{
 	pixel_x = -6;
 	pixel_y = -3
 	},
@@ -12641,9 +12641,7 @@
 /area/station/security)
 "elb" = (
 /obj/structure/table/reinforced,
-/obj/structure/tipjar{
-	pixel_y = 5
-	},
+/obj/structure/tipjar/prefilled,
 /obj/machinery/door/firedoor/border_only{
 	dir = 4
 	},
@@ -18000,9 +17998,7 @@
 /area/station/commons/dorms)
 "fYJ" = (
 /obj/structure/table/wood,
-/obj/structure/tipjar{
-	pixel_y = 8
-	},
+/obj/structure/tipjar/prefilled,
 /obj/effect/turf_decal/siding/wood{
 	dir = 9
 	},
@@ -41438,7 +41434,7 @@
 /obj/machinery/camera/autoname/directional/east,
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/table,
-/obj/item/food/cornchips/green,
+/obj/item/food/chips/corn/green,
 /turf/open/floor/iron/dark/smooth_large,
 /area/station/cargo/bitrunning/den)
 "nyi" = (
@@ -74374,7 +74370,7 @@
 /obj/structure/rack,
 /obj/machinery/flasher/directional/west,
 /obj/item/storage/toolbox/electrical,
-/obj/structure/sign/plaques/kiddie{
+/obj/structure/plaque/kiddie/developer{
 	pixel_x = 0;
 	pixel_y = -28
 	},
@@ -74423,7 +74419,7 @@
 	pixel_x = 3;
 	pixel_y = 9
 	},
-/obj/structure/sign/plaques/kiddie/perfect_drone{
+/obj/structure/plaque/kiddie/perfect_drone{
 	pixel_x = 0;
 	pixel_y = -28
 	},

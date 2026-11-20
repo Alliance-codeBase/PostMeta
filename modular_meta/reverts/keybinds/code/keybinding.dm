@@ -7,14 +7,8 @@
 /datum/keybinding/living/toggle_throw_mode
 	hotkey_keys = list("R", "Southwest")
 
-/datum/keybinding/mob/swap_hands
+/datum/keybinding/dextrous/swap_hands/row
 	hotkey_keys = list("X")
 
-/datum/keybinding/mob/drop_item
+/datum/keybinding/dextrous/drop_item
 	hotkey_keys = list("Q")
-
-/datum/keybinding/mob/select_hand/right
-	hotkey_keys = null
-
-/datum/keybinding/mob/select_hand/left
-	hotkey_keys = null

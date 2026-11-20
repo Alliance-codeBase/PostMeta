@@ -246,7 +246,9 @@
 	var/list/history = list()
 
 /datum/metacoinshop/panel/slot/New(client/owner, mob/viewer)
-	machine = get_metacoin_controller().slot
+	var/datum/metacoin_shop_controller/shop_controller = get_metacoin_controller()
+	var/datum/metacoins_controller/controller = get_metacoins_controller()
+	machine = shop_controller.slot
 	reels = machine.roll_reels()
 	last = list(
 		"bet" = METACOIN_SLOT_DEFAULT_BET,
@@ -257,7 +259,7 @@
 		"resultState" = "idle",
 	)
 	history = list()
-	balance = get_metacoins_controller().fetch_balance(owner?.ckey)
+	balance = controller.fetch_balance(owner?.ckey)
 	if(isnull(balance))
 		balance = 0
 	..(owner, viewer)

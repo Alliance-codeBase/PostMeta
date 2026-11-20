@@ -11,11 +11,14 @@
 	custom_materials = list(/datum/material/iron = SMALL_MATERIAL_AMOUNT * 0.5, /datum/material/glass = SMALL_MATERIAL_AMOUNT * 0.2)
 
 /obj/item/flashlight/lamp/lava/update_icon_state()
-	overlays.Cut()
-	var/image/I = image(icon = icon, icon_state = "lavalamp-[light_on ? "on" : "off"]")
-	I.color = light_color
-	overlays += I
-	return ..()
+	. = ..()
+	icon_state = initial(icon_state) // -on state is just the glass, the body must stay
+
+/obj/item/flashlight/lamp/lava/update_overlays()
+	. = ..()
+	var/mutable_appearance/lava_overlay = mutable_appearance(icon, "lavalamp-[light_on ? "on" : "off"]")
+	lava_overlay.color = initial(light_color) // paint filter tints it on top
+	. += lava_overlay
 
 /obj/item/flashlight/lamp/lava/red
 	desc = "A kitchy red decorative light."

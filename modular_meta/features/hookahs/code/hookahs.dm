@@ -239,7 +239,7 @@
 				return CLICK_ACTION_BLOCKING
 
 			var/mob/living/living_user = user
-			if(!(hookah_mouthpiece in living_user.held_items))
+			if(isnull(hookah_mouthpiece) || !living_user.is_holding(hookah_mouthpiece)) // empty hands hold null too
 				return CLICK_ACTION_BLOCKING
 
 			user.visible_message(span_notice("[user] takes a deep puff..."), span_notice("You take a deep puff..."))
@@ -308,7 +308,7 @@
 
 	QDEL_LIST(food_items)
 	visible_message(span_warning("Hookah shatters into pieces with a loud crash!"))
-	playsound(src, SFX_SHATTER, 50)
+	playsound(src, /datum/sound_effect/shatter, 50)
 	return ..()
 
 /obj/item/hookah/pickup(mob/user)

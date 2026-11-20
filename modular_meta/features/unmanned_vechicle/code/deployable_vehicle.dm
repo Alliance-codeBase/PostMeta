@@ -36,11 +36,12 @@
 		internal_item = loc
 
 	if(internal_item)
-		atom_integrity = internal_item.atom_integrity
+		atom_integrity = internal_item.get_integrity()
 
 /obj/vehicle/unmanned/deployable/Destroy()
 	if(internal_item)
-		qdel(internal_item)
+		internal_item.forceMove(get_turf(src))
+	STOP_PROCESSING(SSobj,src)
 	return ..()
 
 /obj/vehicle/unmanned/deployable/attack_hand(mob/user, list/modifiers)
@@ -89,7 +90,7 @@
 
 		if(internal_item)
 			internal_item.forceMove(drop_turf)
-			internal_item.atom_integrity = atom_integrity
+			internal_item.update_integrity(atom_integrity)
 			to_chat(user, span_notice("You pack [src] into [internal_item.name]."))
 			internal_item = null
 
