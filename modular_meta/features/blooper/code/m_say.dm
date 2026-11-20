@@ -46,7 +46,7 @@
 		sound_file = muffled ? blooper_sounds.muffled_sound : blooper_sounds.sound
 	play_blooper(
 		bloop_hearers,
-		source = (radio ? null : source), // radio goes straight into the ear
+		speaker = (radio ? null : src), // radio goes straight into the ear
 		sound_file = sound_file,
 		pitch = blooper_pitch,
 		message = message,
