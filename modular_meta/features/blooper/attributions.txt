@@ -1,0 +1,5 @@
+attention, blah, boo, darwin, drop, fox, friendly, guttural, hack, honey, hospital, hospital_2, huh, ow, prompter, wow:
+from Paradise Station, https://github.com/ParadiseSS13/Paradise/pull/32678 by Alecksohs, CC BY-SA 3.0.
+darwin, drop, guttural, huh, prompter and wow were made by BlackDog.
+
+*_muffled, *_radio and *_radio_muffled are ffmpeg-filtered copies of the clean takes, CC BY-SA 3.0 like their sources.
