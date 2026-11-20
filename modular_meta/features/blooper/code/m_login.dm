@@ -1,10 +1,11 @@
-//ORIGINAL FILE: code/modules/mob/living/carbon/human/human_defines.dm
-/mob/living/carbon/human
+//ORIGINAL FILE: code/modules/mob/living/living_defines.dm
+/mob/living
 	/// bloops instead of a voice even when the server has one
 	var/blooper_voice = FALSE
 
-/// hands the mic over to the bloops
-/mob/living/carbon/human/proc/update_blooper_voice()
+/// bloops or voice, bloops take the mic
+/mob/living/proc/set_blooper_voice(new_blooper_voice)
+	blooper_voice = new_blooper_voice
 	if(blooper_voice)
 		voice = null
 
@@ -15,4 +16,15 @@
 	if(isnull(blooper))
 		blooper = pick(GLOB.bloopers)
 	// login just handed out a random voice, take it back
-	update_blooper_voice()
+	set_blooper_voice(blooper_voice)
+
+//ORIGINAL FILE: code/modules/mob/living/silicon/login.dm
+/mob/living/silicon/Login()
+	. = ..()
+	// dropped mid-login, nobody to read prefs from
+	if(!. || !client)
+		return FALSE
+	// the chassis squeaks like its char slot
+	blooper = client.prefs.read_preference(/datum/preference/choiced/blooper)
+	blooper_pitch = client.prefs.read_preference(/datum/preference/numeric/blooper_pitch)
+	set_blooper_voice(client.prefs.read_preference(/datum/preference/toggle/blooper_voice))

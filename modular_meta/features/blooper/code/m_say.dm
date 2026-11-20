@@ -34,6 +34,9 @@
 		if(!radio && get_dist(hearer, source) > MESSAGE_RANGE)
 			continue
 		bloop_hearers += hearer
+	// silicon radio chatter passes nobody in
+	if(!length(bloop_hearers))
+		return
 	// gas mask on? bloop through a sock
 	var/list/voice_filters = list()
 	get_tts_voice(voice_filters, list())

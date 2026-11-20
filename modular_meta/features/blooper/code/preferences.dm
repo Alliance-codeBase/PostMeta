@@ -14,8 +14,7 @@
 	return ..()
 
 /datum/preference/toggle/blooper_voice/apply_to_human(mob/living/carbon/human/target, value)
-	target.blooper_voice = value
-	target.update_blooper_voice()
+	target.set_blooper_voice(value)
 
 /// what the character bloops with
 /datum/preference/choiced/blooper

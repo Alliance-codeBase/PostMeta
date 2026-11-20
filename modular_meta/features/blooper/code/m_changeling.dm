@@ -19,4 +19,4 @@
 	. = ..()
 	user.blooper = chosen_profile.blooper
 	user.blooper_pitch = chosen_profile.blooper_pitch
-	user.blooper_voice = chosen_profile.blooper_voice
+	user.set_blooper_voice(chosen_profile.blooper_voice)
