@@ -239,9 +239,8 @@
 				return CLICK_ACTION_BLOCKING
 
 			var/mob/living/living_user = user
-			for(var/obj/item/hookah_mouthpiece/hookah_mouthpiece as anything in living_user.get_held_items_of_type(/obj/item/hookah_mouthpiece))
-				if(!hookah_mouthpiece)
-					return CLICK_ACTION_BLOCKING
+			if(isnull(hookah_mouthpiece) || !living_user.is_holding(hookah_mouthpiece)) // empty hands hold null too
+				return CLICK_ACTION_BLOCKING
 
 			user.visible_message(span_notice("[user] takes a deep puff..."), span_notice("You take a deep puff..."))
 			if(!do_after(user, 5 SECONDS, src))
