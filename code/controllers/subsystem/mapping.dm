@@ -142,15 +142,12 @@ SUBSYSTEM_DEF(mapping)
 	require_area_resort()
 	process_teleport_locs() //Sets up the wizard teleport locations
 	preloadTemplates()
-<<<<<<< HEAD
 	var/start_time // MASSMETA ADDITION
-=======
 	#ifdef NAVMAP_BAKE_GENERATION
 	var/generating_navmap_bakes = TRUE
 	#else
 	var/generating_navmap_bakes = FALSE
 	#endif
->>>>>>> upstream/master
 
 #ifndef SKIP_SPACE_LEVELS
 	// MASSMETA ADDITION
@@ -181,21 +178,13 @@ SUBSYSTEM_DEF(mapping)
 			CRASH("Ice wilds failed to load!")
 
 	// Pick a random away mission.
-<<<<<<< HEAD
-	if(CONFIG_GET(flag/roundstart_away))
-		SStitle.add_init_text("Away Mission", "> Away Mission", "<font color='yellow'>LOADING...</font>") // MASSMETA ADDITION
-=======
 	if(!generating_navmap_bakes && CONFIG_GET(flag/roundstart_away))
->>>>>>> upstream/master
+		SStitle.add_init_text("Away Mission", "> Away Mission", "<font color='yellow'>LOADING...</font>") // MASSMETA ADDITION
 		createRandomZlevel(prob(CONFIG_GET(number/config_gateway_chance)))
 		SStitle.add_init_text("Away Mission", "> Away Mission", "<font color='green'>DONE</font>", (REALTIMEOFDAY - start_time) / (1 SECONDS)) // MASSMETA ADDITION
 
-<<<<<<< HEAD
-	else if (SSmapping.current_map.load_all_away_missions) // we're likely in a local testing environment, so punch it.
-		SStitle.add_init_text("Away Mission", "> All Away Missions", "<font color='yellow'>LOADING...</font>") // MASSMETA ADDITION
-=======
 	else if (!generating_navmap_bakes && SSmapping.current_map.load_all_away_missions) // we're likely in a local testing environment, so punch it.
->>>>>>> upstream/master
+		SStitle.add_init_text("Away Mission", "> All Away Missions", "<font color='yellow'>LOADING...</font>") // MASSMETA ADDITION
 		load_all_away_missions()
 	// MASSMETA ADDITION
 		SStitle.add_init_text("Away Mission", "> All Away Missions", "<font color='green'>DONE</font>", (REALTIMEOFDAY - start_time) / (1 SECONDS))
@@ -206,13 +195,9 @@ SUBSYSTEM_DEF(mapping)
 	SStitle.add_init_text("Ruins", "> Ruins", "<font color='yellow'>LOADING...</font>")
 	// MASSMETA ADDITION END
 
-<<<<<<< HEAD
-	setup_ruins()
-	SStitle.add_init_text("Ruins", "> Ruins", "<font color='green'>DONE</font>", (REALTIMEOFDAY - start_time) / (1 SECONDS)) // MASSMETA ADDITION
-=======
 	if(!generating_navmap_bakes)
 		setup_ruins()
->>>>>>> upstream/master
+	SStitle.add_init_text("Ruins", "> Ruins", "<font color='green'>DONE</font>", (REALTIMEOFDAY - start_time) / (1 SECONDS)) // MASSMETA ADDITION
 #endif
 
 	if(!generating_navmap_bakes)

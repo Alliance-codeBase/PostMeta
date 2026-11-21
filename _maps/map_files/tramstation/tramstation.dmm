@@ -4342,17 +4342,6 @@
 	},
 /turf/open/floor/iron,
 /area/station/hallway/primary/tram/center)
-<<<<<<< HEAD
-=======
-"aEo" = (
-/obj/effect/turf_decal/stripes/line{
-	dir = 1
-	},
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/cyan/visible,
-/turf/open/floor/engine,
-/area/station/engineering/supermatter/room)
->>>>>>> upstream/master
 "aEu" = (
 /obj/effect/turf_decal/trimline/neutral/filled/line{
 	dir = 8
@@ -25873,8 +25862,8 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 1
 	},
-/obj/machinery/atmospherics/pipe/smart/manifold4w/cyan/visible,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/cyan/visible,
 /turf/open/floor/engine,
 /area/station/engineering/supermatter/room)
 "hSJ" = (
@@ -36081,6 +36070,10 @@
 	},
 /turf/open/floor/iron,
 /area/station/commons/fitness/recreation)
+"llu" = (
+/obj/machinery/atmospherics/pipe/smart/manifold4w/orange/visible,
+/turf/open/floor/engine,
+/area/station/engineering/supermatter/room)
 "llx" = (
 /obj/machinery/door/airlock/mining/glass{
 	name = "Mailing Sorting Office"
@@ -40939,10 +40932,6 @@
 /obj/item/stack/ore/glass,
 /turf/open/misc/asteroid,
 /area/station/science/explab)
-"mRW" = (
-/obj/machinery/atmospherics/pipe/smart/manifold4w/orange/visible,
-/turf/open/floor/engine,
-/area/station/engineering/supermatter/room)
 "mSf" = (
 /obj/structure/cable,
 /obj/structure/disposalpipe/junction/yjunction,
@@ -102905,7 +102894,7 @@ dQs
 kWr
 gIO
 qrg
-mRW
+llu
 sZA
 daJ
 gqp
@@ -103419,13 +103408,8 @@ smX
 gub
 lNz
 qqc
-<<<<<<< HEAD
-cOF
-dVt
-=======
 aqm
-eDg
->>>>>>> upstream/master
+dVt
 daJ
 fVI
 euW
@@ -103681,7 +103665,7 @@ bYu
 cmR
 lNz
 nMX
-mRW
+llu
 hTF
 qHs
 ghh
@@ -104709,7 +104693,7 @@ uKF
 pWK
 lNz
 qqc
-mRW
+llu
 hTF
 qHs
 ghh
@@ -104966,13 +104950,8 @@ lUm
 gub
 lNz
 qqc
-<<<<<<< HEAD
-hTX
-dVt
-=======
 aqm
-eDg
->>>>>>> upstream/master
+dVt
 daJ
 fVI
 euW
