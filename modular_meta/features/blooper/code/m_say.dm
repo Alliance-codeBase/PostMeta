@@ -1,8 +1,9 @@
 //ORIGINAL FILE: code/game/atoms_movable.dm
 /atom/movable
-	/// name of what we bloop with, null for the silent ones
+	// Bloopers
+	/// The current mob's stored ID for their blooper. ID of a datum.
 	var/blooper
-	/// bloop pitch
+	/// The pitch pre-variation.
 	var/blooper_pitch = 1
 
 //ORIGINAL FILE: code/game/say.dm

@@ -1,4 +1,5 @@
 #include "code\blooper.dm"
+#include "code\blooper_list.dm"
 #include "code\m_changeling.dm"
 #include "code\m_dullahan.dm"
 #include "code\m_hologram.dm"
