@@ -63,6 +63,7 @@
 #include "features\explosives_ban\includes.dm"
 #include "features\unmanned_vechicle\includes.dm"
 #include "features\title_screenz\includes.dm"
+#include "features\blooper\includes.dm"
 #include "features\_code_helpers\includes.dm"
 #include "features\hemag\includes.dm"
 
