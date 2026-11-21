@@ -89,12 +89,8 @@ jobs:
         compile_all_maps,
         run_all_tests,
         run_alternate_tests,
-<<<<<<< HEAD
         #run_linters,
-=======
-        run_linters,
         check_navmap_bakes,
->>>>>>> upstream/master
       ]
     runs-on: ubuntu-24.04
     steps:
