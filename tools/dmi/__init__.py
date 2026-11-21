@@ -58,7 +58,11 @@ class Dmi:
 
         # read metadata
         metadata = image.info['Description']
-        line_iter = iter(metadata.splitlines())
+        # MASSMETA EDIT CHANGE BEGIN - pil reads utf-8 as latin-1, and splitlines() breaks cyrillic on \x85
+        # ORIGINAL
+        # line_iter = iter(metadata.splitlines())
+        line_iter = iter(metadata.split('\n'))
+        # MASSMETA EDIT CHANGE END
         assert next(line_iter) == "# BEGIN DMI"
         assert next(line_iter) == f"version = {cls.version}"
 

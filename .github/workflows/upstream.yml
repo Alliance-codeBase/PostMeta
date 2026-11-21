@@ -8,7 +8,7 @@ on:
 
 jobs:
   sync-upstream:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/create-github-app-token@v2
         id: generate-token
@@ -31,11 +31,13 @@ jobs:
           git remote add upstream https://github.com/tgstation/tgstation
           git fetch upstream master
           git checkout master
+          tools/hooks/install.sh # maps merge tile by tile, not line by line
           git config user.name "mass-bot"
           git config user.email "179393467+mass-bot@users.noreply.github.com"
           set +e
-          git merge --no-edit upstream/master
+          git merge --no-edit upstream/master > "$RUNNER_TEMP/merge.log"
           merge=$?
+          cat "$RUNNER_TEMP/merge.log"
           echo "Exit Code: $merge"
           set -e
           if [ "$merge" -ne "0" ]; then
@@ -43,6 +45,10 @@ jobs:
             {
             echo "conflicts<<EOF"
             echo "$conflicts"
+            # turf and area clashes leave no marker in the map, so the driver's report goes to the pr
+            echo '```'
+            grep -E '^Merging |^ C: |^    (Saving|Alternative|Original)' "$RUNNER_TEMP/merge.log" || true
+            echo '```'
             echo "EOF"
             } >> $GITHUB_OUTPUT
             git add -A
