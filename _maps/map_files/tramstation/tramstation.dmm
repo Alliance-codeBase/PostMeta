@@ -6964,7 +6964,6 @@
 /obj/structure/disposalpipe/trunk/multiz/down{
 	dir = 4
 	},
-/obj/structure/cable,
 /obj/effect/turf_decal/trimline/neutral/filled/corner{
 	dir = 4
 	},
