@@ -287,6 +287,11 @@
 	if(!filter_name_ic(trimmed)) // Contains IC chat prohibited words
 		return
 
+	//MASSMETA EDIT ADDITION BEGIN (alias_xss)
+	if(findtext(trimmed, regex("\[<>\"]"))) // admin panels paste names in as raw html, a name is not a webpage
+		return
+	//MASSMETA EDIT ADDITION END
+
 	return trim(trimmed)
 
 
