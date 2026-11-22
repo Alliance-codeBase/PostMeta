@@ -221,7 +221,7 @@ To check if a reward is bought
 
 /datum/metacoinshop/listing_variant/maint_disk/scan
 	id = "scan"
-	name = "Phys-scaner"
+	name = "Phys-scanner"
 	item_type = /obj/item/disk/computer/maintenance/scanner
 /datum/metacoinshop/listing_variant/maint_disk/cam
 	id = "cam"
