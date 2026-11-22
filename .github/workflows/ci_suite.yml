@@ -28,15 +28,15 @@ jobs:
       - name: Mandatory Empty Step
         run: exit 0
 
-  #run_linters:
-  #  name: Run Linters
-  #  needs: start_gate
-  #  uses: ./.github/workflows/run_linters.yml - MASSMETA EDIT (почините говно)
-
-  check_navmap_bakes:
-    name: Check generated navmaps
+  run_linters:
+    name: Run Linters
     needs: start_gate
-    uses: ./.github/workflows/check_navmap_bakes.yml
+    uses: ./.github/workflows/run_linters.yml
+
+  #check_navmap_bakes: # MASSMETA EDIT - our maps have no bakes, the server bakes them at roundstart
+  #  name: Check generated navmaps
+  #  needs: start_gate
+  #  uses: ./.github/workflows/check_navmap_bakes.yml
 
   collect_data:
     name: Collect Data
@@ -89,8 +89,8 @@ jobs:
         compile_all_maps,
         run_all_tests,
         run_alternate_tests,
-        #run_linters,
-        check_navmap_bakes,
+        run_linters,
+        #check_navmap_bakes,
       ]
     runs-on: ubuntu-24.04
     steps:

@@ -50,7 +50,7 @@
 
 
 /obj/item/clothing/head/hats/hopcap/setup_reskins()
- 	AddComponent(/datum/component/reskinable_item, /datum/atom_skin/hopcap)
+	AddComponent(/datum/component/reskinable_item, /datum/atom_skin/hopcap)
 
 /datum/atom_skin/hopcap
 	abstract_type =  /datum/atom_skin/hopcap

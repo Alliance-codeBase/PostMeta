@@ -22,7 +22,7 @@
 				confidential = TRUE)
 		else
 			/// Mentor we are replying to left. Mentorhelp instead.
-			mentorhelp(msg)
+			send_mentorhelp(msg)
 		return
 
 	//Get message text, limit it's length.and clean/escape html
@@ -40,7 +40,7 @@
 					confidential = TRUE)
 			else
 				//Mentor we are replying to has vanished, Mentorhelp instead
-				mentorhelp(msg)
+				send_mentorhelp(msg)
 				return
 
 		//Neither party is a mentor, they shouldn't be PMing!

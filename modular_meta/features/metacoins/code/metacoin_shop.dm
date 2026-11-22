@@ -159,7 +159,10 @@ GLOBAL_DATUM(metacoin_shop_controller, /datum/metacoin_shop_controller)
 
 /datum/metacoin_shop_controller/proc/on_spawn(datum/source, datum/job/job, mob/living/spawned, client/player_client)
 	SIGNAL_HANDLER
+	INVOKE_ASYNC(src, PROC_REF(hand_out_spawn_purchases), spawned, player_client)
 
+/// Gives a roundstart player their purchases, async since the metacoin queries can sleep
+/datum/metacoin_shop_controller/proc/hand_out_spawn_purchases(mob/living/spawned, client/player_client)
 	if(!player_client)
 		return
 
@@ -207,7 +210,10 @@ GLOBAL_DATUM(metacoin_shop_controller, /datum/metacoin_shop_controller)
 
 /datum/metacoin_shop_controller/proc/on_latejoin(datum/source, datum/job/job, mob/living/spawned)
 	SIGNAL_HANDLER
+	INVOKE_ASYNC(src, PROC_REF(hand_out_latejoin_purchases), spawned)
 
+/// Gives a latejoining player their purchases, async since the metacoin queries can sleep
+/datum/metacoin_shop_controller/proc/hand_out_latejoin_purchases(mob/living/spawned)
 	var/target_ckey = spawned.ckey
 
 	persistent.grant(target_ckey, spawned, spawned.client)
@@ -353,9 +359,6 @@ GLOBAL_DATUM(metacoin_shop_controller, /datum/metacoin_shop_controller)
 	send_error(user, result["error"])
 	return FALSE
 
-/client/verb/view_metacoin_shop()
-	set name = "View Metacoin Shop"
-	set category = "OOC"
-	set desc = "Open metacoin shop window."
+GAME_VERB_DESC(/client, view_metacoin_shop, "View Metacoin Shop", "Open metacoin shop window.", "OOC")
 
 	new /datum/metacoinshop/panel/shop(src, usr)

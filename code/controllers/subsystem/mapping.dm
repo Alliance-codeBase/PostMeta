@@ -142,7 +142,6 @@ SUBSYSTEM_DEF(mapping)
 	require_area_resort()
 	process_teleport_locs() //Sets up the wizard teleport locations
 	preloadTemplates()
-	var/start_time // MASSMETA ADDITION
 	#ifdef NAVMAP_BAKE_GENERATION
 	var/generating_navmap_bakes = TRUE
 	#else
@@ -151,7 +150,7 @@ SUBSYSTEM_DEF(mapping)
 
 #ifndef SKIP_SPACE_LEVELS
 	// MASSMETA ADDITION
-	start_time = REALTIMEOFDAY
+	var/start_time = REALTIMEOFDAY
 	SStitle.add_init_text("Empty Space", "> Space", "<font color='yellow'>LOADING...</font>")
 	// MASSMETA ADDITION END
 	// Create space ruin levels

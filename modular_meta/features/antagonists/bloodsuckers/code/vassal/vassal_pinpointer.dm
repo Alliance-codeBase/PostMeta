@@ -9,6 +9,10 @@
 	name = "Blood Bond"
 	desc = "You always know where your master is."
 
+#define VASSAL_SCAN_MIN_DISTANCE 5
+/// 2s update time.
+#define VASSAL_SCAN_PING_TIME 20
+
 /datum/status_effect/agent_pinpointer/vassal_edition
 	id = "agent_pinpointer"
 	alert_type = /atom/movable/screen/alert/status_effect/agent_pinpointer/vassal_edition
@@ -16,6 +20,9 @@
 	tick_interval = VASSAL_SCAN_PING_TIME
 	duration = -1
 	range_fuzz_factor = 0
+
+#undef VASSAL_SCAN_MIN_DISTANCE
+#undef VASSAL_SCAN_PING_TIME
 
 /datum/status_effect/agent_pinpointer/vassal_edition/on_creation(mob/living/new_owner, ...)
 	..()
