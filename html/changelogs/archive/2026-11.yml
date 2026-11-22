@@ -250,3 +250,38 @@
       means they might get scalerot, so please don't actually do that. Just admire
       them from a comfortable, although perhaps uncomfortable for the subject of admiration,
       distance.
+2026-11-19:
+  san7890:
+  - rscdel: CatwalkStation has been removed from the game.
+2026-11-20:
+  Absolucy:
+  - bugfix: fixed lighting and night vision breaking after turning back from a shapeshift
+      (or getting put into a body) on an upper z-level, until you changed z-levels
+  Melbert:
+  - rscadd: Shoving someone who is on fire into someone who is not spreads fire now.
+  TheRyeGuyWhoWillNowDie:
+  - balance: Doubled the potency of synthflesh
+  btcbuster:
+  - spellcheck: fixed a typo on an icebox plant
+  moocowswag:
+  - qol: Ai's will no longer be punished for having high apm
+  - qol: Silicons can now rapidly cycle modes on air alarms
+  - bugfix: Air alarm ai wires are no longer inverted
+  - bugfix: Air alarm screwdriver context is no longer inverted
+2026-11-22:
+  Kurgis:
+  - bugfix: Exosuit drills no longer need to disabled and re-enabled again to properly
+      use their on_click functions... because now they just start disabled.
+  Melbert:
+  - bugfix: You can no longer examine things obscured by darkness (unless you have
+      night vision)
+  - bugfix: You no longer see messages of people obscured by darkness (unless you
+      have night vision)
+  PapaMichael:
+  - bugfix: AIs can now malfunction when piloting a shell
+  - bugfix: Ceruleans species-changed into humans no longer lose a third of their
+      blood nor zoom around super fast
+  SmArtKar:
+  - bugfix: Fixes hacker names not filtering out some invalid symbols
+  btcbuster:
+  - bugfix: Can't take pyrophobia and pyromania at once now.

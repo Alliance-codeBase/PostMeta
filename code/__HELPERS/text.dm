@@ -268,6 +268,7 @@
 #undef NUMBERS_DETECTED
 #undef LETTERS_DETECTED
 
+<<<<<<< HEAD
 
 /// Much more permissive version of reject_bad_name().
 /// Returns a trimmed string or null if the name is invalid.
@@ -296,6 +297,8 @@
 	return trim(trimmed)
 
 
+=======
+>>>>>>> upstream/master
 /// Helper proc to check if a name is valid for the IC filter
 /proc/filter_name_ic(name)
 	for(var/bad_name in list("space", "floor", "wall", "r-wall", "monkey", "unknown", "inactive ai")) //prevents these common metagamey names
