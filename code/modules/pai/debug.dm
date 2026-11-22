@@ -20,7 +20,12 @@ ADMIN_VERB(makepAI, R_FUN, "Make pAI", "Specify a location to spawn a pAI device
 	var/obj/item/pai_card/card = new(target)
 	var/mob/living/silicon/pai/pai = new(card)
 
+	//MASSMETA EDIT CHANGE BEGIN (alias_xss)
+	/* ORIGINAL
 	pai.name = chosen_name
+	*/
+	pai.name = reject_bad_name(chosen_name, allow_numbers = TRUE, strict = TRUE, cap_after_symbols = FALSE) || "Unknown" // same rules as a pai signing up through the menu
+	//MASSMETA EDIT CHANGE END
 	pai.real_name = pai.name
 	pai.PossessByPlayer(choice.key)
 	card.set_personality(pai)
