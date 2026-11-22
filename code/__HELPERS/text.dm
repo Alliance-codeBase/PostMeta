@@ -268,34 +268,6 @@
 #undef NUMBERS_DETECTED
 #undef LETTERS_DETECTED
 
-
-/// Much more permissive version of reject_bad_name().
-/// Returns a trimmed string or null if the name is invalid.
-/// Allows most characters except for IC chat prohibited words.
-/proc/permissive_sanitize_name(value)
-	if(!istext(value)) // Not a string
-		return
-
-	var/name_length = length(value)
-	if(name_length < 3) // Too short
-		return
-
-	if(name_length > 3 * MAX_NAME_LEN) // Bad input
-		return
-
-	var/trimmed = trim(value, MAX_NAME_LEN)
-	if(!filter_name_ic(trimmed)) // Contains IC chat prohibited words
-		return
-
-	//MASSMETA EDIT ADDITION BEGIN (alias_xss)
-	var/static/regex/html_chars = regex("\[<>\"]")
-	if(findtext(trimmed, html_chars)) // admin panels paste names in as raw html, a name is not a webpage
-		return
-	//MASSMETA EDIT ADDITION END
-
-	return trim(trimmed)
-
-
 /// Helper proc to check if a name is valid for the IC filter
 /proc/filter_name_ic(name)
 	for(var/bad_name in list("space", "floor", "wall", "r-wall", "monkey", "unknown", "inactive ai")) //prevents these common metagamey names
