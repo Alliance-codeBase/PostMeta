@@ -52,7 +52,12 @@
 	if (host_role.mafia_game_controller.phase != MAFIA_PHASE_NIGHT)
 		return FALSE
 
+	//MASSMETA EDIT CHANGE BEGIN (xss_hotfix)
+	/* ORIGINAL
 	var/message = span_changeling("<b>\[CHANGELING CHAT\] [source]</b>: [html_decode(speech_args[SPEECH_MESSAGE])]")
+	*/
+	var/message = span_changeling("<b>\[CHANGELING CHAT\] [source]</b>: [speech_args[SPEECH_MESSAGE]]") // say() already encoded it, decoding hands raw html to to_chat
+	//MASSMETA EDIT CHANGE END
 	host_role.mafia_game_controller.send_message(message, MAFIA_TEAM_MAFIA)
 	speech_args[SPEECH_MESSAGE] = ""
 	return TRUE

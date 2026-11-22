@@ -146,14 +146,12 @@
 
 	say("Processing audio..")
 
-	var/safe_url = replacetext(request_url, "\"", "")
-	safe_url = replacetext(safe_url, ";", "")
-	safe_url = replacetext(safe_url, "&", "")
+	var/safe_url = shell_url_scrub(request_url) // $() and backticks still run inside double quotes, so whitelist instead of a blacklist
 
 	var/stream_id = rustg_hash_string(RUSTG_HASH_MD5, safe_url)
 	var/output_template = "data/music_cache/yt_[stream_id]"
 	current_stream_path = "[output_template].ogg"
-	var/shell_command = "yt-dlp -x --audio-format vorbis --audio-quality 8 --postprocessor-args \"ExtractAudio:-ac 1 -ar 32000\" -o \"[output_template].%(ext)s\" \"[safe_url]\" > \"data/music_cache/yt_[stream_id].log\" 2>&1" // clients pull the whole file on entering range, keep it small
+	var/shell_command = "yt-dlp -x --audio-format vorbis --audio-quality 8 --postprocessor-args \"ExtractAudio:-ac 1 -ar 32000\" -o \"[output_template].%(ext)s\" -- \"[safe_url]\" >\"data/music_cache/yt_[stream_id].log\" 2>&1" // clients pull the whole file on entering range, keep it small
 	if(!fexists(current_stream_path))
 		if(world.system_type == MS_WINDOWS)
 			shell("cmd /c \"[shell_command]\"")

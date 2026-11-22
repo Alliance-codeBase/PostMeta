@@ -27,7 +27,7 @@ type MarkdownRendererProps = {
 };
 
 export const MarkdownRenderer = (props: MarkdownRendererProps) => {
-  let { content, sanitize } = props;
+  let { content, sanitize = true } = props; // MASSMETA EDIT CHANGE (xss_hotfix): react 19 ignores defaultProps on function components, ORIGINAL: let { content, sanitize } = props;
 
   content = marked(content, { async: false });
   if (sanitize) {
@@ -37,6 +37,10 @@ export const MarkdownRenderer = (props: MarkdownRendererProps) => {
   return <div dangerouslySetInnerHTML={{ __html: content }} />;
 };
 
+// MASSMETA EDIT REMOVAL BEGIN (xss_hotfix)
+/*
 MarkdownRenderer.defaultProps = {
   sanitize: true,
 };
+*/
+// MASSMETA EDIT REMOVAL END
