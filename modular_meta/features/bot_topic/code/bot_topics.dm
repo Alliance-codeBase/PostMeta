@@ -64,6 +64,7 @@
 	if(!author || !message)
 		return json_encode(list("error" = "Missing author or message"))
 
+	author = sanitize(author)
 	message = sanitize(message)
 
 	for(var/client/C in GLOB.clients)

@@ -189,7 +189,12 @@
 		message = uppertext(message)
 		message += "[stutter_char(exclamation)]"
 
+	//MASSMETA EDIT CHANGE BEGIN (xss_hotfix)
+	/* ORIGINAL
 	message_args[TREAT_MESSAGE_ARG] = message
+	*/
+	message_args[TREAT_MESSAGE_ARG] = sanitize(message) // re-encode like the parent does, the parent only runs 15% of the time
+	//MASSMETA EDIT CHANGE END
 
 	var/mob/living/living_source = source
 	if(!isliving(source) || living_source.has_status_effect(/datum/status_effect/speech/stutter))

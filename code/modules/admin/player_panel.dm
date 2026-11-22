@@ -63,8 +63,15 @@
 				function expand(data_id,target_id){
 
 					job = document.getElementById(data_id+"_job").textContent
+					//MASSMETA EDIT CHANGE BEGIN (alias_xss)
+					/* ORIGINAL
 					name = document.getElementById(data_id+"_name").textContent
 					real_name = document.getElementById(data_id+"_rname").textContent
+					*/
+					// innerHTML keeps the server side escaping, textContent would undo it right before body hits innerHTML
+					name = document.getElementById(data_id+"_name").innerHTML
+					real_name = document.getElementById(data_id+"_rname").innerHTML
+					//MASSMETA EDIT CHANGE END
 					old_names = document.getElementById(data_id+"_prevnames").textContent
 					key = document.getElementById(data_id+"_key").textContent
 					ip = document.getElementById(data_id+"_lastip").textContent

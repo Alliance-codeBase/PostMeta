@@ -33,7 +33,12 @@
 /obj/item/integrated_circuit/module/set_display_name(new_name)
 	. = ..()
 	attached_module.display_name = new_name
+	//MASSMETA EDIT CHANGE BEGIN (xss_hotfix)
+	/* ORIGINAL
 	attached_module.name = "module ([new_name])"
+	*/
+	attached_module.name = "module ([strip_html(display_name)])" // same treatment the parent gives shells, the raw param had no length cap either
+	//MASSMETA EDIT CHANGE END
 
 /obj/item/integrated_circuit/module/load_component(type)
 	if(!attached_module)

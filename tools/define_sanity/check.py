@@ -34,6 +34,11 @@ excluded_files = [
     "code/__DEFINES/*.dm",
     "code/__HELPERS/*.dm",
     "code/_globalvars/*.dm",
+    # MASSMETA EDIT ADDITION BEGIN - modular global defines
+    "modular_meta/_defines/*.dm",
+    "modular_meta/_helpers/*.dm",
+    "modular_meta/_globalvars/*.dm",
+    # MASSMETA EDIT ADDITION END
     # TGS files come from another repository so lets not worry about them.
     "code/modules/tgs/**/*.dm",
     # Doesn't come with the repo, but is in CI.

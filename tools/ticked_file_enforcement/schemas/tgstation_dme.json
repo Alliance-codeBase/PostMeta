@@ -11,6 +11,8 @@
 		"tools/HubMigrator/HubMigrator.dm",
 		"tools/CatchUnescapedBrackets/*.dm",
 		"tools/SS13SmoothingCutter/*.dm",
-		"tools/ScrollAnimationAssembler/*.dm"
+		"tools/ScrollAnimationAssembler/*.dm",
+		"modular_meta/*/*",
+		"massmeta/*/*"
 	]
 }

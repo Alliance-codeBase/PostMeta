@@ -109,9 +109,10 @@
 			continue
 		already_targeting += task.target //Removing primary objective kill targets from the list
 
-	var/parent_type = type::parent_type
+	var/datum/traitor_objective/own_type = type
+	var/normal_objective_type = own_type::parent_type
 	//don't roll head of staff types if you haven't completed the normal version
-	if(heads_of_staff && !handler.get_completion_count(parent_type))
+	if(heads_of_staff && !handler.get_completion_count(normal_objective_type))
 		// Locked if they don't have any of the risky bug room objective completed
 		return FALSE
 

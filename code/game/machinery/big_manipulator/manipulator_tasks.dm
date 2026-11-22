@@ -494,7 +494,12 @@
 		new /datum/manipulator_priority/interact/with_items,
 		new /datum/manipulator_priority/interact/with_turf,
 	)
+	//MASSMETA EDIT CHANGE BEGIN (parts_tier_5)
+	/* ORIGINAL
 	if(manipulator_tier == 4)
+	*/
+	if(manipulator_tier >= 4)
+	//MASSMETA EDIT CHANGE END
 		priorities += new /datum/manipulator_priority/interact/with_vehicles
 	return priorities
 
@@ -537,7 +542,12 @@
 		new /datum/manipulator_priority/interact/with_items,
 		new /datum/manipulator_priority/interact/with_turf,
 	)
+	//MASSMETA EDIT CHANGE BEGIN (parts_tier_5)
+	/* ORIGINAL
 	if(manipulator_tier == 4)
+	*/
+	if(manipulator_tier >= 4)
+	//MASSMETA EDIT CHANGE END
 		priorities += new /datum/manipulator_priority/interact/with_vehicles
 	return priorities
 

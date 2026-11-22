@@ -2,10 +2,11 @@
 /// This is a copy paste of ASAY_LINK_PINGED_ADMINS_INDEX
 #define MSAY_LINK_PINGED_MENTORS_INDEX "!pinged_mentors"
 
-/client/proc/cmd_mentor_say(msg as text)
-	set category = "Mentor"
-	set name = "Mentorsay"
+GAME_VERB_PROC(/client, cmd_mentor_say, "Mentorsay", "Mentor")
+	mentor_say(tgui_input_text(src, title = "Mentorsay", encode = FALSE))
 
+/// posts to the mentor channel, every mentor and admin hears it
+/client/proc/mentor_say(msg)
 	if(!is_mentor())
 		to_chat(src, span_danger("Error: Only mentors and administrators may use this command."), confidential = TRUE)
 		return
@@ -45,7 +46,7 @@
 
 /client/proc/get_mentor_say()
 	var/msg = input(src, null, "msay \"text\"") as text|null
-	cmd_mentor_say(msg)
+	mentor_say(msg)
 
 // see /proc/check_asay_links(msg) we just check for mentor_datum instead of holder
 /proc/check_mentor_pings(msg)
@@ -59,7 +60,7 @@
 			continue
 		if(word[1] != "@")
 			continue
-		var/ckey_check = lowertext(copytext(word, 2))
+		var/ckey_check = LOWER_TEXT(copytext(word, 2))
 		var/client/client_check = GLOB.directory[ckey_check]
 		if(client_check?.mentor_datum)
 			msglist[i] = "<u>[word]</u>"

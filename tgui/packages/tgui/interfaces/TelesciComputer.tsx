@@ -105,7 +105,10 @@ export const TelesciComputer = (_props: any, context: any) => {
                     maxValue={90}
                     step={1}
                     stepPixelSize={5}
-                    onDrag={(e, value) => act('setangle', { newangle: value })}
+                    tickWhileDragging
+                    onChange={(_event, value) =>
+                      act('setangle', { newangle: value })
+                    }
                   />
                 </LabeledList.Item>
                 <LabeledList.Item label="Rotation">
@@ -116,7 +119,8 @@ export const TelesciComputer = (_props: any, context: any) => {
                     maxValue={360}
                     step={1}
                     stepPixelSize={1}
-                    onDrag={(e, value) =>
+                    tickWhileDragging
+                    onChange={(_event, value) =>
                       act('setrotation', { newrotation: value })
                     }
                   />

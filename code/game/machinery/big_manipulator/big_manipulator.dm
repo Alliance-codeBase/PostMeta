@@ -152,12 +152,25 @@
 			interaction_point_limit = MAX_TASKS_TIER_3
 			set_greyscale(COLOR_RED)
 			manipulator_arm?.set_greyscale(COLOR_RED)
+		//MASSMETA EDIT CHANGE BEGIN (parts_tier_5)
+		/* ORIGINAL
 		if(4 to INFINITY)
+		*/
+		if(4)
+		//MASSMETA EDIT CHANGE END
 			min_speed_multiplier = MIN_SPEED_MULTIPLIER_TIER_4
 			max_speed_multiplier = MAX_SPEED_MULTIPLIER_TIER_4
 			interaction_point_limit = MAX_TASKS_TIER_4
 			set_greyscale(COLOR_PURPLE)
 			manipulator_arm?.set_greyscale(COLOR_PURPLE)
+		//MASSMETA EDIT ADDITION BEGIN (parts_tier_5)
+		if(5 to INFINITY)
+			min_speed_multiplier = MIN_SPEED_MULTIPLIER_TIER_4
+			max_speed_multiplier = MAX_SPEED_MULTIPLIER_TIER_4
+			interaction_point_limit = MAX_TASKS_TIER_5
+			set_greyscale(COLOR_DARK_RED)
+			manipulator_arm?.set_greyscale(COLOR_DARK_RED)
+		//MASSMETA EDIT ADDITION END
 
 	active_power_usage = BASE_MACHINE_ACTIVE_CONSUMPTION * BASE_POWER_USAGE * manipulator_tier
 

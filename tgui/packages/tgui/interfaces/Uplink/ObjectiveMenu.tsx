@@ -1,4 +1,4 @@
-import { Component, MouseEvent } from 'react';
+import { Component, MouseEvent, type ReactNode } from 'react';
 import {
   Box,
   Button,
@@ -349,7 +349,7 @@ type ObjectiveElementProps = {
   description: string;
   telecrystalReward: number;
   progressionReward: number;
-  uiButtons?: JSX.Element;
+  uiButtons?: ReactNode;
   objectiveState?: ObjectiveState;
   originalProgression: number;
   telecrystalPenalty: number;

@@ -380,7 +380,7 @@
 	UnregisterSignal(head, COMSIG_MOVABLE_MOVED)
 
 // not including detailed instructions on wall destruction, as well as the finish off, as deep-lore element explains it just enough,
-// also understanding mechanics through lore is much better, than just adding a blatant to_chat() with everything required
+// also understanding mechanics through lore is much better, than just adding a blatant to_chat with everything required
 /obj/item/syndicate_sledgehammer/examine(mob/user)
 	. = ..()
 	. += span_notice("Right-click with this in-hand to prepare a charged strike, the more progress bar is completed on the hammer, the harder will be the blow")

@@ -11,7 +11,7 @@
 		return ITEM_INTERACT_BLOCKING
 	log_combat(user, interacting_with, "attempted to emag")
 	if(used)
-		balloon_alert(user, "Nuh uh")
+		balloon_alert(user, "nuh uh")
 		return
 	if(interacting_with.emag_act(user, src))
 		used = TRUE
