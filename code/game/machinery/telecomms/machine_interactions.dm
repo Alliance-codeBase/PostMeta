@@ -100,7 +100,12 @@
 					return
 				else
 					id = params["value"]
+					//MASSMETA EDIT CHANGE BEGIN (xss_hotfix)
+					/* ORIGINAL
 					current_user.log_message("has changed the ID for [src] to [id].", LOG_GAME)
+					*/
+					current_user.log_message("has changed the ID for [src] to [html_encode(id)].", LOG_GAME) // individual logs render entries as raw html, the id itself stays raw for network matching
+					//MASSMETA EDIT CHANGE END
 					. = TRUE
 		if("network")
 			if(params["value"])
@@ -113,7 +118,12 @@
 						remove_link(linked_machine)
 					network = params["value"]
 					links = list()
+					//MASSMETA EDIT CHANGE BEGIN (xss_hotfix)
+					/* ORIGINAL
 					current_user.log_message("has changed the network for [src] to [network].", LOG_GAME)
+					*/
+					current_user.log_message("has changed the network for [src] to [html_encode(network)].", LOG_GAME)
+					//MASSMETA EDIT CHANGE END
 					. = TRUE
 		if("tempfreq")
 			if(params["value"])
@@ -129,7 +139,12 @@
 					. = TRUE
 		if("delete")
 			freq_listening.Remove(params["value"])
+			//MASSMETA EDIT CHANGE BEGIN (xss_hotfix)
+			/* ORIGINAL
 			current_user.log_message("removed frequency [params["value"]] for [src].", LOG_GAME)
+			*/
+			current_user.log_message("removed frequency [html_encode("[params["value"]]")] for [src].", LOG_GAME)
+			//MASSMETA EDIT CHANGE END
 			. = TRUE
 		if("unlink")
 			var/obj/machinery/telecomms/machine_to_unlink = links[text2num(params["value"])]
