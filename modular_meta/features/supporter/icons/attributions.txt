@@ -1,0 +1,6 @@
+Original assets at commit 435c7cfecd6a3af9b4c117f07e04dd8840826bf9:
+https://github.com/ParadiseSS13/Paradise/blob/435c7cfecd6a3af9b4c117f07e04dd8840826bf9/icons/mob/clothing/modsuit/mod_clothing.dmi
+https://github.com/ParadiseSS13/Paradise/blob/435c7cfecd6a3af9b4c117f07e04dd8840826bf9/icons/obj/clothing/modsuit/mod_clothing.dmi
+
+license: CC BY-SA 3.0
+https://creativecommons.org/licenses/by-sa/3.0/
