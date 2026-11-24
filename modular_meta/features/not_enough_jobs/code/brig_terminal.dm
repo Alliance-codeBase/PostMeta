@@ -1,3 +1,4 @@
+/*
 /obj/machinery/computer/brig_physician
 	name = "disobediency processing unit" // got no idea how to call it
 	desc = "A terminal for processing post-mortem reports."
@@ -23,3 +24,4 @@
 	name = "EoC Processing Unit"
 	greyscale_colors = CIRCUIT_COLOR_SECURITY
 	build_path = /obj/machinery/computer/brig_physician
+*/
