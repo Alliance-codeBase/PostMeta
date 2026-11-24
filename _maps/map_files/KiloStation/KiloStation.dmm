@@ -5135,13 +5135,10 @@
 /turf/open/floor/plating,
 /area/station/engineering/supermatter/room)
 "bIR" = (
-/obj/machinery/firealarm/directional/east,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/structure/cable,
-/obj/effect/landmark/start/brig_physician,
-/turf/open/floor/iron/dark,
-/area/station/maintenance/department/security)
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/mapping_helpers/burnt_floor,
+/turf/open/floor/plating,
+/area/station/maintenance/port/aft)
 "bJm" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
@@ -12524,11 +12521,9 @@
 /turf/open/floor/iron,
 /area/station/hallway/secondary/exit/departure_lounge)
 "ecY" = (
-/obj/machinery/airalarm/directional/east,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/structure/cable,
-/turf/open/floor/iron/dark,
-/area/station/maintenance/department/security)
+/obj/structure/sign/warning/docking,
+/turf/closed/wall,
+/area/station/maintenance/port/aft)
 "edj" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
@@ -14110,21 +14105,11 @@
 /turf/open/floor/plating,
 /area/station/maintenance/aft)
 "eEX" = (
-/obj/machinery/airalarm/directional/west{
-	dir = 4
-	},
-/obj/effect/turf_decal/tile/neutral/half/contrasted{
-	dir = 4
-	},
-/obj/structure/closet/secure_closet/secmed/blue,
-/obj/item/storage/medkit,
-/obj/item/storage/medkit/brute,
-/obj/item/storage/medkit/fire,
-/obj/item/reagent_containers/cup/bottle/multiver,
-/obj/item/storage/box/syringes,
-/obj/item/storage/pill_bottle/iron,
+/obj/effect/decal/cleanable/blood/old,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/mapping_helpers/broken_floor,
 /turf/open/floor/plating,
-/area/station/maintenance/department/security)
+/area/station/maintenance/port/aft)
 "eFy" = (
 /obj/effect/turf_decal/tile/neutral/fourcorners,
 /obj/machinery/light/floor,
@@ -14288,7 +14273,7 @@
 "eIl" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/security{
-	name = "Brig Sugery"
+	name = "Prison Wing"
 	},
 /obj/effect/mapping_helpers/airlock/cyclelink_helper_multi{
 	cycle_id = "brig-maint-passthrough"
@@ -16296,6 +16281,7 @@
 /area/station/science/genetics)
 "frP" = (
 /obj/effect/decal/cleanable/dirt,
+/obj/structure/extinguisher_cabinet/directional/west,
 /obj/effect/turf_decal/stripes/line,
 /obj/machinery/atmospherics/components/unary/vent_scrubber/on/layer2{
 	dir = 1
@@ -22165,7 +22151,7 @@
 "hfP" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/security{
-	name = "Brig Sugery"
+	name = "Prison Wing"
 	},
 /obj/effect/mapping_helpers/airlock/cyclelink_helper_multi{
 	cycle_id = "brig-maint-passthrough"
@@ -22797,7 +22783,6 @@
 /obj/structure/extinguisher_cabinet/directional/west,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/machinery/computer/security/telescreen/prison/directional/south,
 /turf/open/floor/iron,
 /area/station/security/office)
 "hpY" = (
@@ -22947,8 +22932,18 @@
 /turf/open/floor/iron/dark,
 /area/station/service/hydroponics)
 "hsB" = (
-/obj/structure/bodycontainer/morgue,
-/turf/open/floor/iron/showroomfloor,
+/obj/machinery/airalarm/directional/west,
+/obj/effect/turf_decal/tile/neutral/half/contrasted{
+	dir = 4
+	},
+/obj/structure/closet/secure_closet/secmed/blue,
+/obj/item/storage/medkit,
+/obj/item/storage/medkit/brute,
+/obj/item/storage/medkit/fire,
+/obj/item/reagent_containers/cup/bottle/multiver,
+/obj/item/storage/box/syringes,
+/obj/item/storage/pill_bottle/iron,
+/turf/open/floor/iron/dark,
 /area/station/security/medical)
 "hsC" = (
 /obj/machinery/vending/hydronutrients,
@@ -31101,15 +31096,19 @@
 /turf/open/floor/iron,
 /area/station/security/courtroom)
 "jJH" = (
-/obj/effect/mapping_helpers/airlock/access/all/security/general,
-/obj/machinery/door/airlock/security{
-	name = "Brig Sugery"
+/obj/structure/plasticflaps/opaque,
+/obj/machinery/navbeacon{
+	codes_txt = "delivery;dir=1";
+	location = "Security";
+	name = "navigation beacon (Security Delivery)"
 	},
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/structure/cable,
+/obj/machinery/door/window/right/directional/north{
+	name = "Security Delivery Access";
+	req_access = list("security")
+	},
+/obj/effect/turf_decal/delivery,
 /turf/open/floor/iron/dark,
-/area/station/maintenance/department/security)
+/area/station/maintenance/port/aft)
 "jJI" = (
 /obj/effect/turf_decal/tile/blue/half/contrasted{
 	dir = 1
@@ -35196,9 +35195,15 @@
 /turf/open/floor/iron/dark,
 /area/station/maintenance/port/greater)
 "kZK" = (
-/obj/effect/decal/cleanable/blood/old,
-/obj/effect/mapping_helpers/burnt_floor,
-/turf/open/floor/plating,
+/obj/machinery/door/airlock/external{
+	name = "Security Escape Pod";
+	space_dir = 2
+	},
+/obj/effect/mapping_helpers/airlock/cyclelink_helper{
+	dir = 1
+	},
+/obj/effect/mapping_helpers/airlock/access/all/security/general,
+/turf/open/floor/iron/dark,
 /area/station/maintenance/port/aft)
 "kZP" = (
 /obj/machinery/atmospherics/components/unary/vent_pump/on/layer4{
@@ -37023,7 +37028,7 @@
 	cycle_id = "brig-maint-passthrough"
 	},
 /obj/machinery/door/airlock/security{
-	name = "Brig Sugery"
+	name = "Prison Wing"
 	},
 /obj/effect/mapping_helpers/airlock/access/all/security/general,
 /obj/machinery/duct,
@@ -40321,6 +40326,7 @@
 /obj/machinery/computer/records/security{
 	dir = 4
 	},
+/obj/machinery/newscaster/directional/west,
 /obj/machinery/camera/directional/west{
 	c_tag = "Security Office Computers"
 	},
@@ -43832,20 +43838,11 @@
 /turf/open/floor/iron/showroomfloor,
 /area/station/medical/break_room)
 "nLT" = (
-/obj/structure/plasticflaps/opaque,
-/obj/machinery/door/window/right/directional/north{
-	name = "Security Delivery Access";
-	req_access = list("security");
-	dir = 4
+/obj/docking_port/stationary/escape_pod{
+	dir = 2
 	},
-/obj/machinery/navbeacon{
-	codes_txt = "delivery;dir=1";
-	location = "Security";
-	name = "navigation beacon (Security Delivery)"
-	},
-/obj/effect/turf_decal/delivery,
-/turf/open/floor/iron/dark,
-/area/station/maintenance/port/aft)
+/turf/open/space/basic,
+/area/space)
 "nLY" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
@@ -45436,9 +45433,6 @@
 /obj/effect/turf_decal/tile/neutral/half/contrasted{
 	dir = 1
 	},
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/structure/cable,
 /turf/open/floor/iron/dark,
 /area/station/security/office)
 "osW" = (
@@ -48955,14 +48949,8 @@
 /turf/open/floor/plating,
 /area/station/maintenance/port/lesser)
 "pxe" = (
-/obj/machinery/power/apc/auto_name/directional/west,
-/obj/effect/mapping_helpers/broken_floor,
-/obj/structure/cable,
-/obj/machinery/atmospherics/components/unary/vent_pump/on/layer4{
-	dir = 4
-	},
-/turf/open/floor/iron/dark,
-/area/station/maintenance/department/security)
+/turf/closed/wall/mineral/plastitanium,
+/area/station/maintenance/port/aft)
 "pxs" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
@@ -57568,7 +57556,6 @@
 	},
 /obj/effect/mapping_helpers/airlock/red_alert_access,
 /obj/effect/mapping_helpers/airlock/access/all/security/armory,
-/obj/structure/extinguisher_cabinet/directional/west,
 /turf/open/floor/iron/dark,
 /area/station/security/office)
 "shk" = (
@@ -62120,14 +62107,11 @@
 "tzL" = (
 /obj/effect/turf_decal/bot,
 /obj/structure/table,
-/obj/item/flashlight/lamp{
-	pixel_x = -7;
-	pixel_y = 13
-	},
+/obj/item/flashlight/lamp,
 /obj/effect/turf_decal/tile/neutral/half/contrasted{
 	dir = 1
 	},
-/obj/machinery/newscaster/directional/west,
+/obj/machinery/computer/security/telescreen/prison/directional/south,
 /turf/open/floor/iron/dark,
 /area/station/security/office)
 "tzN" = (
@@ -62453,7 +62437,7 @@
 	cycle_id = "brig-maint-passthrough"
 	},
 /obj/machinery/door/airlock/security{
-	name = "Brig Sugery"
+	name = "Prison Wing"
 	},
 /obj/effect/mapping_helpers/airlock/access/all/security/brig,
 /obj/machinery/duct,
@@ -63661,6 +63645,7 @@
 /turf/open/floor/iron,
 /area/station/command/bridge)
 "tZD" = (
+/obj/effect/landmark/secequipment,
 /obj/effect/turf_decal/bot,
 /obj/effect/turf_decal/tile/neutral/half/contrasted,
 /obj/machinery/wall_healer/directional/north,
@@ -67080,8 +67065,7 @@
 /turf/open/floor/iron/dark,
 /area/station/engineering/supermatter/room)
 "vek" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/mapping_helpers/burnt_floor,
+/obj/effect/decal/cleanable/cobweb/cobweb2,
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/plating,
 /area/station/maintenance/port/aft)
@@ -93611,9 +93595,9 @@ kuL
 hOh
 cuR
 kMe
-qfe
-qfe
-oWS
+aeU
+coy
+aaa
 aaa
 aaa
 aaQ
@@ -93866,11 +93850,11 @@ mij
 pFl
 ibU
 bzo
-hqp
-iZs
-iZs
-qWn
-oWS
+tCU
+aeu
+aeu
+aeU
+aaa
 aaa
 aaa
 acm
@@ -94121,21 +94105,21 @@ ezC
 uey
 mWV
 vek
-koP
-koP
-vek
-rDj
 kJs
 sKb
-qJR
-qJR
-qfe
-qfe
-ckn
-eDU
+tCU
+gPA
+tCU
+tCU
+ecY
+pxe
 beK
 sRm
 qJs
+aaa
+aaa
+aaa
+aaa
 aaa
 aaa
 aaa
@@ -94369,7 +94353,7 @@ tsY
 dMd
 gLT
 tCU
-nLT
+tCU
 tCU
 gPA
 pLv
@@ -94377,22 +94361,22 @@ ycs
 bps
 tCU
 tCU
-wjK
-wjK
-wjK
-wjK
-wjK
+tCU
 qzD
 mWg
 pQi
 nYD
-nTX
-cry
-cry
-cry
+pQi
+aaa
+aaa
+aaa
 cry
 ouV
 acK
+aaa
+aaa
+aaa
+aaa
 aaa
 aaa
 aaa
@@ -94634,22 +94618,22 @@ kio
 grs
 hpW
 tzL
-wjK
+tCU
 eEX
-pxe
-kcn
-wjK
-kZK
 gDy
 hOU
 aHz
-cFz
-dnH
-cry
-cry
+kZK
+nLT
+aaa
+aaa
 cry
 vsx
 acm
+aaa
+aaa
+aaa
+aaa
 aaa
 aaa
 aaa
@@ -94889,24 +94873,24 @@ tzY
 vpV
 iEi
 vlg
-vGS
+hwJ
 osT
 jJH
 bIR
-ecY
-gxI
-wjK
-koP
 pXh
 pQi
 gDy
-nTX
-cry
-cry
-cry
+pQi
+aaa
+aaa
+aaa
 cry
 ouV
 acK
+aaa
+aaa
+aaa
+aaa
 aaa
 aaa
 aaa
@@ -95148,22 +95132,22 @@ oHe
 cjq
 hwJ
 aYU
-wjK
-wjK
-wjK
-wjK
-iNu
+tCU
 gPA
 cuR
 cuR
 qJR
-vbu
-vbu
-ckn
-eDU
+cuR
+cuR
+ecY
+pxe
 aeZ
 pmM
 qJs
+aaa
+aaa
+aaa
+aaa
 aaa
 aaa
 aaa
