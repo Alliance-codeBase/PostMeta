@@ -19,6 +19,9 @@ MONO = "aformat=sample_rates=44100:channel_layouts=mono"
 PEAK_METER = "astats=measure_perchannel=none:measure_overall=Peak_level"
 # five bloops 0.15 s apart, the way the game plays them, see BLOOPER_INTERVAL
 BLOOP_TRAIN = "aecho=1:1:150|300|450|600:1|1|1|1,apad=pad_dur=0.5"
+# a bloop starts on the letter, not after a breath
+LEADING_SILENCE_TRIM = "silenceremove=start_periods=1:start_threshold=-40dB"
+FADE_OUT_SECONDS = 0.1
 
 # same lowpass the tts puts on a gas mask
 MUFFLED_FILTER = "lowpass=f=750,volume=2"
@@ -63,10 +66,14 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("source", help="any sound ffmpeg can read")
     parser.add_argument("blooper_id", help="file name without extension, like quack")
+    parser.add_argument("--length", type=float, help="cut to this many seconds with a fade out, screams and other long ones like 0.3")
     arguments = parser.parse_args()
 
+    clean_filter = LEADING_SILENCE_TRIM
+    if arguments.length is not None:
+        clean_filter += f",atrim=duration={arguments.length},afade=t=out:start_time={arguments.length - FADE_OUT_SECONDS}:duration={FADE_OUT_SECONDS}"
     clean_take = SOUND_DIRECTORY / f"{arguments.blooper_id}.ogg"
-    render(arguments.source, "anull", clean_take)
+    render(arguments.source, clean_filter, clean_take)
     # the radio crunch depends on how loud it is fed, so every copy is cut from the leveled clean take
     for suffix, audio_filter in FILTERS_BY_SUFFIX.items():
         render(clean_take, audio_filter, SOUND_DIRECTORY / f"{arguments.blooper_id}{suffix}.ogg")

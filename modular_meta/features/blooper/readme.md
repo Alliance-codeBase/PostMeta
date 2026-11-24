@@ -6,9 +6,13 @@
 
 ### Как добавить голос:
 
-1. `python modular_meta/tools/blooper_sound.py путь/к/звуку.ogg quack` кладёт в `sound/` чистый `quack.ogg` и его копии `quack_muffled.ogg` (противогаз), `quack_radio.ogg` (рация) и `quack_radio_muffled.ogg` (рация в противогазе), все на одной громкости. Нужен ffmpeg.
-2. Датум `/datum/blooper/quack` в `code/blooper_list.dm` со всеми четырьмя файлами.
-3. Строчка в `attributions.txt`: откуда звук и под какой лицензией.
+1. Прогони звук через [blooper_sound.py](../../tools/blooper_sound.py), нужен ffmpeg. Скрипт кладёт в [sound/](sound/) чистый `quack.ogg` и его копии `quack_muffled.ogg` (противогаз), `quack_radio.ogg` (рация) и `quack_radio_muffled.ogg` (рация в противогазе), все на одной громкости. Тишину в начале срезает сам.
+	- Обычный звук: `python modular_meta/tools/blooper_sound.py sound/effects/quack.ogg quack`
+	- Длинный, вроде крика, режь флагом `--length`, останутся первые 0.3 секунды с затуханием: `python modular_meta/tools/blooper_sound.py --length 0.3 sound/mobs/humanoids/human/scream/malescream_1.ogg malescream_1`
+2. Добавь датум в [code/blooper_list.dm](code/blooper_list.dm):
+	- Один звук: скопируй `/datum/blooper/quack`.
+	- Коллекция, где каждая фраза берёт один случайный звук: скопируй `/datum/blooper/random_meow` вместе с его четырьмя `/datum/sound_effect/blooper_cat_meow*`. Каждый звук коллекции стоит добавить и отдельным голосом, как `/datum/blooper/cat_meow1`.
+3. Допиши в [attributions.txt](attributions.txt), откуда звук и под какой лицензией.
 
 ### TG Proc/File Changes:
 
