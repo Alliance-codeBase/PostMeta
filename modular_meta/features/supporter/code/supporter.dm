@@ -79,3 +79,5 @@ DO
 
 // btw, if you're someone who wanted add same tier-based supporter system for your server - main supporter table is handled
 // separately from the game's code (you won't be able to find it in this repository)
+
+// 1 minute lol
