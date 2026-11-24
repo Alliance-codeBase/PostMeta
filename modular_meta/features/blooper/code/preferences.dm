@@ -59,7 +59,7 @@
 
 /// bloops a sample line at whoever pressed play
 /datum/preference_middleware/blooper/proc/preview_blooper(list/params, mob/user)
-	var/datum/blooper/blooper_sounds = GLOB.bloopers[preferences.read_preference(/datum/preference/choiced/blooper)]
+	var/datum/blooper/blooper_sounds = pick_blooper_voice(preferences.read_preference(/datum/preference/choiced/blooper))
 	play_blooper(
 		list(user),
 		speaker = null,

@@ -54,6 +54,27 @@
 	radio_sound = 'modular_meta/features/blooper/sound/button_click_radio.ogg'
 	radio_muffled_sound = 'modular_meta/features/blooper/sound/button_click_radio_muffled.ogg'
 
+/datum/blooper/cat_meow1
+	name = "Cat Meow 1"
+	sound = 'modular_meta/features/blooper/sound/cat_meow1.ogg'
+	muffled_sound = 'modular_meta/features/blooper/sound/cat_meow1_muffled.ogg'
+	radio_sound = 'modular_meta/features/blooper/sound/cat_meow1_radio.ogg'
+	radio_muffled_sound = 'modular_meta/features/blooper/sound/cat_meow1_radio_muffled.ogg'
+
+/datum/blooper/cat_meow2
+	name = "Cat Meow 2"
+	sound = 'modular_meta/features/blooper/sound/cat_meow2.ogg'
+	muffled_sound = 'modular_meta/features/blooper/sound/cat_meow2_muffled.ogg'
+	radio_sound = 'modular_meta/features/blooper/sound/cat_meow2_radio.ogg'
+	radio_muffled_sound = 'modular_meta/features/blooper/sound/cat_meow2_radio_muffled.ogg'
+
+/datum/blooper/cat_meow3
+	name = "Cat Meow 3"
+	sound = 'modular_meta/features/blooper/sound/cat_meow3.ogg'
+	muffled_sound = 'modular_meta/features/blooper/sound/cat_meow3_muffled.ogg'
+	radio_sound = 'modular_meta/features/blooper/sound/cat_meow3_radio.ogg'
+	radio_muffled_sound = 'modular_meta/features/blooper/sound/cat_meow3_radio_muffled.ogg'
+
 /datum/blooper/chirp
 	name = "Chirp"
 	sound = 'modular_meta/features/blooper/sound/chirp.ogg'
@@ -67,6 +88,20 @@
 	muffled_sound = 'modular_meta/features/blooper/sound/chitter_muffled.ogg'
 	radio_sound = 'modular_meta/features/blooper/sound/chitter_radio.ogg'
 	radio_muffled_sound = 'modular_meta/features/blooper/sound/chitter_radio_muffled.ogg'
+
+/datum/blooper/damn
+	name = "Damn"
+	sound = 'modular_meta/features/blooper/sound/damn.ogg'
+	muffled_sound = 'modular_meta/features/blooper/sound/damn_muffled.ogg'
+	radio_sound = 'modular_meta/features/blooper/sound/damn_radio.ogg'
+	radio_muffled_sound = 'modular_meta/features/blooper/sound/damn_radio_muffled.ogg'
+
+/datum/blooper/damn_2
+	name = "Damn 2"
+	sound = 'modular_meta/features/blooper/sound/damn_2.ogg'
+	muffled_sound = 'modular_meta/features/blooper/sound/damn_2_muffled.ogg'
+	radio_sound = 'modular_meta/features/blooper/sound/damn_2_radio.ogg'
+	radio_muffled_sound = 'modular_meta/features/blooper/sound/damn_2_radio_muffled.ogg'
 
 /datum/blooper/darwin
 	name = "Darwin"
@@ -159,6 +194,48 @@
 	radio_sound = 'modular_meta/features/blooper/sound/lighter_radio.ogg'
 	radio_muffled_sound = 'modular_meta/features/blooper/sound/lighter_radio_muffled.ogg'
 
+/datum/blooper/malescream_1
+	name = "Male Scream 1"
+	sound = 'modular_meta/features/blooper/sound/malescream_1.ogg'
+	muffled_sound = 'modular_meta/features/blooper/sound/malescream_1_muffled.ogg'
+	radio_sound = 'modular_meta/features/blooper/sound/malescream_1_radio.ogg'
+	radio_muffled_sound = 'modular_meta/features/blooper/sound/malescream_1_radio_muffled.ogg'
+
+/datum/blooper/malescream_2
+	name = "Male Scream 2"
+	sound = 'modular_meta/features/blooper/sound/malescream_2.ogg'
+	muffled_sound = 'modular_meta/features/blooper/sound/malescream_2_muffled.ogg'
+	radio_sound = 'modular_meta/features/blooper/sound/malescream_2_radio.ogg'
+	radio_muffled_sound = 'modular_meta/features/blooper/sound/malescream_2_radio_muffled.ogg'
+
+/datum/blooper/malescream_3
+	name = "Male Scream 3"
+	sound = 'modular_meta/features/blooper/sound/malescream_3.ogg'
+	muffled_sound = 'modular_meta/features/blooper/sound/malescream_3_muffled.ogg'
+	radio_sound = 'modular_meta/features/blooper/sound/malescream_3_radio.ogg'
+	radio_muffled_sound = 'modular_meta/features/blooper/sound/malescream_3_radio_muffled.ogg'
+
+/datum/blooper/malescream_4
+	name = "Male Scream 4"
+	sound = 'modular_meta/features/blooper/sound/malescream_4.ogg'
+	muffled_sound = 'modular_meta/features/blooper/sound/malescream_4_muffled.ogg'
+	radio_sound = 'modular_meta/features/blooper/sound/malescream_4_radio.ogg'
+	radio_muffled_sound = 'modular_meta/features/blooper/sound/malescream_4_radio_muffled.ogg'
+
+/datum/blooper/malescream_5
+	name = "Male Scream 5"
+	sound = 'modular_meta/features/blooper/sound/malescream_5.ogg'
+	muffled_sound = 'modular_meta/features/blooper/sound/malescream_5_muffled.ogg'
+	radio_sound = 'modular_meta/features/blooper/sound/malescream_5_radio.ogg'
+	radio_muffled_sound = 'modular_meta/features/blooper/sound/malescream_5_radio_muffled.ogg'
+
+/datum/blooper/malescream_6
+	name = "Male Scream 6"
+	sound = 'modular_meta/features/blooper/sound/malescream_6.ogg'
+	muffled_sound = 'modular_meta/features/blooper/sound/malescream_6_muffled.ogg'
+	radio_sound = 'modular_meta/features/blooper/sound/malescream_6_radio.ogg'
+	radio_muffled_sound = 'modular_meta/features/blooper/sound/malescream_6_radio_muffled.ogg'
+
 /datum/blooper/meat_slap
 	name = "Meat Slap"
 	sound = 'modular_meta/features/blooper/sound/meat_slap.ogg'
@@ -186,6 +263,13 @@
 	muffled_sound = 'modular_meta/features/blooper/sound/muted_string_medium_muffled.ogg'
 	radio_sound = 'modular_meta/features/blooper/sound/muted_string_medium_radio.ogg'
 	radio_muffled_sound = 'modular_meta/features/blooper/sound/muted_string_medium_radio_muffled.ogg'
+
+/datum/blooper/oguzzzok123
+	name = "Oguzzzok"
+	sound = 'modular_meta/features/blooper/sound/oguzzzok123.ogg'
+	muffled_sound = 'modular_meta/features/blooper/sound/oguzzzok123_muffled.ogg'
+	radio_sound = 'modular_meta/features/blooper/sound/oguzzzok123_radio.ogg'
+	radio_muffled_sound = 'modular_meta/features/blooper/sound/oguzzzok123_radio_muffled.ogg'
 
 /datum/blooper/ow
 	name = "Ow"
@@ -221,6 +305,26 @@
 	muffled_sound = 'modular_meta/features/blooper/sound/quack_muffled.ogg'
 	radio_sound = 'modular_meta/features/blooper/sound/quack_radio.ogg'
 	radio_muffled_sound = 'modular_meta/features/blooper/sound/quack_radio_muffled.ogg'
+
+// a collection is a list of voices, every message picks one of them
+/datum/blooper/random_meow
+	name = "Random Meow"
+	collection = list(
+		/datum/blooper/cat_meow1,
+		/datum/blooper/cat_meow2,
+		/datum/blooper/cat_meow3,
+	)
+
+/datum/blooper/random_scream
+	name = "Random Scream"
+	collection = list(
+		/datum/blooper/malescream_1,
+		/datum/blooper/malescream_2,
+		/datum/blooper/malescream_3,
+		/datum/blooper/malescream_4,
+		/datum/blooper/malescream_5,
+		/datum/blooper/malescream_6,
+	)
 
 /datum/blooper/scope
 	name = "Scope"

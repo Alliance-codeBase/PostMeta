@@ -8,6 +8,17 @@
 	var/radio_sound
 	/// gas mask over the radio, the worst of both
 	var/radio_muffled_sound
+	/// blooper types to voice a message instead, one picked per message
+	var/list/collection
+
+/// the blooper that voices one message for the chosen name, a collection hands it to a random member
+/proc/pick_blooper_voice(blooper_name)
+	var/datum/blooper/voice = GLOB.bloopers[blooper_name]
+	// a plain voice speaks for itself
+	if(isnull(voice.collection))
+		return voice
+	var/datum/blooper/member_type = pick(voice.collection)
+	return GLOB.bloopers[initial(member_type.name)]
 
 // Code for bloopers
 

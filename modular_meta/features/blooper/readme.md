@@ -11,7 +11,7 @@
 	- Длинный, вроде крика, режь флагом `--length`, останутся первые 0.3 секунды с затуханием: `python modular_meta/tools/blooper_sound.py --length 0.3 sound/mobs/humanoids/human/scream/malescream_1.ogg malescream_1`
 2. Добавь датум в [code/blooper_list.dm](code/blooper_list.dm):
 	- Один звук: скопируй `/datum/blooper/quack`.
-	- Коллекция, где каждая фраза берёт один случайный звук: скопируй `/datum/blooper/random_meow` вместе с его четырьмя `/datum/sound_effect/blooper_cat_meow*`. Каждый звук коллекции стоит добавить и отдельным голосом, как `/datum/blooper/cat_meow1`.
+	- Коллекция, где каждая фраза берёт один случайный голос из списка: скопируй `/datum/blooper/random_meow` и перечисли в `collection` датумы голосов, как `/datum/blooper/cat_meow1`.
 3. Допиши в [attributions.txt](attributions.txt), откуда звук и под какой лицензией.
 
 ### TG Proc/File Changes:

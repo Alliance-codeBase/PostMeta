@@ -42,7 +42,7 @@
 	var/list/voice_filters = list()
 	get_tts_voice(voice_filters, list())
 	var/muffled = length(voice_filter) > 0 || length(voice_filters) > 0
-	var/datum/blooper/blooper_sounds = GLOB.bloopers[blooper]
+	var/datum/blooper/blooper_sounds = pick_blooper_voice(blooper)
 	var/sound_file
 	if(radio)
 		sound_file = muffled ? blooper_sounds.radio_muffled_sound : blooper_sounds.radio_sound
