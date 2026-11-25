@@ -5,6 +5,5 @@
 	if(isnull(hologram))
 		return
 	// the hologram squeaks like its caller
-	hologram.blooper = user.blooper
-	hologram.blooper_pitch = user.blooper_pitch
+	hologram.copy_blooper_from(user)
 	return hologram

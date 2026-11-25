@@ -1,12 +1,17 @@
 //ORIGINAL FILE: code/game/atoms_movable.dm
 /atom/movable
 	// Bloopers
-	/// The current mob's stored ID for their blooper. ID of a datum.
+	/// voice name from the picker, a key of [GLOB.blooper_voices]
 	var/blooper
 	/// The pitch pre-variation.
 	var/blooper_pitch = 1
 	/// what's left of the last line on each channel, a frequency or "out loud", the next line talks over it
 	var/list/unsaid_bloops
+
+/// squeaks like source from now on, for clones, holograms and other borrowed bodies
+/atom/movable/proc/copy_blooper_from(atom/movable/source)
+	blooper = source.blooper
+	blooper_pitch = source.blooper_pitch
 
 //ORIGINAL FILE: code/game/say.dm
 /atom/movable/do_tts_message(message, language, message_mods, list/tts_filter, list/hearers)
@@ -20,7 +25,7 @@
  * arguments:
  * * message - what was said
  * * message_mods - its modifiers
- * * hearers - who heard it, only mobs get bloops
+ * * hearers - who heard it, bloops go to the mobs behind them
  * * frequency - the radio frequency it came over, null when said out loud
  */
 /atom/movable/proc/say_blooper(message, list/message_mods, list/hearers, frequency)
@@ -30,21 +35,25 @@
 	var/radio = !isnull(frequency)
 	var/turf/source = get_turf(src)
 	var/list/bloop_hearers = list()
-	for(var/mob/hearer in hearers)
-		// asleep, or talking into your own headset
-		if(radio && (hearer == src || IS_UNCONSCIOUS(hearer)))
+	for(var/atom/movable/hearing_movable as anything in hearers)
+		// dullahan heads and holopads hear on someone's behalf
+		var/mob/hearer = hearing_movable.get_listening_mob()
+		if(isnull(hearer))
+			continue
+		// asleep, talking into your own headset, or a ghost tuned to every channel at once
+		if(radio && (hearer == src || IS_UNCONSCIOUS(hearer) || isobserver(hearer)))
 			continue
 		// ghost ears catch the whole station, bloops stay local
-		if(!radio && get_dist(hearer, source) > MESSAGE_RANGE)
+		if(!radio && get_dist(hearing_movable, source) > MESSAGE_RANGE)
 			continue
-		bloop_hearers += hearer
+		bloop_hearers |= hearer
 	// silicon radio chatter passes nobody in
 	if(!length(bloop_hearers))
 		return
 	// gas mask on? bloop through a sock
 	var/list/voice_filters = list()
 	get_tts_voice(voice_filters, list())
-	var/muffled = length(voice_filter) > 0 || length(voice_filters) > 0
+	var/muffled = length(voice_filters) > 0
 	var/datum/blooper/blooper_sounds = pick(GLOB.blooper_voices[blooper])
 	var/sound_file
 	if(radio)

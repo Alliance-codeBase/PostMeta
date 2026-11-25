@@ -6,5 +6,4 @@
 	if(!istype(detached_head))
 		return
 	// the head does the talking, so it gets the squeak too
-	detached_head.blooper = headless.blooper
-	detached_head.blooper_pitch = headless.blooper_pitch
+	detached_head.copy_blooper_from(headless)

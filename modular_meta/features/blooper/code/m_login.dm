@@ -9,6 +9,10 @@
 	if(blooper_voice)
 		voice = null
 
+/mob/living/copy_blooper_from(mob/living/source)
+	. = ..()
+	set_blooper_voice(source.blooper_voice)
+
 //ORIGINAL FILE: code/modules/mob/living/carbon/human/login.dm
 /mob/living/carbon/human/Login()
 	. = ..()
