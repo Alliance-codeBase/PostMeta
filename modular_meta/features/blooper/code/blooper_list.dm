@@ -382,28 +382,6 @@
 	radio_muffled_sound = 'modular_meta/features/blooper/sound/quack_radio_muffled.ogg'
 	tags = list(BLOOPER_TAG_TG)
 
-// a collection is a list of voices, every message picks one of them
-/datum/blooper/random_meow
-	name = "Cat Meow Random"
-	tags = list(BLOOPER_TAG_TG)
-	collection = list(
-		/datum/blooper/cat_meow1,
-		/datum/blooper/cat_meow2,
-		/datum/blooper/cat_meow3,
-	)
-
-/datum/blooper/random_scream
-	name = "Male Scream Random"
-	tags = list(BLOOPER_TAG_META, BLOOPER_TAG_TG)
-	collection = list(
-		/datum/blooper/malescream_1,
-		/datum/blooper/malescream_2,
-		/datum/blooper/malescream_3,
-		/datum/blooper/malescream_4,
-		/datum/blooper/malescream_5,
-		/datum/blooper/malescream_6,
-	)
-
 /datum/blooper/scope
 	name = "Scope"
 	sound = 'modular_meta/features/blooper/sound/scope.ogg'
@@ -435,3 +413,22 @@
 	radio_sound = 'modular_meta/features/blooper/sound/wow_radio.ogg'
 	radio_muffled_sound = 'modular_meta/features/blooper/sound/wow_radio_muffled.ogg'
 	tags = list(BLOOPER_TAG_PARADISE)
+
+/datum/blooper_collection/random_meow
+	name = "Cat Meow Random"
+	bloopers = list(
+		/datum/blooper/cat_meow1,
+		/datum/blooper/cat_meow2,
+		/datum/blooper/cat_meow3,
+	)
+
+/datum/blooper_collection/random_scream
+	name = "Male Scream Random"
+	bloopers = list(
+		/datum/blooper/malescream_1,
+		/datum/blooper/malescream_2,
+		/datum/blooper/malescream_3,
+		/datum/blooper/malescream_4,
+		/datum/blooper/malescream_5,
+		/datum/blooper/malescream_6,
+	)

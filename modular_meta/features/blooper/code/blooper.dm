@@ -8,32 +8,37 @@
 	var/radio_sound
 	/// gas mask over the radio, the worst of both
 	var/radio_muffled_sound
-	/// blooper types to voice a message instead, one picked per message
-	var/list/collection
 	/// labels like [BLOOPER_TAG_META], the picker sorts by them
 	var/list/tags
 
-/// the blooper that voices one message for the chosen name, a collection hands it to a random member
-/proc/pick_blooper_voice(blooper_name)
-	var/datum/blooper/voice = GLOB.bloopers[blooper_name]
-	// a plain voice speaks for itself
-	if(isnull(voice.collection))
-		return voice
-	var/datum/blooper/member_type = pick(voice.collection)
-	return GLOB.bloopers[initial(member_type.name)]
+/// one voice of several bloopers, every message picks one of them
+/datum/blooper_collection
+	/// what the picker calls it
+	var/name
+	/// blooper types to pick from
+	var/list/bloopers
 
 // Code for bloopers
 
-/// bloopers by name
-GLOBAL_LIST_INIT(bloopers, init_bloopers())
+/// the picker's voices by name, each a list of bloopers, every message picks one
+GLOBAL_LIST_INIT(blooper_voices, init_blooper_voices())
 
-/// one of each blooper, keyed by name
-/proc/init_bloopers()
-	var/list/bloopers = list()
+/// a voice for each blooper and each collection, keyed by name
+/proc/init_blooper_voices()
+	var/list/voices = list()
+	var/list/bloopers_by_type = list()
 	for(var/blooper_type in subtypesof(/datum/blooper))
 		var/datum/blooper/blooper = new blooper_type
-		bloopers[blooper.name] = blooper
-	return bloopers
+		bloopers_by_type[blooper_type] = blooper
+		// a lone blooper is a voice of one
+		voices[blooper.name] = list(blooper)
+	for(var/collection_type in subtypesof(/datum/blooper_collection))
+		var/datum/blooper_collection/collection = new collection_type
+		var/list/members = list()
+		for(var/member_type in collection.bloopers)
+			members += bloopers_by_type[member_type]
+		voices[collection.name] = members
+	return voices
 
 /// keys of one bloop in a line, play_blooper writes them, bloop reads them
 #define BLOOP_PITCH "pitch"

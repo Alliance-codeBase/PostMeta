@@ -26,9 +26,13 @@
 /datum/preference/choiced/blooper/init_possible_values()
 	var/list/meta_bloopers = list()
 	var/list/other_bloopers = list()
-	for(var/blooper_name in GLOB.bloopers)
-		var/datum/blooper/blooper = GLOB.bloopers[blooper_name]
-		if(LAZYFIND(blooper.tags, BLOOPER_TAG_META))
+	for(var/blooper_name in GLOB.blooper_voices)
+		var/homegrown = FALSE
+		// one of ours in the mix makes the whole voice ours
+		for(var/datum/blooper/blooper as anything in GLOB.blooper_voices[blooper_name])
+			if(LAZYFIND(blooper.tags, BLOOPER_TAG_META))
+				homegrown = TRUE
+		if(homegrown)
 			meta_bloopers += blooper_name
 		else
 			other_bloopers += blooper_name
@@ -68,7 +72,7 @@
 
 /// bloops a sample line at whoever pressed play
 /datum/preference_middleware/blooper/proc/preview_blooper(list/params, mob/user)
-	var/datum/blooper/blooper_sounds = pick_blooper_voice(preferences.read_preference(/datum/preference/choiced/blooper))
+	var/datum/blooper/blooper_sounds = pick(GLOB.blooper_voices[preferences.read_preference(/datum/preference/choiced/blooper)])
 	play_blooper(
 		list(user),
 		speaker = null,

@@ -14,7 +14,7 @@
 	. = ..()
 	// strays without prefs still get a squeaky voice
 	if(isnull(blooper))
-		blooper = pick(GLOB.bloopers)
+		blooper = pick(GLOB.blooper_voices)
 	// login just handed out a random voice, take it back
 	set_blooper_voice(blooper_voice)
 
