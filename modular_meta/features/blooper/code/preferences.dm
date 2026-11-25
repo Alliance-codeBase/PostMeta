@@ -24,7 +24,16 @@
 	should_update_preview = FALSE
 
 /datum/preference/choiced/blooper/init_possible_values()
-	return assoc_to_keys(GLOB.bloopers)
+	var/list/meta_bloopers = list()
+	var/list/other_bloopers = list()
+	for(var/blooper_name in GLOB.bloopers)
+		var/datum/blooper/blooper = GLOB.bloopers[blooper_name]
+		if(LAZYFIND(blooper.tags, BLOOPER_TAG_META))
+			meta_bloopers += blooper_name
+		else
+			other_bloopers += blooper_name
+	// ours first, the rest can wait
+	return meta_bloopers + other_bloopers
 
 /datum/preference/choiced/blooper/apply_to_human(mob/living/carbon/human/target, value)
 	target.blooper = value

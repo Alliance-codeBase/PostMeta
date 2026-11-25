@@ -35,7 +35,7 @@ timer <- sound/items/timer.ogg
 
 damn: the "DAAAAAMN" baby pukeko meme sound, voice author unknown.
 damn_2: "Damn 1" by Jaywist, CC0 1.0, https://freesound.org/people/Jaywist/sounds/611762/
-oguzzzok123: a voice message by the player oguzzzok123, used with their permission.
+oguzzzok123, oguzzzok123_vodolaz, oguzzzok123_laugh: voice messages by the player oguzzzok123, used with their permission.
 
 damn and malescream_* are cut to their first 0.3 seconds.
 All clean takes are loudness-normalized with ffmpeg.

@@ -10,6 +10,8 @@
 	var/radio_muffled_sound
 	/// blooper types to voice a message instead, one picked per message
 	var/list/collection
+	/// labels like [BLOOPER_TAG_META], the picker sorts by them
+	var/list/tags
 
 /// the blooper that voices one message for the chosen name, a collection hands it to a random member
 /proc/pick_blooper_voice(blooper_name)
