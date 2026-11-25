@@ -195,7 +195,7 @@
 		SStts.queued_radio_messages_compression[tts_radio_id] = compression
 
 	//MASSMETA EDIT ADDITION BEGIN (blooper)
-	virt.source.say_blooper(message, message_mods, receive, radio = TRUE)
+	virt.source.say_blooper(message, message_mods, receive, frequency)
 	//MASSMETA EDIT ADDITION END
 
 	// Render the message and have everybody hear it.

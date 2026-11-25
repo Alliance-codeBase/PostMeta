@@ -74,7 +74,7 @@
 		speaker = null,
 		sound_file = blooper_sounds.sound,
 		pitch = preferences.read_preference(/datum/preference/numeric/blooper_pitch),
-		message = "Так звучит мой голос", // only the length counts, bloops can't read
+		message = "Так звучит мой голос. Нравится?", // bloops can't read, but they count vowels and hear a question
 		radio = FALSE,
 	)
 	return TRUE
