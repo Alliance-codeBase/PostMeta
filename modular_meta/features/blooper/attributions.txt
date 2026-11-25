@@ -9,21 +9,21 @@ beep <- sound/machines/nuke/general_beep.ogg
 bloop <- sound/misc/bloop.ogg, by Tim Kahn, https://freesound.org/people/tim.kahn/sounds/130377/
 box_deploy <- sound/misc/box_deploy.ogg
 button_click <- sound/effects/pressureplate.ogg
-cat_meow1 <- sound/mobs/non-humanoids/cat/cat_meow1.ogg, by sadboysuss
-cat_meow2 <- sound/mobs/non-humanoids/cat/cat_meow2.ogg, by sadboysuss
-cat_meow3 <- sound/mobs/non-humanoids/cat/cat_meow3.ogg, by sadboysuss
+cat_meow_1 <- sound/mobs/non-humanoids/cat/cat_meow1.ogg, by sadboysuss
+cat_meow_2 <- sound/mobs/non-humanoids/cat/cat_meow2.ogg, by sadboysuss
+cat_meow_3 <- sound/mobs/non-humanoids/cat/cat_meow3.ogg, by sadboysuss
 chirp <- sound/runtime/chatter/griffin_1.ogg
 chitter <- sound/mobs/non-humanoids/insect/chitter.ogg
 clucks <- sound/mobs/non-humanoids/chicken/clucks.ogg
 finger_snap <- sound/mobs/humanoids/human/snap/fingersnap1.ogg
 hoot <- sound/runtime/chatter/owl_1.ogg
 lighter <- sound/items/lighter/lighter_on.ogg, from BeeStation, https://github.com/BeeStation/BeeStation-Hornet/pull/29
-malescream_1 <- sound/mobs/humanoids/human/scream/malescream_1.ogg
-malescream_2 <- sound/mobs/humanoids/human/scream/malescream_2.ogg
-malescream_3 <- sound/mobs/humanoids/human/scream/malescream_3.ogg
-malescream_4 <- sound/mobs/humanoids/human/scream/malescream_4.ogg
-malescream_5 <- sound/mobs/humanoids/human/scream/malescream_5.ogg
-malescream_6 <- sound/mobs/humanoids/human/scream/malescream_6.ogg
+male_scream_1 <- sound/mobs/humanoids/human/scream/malescream_1.ogg
+male_scream_2 <- sound/mobs/humanoids/human/scream/malescream_2.ogg
+male_scream_3 <- sound/mobs/humanoids/human/scream/malescream_3.ogg
+male_scream_4 <- sound/mobs/humanoids/human/scream/malescream_4.ogg
+male_scream_5 <- sound/mobs/humanoids/human/scream/malescream_5.ogg
+male_scream_6 <- sound/mobs/humanoids/human/scream/malescream_6.ogg
 meat_slap <- sound/effects/meatslap.ogg
 muted_string_high <- sound/runtime/instruments/synthesis_samples/guitar/crisis_muted/C4.ogg
 muted_string_low <- sound/runtime/instruments/synthesis_samples/guitar/crisis_muted/C2.ogg
@@ -39,6 +39,6 @@ damn: the "DAAAAAMN" baby pukeko meme sound, voice author unknown.
 damn_2: "Damn 1" by Jaywist, CC0 1.0, https://freesound.org/people/Jaywist/sounds/611762/
 oguzzzok123, oguzzzok123_vodolaz, oguzzzok123_laugh: voice messages by the player oguzzzok123, used with their permission.
 
-bagawk, damn and malescream_* are cut to their first 0.3 seconds, clucks to its first 0.15.
+bagawk, damn and male_scream_* are cut to their first 0.3 seconds, clucks to its first 0.15.
 All clean takes are loudness-normalized with ffmpeg.
 *_muffled, *_radio and *_radio_muffled are ffmpeg-filtered copies of the clean takes, under the same license as their source.

@@ -70,28 +70,28 @@
 	radio_muffled_sound = 'modular_meta/features/blooper/sound/button_click_radio_muffled.ogg'
 	tags = list(BLOOPER_TAG_TG)
 
-/datum/blooper/cat_meow1
+/datum/blooper/cat_meow_1
 	name = "Cat Meow 1"
-	sound = 'modular_meta/features/blooper/sound/cat_meow1.ogg'
-	muffled_sound = 'modular_meta/features/blooper/sound/cat_meow1_muffled.ogg'
-	radio_sound = 'modular_meta/features/blooper/sound/cat_meow1_radio.ogg'
-	radio_muffled_sound = 'modular_meta/features/blooper/sound/cat_meow1_radio_muffled.ogg'
+	sound = 'modular_meta/features/blooper/sound/cat_meow_1.ogg'
+	muffled_sound = 'modular_meta/features/blooper/sound/cat_meow_1_muffled.ogg'
+	radio_sound = 'modular_meta/features/blooper/sound/cat_meow_1_radio.ogg'
+	radio_muffled_sound = 'modular_meta/features/blooper/sound/cat_meow_1_radio_muffled.ogg'
 	tags = list(BLOOPER_TAG_TG)
 
-/datum/blooper/cat_meow2
+/datum/blooper/cat_meow_2
 	name = "Cat Meow 2"
-	sound = 'modular_meta/features/blooper/sound/cat_meow2.ogg'
-	muffled_sound = 'modular_meta/features/blooper/sound/cat_meow2_muffled.ogg'
-	radio_sound = 'modular_meta/features/blooper/sound/cat_meow2_radio.ogg'
-	radio_muffled_sound = 'modular_meta/features/blooper/sound/cat_meow2_radio_muffled.ogg'
+	sound = 'modular_meta/features/blooper/sound/cat_meow_2.ogg'
+	muffled_sound = 'modular_meta/features/blooper/sound/cat_meow_2_muffled.ogg'
+	radio_sound = 'modular_meta/features/blooper/sound/cat_meow_2_radio.ogg'
+	radio_muffled_sound = 'modular_meta/features/blooper/sound/cat_meow_2_radio_muffled.ogg'
 	tags = list(BLOOPER_TAG_TG)
 
-/datum/blooper/cat_meow3
+/datum/blooper/cat_meow_3
 	name = "Cat Meow 3"
-	sound = 'modular_meta/features/blooper/sound/cat_meow3.ogg'
-	muffled_sound = 'modular_meta/features/blooper/sound/cat_meow3_muffled.ogg'
-	radio_sound = 'modular_meta/features/blooper/sound/cat_meow3_radio.ogg'
-	radio_muffled_sound = 'modular_meta/features/blooper/sound/cat_meow3_radio_muffled.ogg'
+	sound = 'modular_meta/features/blooper/sound/cat_meow_3.ogg'
+	muffled_sound = 'modular_meta/features/blooper/sound/cat_meow_3_muffled.ogg'
+	radio_sound = 'modular_meta/features/blooper/sound/cat_meow_3_radio.ogg'
+	radio_muffled_sound = 'modular_meta/features/blooper/sound/cat_meow_3_radio_muffled.ogg'
 	tags = list(BLOOPER_TAG_TG)
 
 /datum/blooper/chirp
@@ -238,52 +238,52 @@
 	radio_muffled_sound = 'modular_meta/features/blooper/sound/lighter_radio_muffled.ogg'
 	tags = list(BLOOPER_TAG_TG)
 
-/datum/blooper/malescream_1
+/datum/blooper/male_scream_1
 	name = "Male Scream 1"
-	sound = 'modular_meta/features/blooper/sound/malescream_1.ogg'
-	muffled_sound = 'modular_meta/features/blooper/sound/malescream_1_muffled.ogg'
-	radio_sound = 'modular_meta/features/blooper/sound/malescream_1_radio.ogg'
-	radio_muffled_sound = 'modular_meta/features/blooper/sound/malescream_1_radio_muffled.ogg'
+	sound = 'modular_meta/features/blooper/sound/male_scream_1.ogg'
+	muffled_sound = 'modular_meta/features/blooper/sound/male_scream_1_muffled.ogg'
+	radio_sound = 'modular_meta/features/blooper/sound/male_scream_1_radio.ogg'
+	radio_muffled_sound = 'modular_meta/features/blooper/sound/male_scream_1_radio_muffled.ogg'
 	tags = list(BLOOPER_TAG_META, BLOOPER_TAG_TG)
 
-/datum/blooper/malescream_2
+/datum/blooper/male_scream_2
 	name = "Male Scream 2"
-	sound = 'modular_meta/features/blooper/sound/malescream_2.ogg'
-	muffled_sound = 'modular_meta/features/blooper/sound/malescream_2_muffled.ogg'
-	radio_sound = 'modular_meta/features/blooper/sound/malescream_2_radio.ogg'
-	radio_muffled_sound = 'modular_meta/features/blooper/sound/malescream_2_radio_muffled.ogg'
+	sound = 'modular_meta/features/blooper/sound/male_scream_2.ogg'
+	muffled_sound = 'modular_meta/features/blooper/sound/male_scream_2_muffled.ogg'
+	radio_sound = 'modular_meta/features/blooper/sound/male_scream_2_radio.ogg'
+	radio_muffled_sound = 'modular_meta/features/blooper/sound/male_scream_2_radio_muffled.ogg'
 	tags = list(BLOOPER_TAG_META, BLOOPER_TAG_TG)
 
-/datum/blooper/malescream_3
+/datum/blooper/male_scream_3
 	name = "Male Scream 3"
-	sound = 'modular_meta/features/blooper/sound/malescream_3.ogg'
-	muffled_sound = 'modular_meta/features/blooper/sound/malescream_3_muffled.ogg'
-	radio_sound = 'modular_meta/features/blooper/sound/malescream_3_radio.ogg'
-	radio_muffled_sound = 'modular_meta/features/blooper/sound/malescream_3_radio_muffled.ogg'
+	sound = 'modular_meta/features/blooper/sound/male_scream_3.ogg'
+	muffled_sound = 'modular_meta/features/blooper/sound/male_scream_3_muffled.ogg'
+	radio_sound = 'modular_meta/features/blooper/sound/male_scream_3_radio.ogg'
+	radio_muffled_sound = 'modular_meta/features/blooper/sound/male_scream_3_radio_muffled.ogg'
 	tags = list(BLOOPER_TAG_META, BLOOPER_TAG_TG)
 
-/datum/blooper/malescream_4
+/datum/blooper/male_scream_4
 	name = "Male Scream 4"
-	sound = 'modular_meta/features/blooper/sound/malescream_4.ogg'
-	muffled_sound = 'modular_meta/features/blooper/sound/malescream_4_muffled.ogg'
-	radio_sound = 'modular_meta/features/blooper/sound/malescream_4_radio.ogg'
-	radio_muffled_sound = 'modular_meta/features/blooper/sound/malescream_4_radio_muffled.ogg'
+	sound = 'modular_meta/features/blooper/sound/male_scream_4.ogg'
+	muffled_sound = 'modular_meta/features/blooper/sound/male_scream_4_muffled.ogg'
+	radio_sound = 'modular_meta/features/blooper/sound/male_scream_4_radio.ogg'
+	radio_muffled_sound = 'modular_meta/features/blooper/sound/male_scream_4_radio_muffled.ogg'
 	tags = list(BLOOPER_TAG_META, BLOOPER_TAG_TG)
 
-/datum/blooper/malescream_5
+/datum/blooper/male_scream_5
 	name = "Male Scream 5"
-	sound = 'modular_meta/features/blooper/sound/malescream_5.ogg'
-	muffled_sound = 'modular_meta/features/blooper/sound/malescream_5_muffled.ogg'
-	radio_sound = 'modular_meta/features/blooper/sound/malescream_5_radio.ogg'
-	radio_muffled_sound = 'modular_meta/features/blooper/sound/malescream_5_radio_muffled.ogg'
+	sound = 'modular_meta/features/blooper/sound/male_scream_5.ogg'
+	muffled_sound = 'modular_meta/features/blooper/sound/male_scream_5_muffled.ogg'
+	radio_sound = 'modular_meta/features/blooper/sound/male_scream_5_radio.ogg'
+	radio_muffled_sound = 'modular_meta/features/blooper/sound/male_scream_5_radio_muffled.ogg'
 	tags = list(BLOOPER_TAG_META, BLOOPER_TAG_TG)
 
-/datum/blooper/malescream_6
+/datum/blooper/male_scream_6
 	name = "Male Scream 6"
-	sound = 'modular_meta/features/blooper/sound/malescream_6.ogg'
-	muffled_sound = 'modular_meta/features/blooper/sound/malescream_6_muffled.ogg'
-	radio_sound = 'modular_meta/features/blooper/sound/malescream_6_radio.ogg'
-	radio_muffled_sound = 'modular_meta/features/blooper/sound/malescream_6_radio_muffled.ogg'
+	sound = 'modular_meta/features/blooper/sound/male_scream_6.ogg'
+	muffled_sound = 'modular_meta/features/blooper/sound/male_scream_6_muffled.ogg'
+	radio_sound = 'modular_meta/features/blooper/sound/male_scream_6_radio.ogg'
+	radio_muffled_sound = 'modular_meta/features/blooper/sound/male_scream_6_radio_muffled.ogg'
 	tags = list(BLOOPER_TAG_META, BLOOPER_TAG_TG)
 
 /datum/blooper/meat_slap
@@ -414,21 +414,21 @@
 	radio_muffled_sound = 'modular_meta/features/blooper/sound/wow_radio_muffled.ogg'
 	tags = list(BLOOPER_TAG_PARADISE)
 
-/datum/blooper_collection/random_meow
+/datum/blooper_collection/cat_meow_random
 	name = "Cat Meow Random"
 	bloopers = list(
-		/datum/blooper/cat_meow1,
-		/datum/blooper/cat_meow2,
-		/datum/blooper/cat_meow3,
+		/datum/blooper/cat_meow_1,
+		/datum/blooper/cat_meow_2,
+		/datum/blooper/cat_meow_3,
 	)
 
-/datum/blooper_collection/random_scream
+/datum/blooper_collection/male_scream_random
 	name = "Male Scream Random"
 	bloopers = list(
-		/datum/blooper/malescream_1,
-		/datum/blooper/malescream_2,
-		/datum/blooper/malescream_3,
-		/datum/blooper/malescream_4,
-		/datum/blooper/malescream_5,
-		/datum/blooper/malescream_6,
+		/datum/blooper/male_scream_1,
+		/datum/blooper/male_scream_2,
+		/datum/blooper/male_scream_3,
+		/datum/blooper/male_scream_4,
+		/datum/blooper/male_scream_5,
+		/datum/blooper/male_scream_6,
 	)
