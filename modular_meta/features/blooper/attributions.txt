@@ -3,6 +3,7 @@ from Paradise Station, https://github.com/ParadiseSS13/Paradise/pull/32678 by Al
 darwin, drop, guttural, huh, prompter and wow were made by BlackDog.
 
 Copies of /tg/station sounds, CC BY-SA 3.0 unless noted:
+bagawk <- sound/mobs/non-humanoids/chicken/bagawk.ogg
 banjo <- sound/runtime/instruments/banjo/Cn3.ogg
 beep <- sound/machines/nuke/general_beep.ogg
 bloop <- sound/misc/bloop.ogg, by Tim Kahn, https://freesound.org/people/tim.kahn/sounds/130377/
@@ -13,6 +14,7 @@ cat_meow2 <- sound/mobs/non-humanoids/cat/cat_meow2.ogg, by sadboysuss
 cat_meow3 <- sound/mobs/non-humanoids/cat/cat_meow3.ogg, by sadboysuss
 chirp <- sound/runtime/chatter/griffin_1.ogg
 chitter <- sound/mobs/non-humanoids/insect/chitter.ogg
+clucks <- sound/mobs/non-humanoids/chicken/clucks.ogg
 finger_snap <- sound/mobs/humanoids/human/snap/fingersnap1.ogg
 hoot <- sound/runtime/chatter/owl_1.ogg
 lighter <- sound/items/lighter/lighter_on.ogg, from BeeStation, https://github.com/BeeStation/BeeStation-Hornet/pull/29
@@ -37,6 +39,6 @@ damn: the "DAAAAAMN" baby pukeko meme sound, voice author unknown.
 damn_2: "Damn 1" by Jaywist, CC0 1.0, https://freesound.org/people/Jaywist/sounds/611762/
 oguzzzok123, oguzzzok123_vodolaz, oguzzzok123_laugh: voice messages by the player oguzzzok123, used with their permission.
 
-damn and malescream_* are cut to their first 0.3 seconds.
+bagawk, damn and malescream_* are cut to their first 0.3 seconds, clucks to its first 0.15.
 All clean takes are loudness-normalized with ffmpeg.
 *_muffled, *_radio and *_radio_muffled are ffmpeg-filtered copies of the clean takes, under the same license as their source.

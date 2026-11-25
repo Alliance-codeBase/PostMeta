@@ -6,6 +6,14 @@
 	radio_muffled_sound = 'modular_meta/features/blooper/sound/attention_radio_muffled.ogg'
 	tags = list(BLOOPER_TAG_PARADISE)
 
+/datum/blooper/bagawk
+	name = "Bagawk"
+	sound = 'modular_meta/features/blooper/sound/bagawk.ogg'
+	muffled_sound = 'modular_meta/features/blooper/sound/bagawk_muffled.ogg'
+	radio_sound = 'modular_meta/features/blooper/sound/bagawk_radio.ogg'
+	radio_muffled_sound = 'modular_meta/features/blooper/sound/bagawk_radio_muffled.ogg'
+	tags = list(BLOOPER_TAG_TG)
+
 /datum/blooper/banjo
 	name = "Banjo"
 	sound = 'modular_meta/features/blooper/sound/banjo.ogg'
@@ -100,6 +108,14 @@
 	muffled_sound = 'modular_meta/features/blooper/sound/chitter_muffled.ogg'
 	radio_sound = 'modular_meta/features/blooper/sound/chitter_radio.ogg'
 	radio_muffled_sound = 'modular_meta/features/blooper/sound/chitter_radio_muffled.ogg'
+	tags = list(BLOOPER_TAG_TG)
+
+/datum/blooper/clucks
+	name = "Clucks"
+	sound = 'modular_meta/features/blooper/sound/clucks.ogg'
+	muffled_sound = 'modular_meta/features/blooper/sound/clucks_muffled.ogg'
+	radio_sound = 'modular_meta/features/blooper/sound/clucks_radio.ogg'
+	radio_muffled_sound = 'modular_meta/features/blooper/sound/clucks_radio_muffled.ogg'
 	tags = list(BLOOPER_TAG_TG)
 
 /datum/blooper/damn
