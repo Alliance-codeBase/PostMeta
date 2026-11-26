@@ -129,4 +129,4 @@
 		it wasnt, in untrained hands this weapon could break skull or ribs with one swift hit.<br>\
 		<br>\
 		And nowadays is used by most robust Nanotrasen security forces, such as YOU!" \
-        )
+	)

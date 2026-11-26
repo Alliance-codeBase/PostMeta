@@ -14,9 +14,9 @@
 
 
 /datum/component/backstabs
-	var/backstab_multiplier
+	var/backstab_multiplier = 4 // 4x damage by default
 
-/datum/component/backstabs/Initialize(backstab_multiplier = 4) // 4x damage by default
+/datum/component/backstabs/Initialize()
 	if(!isitem(parent))
 		return COMPONENT_INCOMPATIBLE
 	RegisterSignal(parent, COMSIG_ITEM_ATTACK, .proc/on_attack)

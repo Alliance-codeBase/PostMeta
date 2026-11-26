@@ -1,7 +1,8 @@
-/client/verb/mentorhelp(msg as text)
-	set category = "Mentor"
-	set name = "Mentorhelp"
+GAME_VERB(/client, mentorhelp, "Mentorhelp", "Mentor")
+	send_mentorhelp(tgui_input_text(src, title = "Mentorhelp", encode = FALSE))
 
+/// sends a mentorhelp to every mentor and admin and files it in the mentor manager
+/client/proc/send_mentorhelp(msg)
 	if(prefs.muted & MUTE_ADMINHELP)
 		to_chat(src,
 			type = MESSAGE_TYPE_MODCHAT,
@@ -70,7 +71,7 @@
 
 	if(key)
 		if(include_link != null)
-			. += "<a href='?_src_=mentor;mentor_msg=[ckey];[MentorHrefToken(TRUE)]'>"
+			. += "<a href='byond://?_src_=mentor;mentor_msg=[ckey];[MentorHrefToken(TRUE)]'>"
 
 		if(chosen_client && chosen_client.holder && chosen_client.holder.fakekey)
 			. += "Administrator"
@@ -85,6 +86,6 @@
 		. += "*no key*"
 
 	if(include_follow)
-		. += " (<a href='?_src_=mentor;mentor_follow=[REF(user)];[MentorHrefToken(TRUE)]'>F</a>)"
+		. += " (<a href='byond://?_src_=mentor;mentor_follow=[REF(user)];[MentorHrefToken(TRUE)]'>F</a>)"
 
 	return .

@@ -181,9 +181,6 @@ GLOBAL_DATUM_INIT(metacoin_tips, /datum/metacoin_tips, new)
 /client/proc/open_metacoin_tips()
 	new /datum/metacoinshop/panel/tips(src, mob)
 
-/client/verb/tip_on_screen()
-	set name = "Tip"
-	set category = "OOC"
-	set desc = "Click a character to tip their player."
+GAME_VERB_DESC(/client, tip_on_screen, "Tip", "Click a character to tip their player.", "OOC")
 
 	GLOB.metacoin_tips.start_picking(src)

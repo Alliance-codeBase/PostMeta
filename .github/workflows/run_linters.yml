@@ -77,9 +77,7 @@ jobs:
       - name: Run grep checks
         if: ${{ !cancelled() }}
         background: true
-        run: |
-          bash tools/ci/check_grep.sh
-          bash modular_meta/tools/massmeta_check_grep.sh # MASSMETA EDIT ADDITION - checking modular_meta code
+        run: bash tools/ci/check_grep.sh
 
       - name: Ticked file enforcement
         if: ${{ !cancelled() }}

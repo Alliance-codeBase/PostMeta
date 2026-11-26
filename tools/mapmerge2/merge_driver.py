@@ -95,7 +95,11 @@ def three_way_merge(base, left, right):
 
         merged.set_tile(coord, merged_movables + merged_turfs + merged_areas)
 
-    merged = mapmerge.merge_map(merged, base)
+    # MASSMETA EDIT CHANGE BEGIN - keys follow our side, so the merge diff shows only their edits
+    # ORIGINAL
+    # merged = mapmerge.merge_map(merged, base)
+    merged = mapmerge.merge_map(merged, left)
+    # MASSMETA EDIT CHANGE END
     return trouble, merged
 
 

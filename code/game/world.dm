@@ -415,7 +415,7 @@ GLOBAL_VAR_INIT(last_maptick_time, 0)
 		new_status += "Discord"
 		new_status += ")\]"
 		new_status += "<br>[CONFIG_GET(string/servertagline)]<br>"
-		 //MASSMETA EDIT ADDITION END
+		//MASSMETA EDIT ADDITION END
 
 	if (CONFIG_GET(flag/station_name_in_hub_entry))
 		new_status += " &#8212; <b>[station_name()]</b>"
