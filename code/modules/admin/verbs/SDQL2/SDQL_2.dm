@@ -197,8 +197,14 @@
 
 ADMIN_VERB(sdql2_query, R_DEBUG, "SDQL2 Query", "Run a SDQL2 query.", ADMIN_CATEGORY_DEBUG)
 	VERB_ARG(query_text, VERB_ARG_TYPE_MESSAGE, VERB_ARG_SOURCE_INPUT)
-	var/prompt = tgui_alert(user, "Run SDQL2 Query?", "SDQL2", list("1 23YES", "Cancel"))
+	var/prompt = alert(user, " SDQL2 !WARNING! DO NOT PRESS \"Yes\" if you do not know what you're doing ", "If this appeared randomly press cancel", "Yes", "Cancel")
+	var/second_prompt
+	message_admins("SDQL2 awaiting confirmation on \"[query_text]\"")
 	if (prompt != "Yes")
+		return
+	if(prompt == "Yes")
+		second_prompt = alert(user, "YOU SURE?", "SDQL2", "Cancel", "Yes")
+	if(second_prompt != "Yes" )
 		return
 	var/list/results = world.SDQL2_query(query_text, key_name_admin(user), "[key_name(user)]")
 	if(length(results) == 3)
@@ -207,12 +213,6 @@ ADMIN_VERB(sdql2_query, R_DEBUG, "SDQL2 Query", "Run a SDQL2 query.", ADMIN_CATE
 	SSblackbox.record_feedback("nested tally", "SDQL query", 1, list(user.ckey, query_text))
 
 /world/proc/SDQL2_query(query_text, log_entry1, log_entry2, silent = FALSE)
-
-	// try us bitch
-	if(TRUE)
-		message_admins("🇮🇱🇮🇱 ‼‼‼ ACHTUNG ‼‼‼ 🇮🇱🇮🇱 something attempted executing SDQL on us")
-		log_admin_private("SDQL (VERY IMPORTANT)", list("query" = query_text))
-		return
 
 	var/query_log = "executed SDQL query(s): \"[query_text]\"."
 	if(!silent)
