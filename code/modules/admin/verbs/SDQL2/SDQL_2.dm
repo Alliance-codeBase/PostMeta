@@ -197,9 +197,9 @@
 
 ADMIN_VERB(sdql2_query, R_DEBUG, "SDQL2 Query", "Run a SDQL2 query.", ADMIN_CATEGORY_DEBUG)
 	VERB_ARG(query_text, VERB_ARG_TYPE_MESSAGE, VERB_ARG_SOURCE_INPUT)
+	message_admins("SDQL2 awaiting confirmation on \"[query_text]\"")
 	var/prompt = alert(user, " SDQL2 !WARNING! DO NOT PRESS \"Yes\" if you do not know what you're doing ", "If this appeared randomly press cancel", "Yes", "Cancel")
 	var/second_prompt
-	message_admins("SDQL2 awaiting confirmation on \"[query_text]\"")
 	if (prompt != "Yes")
 		return
 	if(prompt == "Yes")
