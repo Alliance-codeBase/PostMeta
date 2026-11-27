@@ -1374,6 +1374,7 @@
 		filler.set_density(FALSE)
 	flags_1 &= ~PREVENT_CLICK_UNDER_1
 	air_update_turf(TRUE, FALSE)
+	liquids_on_open() //MASSMETA ADDITION (liquids)
 	var/open_delay = animation_segment_delay(AIRLOCK_OPENING_FINISHED) - transparent_delay - passable_delay
 	sleep(open_delay)
 	layer = OPEN_DOOR_LAYER
@@ -1435,17 +1436,6 @@
 	if(killthis)
 		SSexplosions.med_mov_atom += killthis
 	SEND_SIGNAL(src, COMSIG_AIRLOCK_CLOSE, forced)
-
-	var/turf/open/open_turf = get_turf(src)
-	if(open_turf.liquids)
-		var/datum/liquid_group/turfs_group = open_turf.liquids.liquid_group
-		turfs_group.remove_from_group(open_turf)
-		turfs_group.try_split(open_turf)
-		for(var/dir in GLOB.cardinals)
-			var/turf/open/direction_turf = get_step(open_turf, dir)
-			if(!isopenturf(direction_turf) || !direction_turf.liquids)
-				continue
-			turfs_group.check_edges(direction_turf)
 
 	set_airlock_state(AIRLOCK_CLOSING, animated = TRUE, force_type = forced)
 	layer = CLOSED_DOOR_LAYER

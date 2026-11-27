@@ -1298,6 +1298,7 @@
 		chance = (min(reac_volume * rad_power, CALCULATE_RAD_MAX_CHANCE(rad_power))),
 	)
 
+/*
 /datum/reagent/uranium/expose_turf(turf/exposed_turf, reac_volume)
 	. = ..()
 	if((reac_volume < 3) || isspaceturf(exposed_turf))
@@ -1313,6 +1314,7 @@
 	if(glow.lazy_init_reagents()) // Decal already has reagents inited, add instead
 		glow.reagents.maximum_volume = min(glow.reagents.maximum_volume + rounded_volume, 300) // Increase reagent holder volume up to a max of 300
 		glow.reagents.add_reagent(type, rounded_volume)
+ MASSMETA REMOVAL (liquids) */
 
 //Mutagenic chem side-effects.
 /datum/reagent/uranium/on_hydroponics_apply(obj/machinery/hydroponics/mytray, mob/user)

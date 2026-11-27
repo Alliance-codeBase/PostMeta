@@ -1,4 +1,5 @@
 #include "code\height_floors.dm"
+#include "code\liquid_checks.dm"
 #include "code\liquid_drains.dm"
 #include "code\liquid_effect.dm"
 #include "code\liquid_groups.dm"

@@ -1695,6 +1695,7 @@
 		goo.pre_dissolve(FALSE)
 	return ..()
 
+/*
 /datum/reagent/toxin/acid/industrial_waste/expose_turf(turf/exposed_turf, reac_volume)
 	var/obj/effect/decal/cleanable/greenglow/waste/goo = exposed_turf.spawn_unique_cleanable(/obj/effect/decal/cleanable/greenglow/waste) //Following similar logic to how ants spawn their cleanables.
 	if(QDELETED(goo))
@@ -1710,6 +1711,7 @@
 		goo.pre_dissolve()
 		return // Otherwise there's too little waste to do anything.
 	return ..()
+ MASSMETA REMOVAL (liquids) */
 
 /datum/reagent/toxin/acid/industrial_waste/proc/pre_disposal()
 	SIGNAL_HANDLER

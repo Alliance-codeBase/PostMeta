@@ -12,7 +12,7 @@
 	light_power = 1
 	light_color = LIGHT_COLOR_FIRE
 
-	smoothing_flags = SMOOTH_BITMASK | SMOOTH_OBJ
+	smoothing_flags = SMOOTH_BITMASK | SMOOTH_OBJ | SMOOTH_PROC_FILTER
 	smoothing_groups = SMOOTH_GROUP_WATER
 	canSmoothWith = SMOOTH_GROUP_WATER + SMOOTH_GROUP_WINDOW_FULLTILE + SMOOTH_GROUP_WALLS
 
@@ -44,6 +44,27 @@
 
 	var/temporary_split_key
 
+/obj/effect/abstract/liquid_turf/smoothing_allowed(atom/smoothing_with, direction, junction)
+	if(istype(smoothing_with, /obj/effect/abstract/liquid_turf))
+		var/obj/effect/abstract/liquid_turf/other_liquid = smoothing_with
+		if(QDELETED(liquid_group) || QDELETED(other_liquid.liquid_group))
+			return NONE
+		if(other_liquid.liquid_group != liquid_group)
+			return NONE
+		if(my_turf?.turf_height != other_liquid.my_turf?.turf_height)
+			return NONE
+
+	return junction
+
+/obj/effect/abstract/liquid_turf/proc/update_liquid_smooth()
+	if(liquid_state != LIQUID_STATE_PUDDLE)
+		return
+	QUEUE_SMOOTH(src)
+	QUEUE_SMOOTH_NEIGHBORS(src)
+
+/obj/effect/abstract/liquid_turf/Destroy()
+	QUEUE_SMOOTH_NEIGHBORS(src)
+	return ..()
 
 /obj/effect/abstract/liquid_turf/proc/process_evaporation()
 	if(!liquid_group.always_evaporates && (liquid_group.expected_turf_height > LIQUID_ANKLES_LEVEL_HEIGHT))
@@ -206,7 +227,10 @@
 			to_chat(M, span_userdanger("You fall in the water!"))
 		return ZIMPACT_CANCEL_DAMAGE
 
-/obj/effect/abstract/liquid_turf/Initialize(mapload, datum/liquid_group/group_to_add)
+/obj/effect/abstract/liquid_turf/Initialize(mapload, datum/liquid_group/group_to_add, datum/liquid_group/initial_group)
+	if(initial_group)
+		liquid_group = initial_group
+
 	. = ..()
 	if(!small_fire)
 		small_fire = new

@@ -30,6 +30,11 @@ GLOBAL_VAR_INIT(global_evaporation_rate, 2)
 	evaporation_rate = 5
 	opacity = 150
 
+/datum/reagent/consumable/ice/expose_turf(turf/open/exposed_turf, reac_volume)
+	if(isopenturf(exposed_turf))
+		exposed_turf.MakeSlippery(TURF_WET_ICE, min_wet_time = 10 SECONDS, wet_time_to_add = 5 SECONDS)
+	return
+
 /datum/reagent/lube
 	slippery = FALSE
 	really_slippery = TRUE
@@ -87,3 +92,13 @@ GLOBAL_VAR_INIT(global_evaporation_rate, 2)
 
 /datum/reagent/toxin/spore_burning
 	accelerant_quality = 10
+
+/datum/reagent/toxin/acid/expose_turf(turf/open/exposed_turf, reac_volume)
+	. = ..()
+	if(type != /datum/reagent/toxin/acid)
+		return
+	if(!isopenturf(exposed_turf) || QDELETED(exposed_turf.liquids))
+		return
+
+	if(reac_volume >= 5)
+		exposed_turf.liquids.set_light(1, 1.5, LIGHT_COLOR_GREEN)
