@@ -17232,12 +17232,11 @@
 /turf/open/floor/iron/dark,
 /area/station/service/chapel)
 "eND" = (
-/obj/effect/spawner/structure/window/reinforced,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/structure/cable,
-/turf/open/floor/plating,
-/area/station/security/prison/visit)
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/turf/open/floor/iron,
+/area/station/hallway/primary/central/fore)
 "eNE" = (
 /obj/item/radio/intercom/directional/south,
 /turf/open/floor/iron,
@@ -23768,9 +23767,8 @@
 /obj/machinery/door/firedoor,
 /obj/structure/cable,
 /obj/effect/mapping_helpers/airlock/access/any/security/brig,
-/obj/effect/mapping_helpers/airlock/unres/delayed{
-	dir = 1
-	},
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /turf/open/floor/iron,
 /area/station/security/prison/visit)
 "gFH" = (
@@ -54970,9 +54968,11 @@
 /turf/open/floor/plating,
 /area/station/maintenance/fore)
 "pnX" = (
-/obj/effect/spawner/structure/window/reinforced,
 /obj/structure/cable,
-/turf/open/floor/plating,
+/obj/machinery/turnstile/brig{
+	dir = 4
+	},
+/turf/open/floor/iron,
 /area/station/security/brig)
 "poc" = (
 /obj/structure/cable,
@@ -62037,6 +62037,11 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/structure/cable,
+/obj/machinery/airalarm/directional/south,
+/obj/machinery/camera/directional/south{
+	c_tag = "Security - Visitation South";
+	network = list("ss13","prison")
+	},
 /turf/open/floor/iron,
 /area/station/security/prison/visit)
 "rld" = (
@@ -74463,14 +74468,9 @@
 /turf/open/floor/circuit,
 /area/station/ai/satellite/hallway)
 "uNI" = (
-/obj/machinery/camera/directional/south{
-	c_tag = "Security - Visitation South";
-	network = list("ss13","prison")
+/obj/machinery/turnstile/brig{
+	dir = 1
 	},
-/obj/machinery/airalarm/directional/south,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/structure/cable,
 /turf/open/floor/iron,
 /area/station/security/prison/visit)
 "uNN" = (
@@ -81910,9 +81910,6 @@
 	name = "Permabrig Visitation"
 	},
 /obj/effect/mapping_helpers/airlock/access/any/security/brig,
-/obj/effect/mapping_helpers/airlock/unres/delayed{
-	dir = 4
-	},
 /obj/machinery/door/firedoor,
 /turf/open/floor/iron,
 /area/station/security/brig)
@@ -176201,8 +176198,8 @@ brJ
 ukN
 uHv
 lWb
+vVt
 uNI
-dAZ
 vOw
 eGW
 eGW
@@ -176460,7 +176457,7 @@ uHv
 toU
 vVt
 gFC
-eCE
+eND
 eCE
 eCE
 eYe
@@ -176716,7 +176713,7 @@ eDq
 fNw
 bZk
 rkY
-eND
+dAZ
 qpB
 qpB
 eIU
