@@ -53,7 +53,7 @@ GLOBAL_LIST_INIT(initalized_ocean_areas, list())
 	baseturfs = /turf/open/openspace/ocean
 	var/replacement_turf = /turf/open/floor/plating/ocean
 
-/turf/open/openspace/ocean/Initialize()
+/turf/open/openspace/ocean/Initialize(mapload)
 	. = ..()
 	ChangeTurf(replacement_turf, null, CHANGETURF_IGNORE_AIR)
 
@@ -104,7 +104,7 @@ GLOBAL_LIST_INIT(initalized_ocean_areas, list())
 	/// do we build a catwalk or plating with rods
 	var/catwalk = FALSE
 
-/turf/open/floor/plating/ocean/Initialize()
+/turf/open/floor/plating/ocean/Initialize(mapload)
 	. = ..()
 	RegisterSignal(src, COMSIG_ATOM_ENTERED, PROC_REF(movable_entered))
 	RegisterSignal(src, COMSIG_TURF_MOB_FALL, PROC_REF(mob_fall))
