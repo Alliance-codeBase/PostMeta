@@ -17232,11 +17232,12 @@
 /turf/open/floor/iron/dark,
 /area/station/service/chapel)
 "eND" = (
-/obj/structure/cable,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/machinery/turnstile/brig{
+	dir = 1
+	},
+/obj/machinery/door/firedoor,
 /turf/open/floor/iron,
-/area/station/hallway/primary/central/fore)
+/area/station/security/prison/visit)
 "eNE" = (
 /obj/item/radio/intercom/directional/south,
 /turf/open/floor/iron,
@@ -54972,6 +54973,7 @@
 /obj/machinery/turnstile/brig{
 	dir = 4
 	},
+/obj/machinery/door/firedoor,
 /turf/open/floor/iron,
 /area/station/security/brig)
 "poc" = (
@@ -74468,11 +74470,11 @@
 /turf/open/floor/circuit,
 /area/station/ai/satellite/hallway)
 "uNI" = (
-/obj/machinery/turnstile/brig{
-	dir = 1
-	},
+/obj/structure/cable,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /turf/open/floor/iron,
-/area/station/security/prison/visit)
+/area/station/hallway/primary/central/fore)
 "uNN" = (
 /obj/effect/spawner/random/trash/bin,
 /obj/effect/spawner/random/maintenance,
@@ -176199,7 +176201,7 @@ ukN
 uHv
 lWb
 vVt
-uNI
+eND
 vOw
 eGW
 eGW
@@ -176457,7 +176459,7 @@ uHv
 toU
 vVt
 gFC
-eND
+uNI
 eCE
 eCE
 eYe
