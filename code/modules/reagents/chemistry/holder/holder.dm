@@ -196,10 +196,10 @@
  * * [data][list] - additional data to add
  * * [added_purity][number] - an override to the default purity for each reagent to add.
  */
-/datum/reagents/proc/add_reagent_list(list/list_reagents, list/data = null, added_purity = null)
+/datum/reagents/proc/add_reagent_list(list/list_reagents, list/data = null, added_purity = null, _no_react = FALSE) //MASSMETA EDIT ORIGINAL: /datum/reagents/proc/add_reagent_list(list/list_reagents, list/data = null, added_purity = null)
 	for(var/r_id in list_reagents)
 		var/amt = list_reagents[r_id]
-		add_reagent(r_id, amt, data, added_purity = added_purity)
+		add_reagent(r_id, amt, data, added_purity = added_purity, no_react = _no_react) //MASSMETA EDIT ORIGINAL: add_reagent(r_id, amt, data, added_purity = added_purity)
 
 /**
  * Removes a specific reagent. can supress reactions if needed

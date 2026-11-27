@@ -163,6 +163,54 @@
  * This is most dangerous for fuel tanks, which will explosion().
  * Other dispensers will scatter their contents within range.
  */
+//MASSMETA EDIT (liquids)
+/obj/structure/reagent_dispensers/proc/boom()
+	if(QDELETED(src))
+		return // little bit of sanity sauce before we wreck ourselves somehow
+	var/datum/reagent/fuel/volatiles = reagents.has_reagent(/datum/reagent/fuel)
+	var/fuel_amt = 0
+	if(istype(volatiles) && volatiles.volume >= 25)
+		fuel_amt = volatiles.volume
+		reagents.del_reagent(/datum/reagent/fuel) // not actually used for the explosion
+	if(reagents.total_volume && !fuel_amt)
+		visible_message(span_danger("\The [src] ruptures!"))
+	// get deleted first so our spill can't hit or burn us again, moving out of the way instead knocks wall-mounted tanks off and booms them twice
+	var/turf/open/spill_location = get_turf(src)
+	var/datum/reagents/spilled_reagents = reagents
+	reagents = null
+	spilled_reagents.my_atom = spill_location
+	qdel(src)
+
+	if(spilled_reagents.total_volume && isopenturf(spill_location))
+		if(QDELETED(spill_location.liquids))
+			spill_location.liquids = new(spill_location)
+		var/datum/liquid_group/group = spill_location.liquids.liquid_group
+		if(!QDELETED(group))
+			spilled_reagents.trans_to(group.reagents, spilled_reagents.total_volume / 3, methods = TOUCH)
+			group.process_group()
+	qdel(spilled_reagents)
+
+	if(fuel_amt && spill_location) // with that done, actually explode
+		spill_location.visible_message(span_danger("\The [src] explodes!"))
+		// old code for reference:
+		// standard fuel tank = 1000 units = heavy_impact_range = 1, light_impact_range = 5, flame_range = 5
+		// big fuel tank = 5000 units = devastation_range = 1, heavy_impact_range = 2, light_impact_range = 7, flame_range = 12
+		// It did not account for how much fuel was actually in the tank at all, just the size of the tank.
+		// I encourage others to better scale these numbers in the future.
+		// As it stands this is a minor nerf in exchange for an easy bombing technique working that has been broken for a while.
+		switch(fuel_amt)
+			if(25 to 150)
+				explosion(spill_location, light_impact_range = 1, flame_range = 2, explosion_cause = src)
+			if(150 to 300)
+				explosion(spill_location, light_impact_range = 2, flame_range = 3, explosion_cause = src)
+			if(300 to 750)
+				explosion(spill_location, heavy_impact_range = 1, light_impact_range = 3, flame_range = 5, explosion_cause = src)
+			if(750 to 1500)
+				explosion(spill_location, heavy_impact_range = 1, light_impact_range = 4, flame_range = 6, explosion_cause = src)
+			if(1500 to INFINITY)
+				explosion(spill_location, devastation_range = 1, heavy_impact_range = 2, light_impact_range = 6, flame_range = 8, explosion_cause = src)
+
+/* ORIGINAL
 /obj/structure/reagent_dispensers/proc/boom()
 	if(QDELETED(src))
 		return // little bit of sanity sauce before we wreck ourselves somehow
@@ -203,11 +251,32 @@
 				explosion(spill_location, heavy_impact_range = 1, light_impact_range = 4, flame_range = 6, explosion_cause = src)
 			if(1500 to INFINITY)
 				explosion(spill_location, devastation_range = 1, heavy_impact_range = 2, light_impact_range = 6, flame_range = 8, explosion_cause = src)
+MASSMETA EDIT END */
 
 /obj/structure/reagent_dispensers/atom_deconstruct(disassembled = TRUE)
 	if(!disassembled)
 		boom()
 
+//MASSMETA EDIT (liquids)
+/obj/structure/reagent_dispensers/proc/tank_leak()
+	if(!leaking || !reagents || reagents.total_volume < amount_to_leak)
+		return FALSE
+
+	var/turf/leak_turf = get_turf(src)
+	if(!isopenturf(leak_turf) || isspaceturf(leak_turf))
+		return FALSE
+
+	var/leak_amount = min(amount_to_leak, reagents.get_reagent_amount(reagent_id))
+	if(leak_amount <= 0)
+		return FALSE
+
+	var/leak_temperature = reagents.chem_temp
+	reagents.remove_reagent(reagent_id, leak_amount)
+	leak_turf.add_liquid(reagent_id, leak_amount, FALSE, leak_temperature)
+
+	playsound(src, 'sound/effects/glug.ogg', 33, TRUE, SILENCED_SOUND_EXTRARANGE)
+	return TRUE
+/* ORIGINAL
 /obj/structure/reagent_dispensers/proc/tank_leak()
 	if(leaking && reagents && reagents.total_volume >= amount_to_leak)
 		reagents.expose(get_turf(src), TOUCH, amount_to_leak / max(amount_to_leak, reagents.total_volume))
@@ -215,6 +284,7 @@
 		playsound(src, 'sound/effects/glug.ogg', 33, TRUE, SILENCED_SOUND_EXTRARANGE)
 		return TRUE
 	return FALSE
+MASSMETA EDIT END */
 
 /obj/structure/reagent_dispensers/proc/knock_down()
 	var/range = reagents.total_volume / REAGENT_SPILL_DIVISOR

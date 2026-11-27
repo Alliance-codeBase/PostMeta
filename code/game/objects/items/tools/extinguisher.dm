@@ -365,12 +365,43 @@
 	EmptyExtinguisher(user)
 	return CLICK_ACTION_SUCCESS
 
+//MASSMETA EDIT (liquids)
+/obj/item/extinguisher/proc/EmptyExtinguisher(mob/user)
+	if(loc != user || !reagents.total_volume)
+		return
+
+	user.visible_message(
+		span_notice("[user] starts emptying out [src] onto the floor using the release valve..."),
+		span_info("You start emptying out [src] using its release valve..."),
+	)
+
+	if(loc != user || !reagents.total_volume)
+		return
+
+	var/turf/open/spill_turf = get_turf(user)
+	if(isopenturf(spill_turf))
+		if(QDELETED(spill_turf.liquids))
+			spill_turf.liquids = new(spill_turf)
+		var/datum/liquid_group/group = spill_turf.liquids.liquid_group
+		if(!QDELETED(group))
+			if(reagents.total_volume >= 10)
+				reagents.trans_to(group.reagents, 10, methods = TOUCH)
+			else
+				reagents.trans_to(group.reagents, reagents.total_volume, methods = TOUCH)
+			group.process_group()
+
+	reagents.clear_reagents()
+	user.visible_message(
+		span_notice("[user] empties out [src] onto the floor using the release valve."),
+		span_info("You empty out [src] using its release valve."),
+	)
+/* ORIGINAL:
 /obj/item/extinguisher/proc/EmptyExtinguisher(mob/user)
 	if(loc == user && reagents.total_volume)
 		reagents.expose(user.loc, TOUCH)
 		reagents.clear_reagents()
 		user.visible_message(span_notice("[user] empties out [src] onto the floor using the release valve."), span_info("You quietly empty out [src] using its release valve."))
-
+MASSMETA EDIT END */
 // Firebot assembly
 /obj/item/extinguisher/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
 	if (!istype(tool, /obj/item/bodypart/arm/left/robot) && !istype(tool, /obj/item/bodypart/arm/right/robot))

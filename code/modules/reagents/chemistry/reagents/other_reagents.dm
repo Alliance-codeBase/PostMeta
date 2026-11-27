@@ -158,8 +158,10 @@
 	if(isgroundlessturf(exposed_turf) || isnoslipturf(exposed_turf))
 		return
 
+	/*
 	if(reac_volume >= 5)
 		exposed_turf.MakeSlippery(TURF_WET_WATER, 10 SECONDS, min(reac_volume*1.5 SECONDS, 60 SECONDS))
+	MASSMETA REMOVAL (liquids) */
 
 /*
  * Water reaction to an object
@@ -1276,6 +1278,7 @@
 	if(affected_mob.adjust_tox_loss(tox_damage * seconds_per_tick * metabolization_ratio, updating_health = FALSE))
 		return UPDATE_MOB_HEALTH
 
+/*
 /datum/reagent/uranium/expose_turf(turf/exposed_turf, reac_volume)
 	. = ..()
 	if((reac_volume < 3) || isspaceturf(exposed_turf))
@@ -1291,6 +1294,7 @@
 	if(glow.lazy_init_reagents()) // Decal already has reagents inited, add instead
 		glow.reagents.maximum_volume = min(glow.reagents.maximum_volume + rounded_volume, 300) // Increase reagent holder volume up to a max of 300
 		glow.reagents.add_reagent(type, rounded_volume)
+MASSMETA REMOVAL (liquids) */
 
 //Mutagenic chem side-effects.
 /datum/reagent/uranium/on_hydroponics_apply(obj/machinery/hydroponics/mytray, mob/user)
@@ -1397,10 +1401,11 @@
 
 	if((reac_volume < 5))
 		return
-
+	/*
 	var/obj/effect/decal/cleanable/fuel_pool/pool = exposed_turf.spawn_unique_cleanable(/obj/effect/decal/cleanable/fuel_pool)
 	if(pool)
 		pool.burn_amount = max(min(round(reac_volume / 5), 10), 1)
+	MASSMETA REMOVAL (liquids) */
 
 /datum/reagent/fuel/on_spark_act(power_charge, spark_flags)
 	// Doesn't go boom in open air unless we pass a REALLY high current or if we're hot enough

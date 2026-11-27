@@ -594,6 +594,7 @@
 	var/passable_delay = animation_segment_delay(DOOR_OPENING_PASSABLE)
 	SLEEP_NOT_DEL(passable_delay)
 	set_density(FALSE)
+	liquids_on_open() //MASSMETA ADDITION (liquids)
 	flags_1 &= ~PREVENT_CLICK_UNDER_1
 	var/open_delay = animation_segment_delay(DOOR_OPENING_FINISHED) - passable_delay
 	SLEEP_NOT_DEL(open_delay)
@@ -602,6 +603,7 @@
 	set_opacity(FALSE)
 	operating = FALSE
 	air_update_turf(TRUE, FALSE)
+	SEND_SIGNAL(src, COMSIG_ATOM_DOOR_OPEN) //MASSMETA ADDITION (liquids)
 	if(autoclose)
 		autoclose_in(DOOR_CLOSE_WAIT)
 	return TRUE

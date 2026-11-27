@@ -1373,6 +1373,7 @@
 		filler.set_density(FALSE)
 	flags_1 &= ~PREVENT_CLICK_UNDER_1
 	air_update_turf(TRUE, FALSE)
+	liquids_on_open() //MASSMETA ADDITION (liquids)
 	var/open_delay = animation_segment_delay(AIRLOCK_OPENING_FINISHED) - transparent_delay - passable_delay
 	sleep(open_delay)
 	layer = OPEN_DOOR_LAYER
@@ -1380,6 +1381,7 @@
 	if(delayed_close_requested)
 		delayed_close_requested = FALSE
 		addtimer(CALLBACK(src, PROC_REF(close)), FORCING_DOOR_CHECKS)
+	SEND_SIGNAL(src, COMSIG_ATOM_DOOR_OPEN) //MASSMETA ADDITION (liquids)
 	return TRUE
 
 /// Additional checks depending on what we want to happen to door (should we try and open it normally, or do we want this open at all costs?)
