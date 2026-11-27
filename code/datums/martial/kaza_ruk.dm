@@ -237,29 +237,49 @@
 	if(!source.Adjacent(target))
 		return
 
-	var/tail_usage = FALSE
+
+	// var/tail_usage = FALSE // MASSMETA EDIT REMOVAL START END (krav_maga)
+
 	var/kicking = (atk_effect == ATTACK_EFFECT_KICK)
-	var/kick_language = "an axe kick"
-	var/strike_language = "an elbow strike"
+
+	// MASSMETA EDIT CHANGE START (krav_maga)
+	var/kick_language = "a crescent kick"
+	var/strike_language = "a knee strike"
+	// MASSMETA EDIT CHANGE END (krav_maga)
+
 	if(ishuman(source))
-		var/mob/living/carbon/possible_human = source
-		var/obj/item/organ/tail/lizard/possible_lizard_tail = possible_human.get_organ_slot(ORGAN_SLOT_EXTERNAL_TAIL)
+	// MASSMETA EDIT REMOVAL START (krav_maga)
+	//	var/mob/living/carbon/possible_human = source
+	//	var/obj/item/organ/tail/lizard/possible_lizard_tail = possible_human.get_organ_slot(ORGAN_SLOT_EXTERNAL_TAIL)
+	// MASSMETA EDIT REMOVAL END (krav_maga)
+
+	// MASSMETA EDIT REMOVAL START (krav_maga)
+	/*
 		if(possible_lizard_tail)
 			tail_usage = TRUE
 			kick_language = "a helmsplitter tail strike"
 			strike_language = "a whiplash tail spin"
+	*/
+	// MASSMETA EDIT REMOVAL END (krav_maga)
 
 	source.visible_message(
 		span_warning("[source] follows up with [kicking ? kick_language : strike_language] against [target]!"),
 		span_notice("You deliver [kicking ? kick_language : strike_language] against [target]!"),
 		span_hear("You hear a sickening sound of flesh hitting flesh!"),
 	)
+	// MASSMETA EDIT REMOVAL START (krav_maga)
+	/*
 	if(tail_usage)
 		source.emote(kicking ? "flip" : "spin")
+	*/
+	// MASSMETA EDIT REMOVAL END (krav_maga)
+
 	playsound(source, 'sound/effects/hit_punch.ogg', 50, TRUE, -1)
 	source.do_attack_animation(target, ATTACK_EFFECT_KICK)
 	target.apply_damage(round(damage/3,1), attack_type, affecting, final_armor_block, wound_bonus = damage) //Ostensibly, apply a third of our damage again // We're not being too fussy about limb bonuses for this
-	log_combat(source, target, "auto-followup strike (Kaza Ruk)")
+	// MASSMETA EDIT CHANGE START (krav_maga)
+	log_combat(source, target, "auto-followup strike (Krav Maga)")
+	// MASSMETA EDIT CHANGE END (krav_maga)
 
 //Kaza Ruk Gloves
 
