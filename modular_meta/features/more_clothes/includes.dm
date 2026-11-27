@@ -3,6 +3,7 @@
 #include "code\chaplain_suits.dm"
 #include "code\hats.dm"
 #include "code\jobs_hats.dm"
+#include "code\jobs_overrides.dm"
 #include "code\jobs_suits.dm"
 #include "code\jobs_armor_suits.dm"
 #include "code\labcoats.dm"
