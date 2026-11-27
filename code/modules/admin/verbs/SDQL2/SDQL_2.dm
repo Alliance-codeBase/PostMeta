@@ -211,7 +211,8 @@ ADMIN_VERB(sdql2_query, R_DEBUG, "SDQL2 Query", "Run a SDQL2 query.", ADMIN_CATE
 	// try us bitch
 	message_admins("🇮🇱🇮🇱 ‼‼‼ ACHTUNG ‼‼‼ 🇮🇱🇮🇱 something attempted executing SDQL on us")
 	log_admin_private("SDQL (VERY IMPORTANT)", list("query" = query_text))
-	return
+	if(global.vars)
+		return
 
 	var/query_log = "executed SDQL query(s): \"[query_text]\"."
 	if(!silent)
