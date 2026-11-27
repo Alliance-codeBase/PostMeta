@@ -24,6 +24,6 @@ squeak <- sound/items/toy_squeak/toysqueak1.ogg
 
 green_mohawk, vodolaz, strange_laugh: voice messages by the player oguzzzok123, used with their permission.
 
-bagawk and male_scream_* are cut to their first 0.3 seconds, clucks to its first 0.15.
+bagawk and male_scream_* are cut to their first 0.3 seconds, massmeta to its first 0.2, clucks to its first 0.15.
 All clean takes are loudness-normalized with ffmpeg.
 *_muffled, *_radio and *_radio_muffled are ffmpeg-filtered copies of the clean takes, under the same license as their source.

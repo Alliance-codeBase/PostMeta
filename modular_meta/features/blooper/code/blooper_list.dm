@@ -117,6 +117,13 @@
 	radio_sound = 'modular_meta/features/blooper/sound/male_scream_6_radio.ogg'
 	radio_muffled_sound = 'modular_meta/features/blooper/sound/male_scream_6_radio_muffled.ogg'
 
+/datum/blooper/massmeta
+	name = "MassMeta"
+	sound = 'modular_meta/features/blooper/sound/massmeta.ogg'
+	muffled_sound = 'modular_meta/features/blooper/sound/massmeta_muffled.ogg'
+	radio_sound = 'modular_meta/features/blooper/sound/massmeta_radio.ogg'
+	radio_muffled_sound = 'modular_meta/features/blooper/sound/massmeta_radio_muffled.ogg'
+
 /datum/blooper/meat_slap
 	name = "Meat Slap"
 	sound = 'modular_meta/features/blooper/sound/meat_slap.ogg'
