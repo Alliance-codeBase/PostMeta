@@ -17232,9 +17232,10 @@
 /turf/open/floor/iron/dark,
 /area/station/service/chapel)
 "eND" = (
-/obj/structure/cable,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/effect/turf_decal/tile/red,
+/obj/item/kirbyplants/random,
 /turf/open/floor/iron,
 /area/station/hallway/primary/central/fore)
 "eNE" = (
@@ -54968,7 +54969,6 @@
 /turf/open/floor/plating,
 /area/station/maintenance/fore)
 "pnX" = (
-/obj/structure/cable,
 /obj/machinery/turnstile/brig{
 	dir = 4
 	},
@@ -62035,8 +62035,6 @@
 /area/station/science/ordnance/bomb/planet)
 "rkY" = (
 /obj/effect/turf_decal/tile/red/anticorner/contrasted,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/structure/cable,
 /obj/machinery/airalarm/directional/south,
 /obj/machinery/camera/directional/south{
@@ -74469,10 +74467,9 @@
 /turf/open/floor/circuit,
 /area/station/ai/satellite/hallway)
 "uNI" = (
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/structure/cable,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/effect/turf_decal/tile/red,
-/obj/item/kirbyplants/random,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /turf/open/floor/iron,
 /area/station/hallway/primary/central/fore)
 "uNN" = (
@@ -81907,7 +81904,6 @@
 /turf/open/floor/iron,
 /area/station/engineering/storage_shared)
 "wWQ" = (
-/obj/structure/cable,
 /obj/machinery/door/airlock/security/glass{
 	name = "Permabrig Visitation"
 	},
@@ -85815,7 +85811,6 @@
 /turf/open/floor/iron,
 /area/station/commons/storage/mining)
 "xXR" = (
-/obj/structure/cable,
 /obj/machinery/door/airlock/security/glass{
 	name = "Brig"
 	},
@@ -176459,7 +176454,7 @@ uHv
 toU
 vVt
 gFC
-eND
+uNI
 eCE
 eCE
 eYe
@@ -176716,7 +176711,7 @@ fNw
 bZk
 rkY
 dAZ
-uNI
+eND
 qpB
 eIU
 qpB
