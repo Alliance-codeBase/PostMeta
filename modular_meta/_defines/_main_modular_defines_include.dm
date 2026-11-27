@@ -2,6 +2,7 @@
 // So you can easily use your defines in TG code folder, not only in our modular folder
 
 #include "antagonists.dm"
+#include "blooper.dm"
 #include "hardsuit.dm"
 #include "re_hooch_heals_assistants.dm"
 #include "justice_mecha.dm"
@@ -14,4 +15,3 @@
 #include "force_say.dm"
 #include "communication_bans.dm"
 #include "explosives_ban.dm"
-#include "blooper.dm"
