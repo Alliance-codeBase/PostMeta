@@ -322,6 +322,14 @@
 	price = 25
 	item_type = /obj/item/clothing/shoes/wheelys/rollerskates
 
+/datum/metacoinshop/listing/preround/shoe_wheels
+	id = "shoe_wheels"
+	category = /datum/metacoin_category/wardrobe
+	name = "Wheely-Heels"
+	desc = "Uses patented retractable wheel technology. Never sacrifice speed for style - not that this provides much of either."
+	price = 200
+	item_type = /obj/item/clothing/shoes/wheelys
+
 /datum/metacoinshop/listing/preround/collectable_hat
 	id = "collectable_hat"
 	category = /datum/metacoin_category/wardrobe

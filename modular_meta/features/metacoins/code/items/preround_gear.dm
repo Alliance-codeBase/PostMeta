@@ -393,14 +393,6 @@
 	name = "Cool sword"
 	item_type = /obj/item/disk/computer/maintenance/cool_sword
 
-/datum/metacoinshop/listing/preround/shoe_wheels
-	id = "shoe_wheels"
-	category = /datum/metacoin_category/wardrobe
-	name = "Wheely-Heels"
-	desc = "Uses patented retractable wheel technology. Never sacrifice speed for style - not that this provides much of either."
-	price = 200
-	item_type = /obj/item/clothing/shoes/wheelys
-
 /datum/metacoinshop/listing/preround/syndeye
 	id = "syndeye"
 	category = /datum/metacoin_category/research_surplus
