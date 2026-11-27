@@ -67,3 +67,5 @@
 	req_access = list(ACCESS_SECURITY)
 	max_integrity = 350
 	damage_deflection = 16
+
+MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/turnstile/brig, 0)
