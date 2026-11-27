@@ -88,11 +88,11 @@
 		TRAIT_NOCRITDAMAGE,
 		TRAIT_NODEATH,
 		TRAIT_NOHUNGER,
-		TRAIT_RADIMMUNE,
 		TRAIT_RESISTCOLD,
 		TRAIT_RESISTHIGHPRESSURE,
 		TRAIT_RESISTLOWPRESSURE,
 		TRAIT_TOXIMMUNE,
+		TRAIT_UNBOTHERED_BY_RADIATION,
 	)
 
 	/// Biotypes we added (typically just MOB_UNDEAD)
@@ -126,7 +126,7 @@
 	if(isnull(infection))
 		infection = new()
 		infection.Insert(new_zombie)
-		RegisterSignal(infection, COMSIG_ORGAN_REMOVED, PROC_REF(organ_removed))
+	RegisterSignal(infection, COMSIG_ORGAN_REMOVED, PROC_REF(organ_removed))
 
 	var/obj/item/bodypart/head/head = new_zombie.get_bodypart(BODY_ZONE_HEAD)
 	if(!QDELETED(head))

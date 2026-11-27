@@ -60,8 +60,8 @@
 		if("play_radio")
 			return play_radio(params, ui.user)
 		/*
-		 if("play_radio_ion")
-		 	return play_radio(params, ui.user, TRUE)
+		if("play_radio_ion")
+			return play_radio(params, ui.user, TRUE)
 		*/
 		if("play_gas_mask")
 			return play_mask(params, ui.user, /obj/item/clothing/mask/gas)

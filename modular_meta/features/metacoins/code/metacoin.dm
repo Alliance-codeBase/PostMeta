@@ -533,10 +533,7 @@ GLOBAL_DATUM(metacoins_controller, /datum/metacoins_controller)
 
 	return FALSE
 
-/client/verb/view_metacoins()
-	set name = "View Metacoins"
-	set category = "OOC"
-	set desc = "View your metacoin balance and this round award log."
+GAME_VERB_DESC(/client, view_metacoins, "View Metacoins", "View your metacoin balance and this round award log.", "OOC")
 
 	new /datum/metacoinshop/panel/wallet(src, usr)
 

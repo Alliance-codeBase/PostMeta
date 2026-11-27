@@ -143,7 +143,7 @@
 	//lefthand_file = 'lambda/ss7v/icons/obj/lefthand.dmi'
 	//righthand_file = 'lambda/ss7v/icons/obj/righthand.dmi'
 	force = 8
-	hitsound = "swing_hit"
+	hitsound = /datum/sound_effect/swing_hit
 	throw_speed = 2
 	throw_range = 4
 	w_class = WEIGHT_CLASS_BULKY

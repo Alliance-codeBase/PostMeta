@@ -28,10 +28,7 @@ SUBSYSTEM_DEF(modpacks)
 
 	return SS_INIT_SUCCESS
 
-/client/verb/modpacks_list()
-	set name = "Modpacks List"
-	set category = "OOC"
-
+GAME_VERB(/client, modpacks_list, "Modpacks List", "OOC")
 	if(!GLOB.modpacks_tgui)
 		GLOB.modpacks_tgui = new /datum/modpack()
 

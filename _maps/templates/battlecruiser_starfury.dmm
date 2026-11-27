@@ -2180,15 +2180,6 @@
 	},
 /turf/open/floor/iron/dark,
 /area/shuttle/sbc_starfury)
-"hX" = (
-/obj/effect/mapping_helpers/airlock/locked,
-/obj/effect/mapping_helpers/airlock/access/all/syndicate/general,
-/obj/effect/mapping_helpers/airlock/cutaiwire,
-/obj/machinery/door/airlock/highsecurity/syndicate{
-	name = "Starfury Armory"
-	},
-/turf/open/floor/iron/dark,
-/area/shuttle/sbc_starfury)
 "hZ" = (
 /obj/structure/rack{
 	dir = 8
@@ -4487,6 +4478,16 @@
 /obj/effect/decal/cleanable/generic,
 /turf/open/floor/fakespace,
 /area/shuttle/sbc_starfury)
+"Cy" = (
+/obj/effect/mapping_helpers/airlock/locked,
+/obj/effect/mapping_helpers/airlock/access/all/syndicate/general,
+/obj/effect/mapping_helpers/airlock/cutaiwire,
+/obj/machinery/door/airlock/highsecurity/syndicate{
+	name = "Starfury Armory";
+	id_tag = "syndie_battlecruiser_armory"
+	},
+/turf/open/floor/iron/dark,
+/area/shuttle/sbc_starfury)
 "CC" = (
 /obj/effect/turf_decal/box/corners{
 	dir = 8
@@ -5196,6 +5197,18 @@
 /obj/effect/mapping_helpers/airlock/cutaiwire,
 /turf/open/floor/plating,
 /area/shuttle/sbc_starfury)
+"Pi" = (
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/effect/mapping_helpers/airlock/locked,
+/obj/effect/mapping_helpers/airlock/access/all/syndicate/general,
+/obj/effect/mapping_helpers/airlock/cutaiwire,
+/obj/machinery/door/airlock/highsecurity/syndicate{
+	name = "Starfury Armory";
+	id_tag = "syndie_battlecruiser_armory"
+	},
+/turf/open/floor/iron/dark,
+/area/shuttle/sbc_starfury)
 "Pk" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 10
@@ -5808,17 +5821,6 @@
 /obj/effect/turf_decal/stripes/line,
 /obj/effect/decal/cleanable/blood/oil,
 /turf/open/floor/plating,
-/area/shuttle/sbc_starfury)
-"ZK" = (
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/effect/mapping_helpers/airlock/locked,
-/obj/effect/mapping_helpers/airlock/access/all/syndicate/general,
-/obj/effect/mapping_helpers/airlock/cutaiwire,
-/obj/machinery/door/airlock/highsecurity/syndicate{
-	name = "Starfury Armory"
-	},
-/turf/open/floor/iron/dark,
 /area/shuttle/sbc_starfury)
 "ZR" = (
 /obj/effect/turf_decal/loading_area{
@@ -7646,8 +7648,8 @@ ae
 ae
 ae
 ae
-ZK
-hX
+Pi
+Cy
 ae
 ae
 ae

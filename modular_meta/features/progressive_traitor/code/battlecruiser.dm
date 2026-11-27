@@ -20,7 +20,7 @@
 
 // yeah let's call an async function on a something that haven't properly initialized yet, very good
 /obj/docking_port/stationary/starfury_fighter/LateInitialize()
-    return
+	return
 
 /obj/docking_port/stationary/starfury_corvette/LateInitialize()
-    return
+	return

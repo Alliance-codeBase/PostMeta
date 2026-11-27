@@ -113,6 +113,7 @@
 #include "area_contents.dm"
 #include "armor_verification.dm"
 #include "asset_smart_cache.dm"
+#include "atmos_pressure_tanks.dm"
 #include "atmospherics_sanity.dm"
 #include "autowiki.dm"
 #include "bake_a_cake.dm"
@@ -179,6 +180,7 @@
 #include "dropper.dm"
 #include "dummy_spawn.dm"
 #include "dynamic_ruleset_sanity.dm"
+#include "effective_pressure.dm"
 #include "egg_glands.dm"
 #include "embedding.dm"
 #include "emoting.dm"
@@ -272,9 +274,7 @@
 #include "neurine_trauma_cleanup.dm"
 #include "novaflower_burn.dm"
 #include "nuke_cinematic.dm"
-// (progressive_traitor)
 #include "objectives.dm"
-// (progressive_traitor)
 #include "omnitools.dm"
 #include "operating_table.dm"
 #include "orderable_items.dm"

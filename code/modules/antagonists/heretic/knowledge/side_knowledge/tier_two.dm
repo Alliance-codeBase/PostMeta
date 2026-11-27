@@ -222,7 +222,12 @@
 	var/hypnosis_text = ""
 	for(var/obj/item/paper/paper in selected_atoms)
 		for(var/datum/paper_input/text as anything in paper.raw_text_inputs)
+			//MASSMETA EDIT CHANGE BEGIN (xss_hotfix)
+			/* ORIGINAL
 			hypnosis_text += "[STRIP_HTML_FULL(text.raw_text, MAX_MESSAGE_LEN)] "
+			*/
+			hypnosis_text += "[html_encode(STRIP_HTML_FULL(text.raw_text, MAX_MESSAGE_LEN))] " // an unclosed <img survives the tag strip, other hypnosis sources hand over encoded text too
+			//MASSMETA EDIT CHANGE END
 		paper.burn()
 		selected_atoms -= paper
 

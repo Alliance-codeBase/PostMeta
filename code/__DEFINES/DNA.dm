@@ -11,9 +11,9 @@
 // String identifiers for associative list lookup
 
 //Types of usual mutations
-#define POSITIVE 1
-#define NEGATIVE 2
-#define MINOR_NEGATIVE 4
+#define POSITIVE (1<<0)
+#define NEGATIVE (1<<1)
+#define MINOR_NEGATIVE (1<<2)
 
 
 //Mutation sources. As long as there is at least one, the mutation will stay up after a remove_mutation call
@@ -73,6 +73,7 @@
 #define FEATURE_WINGS_OPEN "wingsopen"
 #define FEATURE_TAIL_MONKEY "tail_monkey"
 #define FEATURE_TAIL_XENO "tail_xeno"
+#define FEATURE_TAIL_MOUSE "tail_mouse"
 #define FEATURE_TAILSPINES "tailspines" // Different from regular spines, these appear on tails
 #define FEATURE_LEGS "legs"
 

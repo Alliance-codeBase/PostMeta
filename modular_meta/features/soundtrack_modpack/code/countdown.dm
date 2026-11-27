@@ -43,3 +43,5 @@
 /obj/machinery/nuclearbomb/disarm_nuke(mob/disarmer)
 	. = ..()
 	stop_soundtrack_music()
+
+#undef CHANNEL_SOUNDTRACK

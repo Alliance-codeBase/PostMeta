@@ -17,6 +17,7 @@
 #define MAX_TASKS_TIER_2 16
 #define MAX_TASKS_TIER_3 32
 #define MAX_TASKS_TIER_4 48
+#define MAX_TASKS_TIER_5 64 // MASSMETA EDIT ADDITION (parts_tier_5)
 
 
 #define BASE_POWER_USAGE 0.2

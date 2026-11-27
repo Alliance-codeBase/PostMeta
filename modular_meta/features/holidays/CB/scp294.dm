@@ -88,7 +88,7 @@
 	return TRUE
 
 /obj/machinery/anomalous_coffeemachine/proc/order(mob/user)
-	pending = find_drink(lowertext(request))
+	pending = find_drink(LOWER_TEXT(request))
 	var/wait = 3 SECONDS
 	if(!pending)
 		pending = new /datum/anomalous_coffeemachine/drinks
@@ -112,7 +112,7 @@
 		QDEL_NULL(pending)
 	else
 		var/obj/item/reagent_containers/cup/glass/coffee_cup/scp294/cup = new(drop_location())
-		cup.name = "cup of [lowertext(pending.label)]"
+		cup.name = "cup of [LOWER_TEXT(pending.label)]"
 		var/volume = 30
 		var/list/data
 		if(ispath(pending.reagent, /datum/reagent/anomalous))

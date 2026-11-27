@@ -112,6 +112,10 @@
 	if(liverless && !reagent.self_consuming) //need to be6 metabolized
 		return FALSE
 
+	if(!reagent.metabolizing)
+		reagent.metabolizing = TRUE
+		reagent.on_mob_metabolize(owner)
+
 	var/need_mob_update = FALSE
 	if(reagents_metabolized)
 		reagents_metabolized[reagent.type] = metabolization_ratio
@@ -131,6 +135,7 @@
 
 	reagent.current_cycle++
 	need_mob_update += reagent.on_mob_life(owner, seconds_per_tick, metabolization_ratio)
+	SEND_SIGNAL(reagent, COMSIG_REAGENT_ON_LIFE, owner, seconds_per_tick, metabolization_ratio)
 
 	if(dead && !QDELETED(owner) && !QDELETED(reagent))
 		need_mob_update += reagent.on_mob_dead(owner, seconds_per_tick, metabolization_ratio)

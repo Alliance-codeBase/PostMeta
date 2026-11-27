@@ -81,9 +81,17 @@
 
 /datum/computer_file/program/maintenance/camera/proc/commit_metadata()
 	if(can_edit_metadata)
+		//MASSMETA EDIT CHANGE BEGIN (xss_hotfix)
+		/* ORIGINAL
 		internal_picture.picture_name = current_picture_name
 		internal_picture.picture_desc = "[current_picture_desc] - [internal_picture.picture_desc]"
 		internal_picture.caption = current_picture_caption
+		*/
+		// the inputs stay raw for tgui, the photo gets encoded text because its name and desc go straight into chat
+		internal_picture.picture_name = html_encode(current_picture_name)
+		internal_picture.picture_desc = "[html_encode(current_picture_desc)] - [internal_picture.picture_desc]"
+		internal_picture.caption = html_encode(current_picture_caption)
+		//MASSMETA EDIT CHANGE END
 		can_edit_metadata = FALSE
 
 /datum/computer_file/program/maintenance/camera/ui_static_data(mob/user)
