@@ -1,12 +1,13 @@
 #include "code\blooper.dm"
 #include "code\blooper_list.dm"
+#include "code\dna.dm"
 #include "code\m_body_copies.dm"
-#include "code\m_changeling.dm"
 #include "code\m_dullahan.dm"
 #include "code\m_hologram.dm"
 #include "code\m_login.dm"
 #include "code\m_say.dm"
 #include "code\preferences.dm"
+#include "code\surgery.dm"
 
 /datum/modpack/blooper
 	id = "blooper"

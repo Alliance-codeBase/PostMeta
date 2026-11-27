@@ -25,8 +25,15 @@ FADE_OUT_SECONDS = 0.1
 
 # same lowpass the tts puts on a gas mask
 MUFFLED_FILTER = "lowpass=f=750,volume=2"
-# phone band, six bits of sand and a hard clip on top
-RADIO_FILTER = "highpass=f=300,lowpass=f=3000,acrusher=bits=6:mode=log:mix=0.6,asoftclip=type=hard:threshold=0.5"
+# tail silence off so the static dies with the sound, then crackle and static,
+# cranked into a hard clip, four bits of sand and a walkie-talkie band
+RADIO_FILTER = (
+    f"areverse,{LEADING_SILENCE_TRIM},areverse,"
+    "aeval=val(0)*(0.6+0.8*random(0))+0.06*(2*random(0)-1):c=same,"
+    "volume=15dB,asoftclip=type=hard:threshold=0.25,"
+    "acrusher=bits=4:mode=log:mix=0.9:samples=4:aa=0,"
+    "highpass=f=600,highpass=f=600,lowpass=f=2200,lowpass=f=2200"
+)
 
 FILTERS_BY_SUFFIX = {
     "_muffled": MUFFLED_FILTER,
@@ -65,7 +72,7 @@ def render(source, audio_filter, output):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("source", help="any sound ffmpeg can read")
-    parser.add_argument("blooper_id", help="file name without extension, like quack")
+    parser.add_argument("blooper_id", help="file name without extension, like squeak")
     parser.add_argument("--length", type=float, help="cut to this many seconds with a fade out, screams and other long ones like 0.3")
     arguments = parser.parse_args()
 

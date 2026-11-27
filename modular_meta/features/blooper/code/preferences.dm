@@ -1,21 +1,3 @@
-/// bloops instead of a voice
-/datum/preference/toggle/blooper_voice
-	savefile_identifier = PREFERENCE_CHARACTER
-	savefile_key = "blooper_voice"
-	category = PREFERENCE_CATEGORY_NON_CONTEXTUAL
-	priority = PREFERENCE_PRORITY_LATE_BODY_TYPE // clears the voice from PREFERENCE_PRIORITY_BODY_TYPE
-	default_value = FALSE
-	can_randomize = FALSE
-	should_update_preview = FALSE
-
-/datum/preference/toggle/blooper_voice/is_accessible(datum/preferences/preferences)
-	if(!SStts.tts_enabled)
-		return FALSE
-	return ..()
-
-/datum/preference/toggle/blooper_voice/apply_to_human(mob/living/carbon/human/target, value)
-	target.set_blooper_voice(value)
-
 /// what the character bloops with
 /datum/preference/choiced/blooper
 	savefile_identifier = PREFERENCE_CHARACTER
@@ -24,23 +6,11 @@
 	should_update_preview = FALSE
 
 /datum/preference/choiced/blooper/init_possible_values()
-	var/list/meta_bloopers = list()
-	var/list/other_bloopers = list()
-	for(var/blooper_name in GLOB.blooper_voices)
-		var/homegrown = FALSE
-		// one of ours in the mix makes the whole voice ours
-		for(var/datum/blooper/blooper as anything in GLOB.blooper_voices[blooper_name])
-			if(LAZYFIND(blooper.tags, BLOOPER_TAG_META))
-				homegrown = TRUE
-		if(homegrown)
-			meta_bloopers += blooper_name
-		else
-			other_bloopers += blooper_name
-	// ours first, the rest can wait
-	return meta_bloopers + other_bloopers
+	// by name, so a collection lands right under its sounds
+	return sort_list(assoc_to_keys(GLOB.blooper_voices))
 
 /datum/preference/choiced/blooper/apply_to_human(mob/living/carbon/human/target, value)
-	target.blooper = value
+	target.set_blooper(value)
 
 /// bloop pitch
 /datum/preference/numeric/blooper_pitch
@@ -56,7 +26,7 @@
 	return /atom/movable::blooper_pitch
 
 /datum/preference/numeric/blooper_pitch/apply_to_human(mob/living/carbon/human/target, value)
-	target.blooper_pitch = value
+	target.set_blooper_pitch(value)
 
 /// bloop volume
 /datum/preference/numeric/volume/sound_blooper_volume
@@ -80,5 +50,6 @@
 		pitch = preferences.read_preference(/datum/preference/numeric/blooper_pitch),
 		message = "Так звучит мой голос. Нравится?", // bloops can't read, but they count vowels and hear a question
 		radio = FALSE,
+		whisper = FALSE,
 	)
 	return TRUE

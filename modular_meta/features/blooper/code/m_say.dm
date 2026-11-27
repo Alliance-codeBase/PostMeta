@@ -29,8 +29,8 @@
  * * frequency - the radio frequency it came over, null when said out loud
  */
 /atom/movable/proc/say_blooper(message, list/message_mods, list/hearers, frequency)
-	// voice has the mic, hands talk, or a mystery speaker
-	if((SStts.tts_enabled && voice) || isnull(blooper) || HAS_TRAIT(src, TRAIT_SIGN_LANG) || HAS_TRAIT(src, TRAIT_UNKNOWN_VOICE) || LAZYACCESS(message_mods, MODE_CUSTOM_SAY_ERASE_INPUT))
+	// a live voice has the mic, hands talk, or a mystery speaker
+	if((SStts.tts_enabled && !SStts.tts_failing && voice) || isnull(blooper) || HAS_TRAIT(src, TRAIT_SIGN_LANG) || HAS_TRAIT(src, TRAIT_UNKNOWN_VOICE) || LAZYACCESS(message_mods, MODE_CUSTOM_SAY_ERASE_INPUT))
 		return
 	var/radio = !isnull(frequency)
 	var/turf/source = get_turf(src)
@@ -54,7 +54,8 @@
 	var/list/voice_filters = list()
 	get_tts_voice(voice_filters, list())
 	var/muffled = length(voice_filters) > 0
-	var/datum/blooper/blooper_sounds = pick(GLOB.blooper_voices[blooper])
+	var/list/voice_and_pitch = get_speaking_blooper()
+	var/datum/blooper/blooper_sounds = pick(GLOB.blooper_voices[voice_and_pitch[1]])
 	var/sound_file
 	if(radio)
 		sound_file = muffled ? blooper_sounds.radio_muffled_sound : blooper_sounds.radio_sound
@@ -64,12 +65,44 @@
 		bloop_hearers,
 		speaker = src,
 		sound_file = sound_file,
-		pitch = blooper_pitch,
+		pitch = voice_and_pitch[2],
 		message = message,
 		radio = radio,
+		whisper = !!LAZYACCESS(message_mods, WHISPER_MODE),
 	)
 	// one line at a time per channel, an open intercom on another frequency won't cut the headset
 	var/channel = radio ? "[frequency]" : "out loud"
 	var/list/unsaid = LAZYACCESS(unsaid_bloops, channel)
 	LAZYCLEARLIST(unsaid)
 	LAZYSET(unsaid_bloops, channel, bloops)
+
+/// the voice and pitch a line bloops with, as list(voice, pitch)
+/atom/movable/proc/get_speaking_blooper()
+	return list(blooper, blooper_pitch)
+
+//ORIGINAL FILE: code/modules/mob/living/carbon/human/human_say.dm
+/mob/living/carbon/human/get_speaking_blooper()
+	var/voice_name = get_voice()
+	if(voice_name == real_name)
+		return ..()
+	// a borrowed name borrows its owner's squeak, npcs nobody played never got one
+	for(var/mob/living/carbon/human/voice_owner as anything in GLOB.human_list)
+		if(voice_owner.real_name == voice_name && !isnull(voice_owner.blooper))
+			return list(voice_owner.blooper, voice_owner.blooper_pitch)
+	// nobody goes by that name, so the name rolls a squeak of its own, the same one every line
+	var/name_hash = md5(voice_name)
+	return list(
+		GLOB.blooper_voices[hex2num(copytext(name_hash, 1, 5)) % length(GLOB.blooper_voices) + 1],
+		BLOOPER_PITCH_AT_STEP(hex2num(copytext(name_hash, 5, 9)) % BLOOPER_PITCH_STEPS + 1),
+	)
+
+//ORIGINAL FILE: code/controllers/subsystem/tts.dm
+/datum/controller/subsystem/tts
+	/// the last finished request failed, the voice server is down and bloops talk for everyone
+	var/tts_failing = FALSE
+
+/datum/tts_request/requests_errored()
+	. = ..()
+	var/datum/http_response/primary_response = get_primary_response()
+	// speech only checks the transport, a server answering 500 is just as dead
+	SStts.tts_failing = . || primary_response.status_code != 200

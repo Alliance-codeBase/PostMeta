@@ -3,12 +3,10 @@ import { useBackend } from 'tgui/backend';
 import { Button, Stack } from 'tgui-core/components';
 
 import {
-  CheckboxInput,
   type FeatureChoiced,
   type FeatureChoicedServerData,
   type FeatureNumeric,
   FeatureSliderInput,
-  type FeatureToggle,
   type FeatureValueProps,
 } from '../base';
 import { FeatureDropdownInput } from '../dropdowns';
@@ -37,12 +35,6 @@ function FeatureBlooperDropdownInput(
     </Stack>
   );
 }
-
-export const blooper_voice: FeatureToggle = {
-  name: 'Blooper Voice',
-  description: 'Speak with bloops instead of a voice.',
-  component: CheckboxInput,
-};
 
 export const blooper: FeatureChoiced = {
   name: 'Blooper',

@@ -8,8 +8,6 @@
 	var/radio_sound
 	/// gas mask over the radio, the worst of both
 	var/radio_muffled_sound
-	/// labels like [BLOOPER_TAG_META], the picker sorts by them
-	var/list/tags
 
 /// one voice of several bloopers, every message picks one of them
 /datum/blooper_collection
@@ -59,6 +57,14 @@ GLOBAL_LIST_INIT(blooper_voices, init_blooper_voices())
 #define BLOOPER_EXCLAMATION_LOUDNESS 0.3
 /// pitch each ! adds to the whole phrase, has to beat the wobble to be heard
 #define BLOOPER_EXCLAMATION_LIFT 0.1
+/// loudness a whisper keeps, !!! the other way round
+#define BLOOPER_WHISPER_LOUDNESS 0.5
+/// pitch a whisper keeps, the whole line sinks
+#define BLOOPER_WHISPER_PITCH 0.85
+/// a line bloops this many times at most, a wall of text loses its middle
+#define BLOOPER_MAX_BLOOPS 40
+/// bloops a cut line keeps from its end, the tune lives there
+#define BLOOPER_KEPT_TAIL 4
 
 /**
  * bloops a message at hearers, one bloop per vowel, punctuation sets pauses and intonation
@@ -70,10 +76,11 @@ GLOBAL_LIST_INIT(blooper_voices, init_blooper_voices())
  * * pitch - frequency multiplier
  * * message - its vowels set the bloop count, its punctuation the tune
  * * radio - over the radio, straight into the ear and quieter
+ * * whisper - hushed, the whole line quieter and lower
  *
  * returns the bloops still to come, cut the list to shut the line up
  */
-/proc/play_blooper(list/hearers, atom/movable/speaker, sound_file, pitch, message, radio)
+/proc/play_blooper(list/hearers, atom/movable/speaker, sound_file, pitch, message, radio, whisper)
 	// marks count only before a space or the end, 3.14 and кто-то don't break a phrase
 	var/static/regex/phrase_ends = regex(@"([.,!?;:…—–-]+)(?:\s+|$)")
 	var/static/regex/vowels = regex(@"[аеёиоуыэюяaeiouy]", "gi")
@@ -114,6 +121,9 @@ GLOBAL_LIST_INIT(blooper_voices, init_blooper_voices())
 		var/exclamations = min(length(marks) - length(replacetext(marks, "!", "")), BLOOPER_MAX_EXCLAMATIONS)
 		var/loudness = 1 + BLOOPER_EXCLAMATION_LOUDNESS * exclamations
 		var/lift = 1 + BLOOPER_EXCLAMATION_LIFT * exclamations
+		if(whisper)
+			loudness *= BLOOPER_WHISPER_LOUDNESS
+			lift *= BLOOPER_WHISPER_PITCH
 		var/list/tail_tune = list()
 		var/pause = 0
 		// ?! asks first and shouts second
@@ -144,6 +154,9 @@ GLOBAL_LIST_INIT(blooper_voices, init_blooper_voices())
 				BLOOP_LOUDNESS = loudness,
 				BLOOP_GAP = gap,
 			))
+	// аааааа gets the start and the ending, nobody misses the middle
+	if(length(bloops) > BLOOPER_MAX_BLOOPS)
+		bloops.Cut(BLOOPER_MAX_BLOOPS - BLOOPER_KEPT_TAIL + 1, length(bloops) - BLOOPER_KEPT_TAIL + 1)
 	bloop(hearers, speaker, sound_file, radio, bloops)
 	return bloops
 
@@ -154,6 +167,10 @@ GLOBAL_LIST_INIT(blooper_voices, init_blooper_voices())
 #undef BLOOPER_MAX_EXCLAMATIONS
 #undef BLOOPER_EXCLAMATION_LOUDNESS
 #undef BLOOPER_EXCLAMATION_LIFT
+#undef BLOOPER_WHISPER_LOUDNESS
+#undef BLOOPER_WHISPER_PITCH
+#undef BLOOPER_MAX_BLOOPS
+#undef BLOOPER_KEPT_TAIL
 
 /// bloop loudness before the listener's slider
 #define BLOOPER_VOLUME 60
