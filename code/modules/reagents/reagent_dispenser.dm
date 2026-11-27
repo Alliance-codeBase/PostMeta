@@ -251,7 +251,7 @@
 				explosion(spill_location, heavy_impact_range = 1, light_impact_range = 4, flame_range = 6, explosion_cause = src)
 			if(1500 to INFINITY)
 				explosion(spill_location, devastation_range = 1, heavy_impact_range = 2, light_impact_range = 6, flame_range = 8, explosion_cause = src)
- MASSMETA EDIT END */
+MASSMETA EDIT END */
 
 /obj/structure/reagent_dispensers/atom_deconstruct(disassembled = TRUE)
 	if(!disassembled)

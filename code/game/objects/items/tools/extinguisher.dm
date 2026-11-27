@@ -375,9 +375,6 @@
 		span_info("You start emptying out [src] using its release valve..."),
 	)
 
-	if(!do_after(user, 2 SECONDS, target = src, timed_action_flags = IGNORE_USER_LOC_CHANGE | IGNORE_TARGET_LOC_CHANGE))
-		return
-
 	if(loc != user || !reagents.total_volume)
 		return
 
@@ -387,7 +384,10 @@
 			spill_turf.liquids = new(spill_turf)
 		var/datum/liquid_group/group = spill_turf.liquids.liquid_group
 		if(!QDELETED(group))
-			reagents.trans_to(group.reagents, reagents.total_volume / 3, methods = TOUCH)
+			if(reagents.total_volume >= 10)
+				reagents.trans_to(group.reagents, 10, methods = TOUCH)
+			else
+				reagents.trans_to(group.reagents, reagents.total_volume, methods = TOUCH)
 			group.process_group()
 
 	reagents.clear_reagents()
@@ -401,7 +401,7 @@
 		reagents.expose(user.loc, TOUCH)
 		reagents.clear_reagents()
 		user.visible_message(span_notice("[user] empties out [src] onto the floor using the release valve."), span_info("You quietly empty out [src] using its release valve."))
- MASSMETA EDIT END */
+MASSMETA EDIT END */
 // Firebot assembly
 /obj/item/extinguisher/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
 	if (!istype(tool, /obj/item/bodypart/arm/left/robot) && !istype(tool, /obj/item/bodypart/arm/right/robot))

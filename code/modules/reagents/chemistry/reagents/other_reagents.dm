@@ -1294,7 +1294,7 @@
 	if(glow.lazy_init_reagents()) // Decal already has reagents inited, add instead
 		glow.reagents.maximum_volume = min(glow.reagents.maximum_volume + rounded_volume, 300) // Increase reagent holder volume up to a max of 300
 		glow.reagents.add_reagent(type, rounded_volume)
- MASSMETA REMOVAL (liquids) */
+MASSMETA REMOVAL (liquids) */
 
 //Mutagenic chem side-effects.
 /datum/reagent/uranium/on_hydroponics_apply(obj/machinery/hydroponics/mytray, mob/user)

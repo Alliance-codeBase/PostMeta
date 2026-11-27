@@ -1680,7 +1680,7 @@
 		goo.pre_dissolve()
 		return // Otherwise there's too little waste to do anything.
 	return ..()
- MASSMETA REMOVAL (liquids) */
+MASSMETA REMOVAL (liquids) */
 
 /datum/reagent/toxin/acid/industrial_waste/proc/pre_disposal()
 	SIGNAL_HANDLER

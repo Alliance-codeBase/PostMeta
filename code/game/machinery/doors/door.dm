@@ -630,7 +630,6 @@
 	operating = TRUE
 
 	run_animation(DOOR_CLOSING_ANIMATION)
-
 	layer = closingLayer
 	var/unpassable_delay = animation_segment_delay(DOOR_CLOSING_UNPASSABLE)
 	SLEEP_NOT_DEL(unpassable_delay)

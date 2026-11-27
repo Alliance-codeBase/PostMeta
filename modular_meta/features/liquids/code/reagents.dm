@@ -31,6 +31,8 @@ GLOBAL_VAR_INIT(global_evaporation_rate, 2)
 	opacity = 150
 
 /datum/reagent/consumable/ice/expose_turf(turf/open/exposed_turf, reac_volume)
+	. = ..()
+
 	if(isopenturf(exposed_turf))
 		exposed_turf.MakeSlippery(TURF_WET_ICE, min_wet_time = 10 SECONDS, wet_time_to_add = 5 SECONDS)
 	return
