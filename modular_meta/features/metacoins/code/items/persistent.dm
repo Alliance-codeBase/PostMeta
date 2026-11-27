@@ -218,3 +218,14 @@ To check if a reward is bought
 /datum/metacoinshop/listing_variant/wycc_soul/strange
 	id = "strange"
 	name = "Stranniy"
+
+// /datum/metacoinshop/listing/persistent/pres_maint_disk
+//  	id = "maint_disk"
+//  	name = "Maintenance data disk"
+//  	desc = "PDA-type disk with strange data of apps that never visited NT-AppStore"
+//  	price = 2000
+//  	item_type = /obj/item/disk/computer/maintenance
+//  	variant_options = list("Data-type" = list(/datum/metacoinshop/listing_variant/maint_disk/scan, /datum/metacoinshop/listing_variant/maint_disk/cam, /datum/metacoinshop/listing_variant/maint_disk/mod_control, /datum/metacoinshop/listing_variant/maint_disk/spook, /datum/metacoinshop/listing_variant/maint_disk/arcade, /datum/metacoinshop/listing_variant/maint_disk/theme, /datum/metacoinshop/listing_variant/maint_disk/sword))
+
+///datum/metacoinshop/listing/persistent/maint_disk/persistent_grant(datum/metacoin_shop_controller/shop, target_ckey, mob/living/spawned, client/player_client)
+//idk, I need more reference

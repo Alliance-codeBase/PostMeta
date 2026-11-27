@@ -347,3 +347,57 @@
 // 	desc = "A switchblade that hits much harder when you stab someone from behind."
 // 	price = 400
 // 	item_type = /obj/item/switchblade/backstab/nt
+
+/datum/metacoinshop/listing/preround/maint_disk
+	id = "maint_disk"
+	category = /datum/metacoin_category/research_surplus
+	name = "Maintenance data disk"
+	desc = "Strange disk with some off brand apps."
+	price = 20
+	variant_options = list("Data-type" = list(
+		/datum/metacoinshop/listing_variant/maint_disk/scan,
+		/datum/metacoinshop/listing_variant/maint_disk/cam,
+		/datum/metacoinshop/listing_variant/maint_disk/mod_control,
+		/datum/metacoinshop/listing_variant/maint_disk/spook,
+		/datum/metacoinshop/listing_variant/maint_disk/arcade,
+		/datum/metacoinshop/listing_variant/maint_disk/theme,
+		/datum/metacoinshop/listing_variant/maint_disk/sword
+	))
+
+/datum/metacoinshop/listing_variant/maint_disk/scan
+	id = "scan"
+	name = "Phys-scanner"
+	item_type = /obj/item/disk/computer/maintenance/scanner
+/datum/metacoinshop/listing_variant/maint_disk/cam
+	id = "cam"
+	name = "Camera"
+	item_type = /obj/item/disk/computer/maintenance/camera
+/datum/metacoinshop/listing_variant/maint_disk/mod_control
+	id = "mod_control"
+	name = "Mod Suit Control"
+	item_type = /obj/item/disk/computer/maintenance/modsuit_control
+/datum/metacoinshop/listing_variant/maint_disk/spook
+	id = "spook"
+	name = "Spook Meter"
+	item_type = /obj/item/disk/computer/maintenance/spectre_meter
+/datum/metacoinshop/listing_variant/maint_disk/arcade
+	id = "game"
+	name = "Portable Arcade"
+	item_type = /obj/item/disk/computer/maintenance/arcade
+/datum/metacoinshop/listing_variant/maint_disk/theme
+	id = "theme"
+	name = "Theme data"
+	item_type = /obj/item/disk/computer/maintenance/theme
+/datum/metacoinshop/listing_variant/maint_disk/sword
+	id = "sword"
+	name = "Cool sword"
+	item_type = /obj/item/disk/computer/maintenance/cool_sword
+
+/datum/metacoinshop/listing/preround/syndeye
+	id = "syndeye"
+	category = /datum/metacoin_category/research_surplus
+	name = "Suspicious disk"
+	desc = "App with access to almost any camera in sector."
+	price = 300
+	item_type = /obj/item/disk/computer/syndicate/camera_app
+
