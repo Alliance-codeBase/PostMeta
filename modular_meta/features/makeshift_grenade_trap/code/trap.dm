@@ -1,4 +1,4 @@
-/obj/structure/tripwire
+/obj/structure/grenade_tripwire
 	name = "stretching"
 	desc = "A wire stretched for several meters. The end of the wire is tied to something..."
 	icon_state = "zipline_hook" // Я кстати говорил какой у меня большой хуй? Он ещё кста влезает в рот кодеров сс220)))
@@ -13,28 +13,28 @@
 	var/obj/item/grenade/stretching
 	var/mob/owner
 
-/obj/structure/tripwire/Initialize(mapload)
+/obj/structure/grenade_tripwire/Initialize(mapload)
 	. = ..()
 	var/static/list/loc_connections = list(
 		COMSIG_ATOM_ENTERED = PROC_REF(check_anus_wycc_for_stretchability),
 	)
 	AddElement(/datum/element/connect_loc, loc_connections)
 
-/obj/structure/tripwire/on_craft_completion(list/components, datum/crafting_recipe/current_recipe, atom/crafter)
+/obj/structure/grenade_tripwire/on_craft_completion(list/components, datum/crafting_recipe/current_recipe, atom/crafter)
 	. = ..()
 	stretching = locate(/obj/item/grenade) in contents
 
 	message_admins("[ADMIN_LOOKUPFLW(crafter)] поставил растяжку[ADMIN_COORDJMP(crafter)]")
 	log_game("[key_name(crafter)] поставил растяжку[COORD(crafter)]")
 
-/obj/structure/tripwire/proc/activate()
+/obj/structure/grenade_tripwire/proc/activate()
 	if(stretching)
 		stretching.detonate(owner)
 		stretching.forceMove(get_turf(stretching))
 		to_chat(owner, span_userdanger("We hit the [src] and activate the [stretching.name]!"))
 		qdel(src)
 
-/obj/structure/tripwire/proc/check_anus_wycc_for_stretchability(datum/source, atom/movable/AM)
+/obj/structure/grenade_tripwire/proc/check_anus_wycc_for_stretchability(datum/source, atom/movable/AM)
 	SIGNAL_HANDLER
 	if(ismob(AM))
 		var/mob/MM = AM
@@ -49,10 +49,10 @@
 				return
 	activate()
 
-/obj/structure/tripwire/attack_hand(mob/user)
+/obj/structure/grenade_tripwire/attack_hand(mob/user)
 	activate()
 
-/obj/structure/tripwire/attackby(obj/item/W, mob/user, params)
+/obj/structure/grenade_tripwire/attackby(obj/item/W, mob/user, params)
 	if(istype(W, /obj/item/wirecutters) && !(resistance_flags & INDESTRUCTIBLE))
 		if(do_after(user, 30, target = src))
 			W.play_tool_sound(src)
@@ -68,7 +68,7 @@
 /datum/crafting_recipe/tripwire
 	name = "stretch"
 	time = 5 SECONDS
-	result = /obj/structure/tripwire
+	result = /obj/structure/grenade_tripwire
 	reqs = list(
 		/obj/item/stack/cable_coil = 30,
 		/obj/item/grenade = 1

@@ -24,7 +24,8 @@
 
 /obj/item/clothing/head/helmet/space/hardsuit/Destroy()
 	if(!QDELETED(suit))
-		QDEL_NULL(suit)
+		qdel(suit)
+	suit = null
 	return ..()
 
 /obj/item/clothing/head/helmet/space/hardsuit/attack_self(mob/user)

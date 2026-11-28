@@ -97,6 +97,7 @@
 	if(in_use)
 		stop_observing(current_user, current_observed)
 	QDEL_NULL(stop_observe)
+	QDEL_NULL(change_observe)
 
 /obj/structure/bloodsucker/mirror/examine(mob/user)
 	. = ..()
