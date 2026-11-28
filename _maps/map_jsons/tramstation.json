@@ -10,7 +10,6 @@
 		"whiteship": "whiteship_tram",
 		"emergency": "emergency_tram"
 	},
-	"ignored_unit_tests": ["/datum/unit_test/create_and_destroy"],
 	"traits": [
 		{
 			"Baseturf": "/turf/open/misc/asteroid/airless",

@@ -38,7 +38,8 @@
 
 /obj/item/clothing/suit/space/hardsuit/Destroy()
 	if(!QDELETED(helmet))
-		QDEL_NULL(helmet)
+		qdel(helmet)
+	helmet = null
 	return ..()
 
 /obj/item/clothing/suit/space/hardsuit/proc/MakeHelmet()

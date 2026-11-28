@@ -381,15 +381,9 @@
 	hardsuit_type = "syndi"
 	armor_type = /datum/armor/hardsuit_syndi
 	on = TRUE
-	var/obj/item/clothing/suit/space/hardsuit/syndi/linkedsuit = null
 	actions_types = list(/datum/action/item_action/toggle_helmet_mode)
 	visor_flags_inv = HIDEMASK|HIDEEYES|HIDEFACE|HIDEFACIALHAIR|HIDESNOUT
 	visor_flags = STOPSPRESSUREDAMAGE
-
-/obj/item/clothing/head/helmet/space/hardsuit/syndi/Initialize(mapload)
-	. = ..()
-	if(istype(loc, /obj/item/clothing/suit/space/hardsuit/syndi))
-		linkedsuit = loc
 
 /obj/item/clothing/head/helmet/space/hardsuit/syndi/attack_self(mob/user) //Toggle Helmet
 	if(!isturf(user.loc))
@@ -426,6 +420,7 @@
 	update_item_action_buttons()
 
 /obj/item/clothing/head/helmet/space/hardsuit/syndi/proc/toggle_hardsuit_mode(mob/user) //Helmet Toggles Suit Mode
+	var/obj/item/clothing/suit/space/hardsuit/syndi/linkedsuit = suit
 	if(linkedsuit)
 		if(on)
 			linkedsuit.name = initial(linkedsuit.name)

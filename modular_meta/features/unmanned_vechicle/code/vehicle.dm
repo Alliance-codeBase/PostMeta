@@ -31,11 +31,6 @@
 	name += " " + num2text(serial)
 	serial++
 
-	var/datum/atom_hud/diag_hud = GLOB.huds[DATA_HUD_DIAGNOSTIC]
-	if(diag_hud)
-		if(diag_hud.hud_atoms)
-			diag_hud.hud_atoms += src
-
 /obj/vehicle/unmanned/take_damage(damage_amount, damage_type, damage_flag, sound_effect, attack_dir, blocked)
 	. = ..()
 
