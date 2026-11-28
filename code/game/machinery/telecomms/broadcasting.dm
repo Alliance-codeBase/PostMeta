@@ -194,6 +194,10 @@
 		SStts.queued_radio_messages[tts_radio_id] = receive_radios
 		SStts.queued_radio_messages_compression[tts_radio_id] = compression
 
+	//MASSMETA EDIT ADDITION BEGIN (blooper)
+	virt.source.say_blooper(message, message_mods, receive, frequency)
+	//MASSMETA EDIT ADDITION END
+
 	// Render the message and have everybody hear it.
 	// Always call this on the virtualspeaker to avoid issues.
 	var/spans = data["spans"]

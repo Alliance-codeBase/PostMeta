@@ -1,0 +1,29 @@
+Copies of /tg/station sounds, CC BY-SA 3.0 unless noted:
+bagawk <- sound/mobs/non-humanoids/chicken/bagawk.ogg
+banjo <- sound/runtime/instruments/banjo/Cn3.ogg
+bloop <- sound/misc/bloop.ogg, by Tim Kahn, https://freesound.org/people/tim.kahn/sounds/130377/
+cat_meow_1 <- sound/mobs/non-humanoids/cat/cat_meow1.ogg, by sadboysuss
+cat_meow_2 <- sound/mobs/non-humanoids/cat/cat_meow2.ogg, by sadboysuss
+cat_meow_3 <- sound/mobs/non-humanoids/cat/cat_meow3.ogg, by sadboysuss
+clucks <- sound/mobs/non-humanoids/chicken/clucks.ogg
+finger_snap <- sound/mobs/humanoids/human/snap/fingersnap1.ogg
+hoot <- sound/runtime/chatter/owl_1.ogg
+lighter <- sound/items/lighter/lighter_on.ogg, from BeeStation, https://github.com/BeeStation/BeeStation-Hornet/pull/29
+male_scream_1 <- sound/mobs/humanoids/human/scream/malescream_1.ogg
+male_scream_2 <- sound/mobs/humanoids/human/scream/malescream_2.ogg
+male_scream_3 <- sound/mobs/humanoids/human/scream/malescream_3.ogg
+male_scream_4 <- sound/mobs/humanoids/human/scream/malescream_4.ogg
+male_scream_5 <- sound/mobs/humanoids/human/scream/malescream_5.ogg
+male_scream_6 <- sound/mobs/humanoids/human/scream/malescream_6.ogg
+meat_slap <- sound/effects/meatslap.ogg
+muted_string_high <- sound/runtime/instruments/synthesis_samples/guitar/crisis_muted/C4.ogg
+muted_string_low <- sound/runtime/instruments/synthesis_samples/guitar/crisis_muted/C2.ogg
+muted_string_medium <- sound/runtime/instruments/synthesis_samples/guitar/crisis_muted/C3.ogg
+pop <- sound/effects/pop.ogg
+squeak <- sound/items/toy_squeak/toysqueak1.ogg
+
+green_mohawk, vodolaz, strange_laugh: voice messages by the player oguzzzok123, used with their permission.
+
+bagawk and male_scream_* are cut to their first 0.3 seconds, massmeta to its first 0.2, clucks to its first 0.15.
+All clean takes are loudness-normalized with ffmpeg.
+*_muffled, *_radio and *_radio_muffled are ffmpeg-filtered copies of the clean takes, under the same license as their source.
