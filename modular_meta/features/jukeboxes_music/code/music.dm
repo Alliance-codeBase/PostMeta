@@ -8,10 +8,6 @@
 	stop_internet_stream()
 	return ..()
 
-/obj/machinery/jukebox/Initialize(mapload)
-	. = ..()
-	SSticker.OnRoundend(CALLBACK(src, PROC_REF(cleanup_files)))
-
 /obj/machinery/jukebox/ui_data(mob/user)
 	var/list/data = ..()
 	data["internet_sound_enabled"] = CONFIG_GET(flag/request_internet_sound) ? TRUE : FALSE
@@ -195,6 +191,12 @@
 		current_stream_path = ""
 	update_static_data_for_all_viewers()
 
-/obj/machinery/jukebox/proc/cleanup_files()
+/datum/modpack/jukebox_mp3/initialize()
+	. = ..()
+	if(.)
+		return
+	SSticker.OnRoundend(CALLBACK(src, PROC_REF(cleanup_files)))
+
+/datum/modpack/jukebox_mp3/proc/cleanup_files()
 	for(var/file in flist("data/music_cache/*"))
 		fdel("data/music_cache/[file]")
