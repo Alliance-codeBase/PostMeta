@@ -17232,12 +17232,12 @@
 /turf/open/floor/iron/dark,
 /area/station/service/chapel)
 "eND" = (
-/obj/effect/spawner/structure/window/reinforced,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/structure/cable,
-/turf/open/floor/plating,
-/area/station/security/prison/visit)
+/obj/effect/turf_decal/tile/red,
+/obj/item/kirbyplants/random,
+/turf/open/floor/iron,
+/area/station/hallway/primary/central/fore)
 "eNE" = (
 /obj/item/radio/intercom/directional/south,
 /turf/open/floor/iron,
@@ -23768,9 +23768,8 @@
 /obj/machinery/door/firedoor,
 /obj/structure/cable,
 /obj/effect/mapping_helpers/airlock/access/any/security/brig,
-/obj/effect/mapping_helpers/airlock/unres/delayed{
-	dir = 1
-	},
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /turf/open/floor/iron,
 /area/station/security/prison/visit)
 "gFH" = (
@@ -54970,9 +54969,11 @@
 /turf/open/floor/plating,
 /area/station/maintenance/fore)
 "pnX" = (
-/obj/effect/spawner/structure/window/reinforced,
-/obj/structure/cable,
-/turf/open/floor/plating,
+/obj/machinery/turnstile/brig{
+	dir = 4
+	},
+/obj/machinery/door/firedoor,
+/turf/open/floor/iron,
 /area/station/security/brig)
 "poc" = (
 /obj/structure/cable,
@@ -62034,9 +62035,12 @@
 /area/station/science/ordnance/bomb/planet)
 "rkY" = (
 /obj/effect/turf_decal/tile/red/anticorner/contrasted,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/structure/cable,
+/obj/machinery/airalarm/directional/south,
+/obj/machinery/camera/directional/south{
+	c_tag = "Security - Visitation South";
+	network = list("ss13","prison")
+	},
 /turf/open/floor/iron,
 /area/station/security/prison/visit)
 "rld" = (
@@ -74463,16 +74467,11 @@
 /turf/open/floor/circuit,
 /area/station/ai/satellite/hallway)
 "uNI" = (
-/obj/machinery/camera/directional/south{
-	c_tag = "Security - Visitation South";
-	network = list("ss13","prison")
-	},
-/obj/machinery/airalarm/directional/south,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/structure/cable,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /turf/open/floor/iron,
-/area/station/security/prison/visit)
+/area/station/hallway/primary/central/fore)
 "uNN" = (
 /obj/effect/spawner/random/trash/bin,
 /obj/effect/spawner/random/maintenance,
@@ -77978,12 +77977,12 @@
 /turf/open/floor/plating/snowed/smoothed/icemoon,
 /area/icemoon/underground/explored)
 "vOw" = (
-/obj/item/kirbyplants/random,
-/obj/effect/turf_decal/tile/red{
+/obj/machinery/turnstile/brig{
 	dir = 1
 	},
+/obj/machinery/door/firedoor,
 /turf/open/floor/iron,
-/area/station/hallway/primary/central/fore)
+/area/station/security/prison/visit)
 "vOy" = (
 /obj/effect/landmark/carpspawn,
 /turf/open/misc/asteroid/snow/icemoon,
@@ -81905,14 +81904,10 @@
 /turf/open/floor/iron,
 /area/station/engineering/storage_shared)
 "wWQ" = (
-/obj/structure/cable,
 /obj/machinery/door/airlock/security/glass{
 	name = "Permabrig Visitation"
 	},
 /obj/effect/mapping_helpers/airlock/access/any/security/brig,
-/obj/effect/mapping_helpers/airlock/unres/delayed{
-	dir = 4
-	},
 /obj/machinery/door/firedoor,
 /turf/open/floor/iron,
 /area/station/security/brig)
@@ -85816,7 +85811,6 @@
 /turf/open/floor/iron,
 /area/station/commons/storage/mining)
 "xXR" = (
-/obj/structure/cable,
 /obj/machinery/door/airlock/security/glass{
 	name = "Brig"
 	},
@@ -176201,9 +176195,9 @@ brJ
 ukN
 uHv
 lWb
-uNI
-dAZ
+vVt
 vOw
+eGW
 eGW
 eGW
 uRk
@@ -176460,7 +176454,7 @@ uHv
 toU
 vVt
 gFC
-eCE
+uNI
 eCE
 eCE
 eYe
@@ -176716,8 +176710,8 @@ eDq
 fNw
 bZk
 rkY
+dAZ
 eND
-qpB
 qpB
 eIU
 qpB
