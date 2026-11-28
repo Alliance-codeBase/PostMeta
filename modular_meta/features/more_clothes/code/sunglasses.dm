@@ -11,6 +11,7 @@
 	flash_protect = FLASH_PROTECTION_WELDER
 	tint = 1
 	glass_colour_type = /datum/client_colour/glass_colour/green
+	custom_materials = list(/datum/material/glass = SHEET_MATERIAL_AMOUNT * 0.8, /datum/material/iron = SHEET_MATERIAL_AMOUNT * 0.55)
 	dog_fashion = /datum/dog_fashion/head
 
 /datum/crafting_recipe/hudsunmes
