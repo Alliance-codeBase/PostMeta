@@ -24,17 +24,15 @@ GLOBAL_LIST_INIT(blooper_voices, init_blooper_voices())
 /// a voice for each blooper and each collection, keyed by name
 /proc/init_blooper_voices()
 	var/list/voices = list()
-	var/list/bloopers_by_type = list()
 	for(var/blooper_type in subtypesof(/datum/blooper))
 		var/datum/blooper/blooper = new blooper_type
-		bloopers_by_type[blooper_type] = blooper
 		// a lone blooper is a voice of one
 		voices[blooper.name] = list(blooper)
 	for(var/collection_type in subtypesof(/datum/blooper_collection))
 		var/datum/blooper_collection/collection = new collection_type
 		var/list/members = list()
-		for(var/member_type in collection.bloopers)
-			members += bloopers_by_type[member_type]
+		for(var/datum/blooper/member_type as anything in collection.bloopers)
+			members += voices[initial(member_type.name)]
 		voices[collection.name] = members
 	return voices
 
@@ -82,7 +80,7 @@ GLOBAL_LIST_INIT(blooper_voices, init_blooper_voices())
  */
 /proc/play_blooper(list/hearers, atom/movable/speaker, sound_file, pitch, message, radio, whisper)
 	// marks count only before a space or the end, 3.14 and кто-то don't break a phrase
-	var/static/regex/phrase_ends = regex(@"([.,!?;:…—–-]+)(?:\s+|$)")
+	var/static/regex/phrase_ends = regex(@"[.,!?;:…—–-]+(?:\s+|$)")
 	var/static/regex/vowels = regex(@"[аеёиоуыэюяaeiouy]", "gi")
 	var/static/regex/spaces = regex(@"\s+")
 	var/static/regex/digits = regex(@"[0-9]")
@@ -93,19 +91,11 @@ GLOBAL_LIST_INIT(blooper_voices, init_blooper_voices())
 	var/static/list/exclamation_tune = list(1.2)
 	var/static/list/sentence_tune = list(0.85)
 	var/list/bloops = list()
-	var/text = html_decode(message)
-	var/text_end = length(text) + 1
-	var/phrase_start = 1
-	while(phrase_start < text_end)
-		var/phrase_stop = text_end
-		var/next_phrase_start = text_end
-		var/marks = ""
-		if(phrase_ends.Find(text, phrase_start))
-			phrase_stop = phrase_ends.index
-			next_phrase_start = phrase_ends.index + length(phrase_ends.match)
-			marks = phrase_ends.group[1]
-		var/phrase = copytext(text, phrase_start, phrase_stop)
-		phrase_start = next_phrase_start
+	// phrase, its marks, phrase, its marks... the last phrase has none
+	var/list/pieces = splittext(html_decode(message), phrase_ends, 1, 0, TRUE)
+	for(var/piece_index in 1 to length(pieces) step 2)
+		var/phrase = pieces[piece_index]
+		var/marks = piece_index < length(pieces) ? pieces[piece_index + 1] : ""
 
 		var/syllables = 0
 		for(var/word in splittext(phrase, spaces))
