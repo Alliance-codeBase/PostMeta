@@ -55,7 +55,7 @@
 #include "features\ntts-nd-tg-tts\includes.dm"
 #include "features\meta_redesign\includes.dm"
 #include "features\holidays\includes.dm"
-#include "features\jukeboxes_music\code\music.dm"
+#include "features\jukeboxes_music\include.dm"
 #include "features\mentors\includes.dm"
 #include "features\arcades\includes.dm"
 #include "features\progressive_traitor\includes.dm"
