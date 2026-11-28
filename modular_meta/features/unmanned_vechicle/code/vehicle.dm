@@ -7,7 +7,8 @@
 	light_range = 2
 	light_power = 0.75
 	max_integrity = 100
-	hud_possible = list(DIAG_STAT_HUD, DIAG_BATT_HUD, DIAG_MECH_HUD, DIAG_TRACK_HUD, DIAG_CAMERA_HUD)
+	armor_type = /datum/armor/unmanned_drone
+	hud_possible = list(DIAG_MECH_HUD)
 
 	var/next_vehicle_move_delay = 0
 	var/vehicle_move_delay = 2
@@ -31,6 +32,19 @@
 	name += " " + num2text(serial)
 	serial++
 
+	prepare_huds()
+	var/datum/atom_hud/data/diagnostic/diagnostic_hud = GLOB.huds[DATA_HUD_DIAGNOSTIC]
+	diagnostic_hud.add_atom_to_hud(src)
+	diag_hud_set_health()
+
+/obj/vehicle/unmanned/on_update_integrity(old_value, new_value)
+	..()
+	diag_hud_set_health()
+
+/// shows the vehicle's integrity on the diagnostic hud, same bar as mechs
+/obj/vehicle/unmanned/proc/diag_hud_set_health()
+	set_hud_image_state(DIAG_MECH_HUD, hud_state = "huddiag[RoundDiagBar(atom_integrity / max_integrity)]")
+
 /obj/vehicle/unmanned/take_damage(damage_amount, damage_type, damage_flag, sound_effect, attack_dir, blocked)
 	. = ..()
 
@@ -44,8 +58,6 @@
 
 	if(has_buckled_mobs())
 		unbuckle_all_mobs(force = TRUE)
-
-	SEND_SIGNAL(src, COMSIG_ATOM_DESTRUCTION, damage_flag)
 
 	var/turf/T = drop_location()
 	for(var/atom/movable/AM in src)
@@ -71,9 +83,6 @@
 
 /obj/vehicle/unmanned/proc/on_unlink(atom/remote_controller)
 	controlled = FALSE
-
-/obj/vehicle/unmanned/fire_act(burn_level)
-	take_damage(burn_level / 2, BURN, FIRE)
 
 /obj/vehicle/unmanned/Bump(atom/A)
 	..()

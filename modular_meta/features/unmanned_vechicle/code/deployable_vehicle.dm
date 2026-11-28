@@ -25,6 +25,7 @@
 /obj/vehicle/unmanned/deployable
 	name = "CULD Neptune-B"
 	desc = "A small remote-controllable vehicle. Configured to be foldable."
+	max_integrity = /obj/item/deployable_vehicle::max_integrity
 	var/obj/item/deployable_vehicle/internal_item
 	var/item_pack_type = /obj/item/deployable_vehicle
 
@@ -36,12 +37,16 @@
 		internal_item = loc
 
 	if(internal_item)
-		atom_integrity = internal_item.get_integrity()
+		update_integrity(internal_item.get_integrity())
 
 /obj/vehicle/unmanned/deployable/Destroy()
-	if(internal_item)
-		internal_item.forceMove(get_turf(src))
+	QDEL_NULL(internal_item)
 	STOP_PROCESSING(SSobj,src)
+	return ..()
+
+/obj/vehicle/unmanned/deployable/atom_destruction(damage_flag)
+	// broken drones stay broken, no free refold
+	QDEL_NULL(internal_item)
 	return ..()
 
 /obj/vehicle/unmanned/deployable/attack_hand(mob/user, list/modifiers)
@@ -107,9 +112,9 @@
 /obj/vehicle/unmanned/deployable/tiny
 	name = "CULD-T Pluto"
 	icon_state = "tiny_uv"
+	max_integrity = /obj/item/deployable_vehicle/tiny::max_integrity
 	vehicle_move_delay = 1.5
 	density = FALSE
-	hud_possible = list(DIAG_STAT_HUD, DIAG_BATT_HUD, DIAG_MECH_HUD, DIAG_TRACK_HUD, DIAG_CAMERA_HUD)
 	armor_type = /datum/armor/tiny_drone
 	unmanned_flags = 1
 	item_pack_type = /obj/item/deployable_vehicle/tiny
